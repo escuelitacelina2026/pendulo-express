@@ -22,44 +22,29 @@
         header h1 { margin: 0; font-family: 'Playfair Display', serif; color: var(--gold); font-size: 1.8rem; }
         header p { margin: 10px 0 0; font-size: 0.8rem; color: #00d2ff; letter-spacing: 4px; text-transform: uppercase; }
 
+        /* NAVEGACIÓN */
         .nav-scroll { display: flex; overflow-x: auto; gap: 10px; padding: 15px; background: #0b0e14; position: sticky; top: 0; z-index: 100; justify-content: flex-start; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .tab-btn { padding: 8px 15px; background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #aaa; cursor: pointer; white-space: nowrap; font-size: 10px; letter-spacing: 1px; }
+        .tab-btn { padding: 8px 15px; background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #aaa; cursor: pointer; white-space: nowrap; font-size: 10px; letter-spacing: 1px; border-radius: 0; }
         .tab-btn.active { border-color: var(--gold); color: var(--gold); background: rgba(197, 160, 89, 0.05); }
 
-        .content { max-width: 450px; margin: 20px auto; padding: 20px; display: none; background: #0e1218; border-radius: 4px; }
+        /* CONTENIDO */
+        .content { max-width: 500px; margin: 20px auto; padding: 25px; display: none; background: #0e1218; border-radius: 4px; animation: fadeIn 0.8s ease; }
         .content.active { display: block; }
-        h3 { color: var(--gold); font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 15px; text-align: center; }
+        h3 { color: var(--gold); font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 20px; text-align: center; border-bottom: 1px solid rgba(197, 160, 89, 0.1); padding-bottom: 10px; }
 
-        /* REPRODUCTOR VERTICAL OPTIMIZADO (9:16) */
-        .video-container {
-            width: 100%;
-            max-width: 320px; /* Ancho ideal para videos verticales */
-            margin: 0 auto;
-            position: relative; 
-        }
-        .video-wrapper { 
-            position: relative; 
-            padding-bottom: 177.77%; /* Proporción 9:16 perfecta para videos de celular */
-            height: 0; 
-            background: #000; 
-            border: 1px solid rgba(197, 160, 89, 0.4); 
-            border-radius: 15px;
-            overflow: hidden; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
+        .materiales-lista { list-style: none; padding: 0; margin: 20px 0; font-size: 0.95rem; color: #ccc; }
+        .materiales-lista li { margin-bottom: 12px; padding-left: 25px; position: relative; }
+        .materiales-lista li::before { content: '✧'; position: absolute; left: 0; color: var(--gold); }
+
+        /* REPRODUCTOR VERTICAL BLINDADO (9:16) EN TODAS LAS PANTALLAS */
+        .video-container { width: 100%; max-width: 320px; margin: 25px auto; position: relative; }
+        .video-wrapper { position: relative; padding-bottom: 177.77%; height: 0; background: #000; border: 1px solid rgba(197, 160, 89, 0.4); border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 
-        /* CAPA DE SEGURIDAD */
-        .video-shield {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 60px; 
-            z-index: 10;
-            background: transparent;
-        }
+        /* ESCUDO DE SEGURIDAD */
+        .video-shield { position: absolute; top: 0; left: 0; width: 100%; height: 60px; z-index: 10; background: transparent; }
 
-        .img-simbolo { display: block; margin: 20px auto; width: 80px; opacity: 0.7; }
-        
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
@@ -87,17 +72,25 @@
         </div>
 
         <div id="m1" class="content active">
-            <h3>Preparación y Materiales</h3>
+            <h3>Materiales de Trabajo</h3>
+            <ul class="materiales-lista">
+                <li><strong>Péndulo:</strong> Cristal, Madera u Orgonita. Elige el que resuene con tu energía.</li>
+                <li>Lugar tranquilo y armonioso para tu práctica.</li>
+                <li>Mesa o superficie cómoda de apoyo.</li>
+                <li>Lápiz negro y papel para trabajos a distancia.</li>
+                <li>Música de meditación para sostener el espacio sagrado.</li>
+            </ul>
             <div class="video-container">
                 <div class="video-shield"></div>
                 <div class="video-wrapper">
-                    <iframe src="https://www.youtube-nocookie.com/embed/IV0Aa1k0gX0?controls=1&rel=0&modestbranding=1&fs=0&disablekb=1" frameborder="0"></iframe>
+                    <iframe src="https://www.youtube-nocookie.com/embed/IV0Aa1Aa1k0gX0?controls=1&rel=0&modestbranding=1&fs=0&disablekb=1" frameborder="0"></iframe>
                 </div>
             </div>
         </div>
 
         <div id="m2" class="content">
             <h3>Limpieza Energética</h3>
+            <p style="text-align: center; font-size: 0.9rem;">Protocolo para purificar tu herramienta.</p>
             <div class="video-container">
                 <div class="video-shield"></div>
                 <div class="video-wrapper">
@@ -108,7 +101,7 @@
 
         <div id="m4" class="content">
             <h3>Simbología de Protección</h3>
-            <img src="https://www.pngrepo.com/png/222045/180/pentagram.png" class="img-simbolo" style="filter: invert(0.8) sepia(1) saturate(2) hue-rotate(10deg);">
+            <p style="text-align: center; font-size: 0.9rem;">Apertura del campo vibratorio seguro.</p>
             <div class="video-container">
                 <div class="video-shield"></div>
                 <div class="video-wrapper">
@@ -119,10 +112,7 @@
 
         <div id="m5" class="content">
             <h3>Metodología de Testeo</h3>
-            <div style="display:flex; justify-content:space-around; text-align:center; margin: 15px 0; border: 1px solid rgba(197, 160, 89, 0.1); padding: 10px;">
-                <div><h2 style="margin:0; color:var(--gold);">↻</h2><p style="font-size: 0.6rem;">SÍ</p></div>
-                <div><h2 style="margin:0; color:#555;">↺</h2><p style="font-size: 0.6rem;">NO</p></div>
-            </div>
+            <p style="text-align: center; font-size: 0.9rem;">Sintonización con las respuestas del péndulo.</p>
             <div class="video-container">
                 <div class="video-shield"></div>
                 <div class="video-wrapper">
