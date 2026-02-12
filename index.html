@@ -24,7 +24,7 @@
 
         /* NAVEGACIÓN */
         .nav-scroll { display: flex; overflow-x: auto; gap: 10px; padding: 15px; background: #0b0e14; position: sticky; top: 0; z-index: 100; justify-content: flex-start; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .tab-btn { padding: 8px 15px; background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #aaa; cursor: pointer; white-space: nowrap; font-size: 10px; letter-spacing: 1px; border-radius: 0; }
+        .tab-btn { padding: 8px 15px; background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #aaa; cursor: pointer; white-space: nowrap; font-size: 10px; letter-spacing: 1px; }
         .tab-btn.active { border-color: var(--gold); color: var(--gold); background: rgba(197, 160, 89, 0.05); }
 
         /* CONTENIDO */
@@ -36,12 +36,11 @@
         .materiales-lista li { margin-bottom: 12px; padding-left: 25px; position: relative; }
         .materiales-lista li::before { content: '✧'; position: absolute; left: 0; color: var(--gold); }
 
-        /* REPRODUCTOR VERTICAL BLINDADO (9:16) EN TODAS LAS PANTALLAS */
+        /* REPRODUCTOR VERTICAL BLINDADO */
         .video-container { width: 100%; max-width: 320px; margin: 25px auto; position: relative; }
         .video-wrapper { position: relative; padding-bottom: 177.77%; height: 0; background: #000; border: 1px solid rgba(197, 160, 89, 0.4); border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 
-        /* ESCUDO DE SEGURIDAD */
         .video-shield { position: absolute; top: 0; left: 0; width: 100%; height: 60px; z-index: 10; background: transparent; }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -75,15 +74,15 @@
             <h3>Materiales de Trabajo</h3>
             <ul class="materiales-lista">
                 <li><strong>Péndulo:</strong> Cristal, Madera u Orgonita. Elige el que resuene con tu energía.</li>
-                <li>Lugar tranquilo y armonioso para tu práctica.</li>
-                <li>Mesa o superficie cómoda de apoyo.</li>
-                <li>Lápiz negro y papel para trabajos a distancia.</li>
-                <li>Música de meditación para sostener el espacio sagrado.</li>
+                <li>Busco un lugar tranquilo y armonioso para trabajar con el péndulo.</li>
+                <li>Busco una mesa o un lugar para apoyar y estar trabajando de manera cómoda.</li>
+                <li>Busco un lápiz negro preferentemente y un papel para trabajar a distancia.</li>
+                <li>Busco una música que me guste de meditación para abrir un espacio sagrado.</li>
             </ul>
             <div class="video-container">
                 <div class="video-shield"></div>
                 <div class="video-wrapper">
-                    <iframe src="https://www.youtube-nocookie.com/embed/IV0Aa1Aa1k0gX0?controls=1&rel=0&modestbranding=1&fs=0&disablekb=1" frameborder="0"></iframe>
+                    <iframe src="https://www.youtube-nocookie.com/embed/IV0Aa1k0gX0?controls=1&rel=0&modestbranding=1&fs=0&disablekb=1" frameborder="0"></iframe>
                 </div>
             </div>
         </div>
