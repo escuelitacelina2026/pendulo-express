@@ -1,43 +1,39 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Péndulo Express - Aula Virtual</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <title>Taller de Péndulo Hebreo - Aula Virtual</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-        :root { --glow: #00d2ff; --bg: #0b0e14; --text-main: #e0e0e0; }
+        :root { --gold: #c5a059; --bg: #0b0e14; --text-light: #f4f4f4; }
+        body { font-family: 'Lato', sans-serif; background-color: var(--bg); color: var(--text-light); margin: 0; line-height: 1.6; }
         
-        body { font-family: 'Montserrat', sans-serif; background: var(--bg); color: var(--text-main); margin: 0; line-height: 1.4; }
-        
-        /* PANTALLA DE LOGIN */
-        #login-page { height: 100vh; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle, #1a1f2c, #0b0e14); }
-        .login-box { background: rgba(255,255,255,0.05); padding: 30px; border: 1px solid var(--glow); border-radius: 20px; text-align: center; width: 280px; box-shadow: 0 0 20px rgba(0,210,255,0.2); }
-        h2 { font-family: 'Orbitron', sans-serif; color: var(--glow); font-size: 1.2rem; margin-bottom: 20px; }
-        input { display: block; width: 100%; margin: 10px 0; padding: 10px; border-radius: 8px; border: 1px solid var(--glow); background: rgba(0,0,0,0.5); color: white; box-sizing: border-box; }
-        button { width: 100%; padding: 12px; background: var(--glow); border: none; font-weight: bold; cursor: pointer; font-family: 'Orbitron'; border-radius: 8px; }
+        /* LOGIN */
+        #login-page { height: 100vh; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle, #1a1f2c 0%, #0b0e14 100%); }
+        .login-box { background: rgba(255, 255, 255, 0.03); padding: 40px; border: 1px solid rgba(197, 160, 89, 0.3); text-align: center; width: 300px; backdrop-filter: blur(10px); }
+        .login-box h2 { font-family: 'Playfair Display', serif; color: var(--gold); margin-bottom: 30px; }
+        input { display: block; width: 100%; margin: 15px 0; padding: 12px; background: transparent; border: none; border-bottom: 1px solid var(--gold); color: white; outline: none; }
+        .btn-entrar { width: 100%; padding: 15px; background: var(--gold); color: #0b0e14; border: none; font-weight: 700; cursor: pointer; letter-spacing: 2px; text-transform: uppercase; margin-top: 20px; }
 
-        /* CABECERA DASHBOARD */
+        /* DASHBOARD */
         #dashboard { display: none; }
-        header { background: #161b22; padding: 20px; text-align: center; border-bottom: 2px solid var(--glow); }
-        header h1 { margin: 0; font-family: 'Orbitron'; color: var(--glow); font-size: 1.4rem; letter-spacing: 2px; }
-        header p { margin: 5px 0 0; font-size: 0.9rem; color: #fff; font-weight: 700; text-transform: uppercase; }
+        header { background: #07090d; padding: 40px 20px; text-align: center; border-bottom: 1px solid rgba(197, 160, 89, 0.2); }
+        header h1 { margin: 0; font-family: 'Playfair Display', serif; color: var(--gold); font-size: 2rem; }
+        header p { margin: 10px 0 0; font-size: 0.8rem; color: #00d2ff; letter-spacing: 4px; text-transform: uppercase; }
 
-        /* NAVEGACIÓN */
-        .nav-scroll { display: flex; overflow-x: auto; gap: 8px; padding: 12px; background: #0b0e14; position: sticky; top: 0; z-index: 100; justify-content: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .tab-btn { padding: 6px 12px; background: transparent; border: 1px solid var(--glow); color: var(--glow); border-radius: 15px; cursor: pointer; white-space: nowrap; font-family: 'Montserrat'; font-weight: 700; font-size: 10px; }
-        .tab-btn.active { background: var(--glow); color: black; }
+        .nav-scroll { display: flex; overflow-x: auto; gap: 15px; padding: 20px; background: #0b0e14; position: sticky; top: 0; z-index: 100; justify-content: center; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .tab-btn { padding: 8px 20px; background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #aaa; cursor: pointer; white-space: nowrap; font-size: 11px; letter-spacing: 1px; }
+        .tab-btn.active { border-color: var(--gold); color: var(--gold); background: rgba(197, 160, 89, 0.05); }
 
-        /* TARJETAS DE CONTENIDO */
-        .content { max-width: 500px; margin: 15px auto; padding: 20px; display: none; animation: fadeIn 0.5s; background: rgba(255,255,255,0.02); border-radius: 15px; }
+        .content { max-width: 600px; margin: 30px auto; padding: 25px; display: none; background: #0e1218; border-radius: 4px; }
         .content.active { display: block; }
-        h3 { color: var(--glow); font-size: 1.1rem; border-bottom: 1px solid rgba(0,210,255,0.2); padding-bottom: 8px; margin-top: 0; }
+        h3 { color: var(--gold); font-family: 'Playfair Display', serif; font-size: 1.4rem; border-bottom: 1px solid rgba(197, 160, 89, 0.1); padding-bottom: 10px; }
 
-        /* REPRODUCTOR DE VIDEO PROTEGIDO */
+        /* VIDEO BLINDADO (Sin botón de agrandar) */
         .video-container {
-            max-width: 400px; 
-            margin: 15px auto;
+            max-width: 420px; 
+            margin: 25px auto;
             position: relative; 
         }
         .video-wrapper { 
@@ -45,24 +41,21 @@
             padding-bottom: 56.25%; 
             height: 0; 
             background: #000; 
-            border-radius: 12px; 
-            border: 1px solid var(--glow); 
+            border: 1px solid rgba(197, 160, 89, 0.3); 
             overflow: hidden; 
         }
-        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+        /* Importante: quitamos allowfullscreen y añadimos parámetros de restricción */
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; pointer-events: auto; }
 
-        /* CAPA ANTI-CLIC (Bloquea "Copiar Link") */
+        /* ESCUDO ANTI-LINK */
         .video-shield {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 50px; 
+            top: 0; left: 0; width: 100%; height: 55px; 
             z-index: 10;
             background: transparent;
         }
 
-        .img-simbolo { display: block; margin: 15px auto; width: 100px; filter: drop-shadow(0 0 5px var(--glow)); }
+        .img-simbolo { display: block; margin: 20px auto; width: 100px; opacity: 0.7; }
         
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
@@ -71,90 +64,85 @@
 
     <div id="login-page">
         <div class="login-box">
-            <h2>🛸 ACCESO</h2>
+            <h2>Taller de Péndulo Hebreo</h2>
             <input type="text" id="u" placeholder="Usuario">
             <input type="password" id="p" placeholder="Contraseña">
-            <button onclick="entrar()">ENTRAR AL PORTAL</button>
+            <button class="btn-entrar" onclick="entrar()">Iniciar Formación</button>
         </div>
     </div>
 
     <div id="dashboard">
         <header>
-            <h1>PÉNDULO EXPRESS</h1>
-            <p>Aula Virtual</p>
+            <h1>TALLER DE PÉNDULO HEBREO</h1>
+            <p>AULA VIRTUAL</p>
         </header>
 
         <div class="nav-scroll">
-            <button class="tab-btn active" onclick="tab(this,'m1')">1. MATERIALES</button>
-            <button class="tab-btn" onclick="tab(this,'m2')">2. LIMPIEZA</button>
-            <button class="tab-btn" onclick="tab(this,'m4')">3. PROTECCIÓN</button>
-            <button class="tab-btn" onclick="tab(this,'m5')">4. CHAKRAS</button>
+            <button class="tab-btn active" onclick="tab(this,'m1')">MATERIALES</button>
+            <button class="tab-btn" onclick="tab(this,'m2')">LIMPIEZA</button>
+            <button class="tab-btn" onclick="tab(this,'m4')">PROTECCIÓN</button>
+            <button class="tab-btn" onclick="tab(this,'m5')">TESTEO</button>
         </div>
 
         <div id="m1" class="content active">
-            <h3>1. Materiales del Taller</h3>
-            <p style="font-size: 0.9rem;">Prepara tus elementos sagrados para comenzar la práctica.</p>
+            <h3>Preparación y Materiales</h3>
+            <p style="font-size:0.9rem;">Visualiza el video instructivo dentro de este panel:</p>
             <div class="video-container">
                 <div class="video-shield"></div>
                 <div class="video-wrapper">
-                    <iframe src="https://www.youtube-nocookie.com/embed/IV0Aa1k0gX0?controls=1&rel=0&modestbranding=1" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube-nocookie.com/embed/IV0Aa1k0gX0?controls=1&rel=0&modestbranding=1&fs=0&disablekb=1" frameborder="0"></iframe>
                 </div>
             </div>
         </div>
 
         <div id="m2" class="content">
-            <h3>2. Limpieza Energética</h3>
-            <p style="font-size: 0.9rem;">Aprende a armonizar tu péndulo con el humo del sahumerio.</p>
+            <h3>Limpieza Energética</h3>
             <div class="video-container">
                 <div class="video-shield"></div>
                 <div class="video-wrapper">
-                    <iframe src="https://www.youtube-nocookie.com/embed/nUizU19lT9w?controls=1&rel=0&modestbranding=1" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube-nocookie.com/embed/nUizU19lT9w?controls=1&rel=0&modestbranding=1&fs=0&disablekb=1" frameborder="0"></iframe>
                 </div>
             </div>
         </div>
 
         <div id="m4" class="content">
-            <h3>3. Protección: Pentagrama</h3>
-            <p style="font-size: 0.9rem;">Traza el escudo protector antes de cada consulta.</p>
-            <img src="https://www.pngrepo.com/png/222045/180/pentagram.png" class="img-simbolo" style="filter: invert(1) sepia(1) saturate(5) hue-rotate(175deg);">
+            <h3>Simbología de Protección</h3>
+            <img src="https://www.pngrepo.com/png/222045/180/pentagram.png" class="img-simbolo" style="filter: invert(0.8) sepia(1) saturate(2) hue-rotate(10deg);">
             <div class="video-container">
                 <div class="video-shield"></div>
                 <div class="video-wrapper">
-                    <iframe src="https://www.youtube-nocookie.com/embed/Sshx93_3ooc?controls=1&rel=0&modestbranding=1" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube-nocookie.com/embed/Sshx93_3ooc?controls=1&rel=0&modestbranding=1&fs=0&disablekb=1" frameborder="0"></iframe>
                 </div>
             </div>
         </div>
 
         <div id="m5" class="content">
-            <h3>4. Testeo de Chakras</h3>
-            <p style="font-size: 0.9rem;">Interpretación de los giros del péndulo.</p>
-            <div style="display:flex; justify-content:space-around; text-align:center; margin: 15px 0;">
-                <div><h1 style="margin:0; color:var(--glow); font-size: 2rem;">↻</h1><p style="font-size: 0.7rem;">SÍ / ABIERTO</p></div>
-                <div><h1 style="margin:0; color:#ff4d4d; font-size: 2rem;">↺</h1><p style="font-size: 0.7rem;">NO / BLOQUEO</p></div>
+            <h3>Metodología de Testeo</h3>
+            <div style="display:flex; justify-content:space-around; text-align:center; margin: 20px 0; border: 1px solid rgba(197, 160, 89, 0.1); padding: 15px;">
+                <div><h2 style="margin:0; color:var(--gold);">↻</h2><p style="font-size: 0.7rem;">SÍ</p></div>
+                <div><h2 style="margin:0; color:#555;">↺</h2><p style="font-size: 0.7rem;">NO</p></div>
             </div>
             <div class="video-container">
                 <div class="video-shield"></div>
                 <div class="video-wrapper">
-                    <iframe src="https://www.youtube-nocookie.com/embed/S_8SNDjG9uU?controls=1&rel=0&modestbranding=1" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube-nocookie.com/embed/S_8SNDjG9uU?controls=1&rel=0&modestbranding=1&fs=0&disablekb=1" frameborder="0"></iframe>
                 </div>
             </div>
         </div>
 
-        <div style="text-align:center; margin: 30px 0 50px;">
-            <button onclick="location.reload()" style="background:none; border:1px solid #444; color:#666; width:auto; padding: 5px 10px; font-size:9px;">CERRAR SESIÓN</button>
+        <div style="text-align:center; margin: 40px 0 80px;">
+            <button onclick="location.reload()" style="background:none; border:none; color:#444; cursor:pointer; font-size:10px; letter-spacing:1px;">CERRAR SESIÓN</button>
         </div>
     </div>
 
     <script>
         function entrar() {
-            const user = document.getElementById('u').value;
-            const pass = document.getElementById('p').value;
-            if(user === "Pendulo" && pass === "PExpress2026") {
+            const u = document.getElementById('u').value;
+            const p = document.getElementById('p').value; 
+            if(u === "Pendulo" && p === "PExpress2026") {
                 document.getElementById('login-page').style.display = 'none';
                 document.getElementById('dashboard').style.display = 'block';
-            } else { 
-                alert("Acceso denegado. Revisa tus credenciales."); 
-            }
+            } else { alert("Acceso denegado."); }
         }
         function tab(btn, id) {
             document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
