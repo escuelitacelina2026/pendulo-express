@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Péndulo Express - Nave Arcturiana</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00d2ff;
+            --secondary: #00fff2;
+            --accent: #9d50bb;
+            --bg-dark: #0f0c29;
+            --card-bg: rgba(255, 255, 255, 0.07);
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: white;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* LOGIN STYLE */
+        #login-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        .login-card {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid var(--primary);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.3);
+            width: 320px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(0,0,0,0.3);
+            color: white;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background: var(--primary);
+            color: #0f0c29;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-family: 'Orbitron';
+        }
+
+        /* DASHBOARD STYLE */
+        #main-content { display: none; padding: 20px; max-width: 900px; margin: 0 auto; }
+
+        .nav-tabs {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            padding: 20px 0;
+            scrollbar-width: none;
+        }
+
+        .tab-btn {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 10px 20px;
+            border-radius: 30px;
+            white-space: nowrap;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .tab-btn.active { background: var(--primary); color: #0f0c29; }
+
+        .content-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 20px;
+            border-left: 5px solid var(--secondary);
+            animation: fadeIn 0.5s ease;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            margin: 20px 0;
+        }
+
+        .video-container iframe {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 10px;
+        }
+
+        .ritual-box {
+            background: rgba(157, 80, 187, 0.1);
+            border: 1px dashed var(--accent);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        h1, h2 { font-family: 'Orbitron'; color: var(--secondary); }
+    </style>
+</head>
+<body>
+
+    <div id="login-section">
+        <div class="login-card">
+            <h2>🛸 ACCESO NAVE</h2>
+            <p>Taller Péndulo Express</p>
+            <input type="text" id="user" placeholder="Usuario">
+            <input type="password" id="pass" placeholder="Contraseña">
+            <button onclick="login()">Entrar al Portal</button>
+            <p id="err" style="color:#ff4d4d; display:none; margin-top:10px;">Frecuencia incorrecta</p>
+        </div>
+    </div>
+
+    <div id="main-content">
+        <header style="text-align:center">
+            <h1>PÉNDULO EXPRESS</h1>
+            <p>Facilitado por Jacqueline Pignatelli</p>
+        </header>
+
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="openTab(event, 'm1')">1. Materiales</button>
+            <button class="tab-btn" onclick="openTab(event, 'm2')">2. Limpieza</button>
+            <button class="tab-btn" onclick="openTab(event, 'm3')">3. Consagración</button>
+            <button class="tab-btn" onclick="openTab(event, 'm4')">4. Protección</button>
+            <button class="tab-btn" onclick="openTab(event, 'm5')">5. Chakras</button>
+            <button class="tab-btn" onclick="openTab(event, 'm6')">6. Cierre</button>
+        </div>
+
+        <div id="m1" class="tab-content content-card">
+            <h2>Materiales Necesarios</h2>
+            <p>Cualquier péndulo que sientas que vibra contigo (Cristal, Madera, Orgonita).</p>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/S2O6Pz-S-pY" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <ul>
+                <li>Lugar tranquilo y armonioso.</li>
+                <li>Lápiz negro y papel para trabajos a distancia.</li>
+                <li>Música de meditación para abrir espacio sagrado.</li>
+            </ul>
+        </div>
+
+        <div id="m2" class="tab-content content-card" style="display:none">
+            <h2>Limpieza Energética</h2>
+            <p>La forma más rápida es con sahumerio. El humo debe envolver al péndulo por completo desde abajo.</p>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/nUizU19lT9w" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div id="m3" class="tab-content content-card" style="display:none">
+            <h2>Ritual de Consagración</h2>
+            <div class="ritual-box">
+                <p><strong>El Ritual:</strong> Mira hacia el ESTE. Pon el péndulo entre tus manos en posición de rezo y di:</p>
+                <p><i>"A partir de este momento te consagro para que trabajes en la luz, para que las respuestas que des sean para mi más alto bien..."</i></p>
+            </div>
+            <p>Solo se hace por primera y única vez después de la limpieza.</p>
+        </div>
+
+        <div id="m4" class="tab-content content-card" style="display:none">
+            <h2>Pentagrama de Protección</h2>
+            <p>Antes de empezar, dibujamos un Pentagrama (Estrella de 5 puntas) en el aire o mesa.</p>
+            <div style="text-align:center; padding: 20px;">
+                <span style="font-size: 50px;">⭐</span>
+                <p><strong>Orden:</strong> Empieza por el ángulo superior izquierdo.</p>
+            </div>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/Sshx93_3ooc" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div id="m5" class="tab-content content-card" style="display:none">
+            <h2>Testeo de Chakras</h2>
+            <p>Posiciona el péndulo sobre cada chakra. Movimientos:</p>
+            <ul>
+                <li><strong>Giro Horario:</strong> Abierto / Sano.</li>
+                <li><strong>Giro Anti-horario:</strong> Bloqueado / Energía negativa.</li>
+                <li><strong>Sin movimiento:</strong> Estancado.</li>
+            </ul>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/S_8SNDjG9uU" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div id="m6" class="tab-content content-card" style="display:none">
+            <h2>Cierre de la Sesión</h2>
+            <ol>
+                <li>Limpiar péndulo con sahumerio.</li>
+                <li>Cerrar el pentagrama (dibujarlo al revés).</li>
+                <li>Agradecer a la Energía Universal y Guías.</li>
+                <li>Cerrar el portal de luz.</li>
+            </ol>
+            <p style="text-align:center; color: var(--secondary);">¡Gracias por Ser y Estar! ✨</p>
+        </div>
+
+        <button onclick="location.reload()" style="margin-top:30px; background:none; color:white; border:1px solid rgba(255,255,255,0.3); font-size:12px; width:auto;">Cerrar Portal</button>
+    </div>
+
+    <script>
+        function login() {
+            const u = document.getElementById('user').value;
+            const p = document.getElementById('pass').value;
+            if(u === "Pendulo" && p === "PExpress2026") {
+                document.getElementById('login-section').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+            } else {
+                document.getElementById('err').style.display = 'block';
+            }
+        }
+
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
+</body>
+</html>
