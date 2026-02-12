@@ -35,10 +35,31 @@
         .lista-info li::before { content: '✧'; position: absolute; left: 0; color: var(--gold); }
 
         /* BOTÓN Y TEXTO DE CONSAGRACIÓN */
-        .btn-consagrar { background: none; border: 1px solid var(--gold); color: var(--gold); padding: 10px; width: 100%; cursor: pointer; font-family: 'Lato'; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; margin: 15px 0; transition: 0.3s; }
-        .btn-consagrar:hover { background: rgba(197, 160, 89, 0.1); }
-        .box-consagrar { display: none; background: rgba(197, 160, 89, 0.05); border-left: 2px solid var(--gold); padding: 15px; font-size: 0.9rem; margin-bottom: 20px; color: #ddd; }
-        .box-consagrar i { color: var(--gold); display: block; margin-top: 10px; font-style: italic; }
+        .btn-consagrar { 
+            background: rgba(197, 160, 89, 0.1); 
+            border: 1px solid var(--gold); 
+            color: var(--gold); 
+            padding: 12px; 
+            width: 100%; 
+            cursor: pointer; 
+            font-family: 'Lato'; 
+            text-transform: uppercase; 
+            font-size: 11px; 
+            letter-spacing: 1px; 
+            margin-bottom: 15px; 
+            font-weight: bold;
+        }
+        .box-consagrar { 
+            display: none; /* Inicia oculto */
+            background: #161b22; 
+            border: 1px solid var(--gold); 
+            padding: 20px; 
+            font-size: 0.9rem; 
+            margin-bottom: 20px; 
+            color: #ddd; 
+            border-radius: 8px;
+        }
+        .box-consagrar strong { color: var(--gold); display: block; margin-bottom: 10px; }
 
         /* REPRODUCTOR VERTICAL */
         .video-container { width: 100%; max-width: 320px; margin: 25px auto; position: relative; }
@@ -92,20 +113,21 @@
 
         <div id="m2" class="content">
             <h3>Limpieza y Consagración</h3>
-            <p style="font-size: 0.9rem; color: #aaa;">La consagración se hace luego de la limpieza por primera y única vez.</p>
             
             <button class="btn-consagrar" onclick="toggleConsagrar()">Ver frase para consagrar péndulo</button>
             
             <div id="box-consagrar" class="box-consagrar">
-                <strong>Ritual de Consagración:</strong>
-                <ul style="padding-left: 15px; margin-top: 10px;">
+                <strong>RITUAL DE CONSAGRACIÓN</strong>
+                <p>La consagración se hace luego de la limpieza por primera y única vez:</p>
+                <ul style="padding-left: 15px; margin-bottom: 15px;">
                     <li>Mirar hacia el Este.</li>
                     <li>Poner el péndulo entre las manos en forma de rezo.</li>
-                    <li>Llevarlo a la nariz, inspirar y exhalar 3 veces hacia el péndulo.</li>
-                    <li>Llevarlo a la altura del chakra AJNA (entrecejo).</li>
-                    <li>Llevarlo a la altura del chakra Cardíaco (pecho).</li>
+                    <li>Llevarlo a la nariz, inspirar y exhalar 3 veces hacia él.</li>
+                    <li>Llevarlo al entrecejo (Chakra Ajna) y luego al pecho (Corazón).</li>
                 </ul>
-                <i>"A partir de este momento te consagro para que trabajes en la luz, muestres siempre la verdad, estés en ley, tus respuestas vengan siempre del ser superior y sean sabias, claras, precisas y seguras. Gracias".</i>
+                <p style="font-style: italic; color: var(--gold); border-top: 1px solid rgba(197,160,89,0.3); padding-top: 10px;">
+                    "A partir de este momento te consagro para que trabajes en la luz, muestres siempre la verdad, estés en ley, tus respuestas vengan siempre del ser superior y sean sabias, claras, precisas y seguras. Gracias".
+                </p>
             </div>
 
             <div class="video-container">
@@ -120,7 +142,7 @@
             <h3>Protección del Espacio</h3>
             <ul class="lista-info">
                 <li>Visualiza una luz protectora rodeando tu campo áurico.</li>
-                <li>Utiliza la simbología sagrada para sellar el lugar de trabajo.</li>
+                <li>Utiliza la simbología sagrada para sellar el lugar.</li>
                 <li>Invoca la asistencia de tus guías para la sesión.</li>
             </ul>
             <div class="video-container">
@@ -134,9 +156,9 @@
         <div id="m5" class="content">
             <h3>Testeo y Movimientos</h3>
             <ul class="lista-info">
-                <li>Posicionamiento correcto del péndulo sobre el objetivo.</li>
-                <li>Interpretación del giro horario (apertura/fluidez).</li>
-                <li>Interpretación del giro anti-horario (bloqueo/limpieza).</li>
+                <li>Interpretación del giro horario (apertura).</li>
+                <li>Interpretación del giro anti-horario (bloqueo).</li>
+                <li>Sintonización con las respuestas del péndulo.</li>
             </ul>
             <div class="video-container">
                 <div class="video-shield"></div>
@@ -152,6 +174,7 @@
     </div>
 
     <script>
+        // Función para el Login
         function entrar() {
             const u = document.getElementById('u').value;
             const p = document.getElementById('p').value; 
@@ -160,6 +183,8 @@
                 document.getElementById('dashboard').style.display = 'block';
             } else { alert("Acceso denegado."); }
         }
+
+        // Función para cambiar de pestañas
         function tab(btn, id) {
             document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -167,9 +192,15 @@
             btn.classList.add('active');
             window.scrollTo(0,0);
         }
+
+        // FUNCIÓN PARA EL DESPLEGABLE
         function toggleConsagrar() {
-            const box = document.getElementById('box-consagrar');
-            box.style.display = (box.style.display === 'block') ? 'none' : 'block';
+            var box = document.getElementById('box-consagrar');
+            if (box.style.display === "block") {
+                box.style.display = "none";
+            } else {
+                box.style.display = "block";
+            }
         }
     </script>
 </body>
