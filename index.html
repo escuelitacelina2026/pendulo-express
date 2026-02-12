@@ -26,19 +26,23 @@
         .tab-btn { padding: 8px 15px; background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #aaa; cursor: pointer; white-space: nowrap; font-size: 10px; letter-spacing: 1px; }
         .tab-btn.active { border-color: var(--gold); color: var(--gold); background: rgba(197, 160, 89, 0.05); }
 
-        /* CONTENIDO */
         .content { max-width: 500px; margin: 20px auto; padding: 25px; display: none; background: #0e1218; border-radius: 4px; animation: fadeIn 0.8s ease; }
         .content.active { display: block; }
         h3 { color: var(--gold); font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 20px; text-align: center; border-bottom: 1px solid rgba(197, 160, 89, 0.1); padding-bottom: 10px; }
-        p.desc { font-size: 0.95rem; color: #ccc; margin-bottom: 15px; }
 
         .lista-info { list-style: none; padding: 0; margin: 20px 0; font-size: 0.95rem; color: #ccc; }
         .lista-info li { margin-bottom: 12px; padding-left: 25px; position: relative; }
         .lista-info li::before { content: '✧'; position: absolute; left: 0; color: var(--gold); }
 
-        /* REPRODUCTOR VERTICAL BLINDADO */
+        /* BOTÓN Y TEXTO DE CONSAGRACIÓN */
+        .btn-consagrar { background: none; border: 1px solid var(--gold); color: var(--gold); padding: 10px; width: 100%; cursor: pointer; font-family: 'Lato'; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; margin: 15px 0; transition: 0.3s; }
+        .btn-consagrar:hover { background: rgba(197, 160, 89, 0.1); }
+        .box-consagrar { display: none; background: rgba(197, 160, 89, 0.05); border-left: 2px solid var(--gold); padding: 15px; font-size: 0.9rem; margin-bottom: 20px; color: #ddd; }
+        .box-consagrar i { color: var(--gold); display: block; margin-top: 10px; font-style: italic; }
+
+        /* REPRODUCTOR VERTICAL */
         .video-container { width: 100%; max-width: 320px; margin: 25px auto; position: relative; }
-        .video-wrapper { position: relative; padding-bottom: 177.77%; height: 0; background: #000; border: 1px solid rgba(197, 160, 89, 0.4); border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .video-wrapper { position: relative; padding-bottom: 177.77%; height: 0; background: #000; border: 1px solid rgba(197, 160, 89, 0.4); border-radius: 15px; overflow: hidden; }
         .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
         .video-shield { position: absolute; top: 0; left: 0; width: 100%; height: 60px; z-index: 10; background: transparent; }
 
@@ -74,9 +78,9 @@
             <ul class="lista-info">
                 <li><strong>Péndulo:</strong> Cristal, Madera u Orgonita. Elige el que resuene contigo.</li>
                 <li>Busco un lugar tranquilo y armonioso para trabajar.</li>
-                <li>Busco una mesa o lugar para trabajar de manera cómoda.</li>
-                <li>Busco un lápiz negro y un papel para trabajar a distancia.</li>
-                <li>Busco música de meditación para abrir un espacio sagrado.</li>
+                <li>Busco una mesa o lugar para apoyar y trabajar cómodamente.</li>
+                <li>Lápiz negro y papel para realizar testeo a distancia.</li>
+                <li>Música de meditación o relajación para abrir el espacio sagrado.</li>
             </ul>
             <div class="video-container">
                 <div class="video-shield"></div>
@@ -87,14 +91,23 @@
         </div>
 
         <div id="m2" class="content">
-            <h3>Limpieza del Péndulo</h3>
-            <p class="desc">Para limpiar nuestro péndulo, debemos tener en cuenta lo siguiente:</p>
-            <ul class="lista-info">
-                <li>Prendemos un sahumerio o alguna rama que tire humo.</li>
-                <li>Pasamos el péndulo por el humo del sahumerio de manera circular.</li>
-                <li>Intencionamos que se limpie de cualquier energía que haya quedado de un trabajo anterior.</li>
-                <li>Podemos utilizar también un cuenco tibetano para limpiarlo por vibración.</li>
-            </ul>
+            <h3>Limpieza y Consagración</h3>
+            <p style="font-size: 0.9rem; color: #aaa;">La consagración se hace luego de la limpieza por primera y única vez.</p>
+            
+            <button class="btn-consagrar" onclick="toggleConsagrar()">Ver frase para consagrar péndulo</button>
+            
+            <div id="box-consagrar" class="box-consagrar">
+                <strong>Ritual de Consagración:</strong>
+                <ul style="padding-left: 15px; margin-top: 10px;">
+                    <li>Mirar hacia el Este.</li>
+                    <li>Poner el péndulo entre las manos en forma de rezo.</li>
+                    <li>Llevarlo a la nariz, inspirar y exhalar 3 veces hacia el péndulo.</li>
+                    <li>Llevarlo a la altura del chakra AJNA (entrecejo).</li>
+                    <li>Llevarlo a la altura del chakra Cardíaco (pecho).</li>
+                </ul>
+                <i>"A partir de este momento te consagro para que trabajes en la luz, muestres siempre la verdad, estés en ley, tus respuestas vengan siempre del ser superior y sean sabias, claras, precisas y seguras. Gracias".</i>
+            </div>
+
             <div class="video-container">
                 <div class="video-shield"></div>
                 <div class="video-wrapper">
@@ -104,13 +117,11 @@
         </div>
 
         <div id="m4" class="content">
-            <h3>Apertura de Espacio Sagrado</h3>
-            <p class="desc">Para protegernos y proteger el espacio de trabajo:</p>
+            <h3>Protección del Espacio</h3>
             <ul class="lista-info">
-                <li>Visualizamos una luz blanca o dorada que nos envuelve por completo.</li>
-                <li>Dibujamos un pentagrama en el aire o utilizamos la simbología del PDF.</li>
-                <li>Pedimos asistencia a nuestros guías y seres de luz para que nos acompañen.</li>
-                <li>Intencionamos que solo la energía de luz y sanación pueda entrar en este espacio.</li>
+                <li>Visualiza una luz protectora rodeando tu campo áurico.</li>
+                <li>Utiliza la simbología sagrada para sellar el lugar de trabajo.</li>
+                <li>Invoca la asistencia de tus guías para la sesión.</li>
             </ul>
             <div class="video-container">
                 <div class="video-shield"></div>
@@ -121,14 +132,11 @@
         </div>
 
         <div id="m5" class="content">
-            <h3>Testeo de Chakras</h3>
-            <p class="desc">Pasos para realizar un testeo efectivo:</p>
+            <h3>Testeo y Movimientos</h3>
             <ul class="lista-info">
-                <li>Colocamos el péndulo sobre el chakra a testear (o sobre el gráfico).</li>
-                <li>Dejamos que el péndulo comience su movimiento natural sin forzarlo.</li>
-                <li><strong>Sentido horario (Derecha):</strong> Chakra abierto y fluyendo correctamente.</li>
-                <li><strong>Sentido anti-horario (Izquierda):</strong> Bloqueo o energía estancada.</li>
-                <li><strong>Lineal o Quieto:</strong> Necesita armonización o falta de respuesta clara.</li>
+                <li>Posicionamiento correcto del péndulo sobre el objetivo.</li>
+                <li>Interpretación del giro horario (apertura/fluidez).</li>
+                <li>Interpretación del giro anti-horario (bloqueo/limpieza).</li>
             </ul>
             <div class="video-container">
                 <div class="video-shield"></div>
@@ -138,8 +146,8 @@
             </div>
         </div>
 
-        <div style="text-align:center; margin: 30px 0 80px;">
-            <button onclick="location.reload()" style="background:none; border:none; color:#444; cursor:pointer; font-size:9px; letter-spacing:1px;">CERRAR SESIÓN</button>
+        <div style="text-align:center; margin-bottom: 80px;">
+            <button onclick="location.reload()" style="background:none; border:none; color:#444; cursor:pointer; font-size:9px;">CERRAR SESIÓN</button>
         </div>
     </div>
 
@@ -158,6 +166,10 @@
             document.getElementById(id).classList.add('active');
             btn.classList.add('active');
             window.scrollTo(0,0);
+        }
+        function toggleConsagrar() {
+            const box = document.getElementById('box-consagrar');
+            box.style.display = (box.style.display === 'block') ? 'none' : 'block';
         }
     </script>
 </body>
