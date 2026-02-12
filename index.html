@@ -19,43 +19,45 @@
         /* DASHBOARD */
         #dashboard { display: none; }
         header { background: #07090d; padding: 40px 20px; text-align: center; border-bottom: 1px solid rgba(197, 160, 89, 0.2); }
-        header h1 { margin: 0; font-family: 'Playfair Display', serif; color: var(--gold); font-size: 2rem; }
+        header h1 { margin: 0; font-family: 'Playfair Display', serif; color: var(--gold); font-size: 1.8rem; }
         header p { margin: 10px 0 0; font-size: 0.8rem; color: #00d2ff; letter-spacing: 4px; text-transform: uppercase; }
 
-        .nav-scroll { display: flex; overflow-x: auto; gap: 15px; padding: 20px; background: #0b0e14; position: sticky; top: 0; z-index: 100; justify-content: center; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .tab-btn { padding: 8px 20px; background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #aaa; cursor: pointer; white-space: nowrap; font-size: 11px; letter-spacing: 1px; }
+        .nav-scroll { display: flex; overflow-x: auto; gap: 10px; padding: 15px; background: #0b0e14; position: sticky; top: 0; z-index: 100; justify-content: flex-start; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .tab-btn { padding: 8px 15px; background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #aaa; cursor: pointer; white-space: nowrap; font-size: 10px; letter-spacing: 1px; }
         .tab-btn.active { border-color: var(--gold); color: var(--gold); background: rgba(197, 160, 89, 0.05); }
 
-        .content { max-width: 600px; margin: 30px auto; padding: 25px; display: none; background: #0e1218; border-radius: 4px; }
+        .content { max-width: 450px; margin: 20px auto; padding: 20px; display: none; background: #0e1218; border-radius: 4px; }
         .content.active { display: block; }
-        h3 { color: var(--gold); font-family: 'Playfair Display', serif; font-size: 1.4rem; border-bottom: 1px solid rgba(197, 160, 89, 0.1); padding-bottom: 10px; }
+        h3 { color: var(--gold); font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 15px; text-align: center; }
 
-        /* VIDEO BLINDADO (Sin botón de agrandar) */
+        /* REPRODUCTOR VERTICAL OPTIMIZADO (9:16) */
         .video-container {
-            max-width: 420px; 
-            margin: 25px auto;
+            width: 100%;
+            max-width: 320px; /* Ancho ideal para videos verticales */
+            margin: 0 auto;
             position: relative; 
         }
         .video-wrapper { 
             position: relative; 
-            padding-bottom: 56.25%; 
+            padding-bottom: 177.77%; /* Proporción 9:16 perfecta para videos de celular */
             height: 0; 
             background: #000; 
-            border: 1px solid rgba(197, 160, 89, 0.3); 
+            border: 1px solid rgba(197, 160, 89, 0.4); 
+            border-radius: 15px;
             overflow: hidden; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-        /* Importante: quitamos allowfullscreen y añadimos parámetros de restricción */
-        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; pointer-events: auto; }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 
-        /* ESCUDO ANTI-LINK */
+        /* CAPA DE SEGURIDAD */
         .video-shield {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 55px; 
+            top: 0; left: 0; width: 100%; height: 60px; 
             z-index: 10;
             background: transparent;
         }
 
-        .img-simbolo { display: block; margin: 20px auto; width: 100px; opacity: 0.7; }
+        .img-simbolo { display: block; margin: 20px auto; width: 80px; opacity: 0.7; }
         
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
@@ -86,7 +88,6 @@
 
         <div id="m1" class="content active">
             <h3>Preparación y Materiales</h3>
-            <p style="font-size:0.9rem;">Visualiza el video instructivo dentro de este panel:</p>
             <div class="video-container">
                 <div class="video-shield"></div>
                 <div class="video-wrapper">
@@ -118,9 +119,9 @@
 
         <div id="m5" class="content">
             <h3>Metodología de Testeo</h3>
-            <div style="display:flex; justify-content:space-around; text-align:center; margin: 20px 0; border: 1px solid rgba(197, 160, 89, 0.1); padding: 15px;">
-                <div><h2 style="margin:0; color:var(--gold);">↻</h2><p style="font-size: 0.7rem;">SÍ</p></div>
-                <div><h2 style="margin:0; color:#555;">↺</h2><p style="font-size: 0.7rem;">NO</p></div>
+            <div style="display:flex; justify-content:space-around; text-align:center; margin: 15px 0; border: 1px solid rgba(197, 160, 89, 0.1); padding: 10px;">
+                <div><h2 style="margin:0; color:var(--gold);">↻</h2><p style="font-size: 0.6rem;">SÍ</p></div>
+                <div><h2 style="margin:0; color:#555;">↺</h2><p style="font-size: 0.6rem;">NO</p></div>
             </div>
             <div class="video-container">
                 <div class="video-shield"></div>
@@ -130,8 +131,8 @@
             </div>
         </div>
 
-        <div style="text-align:center; margin: 40px 0 80px;">
-            <button onclick="location.reload()" style="background:none; border:none; color:#444; cursor:pointer; font-size:10px; letter-spacing:1px;">CERRAR SESIÓN</button>
+        <div style="text-align:center; margin: 30px 0 80px;">
+            <button onclick="location.reload()" style="background:none; border:none; color:#444; cursor:pointer; font-size:9px; letter-spacing:1px;">CERRAR SESIÓN</button>
         </div>
     </div>
 
