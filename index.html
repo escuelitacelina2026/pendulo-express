@@ -34,6 +34,8 @@
         .lista-info li { margin-bottom: 12px; padding-left: 25px; position: relative; }
         .lista-info li::before { content: '✧'; position: absolute; left: 0; color: var(--gold); }
 
+        .img-teoria { width: 100%; border-radius: 8px; margin: 15px 0; border: 1px solid rgba(197, 160, 89, 0.3); }
+
         .btn-consagrar { background: rgba(197, 160, 89, 0.1); border: 1px solid var(--gold); color: var(--gold); padding: 12px; width: 100%; cursor: pointer; font-family: 'Lato'; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; margin-bottom: 15px; font-weight: bold; }
         .box-consagrar { display: none; background: #161b22; border: 1px solid var(--gold); padding: 20px; font-size: 0.9rem; margin-bottom: 20px; color: #ddd; border-radius: 8px; }
 
@@ -78,6 +80,7 @@
             <button class="tab-btn" onclick="tab(this,'m2')">LIMPIEZA</button>
             <button class="tab-btn" onclick="tab(this,'m4')">PROTECCIÓN</button>
             <button class="tab-btn" onclick="tab(this,'m5')">TESTEO</button>
+            <button class="tab-btn" onclick="tab(this,'m6')">GLOSARIO</button>
         </div>
 
         <div id="m1" class="content active">
@@ -143,7 +146,6 @@
                 <li>Giro horario (Derecha): Abierto y fluyendo.</li>
                 <li>Giro anti-horario (Izquierda): Bloqueo o energía estancada.</li>
             </ul>
-            
             <div class="video-container">
                 <div class="video-poster" style="background-image: url('./testeo.jpg');" onclick="loadVideo(this, 'NJ-5aywOkAI')">
                     <div class="play-icon"></div>
@@ -151,7 +153,6 @@
                 </div>
                 <div class="video-wrapper"><div id="player-NJ-5aywOkAI"></div></div>
             </div>
-
             <div class="video-container">
                 <div class="video-poster" style="background-image: url('./testeo.jpg');" onclick="loadVideo(this, 'LngEN9cmHRg')">
                     <div class="play-icon"></div>
@@ -159,7 +160,6 @@
                 </div>
                 <div class="video-wrapper"><div id="player-LngEN9cmHRg"></div></div>
             </div>
-
             <div class="video-container">
                 <div class="video-poster" style="background-image: url('./testeo.jpg');" onclick="loadVideo(this, 'WymTOGzcohY')">
                     <div class="play-icon"></div>
@@ -167,6 +167,30 @@
                 </div>
                 <div class="video-wrapper"><div id="player-WymTOGzcohY"></div></div>
             </div>
+        </div>
+
+        <div id="m6" class="content">
+            <h3>Glosario - Movimientos del Péndulo</h3>
+            <p style="font-size: 0.9rem; color: #bbb;">El péndulo es un puente entre tu mente consciente (lógica/analítica) e inconsciente (intuitiva/profunda).</p>
+            
+            <ul class="lista-info">
+                <li><strong>Hemisferio Izquierdo (Yang):</strong> Deductivo, lógico y maneja la palabra.</li>
+                <li><strong>Hemisferio Derecho (Yin):</strong> Espiritual, intuitivo y maneja los dibujos/trazos.</li>
+            </ul>
+
+            <h3 style="margin-top: 30px; font-size: 1.1rem;">Trazos y Movimientos</h3>
+            <img src="image_f61585.png" class="img-teoria" alt="Giro Horario y Antihorario">
+            <img src="image_f615a8.png" class="img-teoria" alt="Líneas Verticales y Diagonales">
+
+            <h3 style="margin-top: 30px; font-size: 1.1rem;">Descubriendo tu Código</h3>
+            <p style="font-size: 0.9rem; color: #bbb;">Sujeta el péndulo y busca sintonizarte focalizándote solo en el objeto de búsqueda.</p>
+            
+            <ul class="lista-info">
+                <li><strong>Para obtener un SÍ:</strong> Haz una pregunta obvia (ej: "¿La nieve es blanca?"). El movimiento resultante será tu "SÍ".</li>
+                <li><strong>Para obtener un NO:</strong> Haz una pregunta falsa (ej: "¿La nieve es negra?"). El movimiento resultante será tu "NO".</li>
+                <li><strong>Bloqueos:</strong> Si no hay movimiento, puede existir un bloqueo en el radiestesista para conectar con el inconsciente.</li>
+            </ul>
+            <p style="font-size: 0.85rem; font-style: italic; color: var(--gold); text-align: center;">"La mente domina la materia".</p>
         </div>
     </div>
 
