@@ -5,93 +5,154 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Péndulo Express</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 900px; margin: auto; padding: 20px; background-color: #f9f9f9; }
-        header { text-align: center; padding: 20px; background: #2c3e50; color: white; border-radius: 8px; margin-bottom: 30px; }
-        h1 { margin: 0; letter-spacing: 2px; }
-        
-        .card { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 25px; }
-        h2 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        body { 
+            background-color: #0a0a0b; 
+            color: #d4af37; /* Dorado */
+            font-family: 'Times New Roman', serif; 
+            margin: 0; 
+            padding: 0;
+            text-align: center;
+        }
 
-        .video-box { text-align: center; margin: 20px 0; background: #e8f4f8; padding: 15px; border-radius: 5px; }
-        .video-box a { color: #e67e22; font-weight: bold; text-decoration: none; margin: 0 15px; }
+        /* Barra de Navegación Estilo Botones Superiores */
+        nav {
+            background-color: #000;
+            padding: 15px 0;
+            border-bottom: 1px solid #333;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
 
-        .hemisferios { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0; }
-        .hemisferio { padding: 15px; border-radius: 8px; font-size: 0.9em; }
-        .izquierdo { background: #d6eaf8; border-left: 5px solid #3498db; }
-        .derecho { background: #fadbd8; border-left: 5px solid #e74c3c; }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            border: 1px solid #444;
+            padding: 8px 15px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
 
-        .galeria-movimientos { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px; margin: 25px 0; }
-        .item-movimiento { text-align: center; width: 45%; min-width: 250px; }
-        /* AJUSTE PARA QUE LAS IMÁGENES SE VEAN */
-        .item-movimiento img { width: 100%; max-width: 300px; height: auto; border: 1px solid #ddd; border-radius: 4px; }
+        nav a:hover {
+            border-color: #d4af37;
+            color: #d4af37;
+        }
 
-        .codigo-si-no { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .caja-respuesta { background: #fdfefe; border: 1px solid #d5dbdb; padding: 15px; border-radius: 8px; }
-        .si { border-top: 5px solid #27ae60; }
-        .no { border-top: 5px solid #c0392b; }
+        /* Contenedor Principal */
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid #1a1a1a;
+        }
 
-        .footer-nota { font-style: italic; text-align: center; margin-top: 30px; color: #7f8c8d; }
+        h1, h2 { 
+            text-transform: uppercase; 
+            letter-spacing: 3px;
+            color: #fff;
+        }
+
+        .video-links a {
+            color: #ffeb3b;
+            text-decoration: underline;
+            display: block;
+            margin: 10px 0;
+            font-size: 14px;
+        }
+
+        .texto-info {
+            color: #ccc;
+            line-height: 1.8;
+            text-align: justify;
+            margin: 20px 0;
+        }
+
+        /* Galería de Imágenes Técnicas */
+        .galeria {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .card-img {
+            width: 350px;
+            border: 1px solid #333;
+            background: #000;
+            padding: 10px;
+        }
+
+        .card-img img {
+            width: 100%;
+            height: auto;
+            filter: grayscale(100%) invert(100%); /* Ajuste para que tus dibujos negros sobre blanco resalten en el fondo oscuro */
+        }
+
+        .card-img p {
+            font-size: 13px;
+            margin-top: 10px;
+            color: #d4af37;
+        }
+
+        .seccion-codigo {
+            border-top: 1px solid #333;
+            margin-top: 40px;
+            padding-top: 20px;
+        }
+
+        .resaltado { color: #fff; font-weight: bold; }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>PÉNDULO EXPRESS</h1>
-    <p>Guía Práctica de Radiestesia</p>
-</header>
+    <nav>
+        <a href="#">Materiales</a>
+        <a href="#">Limpieza</a>
+        <a href="#">Protección</a>
+        <a href="#">Testeo</a>
+    </nav>
 
-<div class="card">
-    <h2>FUNCIONAMIENTO Y MOVIMIENTOS</h2>
-    <div class="video-box">
-        <a href="#">(VER VIDEO PARTE 1)</a>
-        <a href="#">(VER VIDEO PARTE 2)</a>
-    </div>
+    <div class="container">
+        <h1>Péndulo Express</h1>
+        <p>FUNCIONAMIENTO Y MOVIMIENTOS</p>
 
-    <p>El péndulo es el puente entre tus dos hemisferios:</p>
-    
-    <div class="hemisferios">
-        <div class="hemisferio izquierdo">
-            <strong>H. IZQUIERDO:</strong> Lógico, analítico, consciente. Maneja la palabra.
+        <div class="video-links">
+            <a href="#">(VER VIDEO PARTE 1)</a>
+            <a href="#">(VER VIDEO PARTE 2)</a>
         </div>
-        <div class="hemisferio derecho">
-            <strong>H. DERECHO:</strong> Intuitivo, espiritual, inconsciente. Maneja los dibujos.
-        </div>
-    </div>
 
-    <div class="galeria-movimientos">
-        <div class="item-movimiento">
-            <img src="testeo.jpg" alt="Giros Horario y Antihorario">
-            <p><strong>Giros:</strong> Horario y Anti-horario</p>
+        <div class="texto-info">
+            <p>El péndulo se comunica mediante un código de lenguaje entre la mente consciente e inconsciente. El <span class="resaltado">Hemisferio Izquierdo</span> (lógico y analítico) se une al <span class="resaltado">Hemisferio Derecho</span> (intuitivo y profundo) para traducir movimientos en respuestas claras.</p>
+            <p style="text-align: center; font-style: italic;">"La mente domina la materia"</p>
         </div>
-        <div class="item-movimiento">
-            <img src="proteccion.jpg" alt="Líneas y Diagonales">
-            <p><strong>Líneas:</strong> Vertical, Horizontal y Diagonal</p>
-        </div>
-    </div>
-</div>
 
-<div class="card">
-    <h2>DESCUBRE TU CÓDIGO (SI / NO)</h2>
-    <p>Para programar tu péndulo, busca un estado neutral y realiza estas pruebas:</p>
-
-    <div class="codigo-si-no">
-        <div class="caja-respuesta si">
-            <h3>Obtener un SI</h3>
-            <p>Pregunta: <em>¿La nieve es de color blanco?</em></p>
-            <p>Observa el movimiento y decreta: <strong>"Este movimiento significa SI"</strong>.</p>
+        <div class="galeria">
+            <div class="card-img">
+                <img src="testeo.jpg" alt="Giros">
+                <p>GIRO EN SENTIDO HORARIO Y ANTI-HORARIO</p>
+            </div>
+            <div class="card-img">
+                <img src="proteccion.jpg" alt="Líneas">
+                <p>LINEAS: VERTICAL, HORIZONTAL Y DIAGONAL</p>
+            </div>
         </div>
-        <div class="caja-respuesta no">
-            <h3>Obtener un NO</h3>
-            <p>Pregunta: <em>¿La nieve es de color negro?</em></p>
-            <p>Observa el movimiento y decreta: <strong>"Este movimiento significa NO"</strong>.</p>
+
+        <div class="seccion-codigo">
+            <h2>DESCUBRE TU CÓDIGO</h2>
+            <div class="texto-info">
+                <p><strong>Obtener un SI:</strong> Pregunta algo obvio como <em>"¿La nieve es blanca?"</em>. El movimiento resultante es tu código de afirmación.</p>
+                <p><strong>Obtener un NO:</strong> Pregunta algo falso como <em>"¿La nieve es negra?"</em>. El movimiento resultante es tu código de negación.</p>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="footer-nota">
-    <p>"La mente domina la materia. Si no hay movimiento, mantén la calma y busca neutralidad."</p>
-    <p><strong>Péndulo Express 2026</strong></p>
-</div>
+    <footer style="margin-bottom: 40px; color: #444; font-size: 10px;">
+        PÉNDULO EXPRESS © 2026
+    </footer>
 
 </body>
 </html>
