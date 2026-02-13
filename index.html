@@ -3,222 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taller de Péndulo Express - Aula Virtual</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>Péndulo Express - Funcionamiento</title>
     <style>
-        :root { --gold: #c5a059; --bg: #0b0e14; --text-light: #f4f4f4; }
-        body { font-family: 'Lato', sans-serif; background-color: var(--bg); color: var(--text-light); margin: 0; line-height: 1.6; }
+        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: auto; padding: 20px; background-color: #fff; }
+        h1 { color: #000; text-align: center; border-bottom: 2px solid #000; padding-bottom: 10px; text-transform: uppercase; }
+        h2 { color: #444; margin-top: 30px; border-left: 5px solid #333; padding-left: 10px; }
         
-        /* LOGIN */
-        #login-page { height: 100vh; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle, #1a1f2c 0%, #0b0e14 100%); }
-        .login-box { background: rgba(255, 255, 255, 0.03); padding: 40px; border: 1px solid rgba(197, 160, 89, 0.3); text-align: center; width: 300px; backdrop-filter: blur(10px); }
-        .login-box h2 { font-family: 'Playfair Display', serif; color: var(--gold); margin-bottom: 30px; }
-        input { display: block; width: 100%; margin: 15px 0; padding: 12px; background: transparent; border: none; border-bottom: 1px solid var(--gold); color: white; outline: none; }
-        .btn-entrar { width: 100%; padding: 15px; background: var(--gold); color: #0b0e14; border: none; font-weight: 700; cursor: pointer; letter-spacing: 2px; text-transform: uppercase; margin-top: 20px; }
-
-        /* DASHBOARD */
-        #dashboard { display: none; }
-        header { background: #07090d; padding: 40px 20px; text-align: center; border-bottom: 1px solid rgba(197, 160, 89, 0.2); }
-        header h1 { margin: 0; font-family: 'Playfair Display', serif; color: var(--gold); font-size: 1.8rem; }
-        header p { margin: 10px 0 0; font-size: 0.8rem; color: #00d2ff; letter-spacing: 4px; text-transform: uppercase; }
-
-        .nav-scroll { display: flex; overflow-x: auto; gap: 10px; padding: 15px; background: #0b0e14; position: sticky; top: 0; z-index: 100; justify-content: flex-start; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .tab-btn { padding: 8px 15px; background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #aaa; cursor: pointer; white-space: nowrap; font-size: 10px; letter-spacing: 1px; }
-        .tab-btn.active { border-color: var(--gold); color: var(--gold); background: rgba(197, 160, 89, 0.05); }
-
-        .content { max-width: 500px; margin: 20px auto; padding: 25px; display: none; background: #0e1218; border-radius: 4px; animation: fadeIn 0.8s ease; }
-        .content.active { display: block; }
-        h3 { color: var(--gold); font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 20px; text-align: center; border-bottom: 1px solid rgba(197, 160, 89, 0.1); padding-bottom: 10px; }
-
-        .lista-info { list-style: none; padding: 0; margin: 20px 0; font-size: 0.95rem; color: #ccc; }
-        .lista-info li { margin-bottom: 12px; padding-left: 25px; position: relative; }
-        .lista-info li::before { content: '✧'; position: absolute; left: 0; color: var(--gold); }
-
-        .img-teoria { width: 100%; border-radius: 8px; margin: 15px 0; border: 1px solid rgba(197, 160, 89, 0.3); }
-
-        .btn-consagrar { background: rgba(197, 160, 89, 0.1); border: 1px solid var(--gold); color: var(--gold); padding: 12px; width: 100%; cursor: pointer; font-family: 'Lato'; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; margin-bottom: 15px; font-weight: bold; }
-        .box-consagrar { display: none; background: #161b22; border: 1px solid var(--gold); padding: 20px; font-size: 0.9rem; margin-bottom: 20px; color: #ddd; border-radius: 8px; }
-
-        /* VIDEO CONTAINER */
-        .video-container { width: 100%; max-width: 320px; margin: 25px auto; position: relative; }
-        .video-wrapper { position: relative; padding-bottom: 177.77%; height: 0; background: #000; border: 1px solid rgba(197, 160, 89, 0.4); border-radius: 15px; overflow: hidden; }
-        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+        .video-links { background: #f9f9f9; padding: 15px; border: 1px solid #ddd; text-align: center; margin-bottom: 25px; }
+        .video-links a { font-weight: bold; color: #e63946; text-decoration: none; margin: 0 15px; }
         
-        .video-poster { 
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-            background-size: cover; background-position: center;
-            cursor: pointer; z-index: 5; display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 15px; border: 1px solid var(--gold);
-        }
-        .video-poster::before { content: ""; position: absolute; width: 100%; height: 100%; background: rgba(0,0,0,0.4); border-radius: 15px; }
-        .video-poster span { position: relative; z-index: 6; color: var(--gold); font-family: 'Playfair Display'; font-size: 1.1rem; margin-top: 15px; letter-spacing: 2px; text-shadow: 2px 2px 4px black; text-transform: uppercase; font-weight: bold; text-align: center; }
-        
-        .play-icon { position: relative; z-index: 6; width: 60px; height: 60px; background: rgba(197, 160, 89, 0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #000; font-size: 24px; box-shadow: 0 0 20px rgba(0,0,0,0.5); border: 2px solid white; }
-        .play-icon::after { content: '▶'; margin-left: 4px; }
+        .grid-hemisferios { display: flex; gap: 20px; margin: 20px 0; }
+        .hemisferio { flex: 1; padding: 15px; border: 1px solid #eee; border-radius: 5px; }
+        .izquierdo { background-color: #f0f4f8; }
+        .derecho { background-color: #fff0f0; }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .image-gallery { display: flex; flex-wrap: wrap; justify-content: space-around; gap: 20px; margin: 30px 0; }
+        .image-item { text-align: center; width: 45%; }
+        .image-item img { width: 100%; height: auto; border: 1px solid #ccc; box-shadow: 2px 2px 10px rgba(0,0,0,0.1); }
+        .image-item p { font-size: 0.9em; font-weight: bold; margin-top: 5px; }
+
+        .codigo-box { background: #f1f8e9; border-left: 5px solid #689f38; padding: 20px; margin: 20px 0; }
+        .pregunta { font-style: italic; color: #555; }
+        
+        .nota-bloqueo { background: #fff3e0; border: 1px solid #ffe0b2; padding: 15px; font-size: 0.95em; margin-top: 30px; }
     </style>
 </head>
 <body>
 
-    <div id="login-page">
-        <div class="login-box">
-            <h2>Taller de Péndulo Express</h2>
-            <input type="text" id="u" placeholder="Usuario">
-            <input type="password" id="p" placeholder="Contraseña">
-            <button class="btn-entrar" onclick="entrar()">Iniciar Formación</button>
-        </div>
+    <h1>PÉNDULO EXPRESS</h1>
+    
+    <div class="video-links">
+        <a href="#">(VER VIDEO PARTE 1)</a>
+        <a href="#">(VER VIDEO PARTE 2)</a>
     </div>
 
-    <div id="dashboard">
-        <header>
-            <h1>TALLER DE PÉNDULO EXPRESS</h1>
-            <p>AULA VIRTUAL</p>
-        </header>
+    <section>
+        <h2>FUNCIONAMIENTO DEL PÉNDULO: LOS MOVIMIENTOS</h2>
+        <p>El péndulo se comunica mediante un código de lenguaje; un código entre la mente consciente e inconsciente, entre el hemisferio cerebral derecho y el cerebral izquierdo.</p>
 
-        <div class="nav-scroll">
-            <button class="tab-btn active" onclick="tab(this,'m1')">MATERIALES</button>
-            <button class="tab-btn" onclick="tab(this,'m2')">LIMPIEZA</button>
-            <button class="tab-btn" onclick="tab(this,'m4')">PROTECCIÓN</button>
-            <button class="tab-btn" onclick="tab(this,'m5')">TESTEO</button>
-            <button class="tab-btn" onclick="tab(this,'m6')">GLOSARIO</button>
-        </div>
-
-        <div id="m1" class="content active">
-            <h3>Materiales de Trabajo</h3>
-            <ul class="lista-info">
-                <li><strong>Péndulo:</strong> Cristal, Madera u Orgonita. Elige el que resuene contigo.</li>
-                <li>Lugar tranquilo y armonioso para trabajar.</li>
-                <li>Lápiz negro y papel para realizar el trabajo a distancia.</li>
-            </ul>
-            <div class="video-container">
-                <div class="video-poster" style="background-image: url('./materiales.jpg');" onclick="loadVideo(this, 'IV0Aa1k0gX0')">
-                    <div class="play-icon"></div>
-                    <span>MATERIALES</span>
-                </div>
-                <div class="video-wrapper"><div id="player-IV0Aa1k0gX0"></div></div>
+        <div class="grid-hemisferios">
+            <div class="hemisferio izquierdo">
+                <strong>Hemisferio Izquierdo:</strong> Deductivo, lógico, analítico, consciente, exterior, yang, maneja la palabra.
+            </div>
+            <div class="hemisferio derecho">
+                <strong>Hemisferio Derecho:</strong> Intuitivo, espiritual, holístico, inconsciente, interior, yin, maneja los dibujos.
             </div>
         </div>
+        <p style="text-align: center; font-style: italic;">"La mente domina la materia."</p>
+    </section>
 
-        <div id="m2" class="content">
-            <h3>Limpieza y Consagración</h3>
-            <button class="btn-consagrar" onclick="toggleConsagrar()">Ver ritual y frase de consagración</button>
-            <div id="box-consagrar" class="box-consagrar">
-                <strong style="color: var(--gold); display: block; margin-bottom: 10px;">RITUAL DE CONSAGRACIÓN</strong>
-                <ul style="padding-left: 15px; margin-bottom: 15px; color: #ccc;">
-                    <li>Mirar hacia el Este.</li>
-                    <li>Poner el péndulo entre las manos en forma de rezo.</li>
-                    <li>Llevarlo a la nariz, inspirar y exhalar 3 veces hacia el péndulo.</li>
-                    <li>Llevarlo a la altura del chakra AJNA (entrecejo).</li>
-                    <li>Llevarlo a la altura del chakra Cardíaco (pecho).</li>
-                </ul>
-                <p style="font-style: italic; color: var(--gold); border-top: 1px solid rgba(197,160,89,0.3); padding-top: 10px;">
-                    "A partir de este momento te consagro para que trabajes en la luz, muestres siempre la verdad, estés en ley, tus respuestas vengan siempre del ser superior y sean sabias, claras, precisas y seguras. Gracias".
-                </p>
+    <section>
+        <h2>TRAZOS Y DIBUJOS</h2>
+        <p>Los movimientos del péndulo trazan dibujos que el hemisferio derecho entiende y traduce a palabras.</p>
+        
+        <div class="image-gallery">
+            <div class="image-item">
+                <img src="testeo.jpg" alt="Giro Horario y Anti-horario">
+                <p>Giros: Sentido Horario y Anti-horario</p>
             </div>
-            <div class="video-container">
-                <div class="video-poster" style="background-image: url('./limpieza.jpg');" onclick="loadVideo(this, 'R24gh8hWlu0')">
-                    <div class="play-icon"></div>
-                    <span>LIMPIEZA</span>
-                </div>
-                <div class="video-wrapper"><div id="player-R24gh8hWlu0"></div></div>
+            <div class="image-item">
+                <img src="proteccion.jpg" alt="Líneas y Diagonales">
+                <p>Líneas: Vertical, Horizontal y Diagonal</p>
             </div>
         </div>
+    </section>
 
-        <div id="m4" class="content">
-            <h3>Protección del Espacio</h3>
-            <ul class="lista-info">
-                <li>Visualización de luz blanca o dorada protectora.</li>
-                <li>Invocación de asistencia de guías espirituales.</li>
-            </ul>
-            <div style="text-align: center; font-size: 40px; color: var(--gold); margin: 20px 0;">⛧</div>
-            <div class="video-container">
-                <div class="video-poster" style="background-image: url('./proteccion.jpg');" onclick="loadVideo(this, 'R24gh8hWlu0')">
-                    <div class="play-icon"></div>
-                    <span>PROTECCIÓN</span>
-                </div>
-                <div class="video-wrapper"><div id="player-R24gh8hWlu0"></div></div>
-            </div>
+    <section>
+        <h2>DESCUBRE TU CÓDIGO (SI / NO)</h2>
+        <p>Di o piensa: <em>“Solo quiero ser sensible a las radiaciones de mi péndulo para descubrir el código de lenguaje que mantiene conmigo”</em>.</p>
+
+        <div class="codigo-box">
+            <h3>Obtener un SI:</h3>
+            <p>Formula una pregunta obvia. <span class="pregunta">Ej: ¿La nieve es blanca?</span></p>
+            <p>El movimiento resultante es tu <strong>SI</strong>. Di: "Este movimiento significa SI".</p>
         </div>
 
-        <div id="m5" class="content">
-            <h3>Metodología de Testeo</h3>
-            <ul class="lista-info">
-                <li>Giro horario (Derecha): Abierto y fluyendo.</li>
-                <li>Giro anti-horario (Izquierda): Bloqueo o energía estancada.</li>
-            </ul>
-            <div class="video-container">
-                <div class="video-poster" style="background-image: url('./testeo.jpg');" onclick="loadVideo(this, 'NJ-5aywOkAI')">
-                    <div class="play-icon"></div>
-                    <span>VIDEO 1</span>
-                </div>
-                <div class="video-wrapper"><div id="player-NJ-5aywOkAI"></div></div>
-            </div>
-            <div class="video-container">
-                <div class="video-poster" style="background-image: url('./testeo.jpg');" onclick="loadVideo(this, 'LngEN9cmHRg')">
-                    <div class="play-icon"></div>
-                    <span>VIDEO 2</span>
-                </div>
-                <div class="video-wrapper"><div id="player-LngEN9cmHRg"></div></div>
-            </div>
-            <div class="video-container">
-                <div class="video-poster" style="background-image: url('./testeo.jpg');" onclick="loadVideo(this, 'WymTOGzcohY')">
-                    <div class="play-icon"></div>
-                    <span>VIDEO 3</span>
-                </div>
-                <div class="video-wrapper"><div id="player-WymTOGzcohY"></div></div>
-            </div>
+        <div class="codigo-box">
+            <h3>Obtener un NO:</h3>
+            <p>Formula una pregunta falsa. <span class="pregunta">Ej: ¿La nieve es negra?</span></p>
+            <p>El movimiento resultante es tu <strong>NO</strong>. Di: "Este movimiento significa NO".</p>
         </div>
+    </section>
 
-        <div id="m6" class="content">
-            <h3>Glosario - Movimientos del Péndulo</h3>
-            <p style="font-size: 0.9rem; color: #bbb;">El péndulo es un puente entre tu mente consciente (lógica/analítica) e inconsciente (intuitiva/profunda).</p>
-            
-            <ul class="lista-info">
-                <li><strong>Hemisferio Izquierdo (Yang):</strong> Deductivo, lógico y maneja la palabra.</li>
-                <li><strong>Hemisferio Derecho (Yin):</strong> Espiritual, intuitivo y maneja los dibujos/trazos.</li>
-            </ul>
-
-            <h3 style="margin-top: 30px; font-size: 1.1rem;">Trazos y Movimientos</h3>
-            <img src="image_f61585.png" class="img-teoria" alt="Giro Horario y Antihorario">
-            <img src="image_f615a8.png" class="img-teoria" alt="Líneas Verticales y Diagonales">
-
-            <h3 style="margin-top: 30px; font-size: 1.1rem;">Descubriendo tu Código</h3>
-            <p style="font-size: 0.9rem; color: #bbb;">Sujeta el péndulo y busca sintonizarte focalizándote solo en el objeto de búsqueda.</p>
-            
-            <ul class="lista-info">
-                <li><strong>Para obtener un SÍ:</strong> Haz una pregunta obvia (ej: "¿La nieve es blanca?"). El movimiento resultante será tu "SÍ".</li>
-                <li><strong>Para obtener un NO:</strong> Haz una pregunta falsa (ej: "¿La nieve es negra?"). El movimiento resultante será tu "NO".</li>
-                <li><strong>Bloqueos:</strong> Si no hay movimiento, puede existir un bloqueo en el radiestesista para conectar con el inconsciente.</li>
-            </ul>
-            <p style="font-size: 0.85rem; font-style: italic; color: var(--gold); text-align: center;">"La mente domina la materia".</p>
-        </div>
+    <div class="nota-bloqueo">
+        <strong>Nota:</strong> Si no hay movimiento, existe un bloqueo. Es necesario tener una <strong>actitud neutral</strong> para que el péndulo se mueva correctamente.
     </div>
 
-    <script>
-        function entrar() {
-            const u = document.getElementById('u').value;
-            const p = document.getElementById('p').value; 
-            if(u === "Pendulo" && p === "PExpress2026") {
-                document.getElementById('login-page').style.display = 'none';
-                document.getElementById('dashboard').style.display = 'block';
-            } else { alert("Acceso denegado."); }
-        }
-        function tab(btn, id) {
-            document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-            btn.classList.add('active');
-        }
-        function toggleConsagrar() {
-            var box = document.getElementById('box-consagrar');
-            box.style.display = (box.style.display === "block") ? "none" : "block";
-        }
-        function loadVideo(poster, videoId) {
-            const container = poster.parentElement;
-            const placeholder = container.querySelector('#player-' + videoId);
-            poster.style.display = 'none';
-            placeholder.outerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0" frameborder="0" allow="autoplay; encrypted-media" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>`;
-        }
-    </script>
 </body>
 </html>
