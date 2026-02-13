@@ -3,52 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Péndulo Express</title>
+    <title>Péndulo Express - Versión Restaurada</title>
     <style>
         body { background-color: #0a0a0b; color: #d4af37; font-family: 'Times New Roman', serif; margin: 0; text-align: center; }
         
-        /* PANTALLA DE LOGIN */
+        /* LOGIN */
         #login-screen { 
             position: fixed; width: 100%; height: 100%; background: #000; 
             display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 1000; 
         }
-        .login-box { background: #111; padding: 30px; border: 1px solid #d4af37; border-radius: 10px; width: 320px; }
-        h1 { font-size: 24px; letter-spacing: 2px; }
-        input { display: block; padding: 12px; margin: 15px auto; border: 1px solid #444; background: #000; color: #fff; width: 80%; border-radius: 4px; }
-        .btn-ingresar { padding: 12px 30px; background: #d4af37; color: #000; border: none; cursor: pointer; font-weight: bold; width: 90%; }
+        .login-box { background: #111; padding: 40px; border: 1px solid #d4af37; border-radius: 10px; box-shadow: 0 0 20px rgba(212, 175, 55, 0.2); }
+        input { display: block; padding: 12px; margin: 15px auto; border: 1px solid #444; background: #000; color: #fff; width: 220px; border-radius: 5px; }
+        .btn-ingresar { padding: 12px 35px; background: #d4af37; color: #000; border: none; cursor: pointer; font-weight: bold; text-transform: uppercase; }
 
         /* CONTENIDO PRINCIPAL */
         #main-content { display: none; }
 
-        /* NAVEGACIÓN SOLAPAS */
+        /* NAVEGACIÓN (LAS 5 SOLAPAS) */
         nav { 
             display: flex; justify-content: center; background: #000; 
-            padding: 10px; position: sticky; top: 0; border-bottom: 1px solid #333; z-index: 100;
+            padding: 15px; position: sticky; top: 0; border-bottom: 1px solid #333; z-index: 100; gap: 8px;
         }
         nav button { 
-            background: #1a1a1a; color: #fff; border: 1px solid #444; padding: 10px 15px; 
-            margin: 0 2px; font-size: 11px; cursor: pointer; text-transform: uppercase;
+            background: #1a1a1a; color: #fff; border: 1px solid #444; padding: 10px 18px; 
+            font-size: 11px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px;
         }
-        nav button.active { border-color: #d4af37; color: #d4af37; background: #000; }
+        nav button.active { border-color: #d4af37; color: #d4af37; background: #000; box-shadow: 0 0 10px rgba(212, 175, 55, 0.3); }
 
-        /* SECCIONES */
-        .tab-content { display: none; max-width: 800px; margin: 40px auto; padding: 20px; text-align: left; }
+        /* ESTILO DE LAS SECCIONES */
+        .tab-content { display: none; max-width: 850px; margin: 40px auto; padding: 30px; text-align: left; background: rgba(255,255,255,0.02); border: 1px solid #1a1a1a; }
         .tab-content.active { display: block; }
         
-        .video-placeholder { background: #111; border: 1px solid #333; padding: 40px; text-align: center; margin: 20px 0; color: #666; }
+        h2 { color: #fff; border-bottom: 1px solid #d4af37; padding-bottom: 15px; text-transform: uppercase; letter-spacing: 2px; }
+        .texto-info { color: #ccc; line-height: 1.9; font-size: 17px; margin-bottom: 25px; }
+        .resaltado { color: #d4af37; font-weight: bold; }
+        
+        /* IMÁGENES TÉCNICAS */
+        .img-wrap { text-align: center; margin: 30px 0; }
+        .img-tecnica { width: 100%; max-width: 500px; border: 1px solid #333; filter: invert(100%); padding: 10px; background: #fff; }
 
-        .texto-info { color: #ccc; line-height: 1.8; margin-bottom: 20px; text-align: justify; }
-        .img-tecnica { width: 100%; max-width: 450px; display: block; margin: 25px auto; filter: invert(100%); border: 1px solid #333; padding: 10px; background: #fff; }
-        h2 { color: #fff; border-bottom: 1px solid #d4af37; padding-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
-        strong { color: #fff; }
+        /* VIDEOS */
+        .video-box { position: relative; padding-bottom: 56.25%; height: 0; margin-top: 30px; border: 1px solid #333; }
+        .video-box iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
     </style>
 </head>
 <body>
 
     <div id="login-screen">
         <div class="login-box">
-            <h1>PÉNDULO EXPRESS</h1>
-            <p style="color: #666; font-size: 11px; margin-bottom: 20px;">ACCESO PRIVADO</p>
+            <h1 style="letter-spacing: 5px;">PÉNDULO EXPRESS</h1>
+            <p style="color: #666; font-size: 12px;">ESTUDIO PRIVADO</p>
             <input type="text" id="user" placeholder="Usuario">
             <input type="password" id="pass" placeholder="Contraseña">
             <button class="btn-ingresar" onclick="checkAccess()">INGRESAR</button>
@@ -60,79 +64,84 @@
             <button onclick="showTab('materiales')" id="btn-materiales">Materiales</button>
             <button onclick="showTab('limpieza')" id="btn-limpieza">Limpieza</button>
             <button onclick="showTab('proteccion')" id="btn-proteccion">Protección</button>
-            <button onclick="showTab('testeo')" id="btn-testeo">Testeo</button>
+            <button onclick="showTab('testeo')" id="id-testeo">Testeo</button>
             <button onclick="showTab('funcionamiento')" id="btn-funcionamiento">Funcionamiento</button>
         </nav>
 
-        <div id="materiales" class="tab-content">
+        <div id="materiales" class="tab-content active">
             <h2>1. Materiales</h2>
-            <div class="texto-info">Contenido sobre los tipos de péndulos y herramientas necesarias para la práctica.</div>
-            <div class="video-placeholder">VIDEO DE MATERIALES</div>
+            <div class="texto-info">Contenido de la tarde: Introducción a los instrumentos y elección del péndulo personal.</div>
+            <div class="video-box"><iframe src="" frameborder="0"></iframe></div>
         </div>
 
         <div id="limpieza" class="tab-content">
             <h2>2. Limpieza</h2>
-            <div class="texto-info">Métodos para la descarga energética del péndulo antes de su uso.</div>
-            <div class="video-placeholder">VIDEO DE LIMPIEZA</div>
+            <div class="texto-info">Contenido de la tarde: Métodos de descarga (agua, sal, tierra) y purificación energética.</div>
+            <div class="video-box"><iframe src="" frameborder="0"></iframe></div>
         </div>
 
         <div id="proteccion" class="tab-content">
             <h2>3. Protección</h2>
-            <div class="texto-info">Protocolos de seguridad para mantener la neutralidad y protección del operador.</div>
-            <div class="video-placeholder">VIDEO DE PROTECCIÓN</div>
+            <div class="texto-info">Contenido de la tarde: Protocolo de sellado áurico y oración de protección inicial.</div>
+            <div class="video-box"><iframe src="" frameborder="0"></iframe></div>
         </div>
 
         <div id="testeo" class="tab-content">
             <h2>4. Testeo</h2>
-            <div class="texto-info">Ejercicios iniciales para desarrollar la sensibilidad radiestésica.</div>
-            <div class="video-placeholder">VIDEO DE TESTEO</div>
+            <div class="texto-info">Contenido de la tarde: Primeras prácticas de sensibilidad y sintonización.</div>
+            <div class="video-box"><iframe src="" frameborder="0"></iframe></div>
         </div>
 
         <div id="funcionamiento" class="tab-content">
             <h2>5. Funcionamiento y Movimientos</h2>
             <div class="texto-info">
-                El péndulo se comunica mediante un código de lenguaje; un código entre la mente consciente (Hemisferio Izquierdo: lógico) e inconsciente (Hemisferio Derecho: intuitivo).
+                El péndulo se comunica mediante un código de lenguaje entre la mente consciente e inconsciente.
                 <br><br>
-                <strong>DESCUBRE TU CÓDIGO (SI / NO):</strong>
-                <br>• Para obtener un <strong>SI</strong>: Sujeta el péndulo y pregunta algo obvio como <em>"¿La nieve es de color blanco?"</em>.
-                <br>• Para obtener un <strong>NO</strong>: Pregunta algo falso como <em>"¿La nieve es de color negro?"</em>.
+                <span class="resaltado">Hemisferio Izquierdo:</span> Lógico, analítico, maneja la palabra.
+                <br>
+                <span class="resaltado">Hemisferio Derecho:</span> Intuitivo, espiritual, maneja los dibujos.
             </div>
-            <img src="testeo.jpg" class="img-tecnica" alt="Diagrama de Movimientos del Péndulo">
+
+            <div class="img-wrap">
+                <img src="testeo.jpg" class="img-tecnica" alt="Movimientos">
+                <p style="font-size: 12px;">GIROS Y LÍNEAS TÉCNICAS</p>
+            </div>
+
             <div class="texto-info">
-                Los trazos principales incluyen giros (horario y anti-horario), líneas verticales, horizontales y diagonales. Recuerda mantener una <strong>actitud neutral</strong> para evitar bloqueos.
+                <strong>PROGRAMACIÓN DEL SI / NO:</strong>
+                <br>Formula una pregunta obvia: <span style="color: #fff;">"¿La nieve es blanca?"</span>. El movimiento que realice el péndulo será tu <span class="resaltado">SI</span>.
+                <br>Formula una pregunta falsa: <span style="color: #fff;">"¿La nieve es negra?"</span>. El movimiento resultante será tu <span class="resaltado">NO</span>.
             </div>
         </div>
     </div>
 
     <script>
         function checkAccess() {
-            // Convierte el usuario a minúsculas para evitar errores de escritura
-            const user = document.getElementById('user').value.toLowerCase();
-            const pass = document.getElementById('pass').value;
+            const u = document.getElementById('user').value.toLowerCase();
+            const p = document.getElementById('pass').value;
 
-            // Validación flexible para el usuario "pendulo" y clave "prueba"
-            if(user === "pendulo" && pass === "prueba") {
+            // Usuario: pendulo | Clave: prueba
+            if(u === "pendulo" && p === "prueba") {
                 document.getElementById('login-screen').style.display = 'none';
                 document.getElementById('main-content').style.display = 'block';
                 showTab('materiales');
             } else {
-                alert("Acceso denegado. Verifique usuario y clave.");
+                alert("Datos incorrectos");
             }
         }
 
         function showTab(tabId) {
-            const tabs = document.getElementsByClassName('tab-content');
-            for (let i = 0; i < tabs.length; i++) {
-                tabs[i].classList.remove('active');
-            }
-            const buttons = document.querySelectorAll('nav button');
-            buttons.forEach(btn => btn.classList.remove('active'));
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(t => t.style.display = 'none');
+            
+            const btns = document.querySelectorAll('nav button');
+            btns.forEach(b => b.classList.remove('active'));
 
-            document.getElementById(tabId).classList.add('active');
-            document.getElementById('btn-' + tabId).classList.add('active');
-            window.scrollTo(0,0);
+            document.getElementById(tabId).style.display = 'block';
+            // Para el botón de testeo que tiene un ID diferente
+            const btn = document.getElementById('btn-' + tabId) || document.getElementById('id-testeo');
+            if(btn) btn.classList.add('active');
         }
     </script>
-
 </body>
 </html>
