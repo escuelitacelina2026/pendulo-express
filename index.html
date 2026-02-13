@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taller de Péndulo Hebreo - Aula Virtual</title>
+    <title>Taller de Péndulo Express - Aula Virtual</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root { --gold: #c5a059; --bg: #0b0e14; --text-light: #f4f4f4; }
@@ -34,34 +34,9 @@
         .lista-info li { margin-bottom: 12px; padding-left: 25px; position: relative; }
         .lista-info li::before { content: '✧'; position: absolute; left: 0; color: var(--gold); }
 
-        /* BOTÓN Y TEXTO DE CONSAGRACIÓN */
-        .btn-consagrar { 
-            background: rgba(197, 160, 89, 0.1); 
-            border: 1px solid var(--gold); 
-            color: var(--gold); 
-            padding: 12px; 
-            width: 100%; 
-            cursor: pointer; 
-            font-family: 'Lato'; 
-            text-transform: uppercase; 
-            font-size: 11px; 
-            letter-spacing: 1px; 
-            margin-bottom: 15px; 
-            font-weight: bold;
-        }
-        .box-consagrar { 
-            display: none; /* Inicia oculto */
-            background: #161b22; 
-            border: 1px solid var(--gold); 
-            padding: 20px; 
-            font-size: 0.9rem; 
-            margin-bottom: 20px; 
-            color: #ddd; 
-            border-radius: 8px;
-        }
-        .box-consagrar strong { color: var(--gold); display: block; margin-bottom: 10px; }
+        .btn-consagrar { background: rgba(197, 160, 89, 0.1); border: 1px solid var(--gold); color: var(--gold); padding: 12px; width: 100%; cursor: pointer; font-family: 'Lato'; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; margin-bottom: 15px; font-weight: bold; }
+        .box-consagrar { display: none; background: #161b22; border: 1px solid var(--gold); padding: 20px; font-size: 0.9rem; margin-bottom: 20px; color: #ddd; border-radius: 8px; }
 
-        /* REPRODUCTOR VERTICAL */
         .video-container { width: 100%; max-width: 320px; margin: 25px auto; position: relative; }
         .video-wrapper { position: relative; padding-bottom: 177.77%; height: 0; background: #000; border: 1px solid rgba(197, 160, 89, 0.4); border-radius: 15px; overflow: hidden; }
         .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
@@ -74,7 +49,7 @@
 
     <div id="login-page">
         <div class="login-box">
-            <h2>Taller de Péndulo Hebreo</h2>
+            <h2>Taller de Péndulo Express</h2>
             <input type="text" id="u" placeholder="Usuario">
             <input type="password" id="p" placeholder="Contraseña">
             <button class="btn-entrar" onclick="entrar()">Iniciar Formación</button>
@@ -83,7 +58,7 @@
 
     <div id="dashboard">
         <header>
-            <h1>TALLER DE PÉNDULO HEBREO</h1>
+            <h1>TALLER DE PÉNDULO EXPRESS</h1>
             <p>AULA VIRTUAL</p>
         </header>
 
@@ -98,10 +73,10 @@
             <h3>Materiales de Trabajo</h3>
             <ul class="lista-info">
                 <li><strong>Péndulo:</strong> Cristal, Madera u Orgonita. Elige el que resuene contigo.</li>
-                <li>Busco un lugar tranquilo y armonioso para trabajar.</li>
-                <li>Busco una mesa o lugar para apoyar y trabajar cómodamente.</li>
-                <li>Lápiz negro y papel para realizar testeo a distancia.</li>
-                <li>Música de meditación o relajación para abrir el espacio sagrado.</li>
+                <li>Lugar tranquilo y armonioso para trabajar.</li>
+                <li>Mesa o superficie de apoyo cómoda.</li>
+                <li>Lápiz negro y papel para trabajos a distancia.</li>
+                <li>Música de meditación para sostener el espacio sagrado.</li>
             </ul>
             <div class="video-container">
                 <div class="video-shield"></div>
@@ -113,23 +88,12 @@
 
         <div id="m2" class="content">
             <h3>Limpieza y Consagración</h3>
-            
             <button class="btn-consagrar" onclick="toggleConsagrar()">Ver frase para consagrar péndulo</button>
-            
             <div id="box-consagrar" class="box-consagrar">
                 <strong>RITUAL DE CONSAGRACIÓN</strong>
-                <p>La consagración se hace luego de la limpieza por primera y única vez:</p>
-                <ul style="padding-left: 15px; margin-bottom: 15px;">
-                    <li>Mirar hacia el Este.</li>
-                    <li>Poner el péndulo entre las manos en forma de rezo.</li>
-                    <li>Llevarlo a la nariz, inspirar y exhalar 3 veces hacia él.</li>
-                    <li>Llevarlo al entrecejo (Chakra Ajna) y luego al pecho (Corazón).</li>
-                </ul>
-                <p style="font-style: italic; color: var(--gold); border-top: 1px solid rgba(197,160,89,0.3); padding-top: 10px;">
-                    "A partir de este momento te consagro para que trabajes en la luz, muestres siempre la verdad, estés en ley, tus respuestas vengan siempre del ser superior y sean sabias, claras, precisas y seguras. Gracias".
-                </p>
+                <p>Se realiza por única vez después de la limpieza:</p>
+                <p style="font-style: italic; color: var(--gold);">"A partir de este momento te consagro para que trabajes en la luz, muestres siempre la verdad, estés en ley, tus respuestas vengan siempre del ser superior y sean sabias, claras, precisas y seguras. Gracias".</p>
             </div>
-
             <div class="video-container">
                 <div class="video-shield"></div>
                 <div class="video-wrapper">
@@ -141,9 +105,9 @@
         <div id="m4" class="content">
             <h3>Protección del Espacio</h3>
             <ul class="lista-info">
-                <li>Visualiza una luz protectora rodeando tu campo áurico.</li>
-                <li>Utiliza la simbología sagrada para sellar el lugar.</li>
-                <li>Invoca la asistencia de tus guías para la sesión.</li>
+                <li>Visualización de luz blanca protectora.</li>
+                <li>Sello del espacio con simbología sagrada.</li>
+                <li>Invocación de asistencia de guías espirituales.</li>
             </ul>
             <div class="video-container">
                 <div class="video-shield"></div>
@@ -154,11 +118,11 @@
         </div>
 
         <div id="m5" class="content">
-            <h3>Testeo y Movimientos</h3>
+            <h3>Metodología de Testeo</h3>
             <ul class="lista-info">
-                <li>Interpretación del giro horario (apertura).</li>
-                <li>Interpretación del giro anti-horario (bloqueo).</li>
-                <li>Sintonización con las respuestas del péndulo.</li>
+                <li>Giro horario: Energía fluyendo / Apertura.</li>
+                <li>Giro anti-horario: Bloqueo / Necesidad de limpieza.</li>
+                <li>Sintonización previa con el instrumento.</li>
             </ul>
             <div class="video-container">
                 <div class="video-shield"></div>
@@ -174,7 +138,6 @@
     </div>
 
     <script>
-        // Función para el Login
         function entrar() {
             const u = document.getElementById('u').value;
             const p = document.getElementById('p').value; 
@@ -183,8 +146,6 @@
                 document.getElementById('dashboard').style.display = 'block';
             } else { alert("Acceso denegado."); }
         }
-
-        // Función para cambiar de pestañas
         function tab(btn, id) {
             document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -192,15 +153,9 @@
             btn.classList.add('active');
             window.scrollTo(0,0);
         }
-
-        // FUNCIÓN PARA EL DESPLEGABLE
         function toggleConsagrar() {
             var box = document.getElementById('box-consagrar');
-            if (box.style.display === "block") {
-                box.style.display = "none";
-            } else {
-                box.style.display = "block";
-            }
+            box.style.display = (box.style.display === "block") ? "none" : "block";
         }
     </script>
 </body>
