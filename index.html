@@ -3,123 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Péndulo Express - Versión Completa</title>
+    <title>Taller de Péndulo Express - Aula Virtual</title>
     <style>
-        body { background-color: #0a0a0b; color: #d4af37; font-family: 'Times New Roman', serif; margin: 0; text-align: center; }
+        :root { --oro: #d4af37; --fondo: #0a0a0b; --caja: #111112; }
+        body { background-color: var(--fondo); color: #fff; font-family: 'Georgia', serif; margin: 0; }
         
         /* LOGIN */
-        #login-screen { 
-            position: fixed; width: 100%; height: 100%; background: #000; 
-            display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 1000; 
-        }
-        .login-box { background: #111; padding: 40px; border: 1px solid #d4af37; border-radius: 10px; box-shadow: 0 0 20px rgba(212, 175, 55, 0.2); }
-        input { display: block; padding: 12px; margin: 15px auto; border: 1px solid #444; background: #000; color: #fff; width: 220px; border-radius: 5px; }
-        .btn-ingresar { padding: 12px 35px; background: #d4af37; color: #000; border: none; cursor: pointer; font-weight: bold; text-transform: uppercase; }
+        #login-screen { position: fixed; width: 100%; height: 100%; background: #000; display: flex; justify-content: center; align-items: center; z-index: 2000; }
+        .login-box { border: 1px solid var(--oro); padding: 40px; text-align: center; border-radius: 8px; width: 350px; }
+        .login-box h1 { color: var(--oro); letter-spacing: 3px; font-size: 22px; margin-bottom: 20px; }
+        input { display: block; width: 90%; margin: 10px auto; padding: 12px; background: #000; border: 1px solid #333; color: #fff; border-radius: 4px; }
+        .btn-ingresar { background: var(--oro); color: #000; border: none; padding: 12px; width: 96%; cursor: pointer; font-weight: bold; margin-top: 10px; }
 
-        /* CONTENIDO PRINCIPAL */
-        #main-content { display: none; padding-bottom: 50px; }
+        /* HEADER */
+        header { padding: 40px 0 20px 0; text-align: center; }
+        header h1 { color: var(--oro); font-size: 32px; letter-spacing: 4px; margin: 0; }
+        header p { color: #00bcd4; text-transform: uppercase; letter-spacing: 5px; font-size: 14px; margin-top: 10px; }
 
-        /* NAVEGACIÓN (5 SOLAPAS) */
-        nav { 
-            display: flex; justify-content: center; background: #000; 
-            padding: 15px; position: sticky; top: 0; border-bottom: 1px solid #333; z-index: 100; gap: 8px;
-        }
-        nav button { 
-            background: #1a1a1a; color: #fff; border: 1px solid #444; padding: 10px 18px; 
-            font-size: 11px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px;
-        }
-        nav button.active { border-color: #d4af37; color: #d4af37; background: #000; box-shadow: 0 0 10px rgba(212, 175, 55, 0.3); }
+        /* NAVEGACIÓN */
+        nav { display: flex; justify-content: center; gap: 10px; padding: 20px; border-bottom: 1px solid #222; }
+        nav button { background: none; border: 1px solid #444; color: #aaa; padding: 8px 15px; cursor: pointer; text-transform: uppercase; font-size: 11px; transition: 0.3s; }
+        nav button.active { border-color: var(--oro); color: var(--oro); }
 
-        /* ESTILO DE LAS SECCIONES */
-        .tab-content { display: none; max-width: 850px; margin: 40px auto; padding: 30px; text-align: left; background: rgba(255,255,255,0.02); border: 1px solid #1a1a1a; }
+        /* CONTENEDOR PRINCIPAL */
+        .main-container { max-width: 900px; margin: 30px auto; background: var(--caja); padding: 40px; border-radius: 5px; min-height: 600px; }
+        .tab-content { display: none; }
         .tab-content.active { display: block; }
-        
-        h2 { color: #fff; border-bottom: 1px solid #d4af37; padding-bottom: 15px; text-transform: uppercase; letter-spacing: 2px; }
-        .texto-info { color: #ccc; line-height: 1.9; font-size: 17px; margin-bottom: 25px; }
-        .resaltado { color: #d4af37; font-weight: bold; }
-        
-        /* IMÁGENES TÉCNICAS */
-        .img-wrap { text-align: center; margin: 30px 0; }
-        .img-tecnica { width: 100%; max-width: 500px; border: 1px solid #333; filter: invert(100%); padding: 10px; background: #fff; }
 
-        /* VIDEOS */
-        .video-box { position: relative; padding-bottom: 56.25%; height: 0; margin-top: 30px; border: 1px solid #333; background: #111; }
-        .video-box iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-        .video-label { color: #666; font-size: 12px; text-align: center; margin-top: 10px; display: block; }
+        h2 { color: var(--oro); font-size: 24px; text-align: center; margin-bottom: 30px; }
+        .item-list { list-style: none; padding: 0; margin-bottom: 30px; }
+        .item-list li { margin: 15px 0; color: #ccc; display: flex; align-items: center; gap: 10px; }
+        .item-list li::before { content: "✧"; color: var(--oro); }
+
+        /* VIDEOS CON SEGURIDAD */
+        .video-wrapper { width: 100%; max-width: 500px; margin: 20px auto; position: relative; border: 1px solid var(--oro); border-radius: 15px; overflow: hidden; }
+        .video-wrapper iframe { width: 100%; height: 300px; border: none; }
+        
+        /* BOTÓN DESPLEGABLE (LIMPIEZA) */
+        .collapsible { background: none; color: var(--oro); border: 1px solid var(--oro); padding: 10px; width: 100%; cursor: pointer; text-transform: uppercase; margin-bottom: 20px; }
+        .content-desplegable { display: none; padding: 20px; border: 1px solid #333; margin-bottom: 20px; font-style: italic; color: #ddd; }
+
+        .img-grid { display: flex; justify-content: center; gap: 20px; margin-top: 20px; }
+        .img-mini { width: 45%; border: 1px solid #444; border-radius: 8px; }
     </style>
 </head>
 <body>
 
     <div id="login-screen">
         <div class="login-box">
-            <h1 style="letter-spacing: 5px;">PÉNDULO EXPRESS</h1>
-            <p style="color: #666; font-size: 12px;">ACCESO PRIVADO</p>
+            <h1>PÉNDULO EXPRESS</h1>
+            <p style="color: #666; font-size: 11px; margin-bottom: 15px;">ACCESO PRIVADO</p>
             <input type="text" id="user" placeholder="Usuario">
             <input type="password" id="pass" placeholder="Contraseña">
             <button class="btn-ingresar" onclick="checkAccess()">INGRESAR</button>
         </div>
     </div>
 
-    <div id="main-content">
-        <nav>
-            <button onclick="showTab('materiales')" id="btn-materiales">Materiales</button>
-            <button onclick="showTab('limpieza')" id="btn-limpieza">Limpieza</button>
-            <button onclick="showTab('proteccion')" id="btn-proteccion">Protección</button>
-            <button onclick="showTab('testeo')" id="btn-testeo">Testeo</button>
-            <button onclick="showTab('funcionamiento')" id="btn-funcionamiento">Funcionamiento</button>
-        </nav>
+    <header>
+        <h1>TALLER DE PÉNDULO EXPRESS</h1>
+        <p>AULA VIRTUAL</p>
+    </header>
 
-        <div id="materiales" class="tab-content">
-            <h2>1. Materiales</h2>
-            <div class="texto-info">Para comenzar en Péndulo Express, es fundamental contar con un péndulo de material natural que resuene con tu energía.</div>
-            <div class="video-box"><iframe src="AQUI_VA_URL_VIDEO_1" frameborder="0" allowfullscreen></iframe></div>
-            <span class="video-label">VIDEO: INTRODUCCIÓN Y MATERIALES</span>
+    <nav>
+        <button onclick="showTab('materiales')" class="active">Materiales</button>
+        <button onclick="showTab('limpieza')">Limpieza</button>
+        <button onclick="showTab('proteccion')">Protección</button>
+        <button onclick="showTab('testeo')">Testeo</button>
+        <button onclick="showTab('glosario')">Glosario</button>
+    </nav>
+
+    <div class="main-container">
+        <div id="materiales" class="tab-content active">
+            <h2>Materiales de Trabajo</h2>
+            <ul class="item-list">
+                <li><strong>Péndulo:</strong> Cristal, Madera u Orgonita. Elige el que resuene contigo.</li>
+                <li>Lugar tranquilo y armonioso para trabajar.</li>
+                <li>Lápiz negro y papel para realizar el trabajo a distancia.</li>
+            </ul>
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/XXXXXX?rel=0&modestbranding=1&controls=1" allowfullscreen></iframe>
+            </div>
         </div>
 
         <div id="limpieza" class="tab-content">
-            <h2>2. Limpieza</h2>
-            <div class="texto-info">La limpieza es el proceso de neutralizar las memorias energéticas del instrumento mediante sal, sahumerio o intención.</div>
-            <div class="video-box"><iframe src="AQUI_VA_URL_VIDEO_2" frameborder="0" allowfullscreen></iframe></div>
-            <span class="video-label">VIDEO: TÉCNICAS DE LIMPIEZA</span>
+            <h2>Limpieza y Consagración</h2>
+            <button class="collapsible" onclick="toggleDesplegable()">Ver Ritual y Frase de Consagración</button>
+            <div id="frase-consagracion" class="content-desplegable">
+                "Consagro este péndulo para que sea un instrumento de luz y verdad..." (Aquí va tu frase completa).
+            </div>
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/XXXXXX?rel=0&modestbranding=1" allowfullscreen></iframe>
+            </div>
         </div>
 
         <div id="proteccion" class="tab-content">
-            <h2>3. Protección</h2>
-            <div class="texto-info">Antes de cada sesión, asegúrate de estar en un estado de neutralidad y realiza tu decreto de protección personal.</div>
-            <div class="video-box"><iframe src="AQUI_VA_URL_VIDEO_3" frameborder="0" allowfullscreen></iframe></div>
-            <span class="video-label">VIDEO: PROTOCOLO DE PROTECCIÓN</span>
+            <h2>Protección del Espacio</h2>
+            <ul class="item-list">
+                <li>Visualización de luz blanca o dorada protectora.</li>
+                <li>Invocación de asistencia de guías espirituales.</li>
+            </ul>
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/XXXXXX?rel=0&modestbranding=1" allowfullscreen></iframe>
+            </div>
         </div>
 
         <div id="testeo" class="tab-content">
-            <h2>4. Testeo</h2>
-            <div class="texto-info">El testeo desarrolla tu sensibilidad radiestésica. Comenzamos con ejercicios de calibración simples.</div>
-            <div class="video-box"><iframe src="AQUI_VA_URL_VIDEO_4" frameborder="0" allowfullscreen></iframe></div>
-            <span class="video-label">VIDEO: CALIBRACIÓN Y TESTEO</span>
+            <h2>Metodología de Testeo</h2>
+            <ul class="item-list">
+                <li>Giro horario (Derecha): Abierto y fluyendo.</li>
+                <li>Giro anti-horario (Izquierda): Bloqueo o energía estancada.</li>
+            </ul>
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/VIDEO1" allowfullscreen></iframe>
+            </div>
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/VIDEO2" allowfullscreen></iframe>
+            </div>
         </div>
 
-        <div id="funcionamiento" class="tab-content">
-            <h2>5. Funcionamiento y Movimientos</h2>
-            <div class="texto-info">
-                El péndulo se comunica mediante un código entre la mente consciente e inconsciente.
-                <br><br>
-                <span class="resaltado">Hemisferio Izquierdo:</span> Lógico, analítico, maneja la palabra. 
-                <br>
-                <span class="resaltado">Hemisferio Derecho:</span> Intuitivo, espiritual, maneja los dibujos. 
+        <div id="glosario" class="tab-content">
+            <h2>Glosario - Movimientos del Péndulo</h2>
+            <p style="color: #aaa; line-height: 1.6;">El péndulo es un puente entre tu mente consciente (lógica/analítica) e inconsciente (intuitiva/profunda).</p>
+            <ul class="item-list">
+                <li><strong>Hemisferio Izquierdo (Yang):</strong> Deductivo, lógico y maneja la palabra.</li>
+                <li><strong>Hemisferio Derecho (Yin):</strong> Espiritual, intuitivo y maneja los dibujos/trazos.</li>
+            </ul>
+            <h3 style="color: var(--oro); text-align: center; margin-top: 40px;">Trazos y Movimientos</h3>
+            <div class="img-grid">
+                <img src="giros.png" class="img-mini" alt="Giro Horario y Antihorario">
+                <img src="lineas.png" class="img-mini" alt="Líneas Verticales y Diagonales">
             </div>
-
-            <div class="img-wrap">
-                <img src="testeo.jpg" class="img-tecnica" alt="Movimientos Técnicos">
-                <p style="font-size: 13px; color: #d4af37;">DIAGRAMA DE MOVIMIENTOS TÉCNICOS</p>
-            </div>
-
-            <div class="texto-info">
-                <strong>EJERCICIO DEL SI / NO:</strong>
-                <br>• Pregunta: "¿La nieve es blanca?" -> Tu movimiento es el <span class="resaltado">SI</span>.
-                <br>• Pregunta: "¿La nieve es negra?" -> Tu movimiento es el <span class="resaltado">NO</span>.
-            </div>
-            
-            <div class="video-box"><iframe src="AQUI_VA_URL_VIDEO_5" frameborder="0" allowfullscreen></iframe></div>
-            <span class="video-label">VIDEO: CÓDIGO DE LENGUAJE</span>
         </div>
     </div>
 
@@ -127,26 +140,21 @@
         function checkAccess() {
             const u = document.getElementById('user').value.toLowerCase().trim();
             const p = document.getElementById('pass').value.trim();
-
             if(u === "pendulo" && p === "prueba") {
                 document.getElementById('login-screen').style.display = 'none';
-                document.getElementById('main-content').style.display = 'block';
-                showTab('materiales');
-            } else {
-                alert("Datos incorrectos");
-            }
+            } else { alert("Acceso denegado"); }
         }
 
-        function showTab(tabId) {
-            const tabs = document.querySelectorAll('.tab-content');
-            tabs.forEach(t => t.style.display = 'none');
-            
-            const btns = document.querySelectorAll('nav button');
-            btns.forEach(b => b.classList.remove('active'));
+        function showTab(id) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
 
-            document.getElementById(tabId).style.display = 'block';
-            document.getElementById('btn-' + tabId).classList.add('active');
-            window.scrollTo(0,0);
+        function toggleDesplegable() {
+            const div = document.getElementById('frase-consagracion');
+            div.style.display = (div.style.display === 'block') ? 'none' : 'block';
         }
     </script>
 </body>
