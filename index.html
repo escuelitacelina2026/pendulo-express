@@ -37,13 +37,13 @@
         .btn-consagrar { background: rgba(197, 160, 89, 0.1); border: 1px solid var(--gold); color: var(--gold); padding: 12px; width: 100%; cursor: pointer; font-family: 'Lato'; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; margin-bottom: 15px; font-weight: bold; }
         .box-consagrar { display: none; background: #161b22; border: 1px solid var(--gold); padding: 20px; font-size: 0.9rem; margin-bottom: 20px; color: #ddd; border-radius: 8px; }
 
-        /* REPRODUCTOR CON PORTADA */
+        /* REPRODUCTOR SEGURO */
         .video-container { width: 100%; max-width: 320px; margin: 25px auto; position: relative; }
         .video-wrapper { position: relative; padding-bottom: 177.77%; height: 0; background: #000; border: 1px solid rgba(197, 160, 89, 0.4); border-radius: 15px; overflow: hidden; }
         .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
         
-        .video-poster { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: 0.5s; }
-        .play-icon { width: 60px; height: 60px; background: rgba(197, 160, 89, 0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #000; font-size: 24px; box-shadow: 0 0 20px rgba(0,0,0,0.5); border: 2px solid white; }
+        .video-poster { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: 0.5s; border-radius: 15px; }
+        .play-icon { width: 60px; height: 60px; background: rgba(197, 160, 89, 0.95); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #000; font-size: 24px; box-shadow: 0 0 20px rgba(0,0,0,0.5); border: 2px solid white; }
         .play-icon::after { content: '▶'; margin-left: 4px; }
 
         .video-shield { position: absolute; top: 0; left: 0; width: 100%; height: 60px; z-index: 10; background: transparent; display: none; }
@@ -52,16 +52,16 @@
         .simbolo-proteccion { 
             border: 2px solid var(--gold); 
             border-radius: 50%; 
-            width: 45px; 
-            height: 45px; 
+            width: 50px; 
+            height: 50px; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
-            font-size: 32px; 
+            font-size: 35px; 
             color: var(--gold); 
             background: rgba(197, 160, 89, 0.1);
-            margin: 10px auto;
-            box-shadow: 0 0 10px rgba(197, 160, 89, 0.3);
+            margin: 15px auto;
+            box-shadow: 0 0 15px rgba(197, 160, 89, 0.3);
         }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -94,13 +94,13 @@
         <div id="m1" class="content active">
             <h3>Materiales de Trabajo</h3>
             <ul class="lista-info">
-                <li><strong>Péndulo:</strong> Cristal, Madera u Orgonita.</li>
+                <li><strong>Péndulo:</strong> Cristal, Madera u Orgonita. Elige el que resuene contigo.</li>
                 <li>Lugar tranquilo y armonioso para trabajar.</li>
                 <li>Mesa o superficie de apoyo cómoda.</li>
-                <li>Lápiz negro y papel para trabajos a distancia.</li>
+                <li>Lápiz negro y papel para realizar el trabajo a distancia.</li>
             </ul>
             <div class="video-container">
-                <div class="video-poster" style="background-image: url('https://images.unsplash.com/photo-1596435649733-410a805a5a22?q=80&w=500');" onclick="loadVideo(this, 'IV0Aa1k0gX0')">
+                <div class="video-poster" style="background-image: url('https://img.youtube.com/vi/IV0Aa1k0gX0/hqdefault.jpg');" onclick="loadVideo(this, 'IV0Aa1k0gX0')">
                     <div class="play-icon"></div>
                 </div>
                 <div class="video-shield"></div>
@@ -112,21 +112,26 @@
 
         <div id="m2" class="content">
             <h3>Limpieza y Consagración</h3>
+            <p style="font-size: 0.9rem; color: #aaa;">La consagración se hace luego de la limpieza por primera y única vez.</p>
+            
             <button class="btn-consagrar" onclick="toggleConsagrar()">Ver ritual y frase de consagración</button>
+            
             <div id="box-consagrar" class="box-consagrar">
                 <strong style="color: var(--gold); display: block; margin-bottom: 10px;">RITUAL DE CONSAGRACIÓN</strong>
                 <ul style="padding-left: 15px; margin-bottom: 15px;">
                     <li>Mirar hacia el Este.</li>
                     <li>Poner el péndulo entre las manos en forma de rezo.</li>
-                    <li>Llevarlo a la nariz, inspirar y exhalar 3 veces hacia él.</li>
-                    <li>Llevarlo al entrecejo (Ajna) y al corazón (pecho).</li>
+                    <li>Llevarlo a la nariz, inspirar y exhalar 3 veces hacia el péndulo.</li>
+                    <li>Llevarlo a la altura del chakra AJNA (entrecejo).</li>
+                    <li>Llevarlo a la altura del chakra Cardíaco (pecho).</li>
                 </ul>
-                <p style="font-style: italic; color: var(--gold); border-top: 1px solid rgba(197,160,89,0.3); padding-top: 10px;">
+                <p style="font-style: italic; color: var(--gold); border-top: 1px solid rgba(197,160,89,0.3); padding-top: 10px; line-height: 1.4;">
                     "A partir de este momento te consagro para que trabajes en la luz, muestres siempre la verdad, estés en ley, tus respuestas vengan siempre del ser superior y sean sabias, claras, precisas y seguras. Gracias".
                 </p>
             </div>
+
             <div class="video-container">
-                <div class="video-poster" style="background-image: url('https://images.unsplash.com/photo-1572520623253-86862377a28e?q=80&w=500');" onclick="loadVideo(this, 'eduRIA3ceis')">
+                <div class="video-poster" style="background-image: url('https://img.youtube.com/vi/eduRIA3ceis/hqdefault.jpg');" onclick="loadVideo(this, 'eduRIA3ceis')">
                     <div class="play-icon"></div>
                 </div>
                 <div class="video-shield"></div>
@@ -139,16 +144,17 @@
         <div id="m4" class="content">
             <h3>Protección del Espacio</h3>
             <ul class="lista-info">
-                <li>Visualización de luz blanca protectora.</li>
+                <li>Visualización de luz blanca o dorada protectora.</li>
                 <li>Invocación de asistencia de guías espirituales.</li>
             </ul>
+            
             <div style="text-align: center; margin: 15px 0;">
                 <p style="font-size: 0.8rem; color: var(--gold); margin-bottom: 5px;">Sello del espacio (Pentagrama)</p>
                 <div class="simbolo-proteccion">⛧</div>
             </div>
 
             <div class="video-container">
-                <div class="video-poster" style="background-image: url('https://images.unsplash.com/photo-1531746790731-6c087fecd05a?q=80&w=500');" onclick="loadVideo(this, 'Sshx93_3ooc')">
+                <div class="video-poster" style="background-image: url('https://img.youtube.com/vi/Sshx93_3ooc/hqdefault.jpg');" onclick="loadVideo(this, 'Sshx93_3ooc')">
                     <div class="play-icon"></div>
                 </div>
                 <div class="video-shield"></div>
@@ -161,11 +167,12 @@
         <div id="m5" class="content">
             <h3>Metodología de Testeo</h3>
             <ul class="lista-info">
-                <li>Giro horario (Derecha): Apertura.</li>
-                <li>Giro anti-horario (Izquierda): Bloqueo.</li>
+                <li>Giro horario (Derecha): Abierto y fluyendo.</li>
+                <li>Giro anti-horario (Izquierda): Bloqueo o energía estancada.</li>
+                <li>Lineal o Quieto: Falta de respuesta clara.</li>
             </ul>
             <div class="video-container">
-                <div class="video-poster" style="background-image: url('https://images.unsplash.com/photo-1515940175183-6798529cb860?q=80&w=500');" onclick="loadVideo(this, 'S_8SNDjG9uU')">
+                <div class="video-poster" style="background-image: url('https://img.youtube.com/vi/S_8SNDjG9uU/hqdefault.jpg');" onclick="loadVideo(this, 'S_8SNDjG9uU')">
                     <div class="play-icon"></div>
                 </div>
                 <div class="video-shield"></div>
