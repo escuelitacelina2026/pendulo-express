@@ -7,95 +7,134 @@
     <style>
         body { background-color: #0a0a0b; color: #d4af37; font-family: 'Times New Roman', serif; margin: 0; text-align: center; }
         
-        /* LOGIN */
-        #login-screen { position: fixed; width: 100%; height: 100%; background: #000; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 1000; }
-        #login-screen input { padding: 10px; margin: 10px; border: 1px solid #d4af37; background: #1a1a1a; color: #fff; text-align: center; }
-        #login-screen button { padding: 10px 20px; background: #d4af37; color: #000; border: none; cursor: pointer; font-weight: bold; }
+        /* PANTALLA DE LOGIN */
+        #login-screen { 
+            position: fixed; width: 100%; height: 100%; background: #000; 
+            display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 1000; 
+        }
+        .login-box { background: #111; padding: 30px; border: 1px solid #d4af37; border-radius: 10px; }
+        input { display: block; padding: 10px; margin: 10px auto; border: 1px solid #444; background: #000; color: #fff; width: 200px; }
+        button { padding: 10px 25px; background: #d4af37; color: #000; border: none; cursor: pointer; font-weight: bold; text-transform: uppercase; }
 
-        /* CONTENIDO PRINCIPAL (Oculto al inicio) */
-        #main-content { display: none; padding: 20px; }
+        /* CONTENIDO PRINCIPAL */
+        #main-content { display: none; padding-top: 20px; }
 
-        /* NAVEGACIÓN */
-        nav { background: #000; padding: 15px; border-bottom: 1px solid #333; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
-        nav a { color: #fff; text-decoration: none; border: 1px solid #444; padding: 8px 15px; font-size: 12px; text-transform: uppercase; }
-        nav a:hover { border-color: #d4af37; color: #d4af37; }
+        /* MENÚ DE 5 SOLAPAS */
+        nav { 
+            display: flex; justify-content: center; gap: 5px; background: #000; 
+            padding: 10px; position: sticky; top: 0; border-bottom: 1px solid #333; z-index: 100;
+        }
+        nav button { 
+            background: #1a1a1a; color: #fff; border: 1px solid #444; padding: 10px 15px; 
+            font-size: 12px; cursor: pointer; transition: 0.3s;
+        }
+        nav button.active { border-color: #d4af37; color: #d4af37; background: #000; }
 
-        /* GRILLA DE VIDEOS */
-        .video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; max-width: 1000px; margin: 30px auto; }
-        .video-card { background: #111; border: 1px solid #222; padding: 15px; border-radius: 5px; }
-        .video-card img { width: 100%; height: auto; border: 1px solid #333; margin-bottom: 10px; }
-        .video-card h3 { font-size: 14px; color: #fff; letter-spacing: 1px; }
+        /* SECCIONES */
+        .tab-content { display: none; max-width: 800px; margin: 40px auto; padding: 20px; text-align: left; }
+        .tab-content.active { display: block; }
+        
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; margin: 20px 0; border: 1px solid #333; }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
-        /* SECCIÓN FUNCIONAMIENTO (Lo nuevo) */
-        .info-section { max-width: 800px; margin: 40px auto; background: rgba(255,255,255,0.05); padding: 20px; border: 1px solid #333; text-align: left; }
-        .img-tecnica { width: 100%; max-width: 400px; display: block; margin: 20px auto; filter: invert(100%); }
-        .resaltado { color: #fff; }
+        .texto-info { color: #ccc; line-height: 1.8; margin-bottom: 20px; }
+        .img-tecnica { width: 100%; max-width: 400px; display: block; margin: 20px auto; filter: invert(100%); border: 1px solid #333; }
+        h2 { color: #fff; border-bottom: 1px solid #d4af37; padding-bottom: 10px; }
     </style>
 </head>
 <body>
 
     <div id="login-screen">
-        <h1>PÉNDULO EXPRESS</h1>
-        <p>INGRESE SU CLAVE DE ACCESO</p>
-        <input type="password" id="pass" placeholder="Contraseña">
-        <button onclick="checkPass()">ENTRAR</button>
+        <div class="login-box">
+            <h1>PÉNDULO EXPRESS</h1>
+            <input type="text" id="user" placeholder="Usuario">
+            <input type="password" id="pass" placeholder="Contraseña">
+            <button onclick="checkAccess()">INGRESAR</button>
+        </div>
     </div>
 
     <div id="main-content">
         <nav>
-            <a href="#seccion-materiales">Materiales</a>
-            <a href="#seccion-limpieza">Limpieza</a>
-            <a href="#seccion-proteccion">Protección</a>
-            <a href="#seccion-testeo">Testeo</a>
-            <a href="#seccion-funcionamiento">Funcionamiento</a>
+            <button onclick="showTab('materiales')" id="btn-materiales">MATERIALES</button>
+            <button onclick="showTab('limpieza')" id="btn-limpieza">LIMPIEZA</button>
+            <button onclick="showTab('proteccion')" id="btn-proteccion">PROTECCIÓN</button>
+            <button onclick="showTab('testeo')" id="btn-testeo">TESTEO</button>
+            <button onclick="showTab('funcionamiento')" id="btn-funcionamiento">FUNCIONAMIENTO</button>
         </nav>
 
-        <h1>PÉNDULO EXPRESS</h1>
-
-        <div class="video-grid">
-            <div class="video-card" id="seccion-materiales">
-                <img src="materiales.jpg" alt="Materiales">
-                <h3>1. MATERIALES</h3>
-            </div>
-            <div class="video-card" id="seccion-limpieza">
-                <img src="limpieza.jpg" alt="Limpieza">
-                <h3>2. LIMPIEZA</h3>
-            </div>
-            <div class="video-card" id="seccion-proteccion">
-                <img src="proteccion.jpg" alt="Protección">
-                <h3>3. PROTECCIÓN</h3>
-            </div>
-            <div class="video-card" id="seccion-testeo">
-                <img src="testeo.jpg" alt="Testeo">
-                <h3>4. TESTEO</h3>
+        <div id="materiales" class="tab-content">
+            <h2>1. MATERIALES</h2>
+            <div class="texto-info">Aquí va la descripción de los materiales necesarios para iniciar en la radiestesia...</div>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/VIDEO_ID_1" frameborder="0" allowfullscreen></iframe>
             </div>
         </div>
 
-        <div class="info-section" id="seccion-funcionamiento">
-            <h2 style="text-align: center;">FUNCIONAMIENTO Y MOVIMIENTOS</h2>
-            <p>El péndulo une el <span class="resaltado">Hemisferio Izquierdo</span> (lógico) con el <span class="resaltado">Hemisferio Derecho</span> (intuitivo).</p>
-            
-            <img src="testeo.jpg" class="img-tecnica" alt="Movimientos">
-            
-            <p><span class="resaltado">DESCUBRE TU CÓDIGO:</span></p>
-            <ul>
-                <li><strong>PARA UN SI:</strong> Pregunta "¿La nieve es blanca?".</li>
-                <li><strong>PARA UN NO:</strong> Pregunta "¿La nieve es negra?".</li>
-            </ul>
-            <p style="text-align: center; font-style: italic;">"La mente domina la materia"</p>
+        <div id="limpieza" class="tab-content">
+            <h2>2. LIMPIEZA</h2>
+            <div class="texto-info">Instrucciones sobre cómo limpiar energéticamente tu péndulo...</div>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/VIDEO_ID_2" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div id="proteccion" class="tab-content">
+            <h2>3. PROTECCIÓN</h2>
+            <div class="texto-info">Cómo proteger tu campo energético antes de cada sesión...</div>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/VIDEO_ID_3" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div id="testeo" class="tab-content">
+            <h2>4. TESTEO</h2>
+            <div class="texto-info">Prácticas iniciales de testeo y sensibilidad radiestésica...</div>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/VIDEO_ID_4" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div id="funcionamiento" class="tab-content">
+            <h2>5. FUNCIONAMIENTO Y MOVIMIENTOS</h2>
+            <div class="texto-info">
+                El péndulo une el Hemisferio Izquierdo (lógico) con el Derecho (intuitivo). 
+                <br><br>
+                <strong>DESCUBRE TU CÓDIGO:</strong> Pregunta "¿La nieve es blanca?" para tu SI y "¿La nieve es negra?" para tu NO.
+            </div>
+            <img src="testeo.jpg" class="img-tecnica" alt="Diagrama de Movimientos">
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/VIDEO_ID_5" frameborder="0" allowfullscreen></iframe>
+            </div>
         </div>
     </div>
 
     <script>
-        function checkPass() {
+        function checkAccess() {
+            const user = document.getElementById('user').value;
             const pass = document.getElementById('pass').value;
-            // Aquí puedes poner tu contraseña real
-            if(pass === "1234") { 
+
+            if(user === "pendulo" && pass === "PExpress2026") {
                 document.getElementById('login-screen').style.display = 'none';
                 document.getElementById('main-content').style.display = 'block';
+                showTab('materiales'); // Mostrar la primera solapa por defecto
             } else {
-                alert("Clave incorrecta");
+                alert("Usuario o Contraseña incorrectos");
             }
+        }
+
+        function showTab(tabId) {
+            // Ocultar todas las solapas
+            const tabs = document.getElementsByClassName('tab-content');
+            for (let i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove('active');
+            }
+            // Desactivar todos los botones
+            const buttons = document.querySelectorAll('nav button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // Mostrar la seleccionada
+            document.getElementById(tabId).classList.add('active');
+            document.getElementById('btn-' + tabId).classList.add('active');
         }
     </script>
 
