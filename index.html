@@ -19,14 +19,14 @@
         /* CONTENIDO PRINCIPAL */
         #main-content { display: none; padding-top: 20px; }
 
-        /* MENÚ DE 5 SOLAPAS */
+        /* NAVEGACIÓN SOLAPAS */
         nav { 
             display: flex; justify-content: center; gap: 5px; background: #000; 
             padding: 10px; position: sticky; top: 0; border-bottom: 1px solid #333; z-index: 100;
         }
         nav button { 
             background: #1a1a1a; color: #fff; border: 1px solid #444; padding: 10px 15px; 
-            font-size: 12px; cursor: pointer; transition: 0.3s;
+            font-size: 11px; cursor: pointer; transition: 0.3s;
         }
         nav button.active { border-color: #d4af37; color: #d4af37; background: #000; }
 
@@ -39,7 +39,7 @@
 
         .texto-info { color: #ccc; line-height: 1.8; margin-bottom: 20px; }
         .img-tecnica { width: 100%; max-width: 400px; display: block; margin: 20px auto; filter: invert(100%); border: 1px solid #333; }
-        h2 { color: #fff; border-bottom: 1px solid #d4af37; padding-bottom: 10px; }
+        h2 { color: #fff; border-bottom: 1px solid #d4af37; padding-bottom: 10px; text-transform: uppercase; }
     </style>
 </head>
 <body>
@@ -47,8 +47,9 @@
     <div id="login-screen">
         <div class="login-box">
             <h1>PÉNDULO EXPRESS</h1>
-            <input type="text" id="user" placeholder="Usuario">
-            <input type="password" id="pass" placeholder="Contraseña">
+            <p style="color: #666; font-size: 12px;">ACCESO PRIVADO</p>
+            <input type="text" id="user" placeholder="Usuario (pendulo)">
+            <input type="password" id="pass" placeholder="Contraseña (prueba)">
             <button onclick="checkAccess()">INGRESAR</button>
         </div>
     </div>
@@ -63,47 +64,49 @@
         </nav>
 
         <div id="materiales" class="tab-content">
-            <h2>1. MATERIALES</h2>
-            <div class="texto-info">Aquí va la descripción de los materiales necesarios para iniciar en la radiestesia...</div>
+            <h2>1. Materiales</h2>
+            <div class="texto-info">Descripción de los elementos esenciales...</div>
             <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/VIDEO_ID_1" frameborder="0" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/XXXXXX1" frameborder="0" allowfullscreen></iframe>
             </div>
         </div>
 
         <div id="limpieza" class="tab-content">
-            <h2>2. LIMPIEZA</h2>
-            <div class="texto-info">Instrucciones sobre cómo limpiar energéticamente tu péndulo...</div>
+            <h2>2. Limpieza</h2>
+            <div class="texto-info">Métodos para descargar tu péndulo...</div>
             <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/VIDEO_ID_2" frameborder="0" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/XXXXXX2" frameborder="0" allowfullscreen></iframe>
             </div>
         </div>
 
         <div id="proteccion" class="tab-content">
-            <h2>3. PROTECCIÓN</h2>
-            <div class="texto-info">Cómo proteger tu campo energético antes de cada sesión...</div>
+            <h2>3. Protección</h2>
+            <div class="texto-info">Protocolo de seguridad energética...</div>
             <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/VIDEO_ID_3" frameborder="0" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/XXXXXX3" frameborder="0" allowfullscreen></iframe>
             </div>
         </div>
 
         <div id="testeo" class="tab-content">
-            <h2>4. TESTEO</h2>
-            <div class="texto-info">Prácticas iniciales de testeo y sensibilidad radiestésica...</div>
+            <h2>4. Testeo</h2>
+            <div class="texto-info">Ejercicios de sintonización...</div>
             <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/VIDEO_ID_4" frameborder="0" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/XXXXXX4" frameborder="0" allowfullscreen></iframe>
             </div>
         </div>
 
         <div id="funcionamiento" class="tab-content">
-            <h2>5. FUNCIONAMIENTO Y MOVIMIENTOS</h2>
+            <h2>5. Funcionamiento y Movimientos</h2>
             <div class="texto-info">
-                El péndulo une el Hemisferio Izquierdo (lógico) con el Derecho (intuitivo). 
+                El péndulo se comunica mediante un código de lenguaje; un código entre la mente consciente e inconsciente.
                 <br><br>
-                <strong>DESCUBRE TU CÓDIGO:</strong> Pregunta "¿La nieve es blanca?" para tu SI y "¿La nieve es negra?" para tu NO.
+                <strong>DESCUBRE TU CÓDIGO (SI / NO):</strong>
+                <br>• Pregunta: "¿La nieve es de color blanco?" -> Tu movimiento resultante es el <strong>SI</strong>.
+                <br>• Pregunta: "¿La nieve es de color negro?" -> Tu movimiento resultante es el <strong>NO</strong>.
             </div>
-            <img src="testeo.jpg" class="img-tecnica" alt="Diagrama de Movimientos">
+            <img src="testeo.jpg" class="img-tecnica" alt="Movimientos Péndulo">
             <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/VIDEO_ID_5" frameborder="0" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/XXXXXX5" frameborder="0" allowfullscreen></iframe>
             </div>
         </div>
     </div>
@@ -113,28 +116,27 @@
             const user = document.getElementById('user').value;
             const pass = document.getElementById('pass').value;
 
-            if(user === "pendulo" && pass === "PExpress2026") {
+            // NUEVA CLAVE: prueba
+            if(user === "pendulo" && pass === "prueba") {
                 document.getElementById('login-screen').style.display = 'none';
                 document.getElementById('main-content').style.display = 'block';
-                showTab('materiales'); // Mostrar la primera solapa por defecto
+                showTab('materiales');
             } else {
-                alert("Usuario o Contraseña incorrectos");
+                alert("Acceso denegado. Verifique usuario y clave.");
             }
         }
 
         function showTab(tabId) {
-            // Ocultar todas las solapas
             const tabs = document.getElementsByClassName('tab-content');
             for (let i = 0; i < tabs.length; i++) {
                 tabs[i].classList.remove('active');
             }
-            // Desactivar todos los botones
             const buttons = document.querySelectorAll('nav button');
             buttons.forEach(btn => btn.classList.remove('active'));
 
-            // Mostrar la seleccionada
             document.getElementById(tabId).classList.add('active');
             document.getElementById('btn-' + tabId).classList.add('active');
+            window.scrollTo(0,0);
         }
     </script>
 
