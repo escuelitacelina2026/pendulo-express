@@ -6,82 +6,73 @@
     <title>Taller de Péndulo Express - Aula Virtual</title>
     <style>
         :root { --oro: #b4975a; --fondo: #0a0b10; --caja: #0f111a; --cyan: #00bcd4; }
-        body { background-color: var(--fondo); color: #ffffff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; text-align: center; }
+        body { background-color: var(--fondo); color: #ffffff; font-family: 'Segoe UI', sans-serif; margin: 0; text-align: center; }
         
+        /* LOGIN */
         #login-screen { position: fixed; width: 100%; height: 100%; background: #000; display: flex; justify-content: center; align-items: center; z-index: 2000; }
         .login-box { border: 1px solid var(--oro); padding: 40px; border-radius: 10px; width: 380px; background: #0d0d0d; }
-        .login-box h1 { color: var(--oro); letter-spacing: 3px; font-size: 26px; margin: 0; }
-        .login-box p { color: #666; font-size: 12px; margin-bottom: 25px; letter-spacing: 2px; }
         input { display: block; width: 90%; margin: 15px auto; padding: 12px; background: #000; border: 1px solid #333; color: #fff; text-align: center; }
-        .btn-ingresar { background: var(--oro); color: #000; border: none; padding: 14px; width: 96%; cursor: pointer; font-weight: bold; font-size: 16px; transition: 0.3s; }
+        .btn-ingresar { background: var(--oro); color: #000; border: none; padding: 14px; width: 96%; cursor: pointer; font-weight: bold; }
 
-        header { padding: 50px 0 20px 0; }
-        header h1 { color: var(--oro); font-size: 34px; letter-spacing: 3px; margin: 0; font-family: serif; }
-        header p { color: var(--cyan); text-transform: uppercase; letter-spacing: 6px; font-size: 14px; margin-top: 15px; }
+        header { padding: 40px 0 10px 0; }
+        header h1 { color: var(--oro); font-size: 30px; letter-spacing: 3px; margin: 0; }
+        header p { color: var(--cyan); text-transform: uppercase; letter-spacing: 5px; font-size: 12px; }
 
-        nav { display: flex; justify-content: center; gap: 8px; padding: 20px; margin-bottom: 20px; }
-        nav button { background: none; border: 1px solid #333; color: #888; padding: 10px 18px; cursor: pointer; text-transform: uppercase; font-size: 11px; }
+        nav { display: flex; justify-content: center; gap: 5px; padding: 15px; }
+        nav button { background: none; border: 1px solid #333; color: #888; padding: 8px 12px; cursor: pointer; text-transform: uppercase; font-size: 10px; }
         nav button.active { border-color: var(--oro); color: var(--oro); }
 
-        .aula-content { max-width: 800px; margin: 0 auto; background: var(--caja); padding: 40px; border-radius: 4px; text-align: left; position: relative; }
+        .aula-content { max-width: 800px; margin: 0 auto; background: var(--caja); padding: 30px; border-radius: 4px; text-align: left; }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
 
-        h2 { color: var(--oro); font-size: 26px; text-align: center; margin-bottom: 40px; font-family: serif; }
-        .item-list { list-style: none; padding: 0; margin-bottom: 30px; }
-        .item-list li { margin: 18px 0; color: #e0e0e0; display: flex; align-items: center; font-size: 17px; }
-        .item-list li::before { content: "✧"; color: var(--oro); margin-right: 15px; font-size: 20px; }
+        h2 { color: var(--oro); font-size: 22px; text-align: center; margin-bottom: 30px; }
 
-        /* VIDEO VERTICAL CON SEGURIDAD */
-        .video-container { 
-            position: relative; 
-            width: 100%; 
-            max-width: 320px; /* Ancho para video vertical */
-            margin: 30px auto; 
-            border: 2px solid var(--oro); 
-            border-radius: 20px; 
-            overflow: hidden; 
+        /* CONTENEDOR VIDEO VERTICAL SEGURO */
+        .video-wrapper {
+            position: relative;
+            width: 280px; /* Ancho fijo vertical */
+            height: 500px; /* Alto fijo vertical */
+            margin: 20px auto;
+            border: 2px solid var(--oro);
+            border-radius: 15px;
+            overflow: hidden;
             background: #000;
         }
-        
-        /* La miniatura que actúa de fondo */
-        .video-thumb {
-            width: 100%;
-            display: block;
-        }
 
-        .video-container iframe { 
+        /* CAPA DE LA IMAGEN MINIATURA (Encima de todo) */
+        .video-poster {
             position: absolute;
             top: 0; left: 0;
-            width: 100%; height: 100%; 
-            border: none; 
-        }
-
-        /* CAPA DE SEGURIDAD INVISIBLE: Bloquea clics en logo y títulos */
-        .video-overlay { 
-            position: absolute; 
-            top: 0; left: 0; 
-            width: 100%; height: 100%; 
-            z-index: 10; 
+            width: 100%; height: 100%;
+            object-fit: cover;
+            z-index: 20; /* Por encima del overlay y del iframe */
             cursor: pointer;
-            background: rgba(0,0,0,0); /* Totalmente invisible */
         }
 
-        .btn-ritual { background: none; border: 1px solid var(--oro); color: var(--oro); width: 100%; padding: 15px; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; font-size: 13px; margin-bottom: 10px; }
-        .box-ritual { display: none; border: 1px solid #333; padding: 25px; border-radius: 8px; margin-bottom: 30px; background: #0c0e15; }
-        .box-ritual h3 { color: var(--oro); text-transform: uppercase; font-size: 16px; margin-top: 0; }
-        .box-ritual ul { list-style: disc; padding-left: 20px; color: #ccc; }
-        .box-ritual p { font-style: italic; color: var(--oro); border-top: 1px solid #222; padding-top: 15px; line-height: 1.6; }
+        /* CAPA INVISIBLE DE SEGURIDAD */
+        .video-overlay {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 10;
+            background: rgba(0,0,0,0);
+        }
 
-        .glosario-imgs { display: flex; gap: 15px; justify-content: center; margin-top: 30px; }
-        .glosario-imgs img { width: 48%; border: 1px solid #333; border-radius: 10px; }
+        .video-wrapper iframe {
+            width: 100%; height: 100%;
+            border: none;
+        }
+
+        .btn-ritual { background: none; border: 1px solid var(--oro); color: var(--oro); width: 100%; padding: 12px; cursor: pointer; margin-bottom: 20px; }
+        .box-ritual { display: none; border: 1px solid #333; padding: 20px; background: #0c0e15; margin-bottom: 20px; }
     </style>
 </head>
 <body oncontextmenu="return false;">
 
     <div id="login-screen">
         <div class="login-box">
-            <h1>PÉNDULO EXPRESS</h1>
+            <h1 style="color: var(--oro);">PÉNDULO EXPRESS</h1>
             <p>ACCESO PRIVADO</p>
             <input type="text" id="user" placeholder="Usuario">
             <input type="password" id="pass" placeholder="Contraseña">
@@ -105,73 +96,40 @@
     <div class="aula-content">
         <div id="materiales" class="tab-content active">
             <h2>Materiales de Trabajo</h2>
-            <ul class="item-list">
-                <li><strong>Péndulo:</strong> Cristal, Madera u Orgonita. Elige el que resuene contigo.</li>
-                <li>Lugar tranquilo y armonioso para trabajar.</li>
-                <li>Lápiz negro y papel para realizar el trabajo a distancia.</li>
-            </ul>
-            <div class="video-container">
-                <img src="materiales.jpg" class="video-thumb" alt="Miniatura Materiales">
-                <div class="video-overlay" onclick="this.style.display='none'"></div>
-                <iframe src="https://www.youtube.com/embed/ID_VIDEO?controls=1&rel=0&modestbranding=1&showinfo=0&iv_load_policy=3" allowfullscreen></iframe>
+            <div class="video-wrapper">
+                <img src="materiales.jpg" class="video-poster" onclick="playVideo(this)" alt="Miniatura">
+                <div class="video-overlay"></div>
+                <iframe src="https://www.youtube.com/embed/ID_VIDEO_1?controls=1&rel=0&modestbranding=1&showinfo=0" allowfullscreen></iframe>
             </div>
         </div>
 
         <div id="limpieza" class="tab-content">
             <h2>Limpieza y Consagración</h2>
-            <button class="btn-ritual" onclick="toggleRitual()">Ver Ritual y Frase de Consagración</button>
+            <button class="btn-ritual" onclick="toggleRitual()">Ver Ritual de Consagración</button>
             <div id="ritual-box" class="box-ritual">
-                <h3>Ritual de Consagración</h3>
-                <ul>
-                    <li>Mirar hacia el Este.</li>
-                    <li>Poner el péndulo entre las manos en forma de rezo.</li>
-                    <li>Llevarlo a la altura del chakra AJNA (entrecejo).</li>
-                    <li>Llevarlo a la altura del chakra Cardíaco (pecho).</li>
-                </ul>
-                <p>"A partir de este momento te consagro para que trabajes en la luz, muestres siempre la verdad, estés en ley, tus respuestas vengan siempre del ser superior y sean sabias, claras, precisas y seguras. Gracias".</p>
+                <p style="font-style: italic; color: var(--oro);">"A partir de este momento te consagro para que trabajes en la luz..."</p>
             </div>
-            <div class="video-container">
-                <img src="limpieza.jpg" class="video-thumb" alt="Miniatura Limpieza">
-                <div class="video-overlay" onclick="this.style.display='none'"></div>
-                <iframe src="https://www.youtube.com/embed/ID_VIDEO?controls=1&rel=0&modestbranding=1" allowfullscreen></iframe>
-            </div>
-        </div>
-
-        <div id="proteccion" class="tab-content">
-            <h2>Protección del Espacio</h2>
-            <ul class="item-list">
-                <li>Visualización de luz blanca o dorada protectora.</li>
-                <li>Invocación de asistencia de guías espirituales.</li>
-            </ul>
-            <div class="video-container">
-                <img src="proteccion.jpg" class="video-thumb" alt="Miniatura Protección">
-                <div class="video-overlay" onclick="this.style.display='none'"></div>
-                <iframe src="https://www.youtube.com/embed/ID_VIDEO?controls=1&rel=0&modestbranding=1" allowfullscreen></iframe>
+            <div class="video-wrapper">
+                <img src="limpieza.jpg" class="video-poster" onclick="playVideo(this)" alt="Miniatura">
+                <div class="video-overlay"></div>
+                <iframe src="https://www.youtube.com/embed/ID_VIDEO_2?controls=1&rel=0&modestbranding=1" allowfullscreen></iframe>
             </div>
         </div>
 
         <div id="testeo" class="tab-content">
             <h2>Metodología de Testeo</h2>
-            <ul class="item-list">
-                <li>Giro horario (Derecha): Abierto y fluyendo.</li>
-                <li>Giro anti-horario (Izquierda): Bloqueo o energía estancada.</li>
-            </ul>
-            <div class="video-container">
-                <img src="testeo.jpg" class="video-thumb" alt="Miniatura Testeo">
-                <div class="video-overlay" onclick="this.style.display='none'"></div>
-                <iframe src="https://www.youtube.com/embed/VIDEO_1"></iframe>
+            <div class="video-wrapper">
+                <img src="testeo.jpg" class="video-poster" onclick="playVideo(this)" alt="Miniatura">
+                <div class="video-overlay"></div>
+                <iframe src="https://www.youtube.com/embed/ID_VIDEO_3"></iframe>
             </div>
             </div>
 
         <div id="glosario" class="tab-content">
-            <h2>Glosario - Movimientos del Péndulo</h2>
-            <ul class="item-list">
-                <li><strong>Hemisferio Izquierdo (Yang):</strong> Deductivo, lógico y maneja la palabra.</li>
-                <li><strong>Hemisferio Derecho (Yin):</strong> Espiritual, intuitivo y maneja los dibujos/trazos.</li>
-            </ul>
-            <div class="glosario-imgs">
-                <img src="giros.png" alt="Giros">
-                <img src="lineas.png" alt="Lineas">
+            <h2>Glosario de Movimientos</h2>
+            <div style="display: flex; gap: 10px; justify-content: center;">
+                <img src="giros.png" style="width: 45%; border: 1px solid #333;">
+                <img src="lineas.png" style="width: 45%; border: 1px solid #333;">
             </div>
         </div>
     </div>
@@ -190,6 +148,11 @@
             document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
             btn.classList.add('active');
+        }
+
+        // Esta función hace que al tocar la imagen, esta desaparezca y se vea el video
+        function playVideo(imgElement) {
+            imgElement.style.display = 'none';
         }
 
         function toggleRitual() {
