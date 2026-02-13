@@ -48,7 +48,7 @@
             cursor: pointer; z-index: 5; display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 15px; border: 1px solid var(--gold);
         }
         .video-poster::before { content: ""; position: absolute; width: 100%; height: 100%; background: rgba(0,0,0,0.4); border-radius: 15px; }
-        .video-poster span { position: relative; z-index: 6; color: var(--gold); font-family: 'Playfair Display'; font-size: 1.1rem; margin-top: 15px; letter-spacing: 2px; text-shadow: 2px 2px 4px black; text-transform: uppercase; font-weight: bold; }
+        .video-poster span { position: relative; z-index: 6; color: var(--gold); font-family: 'Playfair Display'; font-size: 1.1rem; margin-top: 15px; letter-spacing: 2px; text-shadow: 2px 2px 4px black; text-transform: uppercase; font-weight: bold; text-align: center; }
         
         .play-icon { position: relative; z-index: 6; width: 60px; height: 60px; background: rgba(197, 160, 89, 0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #000; font-size: 24px; box-shadow: 0 0 20px rgba(0,0,0,0.5); border: 2px solid white; }
         .play-icon::after { content: '▶'; margin-left: 4px; }
@@ -143,12 +143,29 @@
                 <li>Giro horario (Derecha): Abierto y fluyendo.</li>
                 <li>Giro anti-horario (Izquierda): Bloqueo o energía estancada.</li>
             </ul>
+            
             <div class="video-container">
                 <div class="video-poster" style="background-image: url('./testeo.jpg');" onclick="loadVideo(this, 'S_8SNDjG9uU')">
                     <div class="play-icon"></div>
-                    <span>TESTEO</span>
+                    <span>VIDEO 1</span>
                 </div>
                 <div class="video-wrapper"><div id="player-S_8SNDjG9uU"></div></div>
+            </div>
+
+            <div class="video-container">
+                <div class="video-poster" style="background-image: url('./testeo.jpg');" onclick="loadVideo(this, 'VIDEO_ID_2')">
+                    <div class="play-icon"></div>
+                    <span>VIDEO 2</span>
+                </div>
+                <div class="video-wrapper"><div id="player-VIDEO_ID_2"></div></div>
+            </div>
+
+            <div class="video-container">
+                <div class="video-poster" style="background-image: url('./testeo.jpg');" onclick="loadVideo(this, 'VIDEO_ID_3')">
+                    <div class="play-icon"></div>
+                    <span>VIDEO 3</span>
+                </div>
+                <div class="video-wrapper"><div id="player-VIDEO_ID_3"></div></div>
             </div>
         </div>
     </div>
