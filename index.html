@@ -72,7 +72,20 @@
         h2 { color: var(--oro); font-size: 22px; text-align: center; margin-bottom: 25px; font-family: serif; border-bottom: 1px solid #222; padding-bottom: 15px; }
         
         .item-list { list-style: none; padding: 0; text-align: left; }
-        .item-list li { margin: 15px 0; color: #e0e0e0; display: flex; align-items: flex-start; font-size: 16px; line-height: 1.6; }
+.item-list li { 
+            margin: 20px 0; 
+            color: #e0e0e0; 
+            display: block; /* Cambiamos 'flex' por 'block' para que el texto baje */
+            font-size: 16px; 
+            line-height: 1.6; 
+        }
+.item-list li strong { 
+            display: block; 
+            color: var(--oro); 
+            margin-bottom: 5px; 
+            text-transform: uppercase;
+            font-size: 14px;
+        }
         .item-list li::before { content: "✧"; color: var(--oro); margin-right: 12px; font-weight: bold; }
 
         /* VIDEOS ADAPTATIVOS */
@@ -244,12 +257,12 @@
                 <h2>Armonización de Chakras</h2>
                 <div class="info-box">
                     <strong>Interpretación de los Giros:</strong><br><br>
-                    <ul class="item-list" style="margin:0;">
-                        <li><strong>SENTIDO HORARIO:</strong> El chakra está sano, la energía fluye correctamente.</li>
-                        <li><strong>SENTIDO ANTI-HORARIO:</strong> Bloqueo, fuga o la energía fluye negativamente para el cuerpo.</li>
-                        <li><strong>SIN MOVIMIENTO:</strong> El chakra está cerrado o la energía está estancada.</li>
-                        <li><strong>MOVIMIENTO ERRÁTICO:</strong> Existe una fuga o descompensación energética.</li>
-                    </ul>
+                  <ul class="item-list" style="margin:0;">
+    <li><strong>SENTIDO HORARIO:</strong> El chakra está sano, la energía fluye correctamente.</li>
+    <li><strong>SENTIDO ANTI-HORARIO:</strong> Bloqueo, fuga o la energía fluye negativamente para el cuerpo.</li>
+    <li><strong>SIN MOVIMIENTO:</strong> El chakra está cerrado o la energía está estancada.</li>
+    <li><strong>MOVIMIENTO ERRÁTICO:</strong> Existe una fuga o descompensación energética.</li>
+</ul>
                 </div>
                 <div class="video-container">
                     <span class="video-label">Video: Práctica de Testeo</span>
