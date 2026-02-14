@@ -58,7 +58,28 @@
         .item-list { list-style: none; padding: 0; }
         .item-list li { margin: 18px 0; color: #e0e0e0; display: flex; align-items: center; font-size: 16px; }
         .item-list li::before { content: "✧"; color: var(--oro); margin-right: 15px; font-weight: bold; }
+/* DISEÑO DEL BOTÓN DE INSTAGRAM */
+.insta-tag { 
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); 
+    color: #ffffff !important; 
+    padding: 10px 20px; 
+    border-radius: 30px; 
+    text-decoration: none; 
+    font-weight: bold; 
+    display: inline-block; 
+    margin: 15px 0;
+    font-size: 14px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
 
+/* MARCO PARA LA BIOGRAFÍA */
+.card-bio {
+    background: rgba(180, 151, 90, 0.05);
+    border: 1px solid rgba(180, 151, 90, 0.2);
+    padding: 30px;
+    border-radius: 15px;
+    margin-top: 20px;
+}
         /* MANUAL Y BIO */
         .manual-texto { line-height: 1.8; color: #ccc; font-size: 16px; }
         .manual-texto h3 { color: var(--oro); margin-top: 30px; border-left: 3px solid var(--oro); padding-left: 15px; }
@@ -93,16 +114,35 @@
     </style>
 </head>
 <body oncontextmenu="return false;">
-
-    <div id="login-screen">
-        <div class="login-box">
-            <h1 style="color: var(--oro); font-size: 22px; margin-bottom: 5px; font-family: serif;">PÉNDULO EXPRESS</h1>
-            <p style="color: var(--cyan); font-size: 10px; letter-spacing: 4px; margin-bottom: 25px;">AULA VIRTUAL</p>
-            <input type="text" id="user" placeholder="Usuario">
-            <input type="password" id="pass" placeholder="Contraseña">
-            <button class="btn-ingresar" onclick="checkAccess()">INGRESAR</button>
-        </div>
+    <div id="error-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:100000; justify-content:center; align-items:center;">
+    <div style="background:#0d0d0d; border:2px solid #b4975a; padding:30px; border-radius:15px; text-align:center; max-width:320px; box-shadow: 0 0 30px #b4975a;">
+        <div style="font-size:50px; margin-bottom:15px;">👽</div>
+        <p style="color:#b4975a; font-family:serif; font-style:italic; margin-bottom:20px; line-height:1.6; font-size: 16px;">
+            "Acceso denegado: Tu vibración no coincide con la llave del Comandante."
+        </p>
+        <button onclick="document.getElementById('error-modal').style.display='none'" style="background:#b4975a; color:#000; border:none; padding:12px 25px; border-radius:5px; cursor:pointer; font-weight:bold; text-transform:uppercase;">Volver a intentar</button>
     </div>
+</div>
+<div id="login-screen">
+    <div class="login-box">
+        <h1 style="color: #fff; font-size: 32px; margin: 0; font-family: sans-serif; font-weight: bold;">Péndulo Express</h1>
+        <p style="color: var(--cyan); font-size: 11px; letter-spacing: 4px; margin-top: 10px; margin-bottom: 30px;">AULA VIRTUAL</p>
+        
+        <input type="text" id="user" placeholder="Usuario" style="background: #eef4ff; color: #000; width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 8px; border: none; box-sizing: border-box;">
+        
+        <div style="position: relative; width: 100%; margin-bottom: 20px;">
+            <input type="password" id="pass" placeholder="Contraseña" style="background: #eef4ff; color: #000; width: 100%; padding: 12px; padding-right: 40px; border-radius: 8px; border: none; box-sizing: border-box;">
+            <span onclick="togglePass()" style="position: absolute; right: 10px; top: 10px; cursor: pointer; font-size: 20px;">👁️</span>
+        </div>
+        
+        <button class="btn-ingresar" onclick="checkAccess()" style="background: #b4975a; color: #000; font-size: 16px; font-weight: bold; border-radius: 8px; width: 100%; padding: 12px; cursor: pointer; border: none;">INGRESAR AL AULA</button>
+        
+        <p style="color: #666; font-size: 11px; margin-top: 30px; font-style: italic;">
+            "Solo el que está en ley puede ver la verdad"<br>
+            <span style="color: var(--oro); font-style: normal; font-weight: bold; font-size: 13px;">— EL COMANDANTE —</span>
+        </p>
+    </div>
+</div>
 
     <div id="aula-completa">
         <header>
@@ -243,12 +283,16 @@
                     </div>
                 </div>
             </div>
-    <div id="biografia" class="tab-content">
-    <div class="card-aula" style="text-align:center; padding: 30px; background: rgba(180, 151, 90, 0.05); border: 1px solid #333; border-radius: 12px;">
-        <h2>Mi Biografía</h2>
-        <p style="color:var(--oro); font-weight:bold; font-size: 18px; margin-bottom: 10px;">Jacqueline Vanesa Pignatelli</p>
-        <a href="https://instagram.com/nave.arcturiana" target="_blank" class="insta-tag">@nave.arcturiana</a>
-        <div style="text-align:left; margin-top:20px; border-top: 1px solid #333; padding-top:15px; line-height: 1.8; color: #ccc;">
+   <div id="biografia" class="tab-content">
+    <div class="card-bio" style="text-align:center">
+        <h2 style="border:none; margin-bottom:10px;">Mi Biografía</h2>
+        <p style="color:var(--oro); font-weight:bold; font-size: 20px; margin: 0;">Jacqueline Vanesa Pignatelli</p>
+        
+        <a href="https://instagram.com/nave.arcturiana" target="_blank" class="insta-tag">
+            @nave.arcturiana
+        </a>
+
+        <div style="text-align:left; margin-top:20px; border-top: 1px solid #333; padding-top:20px; line-height: 1.8; color: #ccc;">
             <p>✦ Terapeuta Holística Matriculada.</p>
             <p>✦ Canalizadora de Cirugía Astral Cristal Arcturiano.</p>
             <p>✦ Canalizadora de Técnica Reiki Sandalfon (Sanación del Niño interior).</p>
@@ -263,46 +307,56 @@
         </div>
     </div>
 </div>
-                
-    <script>
-        // FUNCIÓN DE INGRESO CORREGIDA
-        function checkAccess() {
-            var u = document.getElementById('user').value.toLowerCase().trim();
-            var p = document.getElementById('pass').value.trim();
-            
-            if(u === "pendulo" && p === "prueba") {
-                document.getElementById('login-screen').style.display = 'none';
-                document.getElementById('aula-completa').style.display = 'block';
-                window.scrollTo(0,0);
-            } else { 
-                alert("Usuario o contraseña incorrectos."); 
-            }
+ <script>
+    // 1. Función para el Ojito
+    function togglePass() {
+        var x = document.getElementById("pass");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
         }
+    }
 
-        // CAMBIO DE SOLAPAS
-        function showTab(tabId, btn) {
-            var tabs = document.getElementsByClassName('tab-content');
-            for (var i = 0; i < tabs.length; i++) {
-                tabs[i].classList.remove('active');
-            }
-            var buttons = document.querySelectorAll('nav button');
-            for (var j = 0; j < buttons.length; j++) {
-                buttons[j].classList.remove('active');
-            }
-            document.getElementById(tabId).classList.add('active');
-            btn.classList.add('active');
+    // 2. Función de Ingreso
+    function checkAccess() {
+        var u = document.getElementById('user').value.toLowerCase().trim();
+        var p = document.getElementById('pass').value.trim();
+        if(u === "pendulo" && p === "prueba") {
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('aula-completa').style.display = 'block';
+            window.scrollTo(0,0);
+        } else { 
+            document.getElementById('error-modal').style.display = 'flex';
         }
+    }
 
-        // MOSTRAR RITUAL
-        function toggleRitual() {
-            var box = document.getElementById('ritual-box');
-            box.style.display = (box.style.display === 'block') ? 'none' : 'block';
+    // 3. Función para las Solapas (Módulos)
+    function showTab(tabId, btn) {
+        var tabs = document.getElementsByClassName('tab-content');
+        for (var i = 0; i < tabs.length; i++) {
+            tabs[i].classList.remove('active');
         }
+        var buttons = document.querySelectorAll('nav button');
+        for (var j = 0; j < buttons.length; j++) {
+            buttons[j].classList.remove('active');
+        }
+        document.getElementById(tabId).classList.add('active');
+        if(btn) btn.classList.add('active');
+    }
 
-        // REPRODUCTOR DE VIDEO
-        function playDirect(container, videoId) {
-            container.innerHTML = '<div class="top-blocker"></div><iframe src="https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0&modestbranding=1&controls=1&fs=0" allow="autoplay; encrypted-media" style="width:100%; height:100%; border:none;"></iframe>';
-        }
-    </script>
+    // 4. Función para el Ritual
+    function toggleRitual() {
+        var box = document.getElementById('ritual-box');
+        if(box) box.style.display = (box.style.display === 'block') ? 'none' : 'block';
+    }
+
+    // 5. Función para los Videos
+    function playDirect(container, videoId) {
+        container.innerHTML = '<div class="top-blocker"></div><iframe src="https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0&modestbranding=1&controls=1&fs=0" allow="autoplay; encrypted-media" style="width:100%; height:100%; border:none;"></iframe>';
+    }
+</script>
 </body>
-</html>
+</html>               
+ 
+  
