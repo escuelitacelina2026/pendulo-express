@@ -26,10 +26,12 @@
         h3 { color: var(--oro); font-size: 14px; text-transform: uppercase; margin-top: 20px; letter-spacing: 1px; }
         p, li { color: #ccc; font-size: 14px; line-height: 1.6; }
 
-        /* VIDEOS CON BLOQUEO Y ESPACIADO */
         .video-wrapper { position: relative; margin: 45px auto; text-align: center; max-width: 280px; }
         .video-label { color: var(--oro); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; display: block; margin-bottom: 20px; font-weight: bold; }
+        
+        /* Capa para evitar clics externos */
         .video-overlay { position: absolute; top: 35px; left: 0; width: 100%; height: calc(100% - 35px); z-index: 10; background: rgba(0,0,0,0); }
+        
         iframe { width: 100%; aspect-ratio: 9/16; border-radius: 20px; border: 2px solid #2a2e3d; background: #000; }
 
         .btn-ritual { width: 100%; border: 1px solid var(--oro); color: var(--oro); padding: 12px; background: transparent; border-radius: 8px; margin-bottom: 20px; cursor: pointer; font-size: 12px; text-transform: uppercase; }
@@ -43,7 +45,6 @@
     <nav>
         <button onclick="openTab('materiales', this)" class="active">Materiales</button>
         <button onclick="openTab('limpieza', this)">Limpieza</button>
-        <button onclick="openTab('espacio', this)">Espacio Sagrado</button>
         <button onclick="openTab('funcionamiento', this)">Funcionamiento</button>
         <button onclick="openTab('chakras', this)">Chakras</button>
         <button onclick="openTab('biografia', this)">Mi Biografía</button>
@@ -72,4 +73,87 @@
                 <p>La forma más rápida es con <b>Sahumerio</b>. El humo debe envolver al péndulo por completo.</p>
                 <ul>
                     <li>Mirar hacia el Este.</li>
-                    <li>Poner el péndulo entre las
+                    <li>Poner el péndulo entre las manos en forma de rezo.</li>
+                    <li>Llevarlo a la nariz, inspirar y exhalar 3 veces.</li>
+                </ul>
+                <p style="font-style: italic; color: var(--oro); font-size: 13px; text-align: center; margin-top: 20px;">"A partir de este momento te consagro para que trabajes en la luz..."</p>
+                <div class="video-wrapper">
+                    <span class="video-label">Video: Técnica de Limpieza</span>
+                    <div class="video-overlay"></div>
+                    <iframe src="https://drive.google.com/file/d/1B-zK-mE4-X9n7-L6z-Z-f4-V-X-v-X/preview"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div id="funcionamiento" class="tab-content">
+            <div class="card-aula">
+                <h2>Funcionamiento</h2>
+                <p>Aquí aprenderás a establecer tu código personal de comunicación con el péndulo.</p>
+                
+                <div class="video-wrapper">
+                    <span class="video-label">Video 1: El código del Sí y No</span>
+                    <div class="video-overlay"></div>
+                    <iframe src="https://drive.google.com/file/d/1B-zK-mE4-X9n7-L6z-Z-f4-V-X-v-X/preview"></iframe>
+                </div>
+
+                <div class="video-wrapper">
+                    <span class="video-label">Comunicación con el péndulo</span>
+                    <div class="video-overlay"></div>
+                    <iframe src="https://www.youtube.com/embed/aJMlz0t79ZI?controls=0&rel=0&modestbranding=1"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div id="chakras" class="tab-content">
+            <div class="card-aula">
+                <h2>Testeo de Chakras</h2>
+                <p>Interpretación de los giros para diagnosticar el estado energético.</p>
+                
+                <div class="video-wrapper">
+                    <span class="video-label">Video 1: Testeo</span>
+                    <div class="video-overlay"></div>
+                    <iframe src="https://drive.google.com/file/d/1hI271pPlIsBm_0SE279prsdvxaTsWexf/preview"></iframe>
+                </div>
+
+                <div class="video-wrapper">
+                    <span class="video-label">Video 2: Armonización</span>
+                    <div class="video-overlay"></div>
+                    <iframe src="https://drive.google.com/file/d/1V-X-v-X-z-Z-f4-L6z-Z-mE4-X9n7-L/preview"></iframe>
+                </div>
+
+                <div class="video-wrapper">
+                    <span class="video-label">Video 3: Cierre de Sesión</span>
+                    <div class="video-overlay"></div>
+                    <iframe src="https://drive.google.com/file/d/1B-zK-mE4-X9n7-L6z-Z-f4-V-X-v-X/preview"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div id="biografia" class="tab-content">
+            <div class="card-aula" style="text-align:center">
+                <h2>Mi Biografía</h2>
+                <p style="color:var(--oro); font-weight:bold; font-size: 18px;">Jacqueline Vanesa Pignatelli</p>
+                <a href="https://instagram.com/nave.arcturiana" target="_blank" class="insta-tag">@nave.arcturiana</a>
+                <div style="text-align:left; margin-top:20px; display: inline-block;">
+                    <p>✦ Terapeuta Holística Matriculada.</p>
+                    <p>✦ Canalizadora de la técnica de Cirugía Astral.</p>
+                    <p>✦ Lectora de Registros Akáshicos.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openTab(id, btn) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) { tabcontent[i].classList.remove("active"); }
+            tablinks = document.querySelectorAll("nav button");
+            for (i = 0; i < tablinks.length; i++) { tablinks[i].classList.remove("active"); }
+            document.getElementById(id).classList.add("active");
+            btn.classList.add('active');
+            window.scrollTo(0,0);
+        }
+    </script>
+</body>
+</html>
