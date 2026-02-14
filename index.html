@@ -13,9 +13,10 @@
             --cyan: #00bcd4; 
         }
         
+        /* LOGIN */
         #login-screen { 
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; 
-            background: #000; display: flex; justify-content: center; align-items: center; z-index: 99999; 
+            background: #000000; display: flex; justify-content: center; align-items: center; z-index: 99999; 
         }
         .login-box { 
             border: 1px solid var(--oro); padding: 40px; border-radius: 15px; 
@@ -43,6 +44,7 @@
             padding: 12px 20px; cursor: pointer; text-transform: uppercase; font-size: 11px; 
             transition: 0.4s; border-radius: 4px;
         }
+        nav button:hover { border-color: var(--oro); color: #eee; box-shadow: 0 0 10px var(--oro-brillo); }
         nav button.active { border-color: var(--oro); color: var(--oro); background: rgba(180, 151, 90, 0.05); box-shadow: 0 0 15px var(--oro-brillo); }
 
         .aula-content { max-width: 850px; margin: 20px auto; background: var(--caja); padding: 40px; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
@@ -52,45 +54,30 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         h2 { color: var(--oro); font-size: 24px; text-align: center; margin-bottom: 30px; font-family: serif; border-bottom: 1px solid #222; padding-bottom: 15px; }
-        h3 { color: var(--oro); margin-top: 25px; }
-
-        /* SCROLL BOX PARA EL MANUAL */
-        .manual-scroll-container {
-            height: 500px;
-            overflow-y: scroll;
-            background: rgba(0,0,0,0.3);
-            padding: 25px;
-            border: 1px solid #222;
-            border-radius: 8px;
-            line-height: 1.7;
-            color: #ccc;
-            scrollbar-width: thin;
-            scrollbar-color: var(--oro) #1a1a1a;
-        }
-        .manual-scroll-container::-webkit-scrollbar { width: 8px; }
-        .manual-scroll-container::-webkit-scrollbar-thumb { background: var(--oro); border-radius: 10px; }
-
-        .box-info { background: rgba(180, 151, 90, 0.05); padding: 20px; border-radius: 10px; border-left: 4px solid var(--oro); margin-bottom: 20px; }
         
-        .btn-download {
-            display: inline-block; background: var(--cyan); color: #000; padding: 15px 30px; 
-            border-radius: 5px; font-weight: bold; margin-top: 25px;
-            transition: 0.3s; text-transform: uppercase; font-size: 12px; cursor: pointer; border: none;
-        }
-        .btn-download:hover { box-shadow: 0 0 15px var(--cyan); transform: scale(1.05); }
+        .item-list { list-style: none; padding: 0; }
+        .item-list li { margin: 18px 0; color: #e0e0e0; display: flex; align-items: center; font-size: 16px; }
+        .item-list li::before { content: "✧"; color: var(--oro); margin-right: 15px; font-weight: bold; }
 
-        .video-container { margin: 30px auto; text-align: center; }
+        /* VIDEOS */
+        .video-container { margin: 40px auto; text-align: center; }
+        .video-label { color: var(--oro); font-size: 13px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; display: block; font-weight: bold; }
         .video-wrapper {
             position: relative; width: 280px; height: 500px; margin: 0 auto;
             border: 1px solid rgba(180, 151, 90, 0.3); border-radius: 20px; overflow: hidden; 
-            background: #000; cursor: pointer;
+            background: #000; cursor: pointer; transition: 0.5s;
         }
+        .video-wrapper:hover { border-color: var(--oro); box-shadow: 0 0 25px var(--oro-brillo); transform: translateY(-5px); }
         .play-button {
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 60px; height: 60px; background: rgba(180, 151, 90, 0.9);
-            border-radius: 50%; display: flex; justify-content: center; align-items: center; border: 2px solid #fff;
+            width: 70px; height: 70px; background: rgba(180, 151, 90, 0.9);
+            border-radius: 50%; z-index: 20; display: flex; justify-content: center; align-items: center; border: 2px solid #fff;
         }
-        .play-button::after { content: ""; border-style: solid; border-width: 10px 0 10px 18px; border-color: transparent transparent transparent white; margin-left: 4px; }
+        .play-button::after { content: ""; border-style: solid; border-width: 12px 0 12px 22px; border-color: transparent transparent transparent white; margin-left: 6px; }
+        .top-blocker { position: absolute; top: 0; left: 0; width: 100%; height: 60px; z-index: 50; background: transparent; }
+
+        .btn-ritual { background: rgba(180, 151, 90, 0.05); border: 1px solid var(--oro); color: var(--oro); width: 100%; padding: 18px; cursor: pointer; text-transform: uppercase; margin-bottom: 20px; border-radius: 8px; font-weight: bold; }
+        .box-ritual { display: none; border: 1px solid #333; padding: 25px; border-radius: 12px; background: #0c0e15; margin-bottom: 30px; }
     </style>
 </head>
 <body oncontextmenu="return false;">
@@ -117,21 +104,19 @@
             <button onclick="showTab('proteccion', this)">Espacio Sagrado</button>
             <button onclick="showTab('funcionamiento', this)">Funcionamiento</button>
             <button onclick="showTab('chakras', this)">Chakras</button>
-            <button onclick="showTab('manual', this)">Manual de Estudio</button>
         </nav>
 
         <div class="aula-content">
             
             <div id="materiales" class="tab-content active">
                 <h2>Materiales de Trabajo</h2>
-                <div class="box-info">
-                    <ul>
-                        <li><strong>Péndulo:</strong> Cristal, Madera u Orgonita. El que resuene contigo.</li>
-                        <li>Lugar tranquilo y mesa de apoyo cómoda.</li>
-                        <li>Lápiz negro y papel para trabajos a distancia.</li>
-                        <li>Música de relajación para abrir el espacio.</li>
-                    </ul>
-                </div>
+                <ul class="item-list">
+                    <li><strong>Péndulo:</strong> Cristal, Madera u Orgonita. Elige el que resuene contigo.</li>
+                    <li>Lugar tranquilo y armonioso para trabajar.</li>
+                    <li>Mesa o lugar de apoyo para estar cómodo.</li>
+                    <li>Lápiz negro y papel (para testeos a distancia).</li>
+                    <li>Música de meditación para abrir espacio sagrado.</li>
+                </ul>
                 <div class="video-container">
                     <div class="video-wrapper" onclick="playDirect(this, 'IV0Aa1k0gX0')">
                         <div class="play-button"></div>
@@ -141,10 +126,16 @@
 
             <div id="limpieza" class="tab-content">
                 <h2>Limpieza y Consagración</h2>
-                <div class="box-info">
-                    Usa <strong>sahumerio</strong> envolviendo el péndulo desde abajo. Para consagrar: Mira al Este, péndulo en manos (rezo), llévalo a la nariz (respira 3 veces), entrecejo y corazón.
-                    <br><br>
-                    <em>"Te consagro para que trabajes en la luz, muestres siempre la verdad..."</em>
+                <button class="btn-ritual" onclick="toggleRitual()">VER RITUAL Y FRASE DE CONSAGRACIÓN</button>
+                <div id="ritual-box" class="box-ritual">
+                    <p style="color: #ccc;">La forma más rápida es con <strong>Sahumerio</strong>. El humo debe envolver al péndulo por completo desde abajo hacia arriba.</p>
+                    <ul style="color: #ccc; padding-left: 20px;">
+                        <li>Mirar hacia el Este.</li>
+                        <li>Poner el péndulo entre las manos en forma de rezo.</li>
+                        <li>Llevarlo a la nariz, inspirar y exhalar 3 veces.</li>
+                        <li>Llevarlo al entrecejo y luego al corazón.</li>
+                    </ul>
+                    <p style="font-style: italic; color: var(--oro); border-top: 1px solid #222; padding-top: 20px; line-height: 1.8;">"A partir de este momento te consagro para que trabajes en la luz, muestres siempre la verdad, estés en ley, tus respuestas vengan siempre del ser superior y sean sabias, claras, precisas y seguras. Gracias".</p>
                 </div>
                 <div class="video-container">
                     <div class="video-wrapper" onclick="playDirect(this, 'eduRIA3ceis')">
@@ -154,10 +145,12 @@
             </div>
 
             <div id="proteccion" class="tab-content">
-                <h2>Espacio Sagrado</h2>
-                <div class="box-info">
-                    Protege el lugar con el Símbolo del Pentagrama o Tetragrámaton. Traza primero el círculo y luego la estrella. Invocación de guías y luz blanca.
-                </div>
+                <h2>Espacio Sagrado y Protección</h2>
+                <ul class="item-list">
+                    <li>Visualización de luz blanca protectora para sellar el aura.</li>
+                    <li>Invocación de guías espirituales y seres de luz.</li>
+                    <li>Uso de sahumos para limpiar la habitación antes y después.</li>
+                </ul>
                 <div class="video-container">
                     <div class="video-wrapper" onclick="playDirect(this, 'R24gh8hWlu0')">
                         <div class="play-button"></div>
@@ -166,10 +159,15 @@
             </div>
 
             <div id="funcionamiento" class="tab-content">
-                <h2>Funcionamiento del Péndulo</h2>
-                <div class="box-info">
-                    Es el puente entre el <strong>Hemisferio Izquierdo</strong> (Lógico/Palabra) y el <strong>Derecho</strong> (Intuitivo/Dibujos). 
-                    Para sintonizar (SÍ/NO), mantén actitud neutral y haz preguntas obvias.
+                <h2>Movimientos del Péndulo</h2>
+                <div style="background: rgba(180, 151, 90, 0.05); padding: 25px; border-radius: 12px; border-left: 4px solid var(--oro); margin-bottom: 25px;">
+                    <p style="margin: 0; line-height: 1.7; color: #ccc;">
+                        El péndulo es un puente entre la mente consciente e inconsciente.
+                        <br><br>
+                        <strong>Hemisferio Izquierdo:</strong> Lógica, palabra, análisis.
+                        <br>
+                        <strong>Hemisferio Derecho:</strong> Intuición, espiritualidad, trazos.
+                    </p>
                 </div>
                 <div class="video-container">
                     <div class="video-wrapper" onclick="playDirect(this, 'Xg2_Wo2K-zA')">
@@ -180,60 +178,15 @@
 
             <div id="chakras" class="tab-content">
                 <h2>Armonización de Chakras</h2>
-                <div class="box-info">
-                    <ul>
-                        <li><strong>No se mueve:</strong> Bloqueo/Cerrado.</li>
-                        <li><strong>Anti-horario:</strong> Energía negativa o descargando.</li>
-                        <li><strong>Horario:</strong> Salud, energía fluyendo correctamente.</li>
-                    </ul>
+                <div style="background: rgba(180, 151, 90, 0.08); border: 1px dashed var(--oro); padding: 25px; border-radius: 12px; margin-bottom: 40px; line-height: 1.8; color: #e0e0e0;">
+                    <p style="margin: 0 0 15px 0;">✧ <strong>Si el péndulo no se mueve:</strong> El chakra está cerrado.</p>
+                    <p style="margin: 0 0 15px 0;">✧ <strong>Giro ANTI-HORARIO:</strong> La energía fluye negativamente.</p>
+                    <p style="margin: 0; color: var(--oro); font-weight: bold; border-top: 1px solid #333; padding-top: 15px;">Para energía sana, el péndulo girará en SENTIDO HORARIO.</p>
                 </div>
                 <div class="video-container">
                     <div class="video-wrapper" onclick="playDirect(this, 'NJ-5aywOkAI')">
                         <div class="play-button"></div>
                     </div>
-                </div>
-            </div>
-
-            <div id="manual" class="tab-content">
-                <h2>Manual de Formación</h2>
-                
-                <div class="manual-scroll-container">
-                    <h3 style="text-align:center;">TALLER EXPRESS DE PÉNDULO</h3>
-                    <p style="text-align:center; color: var(--cyan);">Guía Teórica para Consultas y Testeo de Chakras</p>
-                    <hr style="border:0; border-top:1px solid #333; margin:20px 0;">
-                    
-                    <h3>1. Materiales</h3>
-                    <p>El péndulo puede ser de Cristal, Madera u Orgonita. Lo importante es que sientas una conexión con él. Necesitarás un espacio tranquilo, una mesa de apoyo, lápiz negro y papel para trabajos a distancia, y música de meditación.</p>
-                    
-                    <h3>2. Limpieza y Consagración</h3>
-                    <p>La forma más rápida es con sahumerio, dejando que el humo envuelva el péndulo por completo. La consagración se realiza mirando al Este, colocando el péndulo entre las manos en forma de rezo. Se lleva a la nariz (3 respiraciones), luego al entrecejo y al corazón, recitando la frase de consagración para que trabaje en la luz y la verdad.</p>
-                    
-                    <h3>3. Espacio Sagrado y Protección</h3>
-                    <p>Es fundamental proteger el lugar antes de cualquier sesión. Se utiliza el Símbolo del Pentagrama. Trazamos primero el círculo y luego el pentagrama. Se recomienda la visualización de luz blanca para sellar el aura y la invocación de seres de luz.</p>
-                    
-                    <h3>4. Funcionamiento</h3>
-                    <p>El péndulo actúa como puente entre la mente consciente (Hemisferio Izquierdo: Lógico, Yang) y la mente inconsciente (Hemisferio Derecho: Intuitivo, Yin). El péndulo traza dibujos que el lado derecho comprende y el izquierdo procesa como respuestas.</p>
-                    
-                    <h3>5. Sintonización (SÍ / NO)</h3>
-                    <p>Es vital mantener una actitud neutral. Pregunta cosas obvias (¿La nieve es blanca?) para descubrir tu código de SÍ y NO. Si el péndulo no se mueve, puede haber un bloqueo en el operador o falta de neutralidad.</p>
-                    
-                    <h3>6. Armonización de Chakras</h3>
-                    <p>El testeo de chakras nos da tres respuestas principales:</p>
-                    <ul>
-                        <li>Giro Horario: El chakra está abierto y la energía fluye con salud.</li>
-                        <li>Giro Anti-horario: La energía fluye negativamente o el chakra está descargando.</li>
-                        <li>Sin movimiento: El chakra está cerrado o existe un estancamiento energético.</li>
-                    </ul>
-                    
-                    <h3>7. Ética y Reglas de Oro</h3>
-                    <p>NO utilizar el péndulo si has ingerido alcohol o estimulantes, si tomas medicamentos que alteren el sistema nervioso, o si te encuentras muy cansado o has comido en exceso.</p>
-                    
-                    <h3>8. Cierre de Sesión</h3>
-                    <p>Al finalizar, limpia nuevamente el péndulo, cierra el pentagrama en sentido inverso al que lo abriste, agradece a la energía universal y realiza un sahumo para limpiar la habitación.</p>
-                </div>
-
-                <div style="text-align: center;">
-                    <button class="btn-download" onclick="forceDownload()">📥 DESCARGAR MANUAL PDF COMPLETO</button>
                 </div>
             </div>
 
@@ -247,6 +200,7 @@
             if(u === "pendulo" && p === "prueba") {
                 document.getElementById('login-screen').style.display = 'none';
                 document.getElementById('aula-completa').style.display = 'block';
+                window.scrollTo(0,0);
             } else { alert("Datos incorrectos."); }
         }
 
@@ -257,21 +211,15 @@
             for (var j = 0; j < buttons.length; j++) { buttons[j].classList.remove('active'); }
             document.getElementById(tabId).classList.add('active');
             btn.classList.add('active');
-            window.scrollTo(0,0);
         }
 
-        function forceDownload() {
-            const fileName = "PENDULO EXPRESS- TALLER.pdf";
-            const link = document.createElement('a');
-            link.href = fileName;
-            link.download = fileName;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+        function toggleRitual() {
+            var box = document.getElementById('ritual-box');
+            box.style.display = (box.style.display === 'block') ? 'none' : 'block';
         }
 
         function playDirect(container, videoId) {
-            container.innerHTML = '<iframe src="https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0" allow="autoplay; encrypted-media" style="width:100%; height:100%; border:none;"></iframe>';
+            container.innerHTML = '<div class="top-blocker"></div><iframe src="https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0" allow="autoplay; encrypted-media" style="width:100%; height:100%; border:none;"></iframe>';
         }
     </script>
 </body>
