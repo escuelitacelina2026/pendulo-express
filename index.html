@@ -75,18 +75,25 @@
 .item-list li { 
             margin: 20px 0; 
             color: #e0e0e0; 
-            display: block; /* Cambiamos 'flex' por 'block' para que el texto baje */
+            display: flex; /* Cambiamos a flex para alinear la estrella */
+            align-items: flex-start; 
             font-size: 16px; 
             line-height: 1.6; 
         }
 .item-list li strong { 
-            display: block; 
+            display: inline; /* Importante: inline para que la estrella se pegue */
             color: var(--oro); 
-            margin-bottom: 5px; 
             text-transform: uppercase;
             font-size: 14px;
+            margin-right: 5px;
         }
-        .item-list li::before { content: "✧"; color: var(--oro); margin-right: 12px; font-weight: bold; }
+        .item-list li::before { 
+            content: "✧"; 
+            color: var(--oro); 
+            margin-right: 8px; /* Espacio justo entre la estrella y la palabra */
+            font-weight: bold;
+            display: inline-block;
+        }
 
         /* VIDEOS ADAPTATIVOS */
         .video-container { margin: 35px auto; text-align: center; width: 100%; }
