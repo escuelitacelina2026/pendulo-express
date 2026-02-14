@@ -7,7 +7,7 @@
     <style>
         :root { --oro: #b4975a; --fondo: #0a0b10; --caja: #0f111a; --cyan: #00bcd4; }
         
-        /* LOGIN BLOQUEANTE */
+        /* LOGIN SEGURO */
         #login-screen { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
             background: #000; display: flex; justify-content: center; align-items: center; z-index: 9999; 
@@ -16,7 +16,6 @@
         input { display: block; width: 90%; margin: 15px auto; padding: 12px; background: #000; border: 1px solid #333; color: #fff; text-align: center; border-radius: 5px; }
         .btn-ingresar { background: var(--oro); color: #000; border: none; padding: 14px; width: 100%; cursor: pointer; font-weight: bold; border-radius: 5px; text-transform: uppercase; }
 
-        /* AULA OCULTA HASTA LOGIN */
         #aula-completa { display: none; }
 
         body { background-color: var(--fondo); color: #ffffff; font-family: 'Segoe UI', sans-serif; margin: 0; }
@@ -33,13 +32,12 @@
         .tab-content.active { display: block; }
 
         h2 { color: var(--oro); font-size: 22px; text-align: center; margin-bottom: 25px; font-family: serif; border-bottom: 1px solid #222; padding-bottom: 10px; }
-        h3 { color: var(--oro); font-size: 18px; margin-top: 25px; border-bottom: 1px solid #333; padding-bottom: 5px; }
-
+        
         .item-list { list-style: none; padding: 0; margin-bottom: 30px; }
         .item-list li { margin: 15px 0; color: #e0e0e0; display: flex; align-items: center; font-size: 16px; }
         .item-list li::before { content: "✧"; color: var(--oro); margin-right: 12px; font-size: 18px; }
 
-        /* VIDEO VERTICAL CON SEGURIDAD */
+        /* VIDEO VERTICAL SEGURO */
         .video-wrapper {
             position: relative; width: 280px; height: 500px; margin: 30px auto;
             border: 2px solid var(--oro); border-radius: 20px; overflow: hidden; background: #000; cursor: pointer;
@@ -52,7 +50,6 @@
         }
         .play-button::after { content: ""; border-style: solid; border-width: 12px 0 12px 22px; border-color: transparent transparent transparent white; margin-left: 6px; }
 
-        /* Bloqueador de clics en cabecera de video */
         .top-blocker { position: absolute; top: 0; left: 0; width: 100%; height: 60px; z-index: 50; background: transparent; }
 
         .btn-ritual { background: none; border: 1px solid var(--oro); color: var(--oro); width: 100%; padding: 15px; cursor: pointer; text-transform: uppercase; margin-bottom: 15px; }
@@ -80,12 +77,13 @@
         <nav>
             <button onclick="showTab('materiales', this)" class="active">Materiales</button>
             <button onclick="showTab('limpieza', this)">Limpieza</button>
-            <button onclick="showTab('proteccion', this)">Protección</button>
+            <button onclick="showTab('proteccion', this)">Espacio Sagrado</button>
             <button onclick="showTab('chakras', this)">Chakras</button>
             <button onclick="showTab('glosario', this)">Glosario</button>
         </nav>
 
         <div class="aula-content">
+            
             <div id="materiales" class="tab-content active">
                 <h2>Materiales de Trabajo</h2>
                 <ul class="item-list">
@@ -134,16 +132,19 @@
             <div id="chakras" class="tab-content">
                 <h2>Armonización de Chakras</h2>
                 <p style="text-align: center; color: #aaa; margin-bottom: 20px;">Testeo y equilibrio de los 7 centros energéticos principales.</p>
+                
                 <div class="video-wrapper" onclick="playDirect(this, 'NJ-5aywOkAI')">
-                    <img src="chakra1.jpg" class="video-poster">
+                    <img src="testeo.jpg" class="video-poster">
                     <div class="play-button"></div>
                 </div>
+                
                 <div class="video-wrapper" onclick="playDirect(this, 'LngEN9cmHRg')">
-                    <img src="chakra2.jpg" class="video-poster">
+                    <img src="testeo.jpg" class="video-poster">
                     <div class="play-button"></div>
                 </div>
+
                 <div class="video-wrapper" onclick="playDirect(this, 'WymTOGzcohY')">
-                    <img src="chakra3.jpg" class="video-poster">
+                    <img src="testeo.jpg" class="video-poster">
                     <div class="play-button"></div>
                 </div>
             </div>
@@ -155,7 +156,6 @@
                     <li><strong>Hemisferio Izquierdo (Yang):</strong> Deductivo, lógico y maneja la palabra.</li>
                     <li><strong>Hemisferio Derecho (Yin):</strong> Espiritual, intuitivo y maneja los dibujos/trazos.</li>
                 </ul>
-                <h3>Trazos y Movimientos</h3>
                 <div style="display: flex; gap: 15px; justify-content: center; margin-bottom: 20px;">
                     <img src="giros.png" style="width: 48%; border: 1px solid #333; border-radius: 10px;">
                     <img src="lineas.png" style="width: 48%; border: 1px solid #333; border-radius: 10px;">
@@ -195,7 +195,6 @@
         }
 
         function playDirect(container, videoId) {
-            // Eliminamos la imagen y el botón para insertar el iframe sin opción de agrandar (fs=0)
             container.innerHTML = `
                 <div class="top-blocker"></div>
                 <iframe 
