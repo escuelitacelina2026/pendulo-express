@@ -61,10 +61,23 @@
             display: block !important; 
             width: 100% !important; 
             clear: both !important; 
-        }
-        .video-container:first-of-type { margin-top: 20px !important; }
-        
-        .video-label { text-align: center; display: block; margin-bottom: 15px; color: var(--oro); font-weight: bold; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
+      .video-container {
+    margin-bottom: 20px; /* Bajamos de 40px o 50px a solo 20px */
+    text-align: center;
+}
+
+.video-container iframe {
+    width: 100%;
+    max-width: 320px; /* Esto mantiene el tamaño celular */
+    aspect-ratio: 9/16; 
+    margin-top: 5px; /* Pega el video al título */
+}
+
+.video-label {
+    display: block;
+    margin-bottom: 5px; /* Reduce el espacio entre el texto y el video */
+    font-weight: bold;
+}
         
         .video-wrapper { 
             position: relative; width: 100%; max-width: 280px; aspect-ratio: 9 / 16; 
