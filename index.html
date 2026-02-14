@@ -298,72 +298,57 @@
         </div>
     </div>
 </div>
-                
-    <script>
-        // FUNCIÓN DE INGRESO CORREGIDA
-        function checkAccess() {
-            var u = document.getElementById('user').value.toLowerCase().trim();
-            var p = document.getElementById('pass').value.trim();
-            
-            if(u === "pendulo" && p === "prueba") {
-                document.getElementById('login-screen').style.display = 'none';
-                document.getElementById('aula-completa').style.display = 'block';
-                window.scrollTo(0,0);
-            } else { 
-                alert("Usuario o contraseña incorrectos."); 
-            }
+ <script>
+    // 1. Función para el Ojito
+    function togglePass() {
+        var x = document.getElementById("pass");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
         }
-<script>
-        // 1. FUNCIÓN PARA VER/OCULTAR CONTRASEÑA (EL OJITO)
-        function togglePass() {
-            var x = document.getElementById("pass");
-            if (x.type === "password") {
-                x.type = "text";
-            } else {
-                x.type = "password";
-            }
-        }
+    }
 
-        // 2. FUNCIÓN DE INGRESO (TU CÓDIGO CORREGIDO)
-        function checkAccess() {
-            var u = document.getElementById('user').value.toLowerCase().trim();
-            var p = document.getElementById('pass').value.trim();
-            
-            if(u === "pendulo" && p === "prueba") {
-                document.getElementById('login-screen').style.display = 'none';
-                document.getElementById('aula-completa').style.display = 'block';
-                window.scrollTo(0,0);
-            } else { 
-                alert("Acceso denegado: Tu vibración no coincide con la llave del Comandante."); 
-            }
+    // 2. Función de Ingreso
+    function checkAccess() {
+        var u = document.getElementById('user').value.toLowerCase().trim();
+        var p = document.getElementById('pass').value.trim();
+        if(u === "pendulo" && p === "prueba") {
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('aula-completa').style.display = 'block';
+            window.scrollTo(0,0);
+        } else { 
+            alert("Acceso denegado: Tu vibración no coincide con la llave del Comandante."); 
         }
+    }
 
-        // 3. FUNCIÓN PARA CAMBIAR ENTRE MÓDULOS Y BIOGRAFÍA
-        function showTab(tabId, btn) {
-            var tabs = document.getElementsByClassName('tab-content');
-            for (var i = 0; i < tabs.length; i++) {
-                tabs[i].classList.remove('active');
-            }
-            var buttons = document.querySelectorAll('nav button');
-            for (var j = 0; j < buttons.length; j++) {
-                buttons[j].classList.remove('active');
-            }
-            document.getElementById(tabId).classList.add('active');
-            if(btn) btn.classList.add('active');
+    // 3. Función para las Solapas (Módulos)
+    function showTab(tabId, btn) {
+        var tabs = document.getElementsByClassName('tab-content');
+        for (var i = 0; i < tabs.length; i++) {
+            tabs[i].classList.remove('active');
         }
+        var buttons = document.querySelectorAll('nav button');
+        for (var j = 0; j < buttons.length; j++) {
+            buttons[j].classList.remove('active');
+        }
+        document.getElementById(tabId).classList.add('active');
+        if(btn) btn.classList.add('active');
+    }
 
-        // 4. FUNCIÓN PARA EL RITUAL
-        function toggleRitual() {
-            var box = document.getElementById('ritual-box');
-            if(box) {
-                box.style.display = (box.style.display === 'block') ? 'none' : 'block';
-            }
-        }
+    // 4. Función para el Ritual
+    function toggleRitual() {
+        var box = document.getElementById('ritual-box');
+        if(box) box.style.display = (box.style.display === 'block') ? 'none' : 'block';
+    }
 
-        // 5. FUNCIÓN PARA LOS VIDEOS
-        function playDirect(container, videoId) {
-            container.innerHTML = '<div class="top-blocker"></div><iframe src="https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0&modestbranding=1&controls=1&fs=0" allow="autoplay; encrypted-media" style="width:100%; height:100%; border:none;"></iframe>';
-        }
-    </script>
+    // 5. Función para los Videos
+    function playDirect(container, videoId) {
+        container.innerHTML = '<div class="top-blocker"></div><iframe src="https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0&modestbranding=1&controls=1&fs=0" allow="autoplay; encrypted-media" style="width:100%; height:100%; border:none;"></iframe>';
+    }
+</script>
 </body>
-</html>
+</html>               
+ 
+  
+
