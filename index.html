@@ -52,6 +52,11 @@
 
         .btn-ritual { background: none; border: 1px solid var(--oro); color: var(--oro); width: 100%; padding: 15px; cursor: pointer; text-transform: uppercase; margin-bottom: 15px; }
         .box-ritual { display: none; border: 1px solid #333; padding: 25px; border-radius: 8px; background: #0c0e15; margin-bottom: 30px; }
+        
+        /* ESTILOS PDF GLOSARIO */
+        .pdf-box { background: rgba(180, 151, 90, 0.05); border-left: 3px solid var(--oro); padding: 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .pdf-box h3 { color: var(--oro); font-size: 16px; margin-top: 0; text-transform: uppercase; }
+        .pdf-text { font-size: 15px; line-height: 1.6; color: #ccc; }
     </style>
 </head>
 <body oncontextmenu="return false;">
@@ -90,7 +95,7 @@
                     <li>Lápiz negro y papel para realizar el trabajo a distancia.</li>
                 </ul>
                 <div class="video-wrapper" onclick="playDirect(this, 'IV0Aa1k0gX0')">
-                    <img src="materiales.jpg" class="video-poster">
+                    <img src="image_f80186.jpg" class="video-poster">
                     <div class="play-button"></div>
                 </div>
             </div>
@@ -128,9 +133,9 @@
             <div id="chakras" class="tab-content">
                 <h2>Armonización de Chakras</h2>
                 <div style="background: rgba(180, 151, 90, 0.1); border: 1px dashed var(--oro); padding: 25px; border-radius: 8px; margin-bottom: 30px; line-height: 1.8; color: #e0e0e0;">
-                    <p style="margin: 0 0 15px 0;">✧ <strong>Si el péndulo no se mueve:</strong> El chakra está cerrado. La energía se encuentra estancada en la zona.</p>
-                    <p style="margin: 0 0 20px 0;">✧ <strong>Si el pendulo gira en círculo sentido anti horario:</strong> La energía está fluyendo negativamente para el cuerpo.</p>
-                    <p style="margin: 0; color: var(--oro); border-top: 1px solid #333; padding-top: 15px;">Para saber que la energía está fluyendo correctamente, el péndulo deberá <strong>girar en sentido horario</strong>.</p>
+                    <p>✧ <strong>Si el péndulo no se mueve:</strong> El chakra está cerrado. La energía se encuentra estancada en la zona.</p>
+                    <p>✧ <strong>Si el pendulo gira en círculo sentido anti horario:</strong> La energía está fluyendo negativamente para el cuerpo.</p>
+                    <p style="color: var(--oro); margin-top: 15px;">Para saber que la energía está fluyendo correctamente, el péndulo deberá <strong>girar en sentido horario</strong>.</p>
                 </div>
                 
                 <div class="video-wrapper" onclick="playDirect(this, 'NJ-5aywOkAI')">
@@ -148,17 +153,32 @@
             </div>
 
             <div id="glosario" class="tab-content">
-                <h2>Glosario - Movimientos</h2>
-                <ul class="item-list">
-                    <li><strong>Hemisferio Izquierdo:</strong> Lógica y palabra.</li>
-                    <li><strong>Hemisferio Derecho:</strong> Intuición y trazos.</li>
-                </ul>
-                <div style="display: flex; gap: 15px; justify-content: center; margin-bottom: 20px;">
-                    <img src="giros.png" style="width: 48%; border-radius: 10px; border: 1px solid #333;">
-                    <img src="lineas.png" style="width: 48%; border-radius: 10px; border: 1px solid #333;">
+                <h2>Glosario - Movimientos del Péndulo</h2>
+                
+                <div class="pdf-box">
+                    <h3>Funcionamiento del Péndulo</h3>
+                    [cite_start]<p class="pdf-text">El péndulo se comunica mediante un <strong>código de lenguaje</strong> entre la mente consciente e inconsciente[cite: 4]. [cite_start]Es un puente entre el hemisferio cerebral derecho (intuitivo, maneja dibujos) y el izquierdo (lógico, maneja la palabra)[cite: 4, 5, 6].</p>
                 </div>
+
+                <div class="pdf-box">
+                    <h3>Descubriendo tu Código (SÍ / NO)</h3>
+                    [cite_start]<p class="pdf-text">Para obtener un <strong>SÍ</strong>: Formula una pregunta de carácter afirmativo obvio (Ej: ¿La nieve es blanca?)[cite: 17, 18]. [cite_start]El movimiento que obtengas es tu forma de decir SÍ[cite: 20].</p>
+                    [cite_start]<p class="pdf-text">Para obtener un <strong>NO</strong>: Formula una pregunta de carácter negativo obvio (Ej: ¿La nieve es negra?)[cite: 22, 23]. [cite_start]El movimiento resultante será tu forma de decir NO[cite: 28].</p>
+                    [cite_start]<p class="pdf-text" style="color: var(--cyan); font-size: 13px;"><em>*Importante: Si no hay movimiento, puede existir un bloqueo en el radiestesista por falta de neutralidad[cite: 30, 31].</em></p>
+                </div>
+
+                <div style="display: flex; gap: 15px; justify-content: center; margin-bottom: 30px;">
+                    <img src="image_f7f63f.png" style="width: 48%; border-radius: 10px; border: 1px solid var(--oro); box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
+                    <img src="image_f86a67.png" style="width: 48%; border-radius: 10px; border: 1px solid var(--oro); box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
+                </div>
+
                 <div class="video-wrapper" onclick="playDirect(this, 'Xg2_Wo2K-zA')">
-                    <img src="glosario1.jpg" class="video-poster">
+                    <img src="image_f7f63f.png" class="video-poster">
+                    <div class="play-button"></div>
+                </div>
+
+                <div class="video-wrapper" onclick="playDirect(this, 'aJMlz0t79ZI')">
+                    <img src="image_f86a67.png" class="video-poster">
                     <div class="play-button"></div>
                 </div>
             </div>
