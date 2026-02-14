@@ -110,6 +110,22 @@
         
         .info-box { background: rgba(180, 151, 90, 0.05); padding: 25px; border-radius: 12px; border-left: 4px solid var(--oro); margin-bottom: 25px; line-height: 1.7; color: #ccc; font-size: 15px; text-align: left; }
         .info-box strong { color: var(--oro); }
+
+        /* BIOGRAFIA */
+        .bio-section { text-align: center; }
+        .bio-img { width: 120px; height: 120px; border-radius: 50%; border: 2px solid var(--oro); margin-bottom: 15px; object-fit: cover; }
+        .bio-text { font-size: 15px; color: #ccc; line-height: 1.8; font-style: italic; }
+
+        /* BOTON WHATSAPP */
+        .btn-whatsapp {
+            position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px;
+            background-color: #25d366; border-radius: 50%; display: flex; justify-content: center;
+            align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 1000;
+            text-decoration: none; transition: 0.3s;
+        }
+        .btn-whatsapp:hover { transform: scale(1.1); }
+        .btn-whatsapp svg { width: 35px; height: 35px; fill: white; }
+
     </style>
 </head>
 <body oncontextmenu="return false;">
@@ -133,9 +149,10 @@
         <nav>
             <button onclick="showTab('materiales', this)" class="active">Materiales</button>
             <button onclick="showTab('limpieza', this)">Limpieza</button>
-            <button onclick="showTab('proteccion', this)">Espacio Sagrado</button>
-            <button onclick="showTab('funcionamiento', this)">Funcionamiento</button>
+            <button onclick="showTab('proteccion', this)">Protección</button>
+            <button onclick="showTab('funcionamiento', this)">Sintonía</button>
             <button onclick="showTab('chakras', this)">Chakras</button>
+            <button onclick="showTab('bio', this)">Celina</button>
         </nav>
 
         <div class="aula-content">
@@ -161,17 +178,10 @@
                 <h2>Limpieza y Consagración</h2>
                 <button class="btn-ritual" onclick="toggleRitual()">VER RITUAL Y FRASE DE CONSAGRACIÓN</button>
                 <div id="ritual-box" class="box-ritual">
-                    <p>La forma más rápida es con <strong>Sahumerio</strong>. El humo debe envolver al péndulo por completo desde abajo hacia arriba.</p>
-                    <ul style="color: #ccc; padding-left: 20px;">
-                        <li>Mirar hacia el Este.</li>
-                        <li>Poner el péndulo entre las manos en forma de rezo.</li>
-                        <li>Llevarlo a la nariz, inspirar y exhalar 3 veces.</li>
-                        <li>Llevarlo al entrecejo y luego al corazón.</li>
-                    </ul>
+                    <p>La forma más rápida es con <strong>Sahumerio</strong>. El humo debe envolver al péndulo por completo.</p>
                     <p style="font-style: italic; color: var(--oro); border-top: 1px solid #222; padding-top: 20px; margin-top: 15px;">"A partir de este momento te consagro para que trabajes en la luz, muestres siempre la verdad, estés en ley, tus respuestas vengan siempre del ser superior y sean sabias, claras, precisas y seguras. Gracias".</p>
                 </div>
                 <div class="video-container">
-                    <span class="video-label">Video: Técnica de Limpieza</span>
                     <div class="video-wrapper" style="background-image: url('limpieza.jpg');" onclick="playDirect(this, 'eduRIA3ceis')">
                         <div class="play-button"></div>
                     </div>
@@ -179,18 +189,10 @@
             </div>
 
             <div id="proteccion" class="tab-content">
-                <h2>Espacio Sagrado y Protección</h2>
-                <div class="info-box">
-                    Es fundamental proteger el lugar antes de cualquier trabajo. Puedes utilizar el <strong>Símbolo de Pentagrama o Tetragrámaton</strong>. Trazamos primero el círculo y luego el pentagrama para sellar el ambiente. Visualiza una luz blanca protectora para sellar tu propia aura.
-                </div>
-                
-                <div style="text-align: center; margin-bottom: 30px;">
-                    <img src="pentagrama.jpg" alt="Pentagrama de Protección" style="width: 100%; max-width: 250px; border-radius: 10px; border: 1px solid var(--oro); box-shadow: 0 0 15px var(--oro-brillo);">
-                    <p style="color: var(--oro); font-size: 12px; margin-top: 10px; letter-spacing: 1px;">SÍMBOLO DE PROTECCIÓN</p>
-                </div>
-
+                <h2>Espacio Sagrado</h2>
+                <div class="info-box">Trazamos primero el círculo y luego el pentagrama para sellar el ambiente.</div>
+                <div style="text-align: center;"><img src="pentagrama.jpg" style="width: 200px; border-radius: 50%; border: 1px solid var(--oro);"></div>
                 <div class="video-container">
-                    <span class="video-label">Video: Protección Energética</span>
                     <div class="video-wrapper" style="background-image: url('proteccion.jpg');" onclick="playDirect(this, 'R24gh8hWlu0')">
                         <div class="play-button"></div>
                     </div>
@@ -198,18 +200,9 @@
             </div>
 
             <div id="funcionamiento" class="tab-content">
-                <h2>Funcionamiento del Péndulo</h2>
-                <div class="info-box">
-                    <strong>El lenguaje del Péndulo:</strong><br>
-                    El péndulo es un puente entre la mente consciente e inconsciente. Traza dibujos que el hemisferio derecho (intuición) comprende y el izquierdo (lógica) procesa.<br><br>
-                    <strong>Sintonización (Descubrir tu SÍ y NO):</strong><br>
-                    Para que responda correctamente, es vital tener una <strong>actitud neutral</strong>.<br>
-                    1. Haz una pregunta de respuesta obvia ("¿La nieve es blanca?") para ver el movimiento del SÍ.<br>
-                    2. Haz una pregunta falsa para descubrir tu movimiento del NO.<br><br>
-                    <strong>Reglas de Oro:</strong> No utilizar si consumiste alcohol, medicamentos que alteren el sistema nervioso, si estás muy cansado o comiste en exceso.
-                </div>
+                <h2>Sintonización</h2>
+                <div class="info-box">Pide al péndulo: 1. "Muéstrame mi SÍ" | 2. "Muéstrame mi NO".</div>
                 <div class="video-container">
-                    <span class="video-label">Video: Movimientos y Sintonización</span>
                     <div class="video-wrapper" style="background-image: url('movimiento.jpg');" onclick="playDirect(this, 'Xg2_Wo2K-zA')">
                         <div class="play-button"></div>
                     </div>
@@ -217,70 +210,73 @@
             </div>
 
             <div id="chakras" class="tab-content">
-                <h2>Armonización de Chakras</h2>
-                <div class="info-box">
-                    <strong>Interpretación de los Giros:</strong><br><br>
-                    <ul class="item-list" style="margin:0;">
-                        <li><strong>SENTIDO HORARIO:</strong> El chakra está sano, la energía fluye correctamente.</li>
-                        <li><strong>SENTIDO ANTI-HORARIO:</strong> Bloqueo, fuga o la energía fluye negativamente para el cuerpo.</li>
-                        <li><strong>SIN MOVIMIENTO:</strong> El chakra está cerrado o la energía está estancada.</li>
-                        <li><strong>MOVIMIENTO ERRÁTICO:</strong> Existe una fuga o descompensación energética.</li>
-                    </ul>
-                </div>
+                <h2>Chakras</h2>
                 <div class="video-container">
-                    <span class="video-label">Video: Práctica de Testeo</span>
                     <div class="video-wrapper" style="background-image: url('testeo.jpg');" onclick="playDirect(this, 'NJ-5aywOkAI')">
                         <div class="play-button"></div>
                     </div>
                 </div>
             </div>
 
+            <div id="bio" class="tab-content">
+                <h2>Sobre Celina</h2>
+                <div class="bio-section">
+                    <img src="tu-foto.jpg" alt="Celina" class="bio-img">
+                    <p class="bio-text">
+                        "Mi misión es guiarte en el despertar de tu intuición y el manejo de tu energía personal. <br><br>
+                        Como fundadora de la Escuela de Sabiduría Holística, he diseñado este taller para que puedas conectar con tu péndulo de forma práctica, segura y profunda."
+                    </p>
+                    <p style="color: var(--oro); font-weight: bold; margin-top: 20px;">Terapeuta Holística & Guía Energética</p>
+                </div>
+            </div>
+
         </div>
+
+        <a href="https://wa.me/5491100000000?text=Hola%20Celina!%20Tengo%20una%20duda%20del%20taller%20de%20Péndulo" class="btn-whatsapp" target="_blank">
+            <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.588-5.946 0-6.556 5.332-11.888 11.888-11.888 3.176 0 6.161 1.237 8.404 3.48 2.242 2.242 3.48 5.227 3.48 8.404 0 6.556-5.332 11.888-11.888 11.888-2.01 0-3.988-.511-5.741-1.481l-6.142 1.606zm6.307-3.666c1.558.924 3.18 1.393 4.922 1.393 5.011 0 9.088-4.077 9.088-9.088 0-2.431-.946-4.717-2.664-6.436s-4.005-2.664-6.436-2.664c-5.011 0-9.088 4.077-9.088 9.088 0 1.83.546 3.614 1.577 5.16l-.999 3.647 3.733-.977zM16.814 13.8c-.287-.143-1.7-.84-1.963-.936-.264-.096-.456-.143-.648.143-.192.287-.744.936-.911 1.127-.167.192-.335.215-.623.072-.287-.143-1.214-.447-2.311-1.426-.855-.763-1.432-1.706-1.599-1.992-.167-.287-.018-.442.126-.584.129-.128.287-.335.431-.502.143-.167.192-.287.287-.478.096-.192.048-.359-.024-.502-.072-.143-.648-1.562-.887-2.136-.233-.56-.471-.484-.648-.493l-.551-.01c-.192 0-.502.072-.763.359-.264.287-1.006.984-1.006 2.399 0 1.415 1.03 2.784 1.173 2.976.143.192 2.028 3.097 4.912 4.342.686.296 1.222.473 1.638.604.689.219 1.317.189 1.812.115.551-.082 1.699-.694 1.939-1.364.24-.67.24-1.244.167-1.364-.072-.12-.264-.192-.551-.335z"/></svg>
+        </a>
+
     </div>
 
     <script>
-    function checkAccess() {
-        var u = document.getElementById('user').value.toLowerCase().trim();
-        var p = document.getElementById('pass').value.trim();
-        if(u === "pendulo" && p === "prueba") {
-            document.getElementById('login-screen').style.display = 'none';
-            document.getElementById('aula-completa').style.display = 'block';
-            window.scrollTo(0,0);
-        } else { alert("Usuario o contraseña incorrectos."); }
-    }
+        function checkAccess() {
+            var u = document.getElementById('user').value.toLowerCase().trim();
+            var p = document.getElementById('pass').value.trim();
+            if(u === "pendulo" && p === "prueba") {
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('aula-completa').style.display = 'block';
+                window.scrollTo(0,0);
+            } else { alert("Usuario o contraseña incorrectos."); }
+        }
 
-    function showTab(tabId, btn) {
-        var tabs = document.getElementsByClassName('tab-content');
-        for (var i = 0; i < tabs.length; i++) { tabs[i].classList.remove('active'); }
-        var buttons = document.querySelectorAll('nav button');
-        for (var j = 0; j < buttons.length; j++) { buttons[j].classList.remove('active'); }
-        document.getElementById(tabId).classList.add('active');
-        btn.classList.add('active');
-        window.scrollTo({ top: 120, behavior: 'smooth' });
-    }
+        function showTab(tabId, btn) {
+            var tabs = document.getElementsByClassName('tab-content');
+            for (var i = 0; i < tabs.length; i++) { tabs[i].classList.remove('active'); }
+            var buttons = document.querySelectorAll('nav button');
+            for (var j = 0; j < buttons.length; j++) { buttons[j].classList.remove('active'); }
+            document.getElementById(tabId).classList.add('active');
+            btn.classList.add('active');
+            window.scrollTo({ top: 120, behavior: 'smooth' });
+        }
 
-    function toggleRitual() {
-        var box = document.getElementById('ritual-box');
-        box.style.display = (box.style.display === 'block') ? 'none' : 'block';
-    }
+        function toggleRitual() {
+            var box = document.getElementById('ritual-box');
+            box.style.display = (box.style.display === 'block') ? 'none' : 'block';
+        }
 
-    // ESTA ES LA FUNCIÓN CON SEGURIDAD AÑADIDA
-    function playDirect(container, videoId) {
-        // 1. Quitamos el borde del contenedor para que se vea limpio
-        container.style.border = "none";
-        
-        // 2. Insertamos el escudo invisible arriba y el iframe restringido
-        // ?modestbranding=1 (quita logo) &fs=0 (quita pantalla completa) &rel=0 (sin sugerencias)
-        container.innerHTML = `
-            <div style="position:relative; width:100%; height:100%;">
-                <div style="position:absolute; top:0; left:0; width:100%; height:60px; z-index:10; background:transparent;"></div>
-                <iframe 
-                    src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&fs=0" 
-                    allow="autoplay; encrypted-media" 
-                    style="width:100%; height:100%; border:none;">
-                </iframe>
-            </div>`;
-    }
-</script>
+        // SEGURIDAD DE VIDEO INTEGRADA
+        function playDirect(container, videoId) {
+            container.style.border = "none";
+            container.innerHTML = `
+                <div style="position:relative; width:100%; height:100%;">
+                    <div style="position:absolute; top:0; left:0; width:100%; height:60px; z-index:10; background:transparent;"></div>
+                    <iframe 
+                        src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&fs=0" 
+                        allow="autoplay; encrypted-media" 
+                        style="width:100%; height:100%; border:none;">
+                    </iframe>
+                </div>`;
+        }
+    </script>
 </body>
 </html>
