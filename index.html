@@ -15,7 +15,6 @@
         
         body { 
             background-color: var(--fondo); 
-            /* EFECTO ESTRELLAS */
             background-image: 
                 radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
                 radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
@@ -23,19 +22,13 @@
             background-size: 550px 550px, 350px 350px, 250px 250px;
             color: #ffffff; 
             font-family: 'Segoe UI', sans-serif; 
-            margin: 0; 
-            padding: 0;
+            margin: 0; padding: 0;
             user-select: none;
         }
 
-        #login-screen { 
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: #000; display: flex; justify-content: center; align-items: center; z-index: 99999; 
-        }
-        .login-box { 
-            border: 1px solid var(--oro); padding: 30px; border-radius: 15px; 
-            width: 85%; max-width: 320px; background: #0d0d0d; text-align: center;
-        }
+        /* LOGIN */
+        #login-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; justify-content: center; align-items: center; z-index: 99999; }
+        .login-box { border: 1px solid var(--oro); padding: 30px; border-radius: 15px; width: 85%; max-width: 320px; background: #0d0d0d; text-align: center; }
         input { display: block; width: 100%; box-sizing: border-box; margin: 15px auto; padding: 12px; background: #000; border: 1px solid #333; color: #fff; text-align: center; border-radius: 5px; }
         .btn-ingresar { background: var(--oro); color: #000; border: none; padding: 14px; width: 100%; cursor: pointer; font-weight: bold; border-radius: 5px; text-transform: uppercase; }
 
@@ -45,12 +38,9 @@
         header h1 { color: var(--oro); font-size: 24px; letter-spacing: 2px; margin: 0; font-family: serif; }
         header p { color: var(--cyan); letter-spacing: 4px; font-size: 10px; margin-top: 10px; }
 
+        /* NAVEGACIÓN */
         nav { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; padding: 15px; max-width: 800px; margin: auto; }
-        nav button { 
-            background: rgba(255,255,255,0.03); border: 1px solid #333; color: #888; 
-            padding: 10px; cursor: pointer; text-transform: uppercase; font-size: 9px; 
-            border-radius: 4px; flex-grow: 1; transition: 0.3s;
-        }
+        nav button { background: rgba(255,255,255,0.03); border: 1px solid #333; color: #888; padding: 10px; cursor: pointer; text-transform: uppercase; font-size: 9px; border-radius: 4px; flex-grow: 1; transition: 0.3s; }
         nav button.active { border-color: var(--oro); color: var(--oro); background: rgba(180, 151, 90, 0.1); }
 
         .aula-content { max-width: 800px; margin: 10px auto 80px; background: var(--caja); padding: 25px; border-radius: 12px; width: 95%; box-sizing: border-box; backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.05); }
@@ -59,18 +49,22 @@
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         h2 { color: var(--oro); font-size: 20px; text-align: center; margin-bottom: 20px; font-family: serif; border-bottom: 1px solid #222; padding-bottom: 15px; }
+        
+        .item-list { list-style: none; padding: 0; }
+        .item-list li { margin: 12px 0; color: #e0e0e0; display: flex; font-size: 15px; line-height: 1.5; }
+        .item-list li::before { content: "✧"; color: var(--oro); margin-right: 10px; }
 
-        /* BIO ESTILO TARJETA */
-        .bio-header { text-align: center; margin-bottom: 25px; }
-        .bio-img { width: 120px; height: 120px; border-radius: 50%; border: 2px solid var(--oro); margin-bottom: 15px; object-fit: cover; }
-        .bio-name { color: var(--oro); font-size: 22px; margin: 5px 0; font-family: serif; }
-        .bio-ig-tag { display: flex; align-items: center; justify-content: center; gap: 8px; color: var(--cyan); text-decoration: none; font-weight: bold; margin-bottom: 20px; }
-        .bio-list { font-size: 14px; color: #ddd; }
-        .bio-list div { margin-bottom: 10px; padding-left: 20px; position: relative; line-height: 1.4; }
-        .bio-list div::before { content: "✧"; position: absolute; left: 0; color: var(--oro); }
+        .btn-ritual { background: rgba(180, 151, 90, 0.05); border: 1px solid var(--oro); color: var(--oro); width: 100%; padding: 15px; cursor: pointer; border-radius: 8px; margin-bottom: 20px; font-weight: bold; }
 
         /* VIDEOS */
         .video-wrapper { position: relative; width: 100%; max-width: 280px; aspect-ratio: 9/16; margin: 20px auto; border: 1px solid var(--oro-brillo); border-radius: 20px; overflow: hidden; background: #000; }
+
+        /* BIO */
+        .bio-header { text-align: center; margin-bottom: 25px; }
+        .bio-name { color: var(--oro); font-size: 22px; margin-bottom: 5px; font-family: serif; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .bio-list { font-size: 14px; color: #ddd; }
+        .bio-list div { margin-bottom: 8px; padding-left: 20px; position: relative; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 5px; }
+        .bio-list div::before { content: "✦"; position: absolute; left: 0; color: var(--oro); }
 
         /* BOTONES FLOTANTES */
         .float-btn { position: fixed; width: 55px; height: 55px; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.5); z-index: 1000; transition: 0.3s; }
@@ -83,78 +77,100 @@
 
     <div id="login-screen">
         <div class="login-box">
-            <h1 style="color: var(--oro); font-size: 20px; margin-bottom: 5px;">NAVE ARCTURIANA</h1>
-            <p style="color: var(--cyan); font-size: 9px; letter-spacing: 3px; margin-bottom: 25px;">PÉNDULO EXPRESS</p>
+            <h1 style="color: var(--oro); font-size: 18px;">NAVE ARCTURIANA</h1>
+            <p style="color: var(--cyan); font-size: 9px; letter-spacing: 3px;">PÉNDULO EXPRESS</p>
             <input type="text" id="user" placeholder="Usuario">
             <input type="password" id="pass" placeholder="Contraseña">
-            <button class="btn-ingresar" onclick="checkAccess()">ENTRAR AL AULA</button>
+            <button class="btn-ingresar" onclick="checkAccess()">INGRESAR</button>
         </div>
     </div>
 
     <div id="aula-completa">
         <header>
-            <h1>PÉNDULO EXPRESS</h1>
+            <h1>TALLER DE PÉNDULO EXPRESS</h1>
             <p>Nave Arcturiana</p>
         </header>
 
         <nav>
             <button onclick="showTab('materiales', this)" class="active">Materiales</button>
             <button onclick="showTab('limpieza', this)">Limpieza</button>
+            <button onclick="showTab('proteccion', this)">Protección</button>
             <button onclick="showTab('sintonia', this)">Sintonía</button>
             <button onclick="showTab('chakras', this)">Chakras</button>
-            <button onclick="showTab('jacqueline', this)">Jacqueline</button>
+            <button onclick="showTab('bio', this)">Mi Biografía</button>
         </nav>
 
         <div class="aula-content">
+            
             <div id="materiales" class="tab-content active">
                 <h2>Materiales</h2>
+                <ul class="item-list">
+                    <li><strong>Péndulo:</strong> Cristal, Madera u Orgonita.</li>
+                    <li>Lugar tranquilo y agua para hidratarte.</li>
+                </ul>
                 <div class="video-wrapper" onclick="playVideo(this, 'IV0Aa1k0gX0')">
-                    <div style="background:url('materiales.jpg') center/cover; width:100%; height:100%; display:flex; justify-content:center; align-items:center;"><div style="width:60px; height:60px; background:var(--oro); border-radius:50%; display:flex; justify-content:center; align-items:center;">▶</div></div>
+                    <div style="background:#111; width:100%; height:100%; display:flex; justify-content:center; align-items:center; color:var(--oro);">▶ VER INTRODUCCIÓN</div>
                 </div>
             </div>
 
             <div id="limpieza" class="tab-content">
                 <h2>Limpieza y Consagración</h2>
-                <div class="video-wrapper" onclick="playVideo(this, 'eduRIA3ceis')">
-                    <div style="background:url('limpieza.jpg') center/cover; width:100%; height:100%; display:flex; justify-content:center; align-items:center;"><div style="width:60px; height:60px; background:var(--oro); border-radius:50%; display:flex; justify-content:center; align-items:center;">▶</div></div>
+                <button class="btn-ritual" onclick="document.getElementById('rit').style.display='block'">VER FRASE DE CONSAGRACIÓN</button>
+                <div id="rit" style="display:none; background:rgba(0,0,0,0.5); padding:20px; border-radius:10px; margin-bottom:20px; border:1px solid var(--oro); font-style: italic; color: var(--oro); text-align: center;">
+                    "A partir de este momento te consagro para que trabajes en la luz, muestres siempre la verdad, estés en ley, tus respuestas vengan siempre del ser superior y sean sabias, claras, precisas y seguras. Gracias".
                 </div>
+                <div class="video-wrapper" onclick="playVideo(this, 'eduRIA3ceis')">
+                   <div style="background:#111; width:100%; height:100%; display:flex; justify-content:center; align-items:center; color:var(--oro);">▶ VER VIDEO LIMPIEZA</div>
+                </div>
+            </div>
+
+            <div id="proteccion" class="tab-content">
+                <h2>Espacio Sagrado</h2>
+                <p style="text-align: center; color: #ccc;">Antes de comenzar, visualiza tu espacio protegido.</p>
+                <div style="text-align:center; margin: 20px 0;">
+                    <svg width="150" height="150" viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="45" fill="none" stroke="var(--oro)" stroke-width="2"/>
+                        <path d="M50 5 L63 38 L98 38 L70 59 L81 92 L50 72 L19 92 L30 59 L2 38 L37 38 Z" fill="none" stroke="var(--oro)" stroke-width="2"/>
+                    </svg>
+                </div>
+                <p style="text-align: center; font-size: 14px; color: var(--cyan);">PROTECCIÓN ACTIVA</p>
             </div>
 
             <div id="sintonia" class="tab-content">
                 <h2>Sintonización</h2>
                 <div class="video-wrapper" onclick="playVideo(this, 'Xg2_Wo2K-zA')">
-                    <div style="background:url('movimiento.jpg') center/cover; width:100%; height:100%; display:flex; justify-content:center; align-items:center;"><div style="width:60px; height:60px; background:var(--oro); border-radius:50%; display:flex; justify-content:center; align-items:center;">▶</div></div>
+                    <div style="background:#111; width:100%; height:100%; display:flex; justify-content:center; align-items:center; color:var(--oro);">▶ VER MOVIMIENTOS</div>
                 </div>
             </div>
 
             <div id="chakras" class="tab-content">
                 <h2>Testeo de Chakras</h2>
                 <div class="video-wrapper" onclick="playVideo(this, 'NJ-5aywOkAI')">
-                    <div style="background:url('testeo.jpg') center/cover; width:100%; height:100%; display:flex; justify-content:center; align-items:center;"><div style="width:60px; height:60px; background:var(--oro); border-radius:50%; display:flex; justify-content:center; align-items:center;">▶</div></div>
+                    <div style="background:#111; width:100%; height:100%; display:flex; justify-content:center; align-items:center; color:var(--oro);">▶ VER TESTEO</div>
                 </div>
             </div>
 
-            <div id="jacqueline" class="tab-content">
+            <div id="bio" class="tab-content">
                 <div class="bio-header">
-                    <img src="tu-foto.jpg" class="bio-img" alt="Jacqueline">
-                    <div class="bio-name">Jacqueline Vanesa Pignatelli</div>
-                    <a href="https://www.instagram.com/nave.arcturiana" target="_blank" class="bio-ig-tag">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.17.054 1.805.249 2.227.412.558.217.957.477 1.377.896.419.42.679.819.896 1.377.163.422.358 1.057.412 2.227.059 1.265.071 1.646.071 4.85s-.012 3.584-.07 4.85c-.054 1.17-.249 1.805-.412 2.227-.217.558-.477.957-.896 1.377-.42.419-.819.679-1.377.896-.422.163-1.057.358-2.227.412-1.265.059-1.646.071-4.85.071s-3.584-.012-4.85-.07c-1.17-.054-1.805-.249-2.227-.412-.558-.217-.957-.477-1.377-.896-.419-.42-.679-.819-.896-1.377-.163-.422-.358-1.057-.412-2.227-.058-1.265-.071-1.646-.071-4.85s.013-3.584.071-4.85c.054-1.17.249-1.805.412-2.227.217-.558.477-.957.896-1.377.42-.419.819-.679 1.377-.896.422-.163 1.057-.358 2.227-.412 1.265-.059 1.646-.071 4.85-.071zm0-2.163c-3.259 0-3.667.014-4.947.072-1.277.057-2.15.26-2.914.557-.79.307-1.458.717-2.122 1.381s-1.074 1.332-1.381 2.122c-.297.763-.5 1.637-.557 2.914-.059 1.28-.073 1.688-.073 4.947s.014 3.667.072 4.947c.057 1.277.26 2.15.557 2.914.307.79.717 1.458 1.381 2.122s1.332 1.074 2.122 1.381c.763.297 1.637.5 2.914.557 1.28.059 1.688.073 4.947.073s3.667-.014 4.947-.072c1.277-.057 2.15-.26 2.914-.557.79-.307 1.458-.717 2.122-1.381s1.074-1.332 1.381-2.122c.297-.763.5-1.637.557-2.914.059-1.28.073-1.688.073-4.947s-.014-3.667-.072-4.947c-.057-1.277-.26-2.15-.557-2.914-.307-.79-.717-1.458-1.381-2.122s-1.332-1.074-2.122-1.381c-.763-.297-1.637-.5-2.914-.557-1.28-.059-1.688-.073-4.947-.073z"/></svg>
-                        @nave.arcturiana
-                    </a>
+                    <div class="bio-name">
+                        Jacqueline Vanesa Pignatelli
+                        <a href="https://www.instagram.com/nave.arcturiana" target="_blank">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--cyan)"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.17.054 1.805.249 2.227.412.558.217.957.477 1.377.896.419.42.679.819.896 1.377.163.422.358 1.057.412 2.227.059 1.265.071 1.646.071 4.85s-.012 3.584-.07 4.85c-.054 1.17-.249 1.805-.412 2.227-.217.558-.477.957-.896 1.377-.42.419-.819.679-1.377.896-.422.163-1.057.358-2.227.412-1.265.059-1.646.071-4.85.071s-3.584-.012-4.85-.07c-1.17-.054-1.805-.249-2.227-.412-.558-.217-.957-.477-1.377-.896-.419-.42-.679-.819-.896-1.377-.163-.422-.358-1.057-.412-2.227-.058-1.265-.071-1.646-.071-4.85s.013-3.584.071-4.85c.054-1.17.249-1.805.412-2.227.217-.558.477-.957.896-1.377.42-.419.819-.679 1.377-.896.422-.163 1.057-.358 2.227-.412 1.265-.059 1.646-.071 4.85-.071zm0-2.163c-3.259 0-3.667.014-4.947.072-1.277.057-2.15.26-2.914.557-.79.307-1.458.717-2.122 1.381s-1.074 1.332-1.381 2.122c-.297.763-.5 1.637-.557 2.914-.059 1.28-.073 1.688-.073 4.947s.014 3.667.072 4.947c.057 1.277.26 2.15.557 2.914.307.79.717 1.458 1.381 2.122s1.332 1.074 2.122 1.381c.763.297 1.637.5 2.914.557 1.28.059 1.688.073 4.947.073s3.667-.014 4.947-.072c1.277-.057 2.15-.26 2.914-.557.79-.307 1.458-.717 2.122-1.381s1.074-1.332 1.381-2.122c.297-.763.5-1.637.557-2.914.059-1.28.073-1.688.073-4.947s-.014-3.667-.072-4.947c-.057-1.277-.26-2.15-.557-2.914-.307-.79-.717-1.458-1.381-2.122s-1.332-1.074-2.122-1.381c-.763-.297-1.637-.5-2.914-.557-1.28-.059-1.688-.073-4.947-.073z"/></svg>
+                        </a>
+                    </div>
+                    <p style="color:var(--cyan); font-size: 13px;">Terapeuta Holística Matriculada</p>
                 </div>
                 <div class="bio-list">
-                    <div>Terapeuta Holística Matriculada.</div>
                     <div>Canalizadora de Cirugía Astral Cristal Arcturiano.</div>
-                    <div>Técnica Reiki Sandalfon (Niño interior).</div>
+                    <div>Canalizadora de Técnica Reiki Sandalfon (Sanación del Niño interior).</div>
                     <div>Comunicación Mediumnica / Enlazadora de mundos.</div>
                     <div>Instructora de Chikung.</div>
-                    <div>Registros Akashicos / Mesa Cuántica.</div>
+                    <div>Lectora de Registros Akashicos / Operadora de Mesa Cuántica Energética.</div>
                     <div>Profesora de Yoga de la Música.</div>
                     <div>Maestra de Reiki (Usui, Karuna, Jin Kei Do, Chamánico).</div>
-                    <div>Terapeuta Floral, Auriculoterapeuta, Sonido y Vibracional.</div>
-                    <div>Técnicas Arcturianas, Pleyadianas y Transgeneracional.</div>
-                    <div>Diseño Aplicación Numerología Transgeneracional 2026.</div>
+                    <div>Terapeuta Floral, Auriculoterapeuta, del Sonido y Vibracional.</div>
+                    <div>Terapeuta de Técnicas Arcturianas, Pleyadianas y Transgeneracional.</div>
+                    <div>Diseño y desarrollo de aplicación Numerología Transgeneracional 2026.</div>
                 </div>
             </div>
         </div>
@@ -174,7 +190,7 @@
             if(u === "pendulo" && p === "prueba") {
                 document.getElementById('login-screen').style.display = 'none';
                 document.getElementById('aula-completa').style.display = 'block';
-            } else { alert("Usuario o contraseña incorrectos."); }
+            } else { alert("Acceso denegado."); }
         }
 
         function showTab(tabId, btn) {
@@ -188,11 +204,7 @@
         }
 
         function playVideo(container, videoId) {
-            container.innerHTML = `
-                <div style="position:relative; width:100%; height:100%;">
-                    <div style="position:absolute; top:0; left:0; width:100%; height:60px; z-index:10; background:transparent;"></div>
-                    <iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&fs=0" allow="autoplay; encrypted-media" style="width:100%; height:100%; border:none;"></iframe>
-                </div>`;
+            container.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1" allow="autoplay; encrypted-media" style="width:100%; height:100%; border:none;"></iframe>`;
         }
     </script>
 </body>
