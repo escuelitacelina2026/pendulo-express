@@ -3,154 +3,186 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Péndulo Express - Escuela Celina</title>
+    <title>Péndulo Express - Aula Virtual</title>
     <style>
-        :root { --oro: #b4975a; --fondo: #0a0b10; --caja: #13151f; --nav: #0c0e16; }
-        body { background-color: var(--fondo); color: #ffffff; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; }
+        :root { --oro: #b4975a; --celeste: #00d4ff; --fondo: #0a0b10; --caja: #13151f; }
+        body { background-color: #000; color: #ffffff; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; }
 
-        header { padding: 30px; text-align: center; border-bottom: 1px solid #222; background: linear-gradient(to bottom, #1c202b, var(--fondo)); }
-        header h1 { color: var(--oro); margin: 0; font-size: 22px; letter-spacing: 2px; text-transform: uppercase; }
+        /* LOGIN EXACTO A LA CAPTURA */
+        #login-screen { position: fixed; inset: 0; background: #000; display: flex; align-items: center; justify-content: center; z-index: 1000; }
+        .login-box { border: 1.5px solid var(--oro); border-radius: 20px; padding: 40px; width: 85%; max-width: 350px; text-align: center; background: #000; }
+        .login-box h1 { color: var(--oro); font-size: 18px; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 2px; }
+        .login-box h2 { color: var(--celeste); font-size: 11px; margin-bottom: 30px; letter-spacing: 4px; font-weight: normal; }
+        .login-box input { width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 8px; border: none; background: #e6f0ff; color: #333; font-size: 16px; text-align: center; box-sizing: border-box; }
+        .login-box button { width: 100%; padding: 12px; background: var(--oro); border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 14px; text-transform: uppercase; color: #000; }
 
-        nav { display: flex; overflow-x: auto; gap: 8px; padding: 15px; background: var(--nav); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #222; }
-        nav::-webkit-scrollbar { display: none; }
-        nav button { background: #1a1d26; border: 1px solid #333; color: #888; padding: 10px 15px; border-radius: 5px; cursor: pointer; white-space: nowrap; font-size: 11px; text-transform: uppercase; }
-        nav button.active { border-color: var(--oro); color: var(--oro); background: rgba(180, 151, 90, 0.1); }
+        /* APP ESTRUCTURA */
+        #main-content { display: none; background: var(--fondo); min-height: 100vh; }
+        nav { display: flex; overflow-x: auto; gap: 5px; padding: 10px; background: #0c0e16; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #222; }
+        nav button { background: #1a1d26; border: 1px solid #333; color: #888; padding: 8px 12px; border-radius: 4px; cursor: pointer; white-space: nowrap; font-size: 9px; text-transform: uppercase; }
+        nav button.active { border-color: var(--oro); color: var(--oro); }
 
-        .content { max-width: 800px; margin: 20px auto; padding: 0 15px; }
-        .tab-content { display: none; animation: fadeIn 0.5s; }
+        .content { max-width: 600px; margin: auto; padding: 20px; }
+        .tab-content { display: none; }
         .tab-content.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        .card-aula { background: var(--caja); padding: 25px; border-radius: 15px; border: 1px solid #1f2330; margin-bottom: 20px; }
-        h2 { color: var(--oro); text-align: center; font-size: 20px; margin-bottom: 25px; border-bottom: 1px solid #222; padding-bottom: 15px; }
-        h3 { color: var(--oro); font-size: 14px; text-transform: uppercase; margin-top: 20px; letter-spacing: 1px; }
-        p, li { color: #ccc; font-size: 14px; line-height: 1.6; }
-
-        .video-wrapper { position: relative; margin: 45px auto; text-align: center; max-width: 280px; }
-        .video-label { color: var(--oro); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; display: block; margin-bottom: 20px; font-weight: bold; }
+        h2 { color: var(--oro); text-align: center; font-size: 18px; margin-bottom: 20px; text-transform: none; }
+        .info-card { background: var(--caja); padding: 20px; border-radius: 12px; border: 1px solid #1f2330; margin-bottom: 20px; }
         
-        /* Capa para evitar clics externos */
-        .video-overlay { position: absolute; top: 35px; left: 0; width: 100%; height: calc(100% - 35px); z-index: 10; background: rgba(0,0,0,0); }
-        
-        iframe { width: 100%; aspect-ratio: 9/16; border-radius: 20px; border: 2px solid #2a2e3d; background: #000; }
+        /* TEXTOS */
+        p, li { color: #ccc; font-size: 13px; line-height: 1.6; list-style: none; padding: 0; margin: 10px 0; }
+        b { color: var(--oro); font-size: 11px; display: block; margin-bottom: 2px; }
+        .consagracion { font-style: italic; color: var(--oro); text-align: center; padding: 15px; border-top: 1px solid #222; margin-top: 15px; font-size: 12px; }
 
-        .btn-ritual { width: 100%; border: 1px solid var(--oro); color: var(--oro); padding: 12px; background: transparent; border-radius: 8px; margin-bottom: 20px; cursor: pointer; font-size: 12px; text-transform: uppercase; }
-        .insta-tag { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: #fff; padding: 8px 15px; border-radius: 20px; text-decoration: none; font-weight: bold; display: inline-block; margin-top: 10px; }
+        /* VIDEOS */
+        .video-container { margin: 30px auto; text-align: center; position: relative; }
+        .video-title { color: var(--oro); font-size: 10px; letter-spacing: 1px; display: block; margin-bottom: 10px; font-weight: bold; }
+        iframe { width: 100%; aspect-ratio: 9/16; border-radius: 15px; border: 1px solid #333; }
+        .video-blocker { position: absolute; top: 25px; left: 0; width: 100%; height: calc(100% - 25px); z-index: 5; }
+
+        .insta-btn { background: linear-gradient(45deg, #f09433, #bc1888); color: white; padding: 8px 15px; border-radius: 20px; text-decoration: none; display: inline-block; margin: 10px 0; font-size: 12px; }
     </style>
 </head>
 <body>
 
-    <header><h1>Taller Péndulo Express</h1></header>
+    <div id="login-screen">
+        <div class="login-box">
+            <h1>Péndulo Express</h1>
+            <h2>AULA VIRTUAL</h2>
+            <input type="text" id="userInput" placeholder="Usuario">
+            <input type="password" id="passInput" placeholder="Contraseña">
+            <button onclick="login()">INGRESAR</button>
+        </div>
+    </div>
 
-    <nav>
-        <button onclick="openTab('materiales', this)" class="active">Materiales</button>
-        <button onclick="openTab('limpieza', this)">Limpieza</button>
-        <button onclick="openTab('funcionamiento', this)">Funcionamiento</button>
-        <button onclick="openTab('chakras', this)">Chakras</button>
-        <button onclick="openTab('biografia', this)">Mi Biografía</button>
-    </nav>
+    <div id="main-content">
+        <nav id="tabs">
+            <button onclick="showTab('materiales', this)" class="active">Materiales</button>
+            <button onclick="showTab('limpieza', this)">Limpieza</button>
+            <button onclick="showTab('espacio', this)">Espacio Sagrado</button>
+            <button onclick="showTab('funcionamiento', this)">Funcionamiento</button>
+            <button onclick="showTab('chakras', this)">Chakras</button>
+            <button onclick="showTab('biografia', this)">Mi Biografía</button>
+        </nav>
 
-    <div class="content">
-        <div id="materiales" class="tab-content active">
-            <div class="card-aula">
+        <div class="content">
+            <div id="materiales" class="tab-content active">
                 <h2>Materiales de Trabajo</h2>
-                <h3>Péndulo:</h3><p>Cristal, Madera u Orgonita. Elige el que resuene contigo.</p>
-                <h3>Ambiente:</h3><p>Lugar tranquilo y armonioso para trabajar.</p>
-                <h3>Apoyo:</h3><p>Mesa o lugar de apoyo para estar cómodo.</p>
-                <h3>Registro:</h3><p>Lápiz negro y papel (para trabajos a distancia).</p>
-                <div class="video-wrapper">
-                    <span class="video-label">Video: Introducción y Materiales</span>
-                    <div class="video-overlay"></div>
+                <div class="info-card">
+                    <p><b>PÉNDULO:</b> Cristal, Madera u Orgonita. Elige el que resuene contigo.</p>
+                    <p><b>AMBIENTE:</b> Lugar tranquilo y armonioso para trabajar.</p>
+                    <p><b>APOYO:</b> Mesa o lugar de apoyo para estar cómodo.</p>
+                    <p><b>REGISTRO:</b> Lápiz negro y papel (para trabajos a distancia).</p>
+                    <p><b>ARMONIZACIÓN:</b> Música de meditación para abrir el espacio sagrado.</p>
+                </div>
+                <div class="video-container">
+                    <span class="video-title">VIDEO: INTRODUCCIÓN Y MATERIALES</span>
+                    <div class="video-blocker"></div>
                     <iframe src="https://drive.google.com/file/d/1XpYx-3-9u6XvH6vG_YyS8n-Tf_7z9n-S/preview"></iframe>
                 </div>
             </div>
-        </div>
 
-        <div id="limpieza" class="tab-content">
-            <div class="card-aula">
+            <div id="limpieza" class="tab-content">
                 <h2>Limpieza y Consagración</h2>
-                <button class="btn-ritual">VER RITUAL Y FRASE DE CONSAGRACIÓN</button>
-                <p>La forma más rápida es con <b>Sahumerio</b>. El humo debe envolver al péndulo por completo.</p>
-                <ul>
-                    <li>Mirar hacia el Este.</li>
-                    <li>Poner el péndulo entre las manos en forma de rezo.</li>
-                    <li>Llevarlo a la nariz, inspirar y exhalar 3 veces.</li>
-                </ul>
-                <p style="font-style: italic; color: var(--oro); font-size: 13px; text-align: center; margin-top: 20px;">"A partir de este momento te consagro para que trabajes en la luz..."</p>
-                <div class="video-wrapper">
-                    <span class="video-label">Video: Técnica de Limpieza</span>
-                    <div class="video-overlay"></div>
+                <div class="info-card">
+                    <p>La forma más rápida es con <b>Sahumerio</b>. El humo debe envolver al péndulo por completo desde abajo hacia arriba.</p>
+                    <ul>
+                        <li>✦ Mirar hacia el Este.</li>
+                        <li>✦ Poner el péndulo entre las manos en forma de rezo.</li>
+                        <li>✦ Llevarlo a la nariz, inspirar y exhalar 3 veces.</li>
+                        <li>✦ Llevarlo al entrecejo y luego al corazón.</li>
+                    </ul>
+                    <div class="consagracion">
+                        "A partir de este momento te consagro para que trabajes en la luz, muestres siempre la verdad..."
+                    </div>
+                </div>
+                <div class="video-container">
+                    <span class="video-title">VIDEO: TÉCNICA DE LIMPIEZA</span>
+                    <div class="video-blocker"></div>
                     <iframe src="https://drive.google.com/file/d/1B-zK-mE4-X9n7-L6z-Z-f4-V-X-v-X/preview"></iframe>
                 </div>
             </div>
-        </div>
 
-        <div id="funcionamiento" class="tab-content">
-            <div class="card-aula">
-                <h2>Funcionamiento</h2>
-                <p>Aquí aprenderás a establecer tu código personal de comunicación con el péndulo.</p>
-                
-                <div class="video-wrapper">
-                    <span class="video-label">Video 1: El código del Sí y No</span>
-                    <div class="video-overlay"></div>
+            <div id="espacio" class="tab-content">
+                <h2>Espacio Sagrado y Protección</h2>
+                <div class="info-card">
+                    <p>Es fundamental proteger el lugar antes de cualquier trabajo. Puedes utilizar el <b>Símbolo de Pentagrama o Tetragrámaton</b>.</p>
+                    <center><img src="https://images.squarespace-cdn.com/content/v1/586026859f74567c9d194519/1498664166667-9WNZPZZ2Y8Z9O2O2Z9Z9/Tetragrámaton.jpg" width="100" style="margin:15px; border-radius:10px"></center>
+                </div>
+                <div class="video-container">
+                    <span class="video-title">VIDEO: PROTECCIÓN ENERGÉTICA</span>
+                    <div class="video-blocker"></div>
+                    <iframe src="https://drive.google.com/file/d/1XpYx-3-9u6XvH6vG_YyS8n-Tf_7z9n-S/preview"></iframe>
+                </div>
+            </div>
+
+            <div id="funcionamiento" class="tab-content">
+                <h2>Funcionamiento del Péndulo</h2>
+                <div class="info-card">
+                    <p><b>El lenguaje del Péndulo:</b> Es un puente entre la mente consciente e inconsciente.</p>
+                    <p><b>Sintonización:</b> Para que responda correctamente, es vital tener una <b>actitud neutral</b>.</p>
+                    <p><b>Reglas de Oro:</b> No utilizar si consumiste alcohol, medicamentos o estás muy cansada.</p>
+                </div>
+                <div class="video-container">
+                    <span class="video-title">VIDEO 1: MOVIMIENTOS Y SINTONIZACIÓN</span>
+                    <div class="video-blocker"></div>
                     <iframe src="https://drive.google.com/file/d/1B-zK-mE4-X9n7-L6z-Z-f4-V-X-v-X/preview"></iframe>
                 </div>
-
-                <div class="video-wrapper">
-                    <span class="video-label">Comunicación con el péndulo</span>
-                    <div class="video-overlay"></div>
+                <div class="video-container">
+                    <span class="video-title">VIDEO 2: COMUNICACIÓN CON EL PÉNDULO</span>
+                    <div class="video-blocker"></div>
                     <iframe src="https://www.youtube.com/embed/aJMlz0t79ZI?controls=0&rel=0&modestbranding=1"></iframe>
                 </div>
             </div>
-        </div>
 
-        <div id="chakras" class="tab-content">
-            <div class="card-aula">
-                <h2>Testeo de Chakras</h2>
-                <p>Interpretación de los giros para diagnosticar el estado energético.</p>
-                
-                <div class="video-wrapper">
-                    <span class="video-label">Video 1: Testeo</span>
-                    <div class="video-overlay"></div>
-                    <iframe src="https://drive.google.com/file/d/1hI271pPlIsBm_0SE279prsdvxaTsWexf/preview"></iframe>
+            <div id="chakras" class="tab-content">
+                <h2>Armonización de Chakras</h2>
+                <div class="info-card">
+                    <p><b>SENTIDO HORARIO:</b> Chakra sano.</p>
+                    <p><b>SENTIDO ANTI-HORARIO:</b> Bloqueo o fuga.</p>
+                    <p><b>SIN MOVIMIENTO:</b> Energía estancada.</p>
                 </div>
-
-                <div class="video-wrapper">
-                    <span class="video-label">Video 2: Armonización</span>
-                    <div class="video-overlay"></div>
-                    <iframe src="https://drive.google.com/file/d/1V-X-v-X-z-Z-f4-L6z-Z-mE4-X9n7-L/preview"></iframe>
-                </div>
-
-                <div class="video-wrapper">
-                    <span class="video-label">Video 3: Cierre de Sesión</span>
-                    <div class="video-overlay"></div>
-                    <iframe src="https://drive.google.com/file/d/1B-zK-mE4-X9n7-L6z-Z-f4-V-X-v-X/preview"></iframe>
-                </div>
+                <div class="video-container"><span class="video-title">VIDEO 1: PRÁCTICA DE TESTEO</span><div class="video-blocker"></div><iframe src="https://drive.google.com/file/d/1hI271pPlIsBm_0SE279prsdvxaTsWexf/preview"></iframe></div>
+                <div class="video-container"><span class="video-title">VIDEO 2: ARMONIZACIÓN</span><div class="video-blocker"></div><iframe src="https://drive.google.com/file/d/1XpYx-3-9u6XvH6vG_YyS8n-Tf_7z9n-S/preview"></iframe></div>
+                <div class="video-container"><span class="video-title">VIDEO 3: CIERRE</span><div class="video-blocker"></div><iframe src="https://drive.google.com/file/d/1B-zK-mE4-X9n7-L6z-Z-f4-V-X-v-X/preview"></iframe></div>
             </div>
-        </div>
 
-        <div id="biografia" class="tab-content">
-            <div class="card-aula" style="text-align:center">
-                <h2>Mi Biografía</h2>
-                <p style="color:var(--oro); font-weight:bold; font-size: 18px;">Jacqueline Vanesa Pignatelli</p>
-                <a href="https://instagram.com/nave.arcturiana" target="_blank" class="insta-tag">@nave.arcturiana</a>
-                <div style="text-align:left; margin-top:20px; display: inline-block;">
-                    <p>✦ Terapeuta Holística Matriculada.</p>
-                    <p>✦ Canalizadora de la técnica de Cirugía Astral.</p>
-                    <p>✦ Lectora de Registros Akáshicos.</p>
+            <div id="biografia" class="tab-content">
+                <div class="info-card" style="text-align:center">
+                    <h2>Mi Biografía</h2>
+                    <p style="color:var(--oro); font-weight:bold; font-size: 16px;">Jacqueline Vanesa Pignatelli</p>
+                    <a href="https://instagram.com/nave.arcturiana" class="insta-btn">@nave.arcturiana</a>
+                    <div style="text-align:left; margin-top:15px; border-top: 1px solid #333; padding-top:10px">
+                        <p>✦ Terapeuta Holística Matriculada.</p>
+                        <p>✦ Canalizadora de Cirugía Astral Cristal Arcturiano.</p>
+                        <p>✦ Canalizadora de Técnica Reiki Sandalfon.</p>
+                        <p>✦ Comunicación Mediumnica / Enlazadora de mundos.</p>
+                        <p>✦ Instructora de Chikung.</p>
+                        <p>✦ Lectora de Registros Akashicos / Mesa Cuántica.</p>
+                        <p>✦ Profesora de Yoga de la Música.</p>
+                        <p>✦ Maestra de Reiki (Usui, Karuna, Jin Kei Do, Chamánico).</p>
+                        <p>✦ Terapeuta Floral y del Sonido.</p>
+                        <p>✦ Terapeuta de Técnicas Arcturianas y Pleyadianas.</p>
+                        <p>✦ Diseño de ecosistemas de aprendizaje (LMS).</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        function openTab(id, btn) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tab-content");
-            for (i = 0; i < tabcontent.length; i++) { tabcontent[i].classList.remove("active"); }
-            tablinks = document.querySelectorAll("nav button");
-            for (i = 0; i < tablinks.length; i++) { tablinks[i].classList.remove("active"); }
-            document.getElementById(id).classList.add("active");
+        function login() {
+            const u = document.getElementById('userInput').value.toLowerCase();
+            const p = document.getElementById('passInput').value.toLowerCase();
+            if(u === 'pendulo' && p === 'prueba') {
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+            } else { alert('Credenciales incorrectas'); }
+        }
+        function showTab(id, btn) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
             btn.classList.add('active');
             window.scrollTo(0,0);
         }
