@@ -18,7 +18,7 @@
         header h1 { color: var(--oro); font-size: 30px; letter-spacing: 3px; margin: 0; }
         header p { color: var(--cyan); text-transform: uppercase; letter-spacing: 5px; font-size: 12px; }
 
-        nav { display: flex; justify-content: center; gap: 5px; padding: 15px; }
+        nav { display: flex; justify-content: center; flex-wrap: wrap; gap: 5px; padding: 15px; }
         nav button { background: none; border: 1px solid #333; color: #888; padding: 8px 12px; cursor: pointer; text-transform: uppercase; font-size: 10px; }
         nav button.active { border-color: var(--oro); color: var(--oro); }
 
@@ -26,13 +26,18 @@
         .tab-content { display: none; }
         .tab-content.active { display: block; }
 
-        h2 { color: var(--oro); font-size: 22px; text-align: center; margin-bottom: 30px; }
+        h2 { color: var(--oro); font-size: 22px; text-align: center; margin-bottom: 30px; border-bottom: 1px solid #222; padding-bottom: 10px; }
+        h3 { color: var(--cyan); font-size: 18px; margin-top: 25px; }
 
-        /* CONTENEDOR VIDEO VERTICAL SEGURO */
+        .item-list { list-style: none; padding: 0; }
+        .item-list li { margin: 12px 0; display: flex; align-items: center; }
+        .item-list li::before { content: "✧"; color: var(--oro); margin-right: 10px; }
+
+        /* VIDEO VERTICAL */
         .video-wrapper {
             position: relative;
-            width: 280px; /* Ancho fijo vertical */
-            height: 500px; /* Alto fijo vertical */
+            width: 280px;
+            height: 500px;
             margin: 20px auto;
             border: 2px solid var(--oro);
             border-radius: 15px;
@@ -40,32 +45,26 @@
             background: #000;
         }
 
-        /* CAPA DE LA IMAGEN MINIATURA (Encima de todo) */
         .video-poster {
             position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
             object-fit: cover;
-            z-index: 20; /* Por encima del overlay y del iframe */
+            z-index: 20;
             cursor: pointer;
         }
 
-        /* CAPA INVISIBLE DE SEGURIDAD */
         .video-overlay {
             position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
             z-index: 10;
-            background: rgba(0,0,0,0);
         }
 
-        .video-wrapper iframe {
-            width: 100%; height: 100%;
-            border: none;
-        }
+        .video-wrapper iframe { width: 100%; height: 100%; border: none; }
 
         .btn-ritual { background: none; border: 1px solid var(--oro); color: var(--oro); width: 100%; padding: 12px; cursor: pointer; margin-bottom: 20px; }
-        .box-ritual { display: none; border: 1px solid #333; padding: 20px; background: #0c0e15; margin-bottom: 20px; }
+        .box-ritual { display: none; border: 1px solid #333; padding: 20px; background: #0c0e15; margin-bottom: 20px; border-radius: 8px; }
     </style>
 </head>
 <body oncontextmenu="return false;">
@@ -88,48 +87,97 @@
     <nav>
         <button onclick="showTab('materiales', this)" class="active">Materiales</button>
         <button onclick="showTab('limpieza', this)">Limpieza</button>
-        <button onclick="showTab('proteccion', this)">Protección</button>
+        <button onclick="showTab('chakras', this)">Chakras</button>
         <button onclick="showTab('testeo', this)">Testeo</button>
-        <button onclick="showTab('glosario', this)">Glosario</button>
+        <button onclick="showTab('glosario', this)">Glosario / Movimientos</button>
     </nav>
 
     <div class="aula-content">
+        
         <div id="materiales" class="tab-content active">
             <h2>Materiales de Trabajo</h2>
+            <ul class="item-list">
+                <li>Péndulo (Cristal, Madera u Orgonita).</li>
+                <li>Lugar tranquilo y sin corrientes de aire.</li>
+                <li>Lápiz negro y papel para diagramas.</li>
+            </ul>
             <div class="video-wrapper">
-                <img src="materiales.jpg" class="video-poster" onclick="playVideo(this)" alt="Miniatura">
+                <img src="materiales.jpg" class="video-poster" onclick="this.style.display='none'" alt="Miniatura">
                 <div class="video-overlay"></div>
-                <iframe src="https://www.youtube.com/embed/ID_VIDEO_1?controls=1&rel=0&modestbranding=1&showinfo=0" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/IV0Aa1k0gX0" allowfullscreen></iframe>
             </div>
         </div>
 
         <div id="limpieza" class="tab-content">
             <h2>Limpieza y Consagración</h2>
-            <button class="btn-ritual" onclick="toggleRitual()">Ver Ritual de Consagración</button>
-            <div id="ritual-box" class="box-ritual">
-                <p style="font-style: italic; color: var(--oro);">"A partir de este momento te consagro para que trabajes en la luz..."</p>
-            </div>
             <div class="video-wrapper">
-                <img src="limpieza.jpg" class="video-poster" onclick="playVideo(this)" alt="Miniatura">
+                <img src="limpieza.jpg" class="video-poster" onclick="this.style.display='none'" alt="Miniatura">
                 <div class="video-overlay"></div>
-                <iframe src="https://www.youtube.com/embed/ID_VIDEO_2?controls=1&rel=0&modestbranding=1" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/eduRIA3ceis" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div id="chakras" class="tab-content">
+            <h2>Armonización de Chakras</h2>
+            <p>A continuación, los 3 videos para el trabajo sobre centros energéticos:</p>
+            
+            <div class="video-wrapper">
+                <img src="chakra1.jpg" class="video-poster" onclick="this.style.display='none'">
+                <iframe src="https://www.youtube.com/embed/NJ-5aywOkAI"></iframe>
+            </div>
+            
+            <div class="video-wrapper">
+                <img src="chakra2.jpg" class="video-poster" onclick="this.style.display='none'">
+                <iframe src="https://www.youtube.com/embed/LngEN9cmHRg"></iframe>
+            </div>
+
+            <div class="video-wrapper">
+                <img src="chakra3.jpg" class="video-poster" onclick="this.style.display='none'">
+                <iframe src="https://www.youtube.com/embed/WymTOGzcohY"></iframe>
             </div>
         </div>
 
         <div id="testeo" class="tab-content">
             <h2>Metodología de Testeo</h2>
             <div class="video-wrapper">
-                <img src="testeo.jpg" class="video-poster" onclick="playVideo(this)" alt="Miniatura">
+                <img src="testeo.jpg" class="video-poster" onclick="this.style.display='none'">
                 <div class="video-overlay"></div>
-                <iframe src="https://www.youtube.com/embed/ID_VIDEO_3"></iframe>
+                <iframe src="https://www.youtube.com/embed/R24gh8hWlu0" allowfullscreen></iframe>
             </div>
-            </div>
+        </div>
 
         <div id="glosario" class="tab-content">
-            <h2>Glosario de Movimientos</h2>
-            <div style="display: flex; gap: 10px; justify-content: center;">
-                <img src="giros.png" style="width: 45%; border: 1px solid #333;">
-                <img src="lineas.png" style="width: 45%; border: 1px solid #333;">
+            <h2>Funcionamiento del Péndulo</h2>
+            
+            <h3>Los Movimientos del Péndulo</h3>
+            <p>El péndulo es una extensión de nuestro sistema nervioso. Sus movimientos se dividen principalmente en:</p>
+            <ul class="item-list">
+                <li><strong>Giro Horario (Derecha):</strong> Significa "SÍ", energía positiva, apertura o activación.</li>
+                <li><strong>Giro Anti-horario (Izquierda):</strong> Significa "NO", energía negativa, bloqueo o necesidad de limpieza.</li>
+                <li><strong>Oscilación Lineal:</strong> Indica duda, una respuesta neutral o que la pregunta debe ser reformulada.</li>
+                <li><strong>Péndulo Inmóvil:</strong> Falta de energía o permiso para testear en ese momento.</li>
+            </ul>
+
+            <h3>Información Adicional de los Hemisferios</h3>
+            <p>Recordemos que el uso del péndulo conecta ambos hemisferios:</p>
+            <ul class="item-list">
+                <li><strong>Hemisferio Izquierdo:</strong> Lógica, estructura y el lenguaje (nuestra parte analítica).</li>
+                <li><strong>Hemisferio Derecho:</strong> Intuición, conexión espiritual y visualización.</li>
+            </ul>
+
+            <div class="video-wrapper">
+                <img src="glosario1.jpg" class="video-poster" onclick="this.style.display='none'">
+                <iframe src="https://www.youtube.com/embed/Xg2_Wo2K-zA"></iframe>
+            </div>
+
+            <div class="video-wrapper">
+                <img src="glosario2.jpg" class="video-poster" onclick="this.style.display='none'">
+                <iframe src="https://www.youtube.com/embed/aJMlz0t79ZI"></iframe>
+            </div>
+
+            <div style="display: flex; gap: 10px; justify-content: center; margin-top: 20px;">
+                <img src="giros.png" style="width: 45%; border: 1px solid #333; border-radius: 5px;">
+                <img src="lineas.png" style="width: 45%; border: 1px solid #333; border-radius: 5px;">
             </div>
         </div>
     </div>
@@ -148,16 +196,6 @@
             document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
             btn.classList.add('active');
-        }
-
-        // Esta función hace que al tocar la imagen, esta desaparezca y se vea el video
-        function playVideo(imgElement) {
-            imgElement.style.display = 'none';
-        }
-
-        function toggleRitual() {
-            const box = document.getElementById('ritual-box');
-            box.style.display = (box.style.display === 'block') ? 'none' : 'block';
         }
     </script>
 </body>
