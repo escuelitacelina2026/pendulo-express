@@ -58,7 +58,28 @@
         .item-list { list-style: none; padding: 0; }
         .item-list li { margin: 18px 0; color: #e0e0e0; display: flex; align-items: center; font-size: 16px; }
         .item-list li::before { content: "✧"; color: var(--oro); margin-right: 15px; font-weight: bold; }
+/* DISEÑO DEL BOTÓN DE INSTAGRAM */
+.insta-tag { 
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); 
+    color: #ffffff !important; 
+    padding: 10px 20px; 
+    border-radius: 30px; 
+    text-decoration: none; 
+    font-weight: bold; 
+    display: inline-block; 
+    margin: 15px 0;
+    font-size: 14px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
 
+/* MARCO PARA LA BIOGRAFÍA */
+.card-bio {
+    background: rgba(180, 151, 90, 0.05);
+    border: 1px solid rgba(180, 151, 90, 0.2);
+    padding: 30px;
+    border-radius: 15px;
+    margin-top: 20px;
+}
         /* MANUAL Y BIO */
         .manual-texto { line-height: 1.8; color: #ccc; font-size: 16px; }
         .manual-texto h3 { color: var(--oro); margin-top: 30px; border-left: 3px solid var(--oro); padding-left: 15px; }
@@ -243,12 +264,16 @@
                     </div>
                 </div>
             </div>
-    <div id="biografia" class="tab-content">
-    <div class="card-aula" style="text-align:center; padding: 30px; background: rgba(180, 151, 90, 0.05); border: 1px solid #333; border-radius: 12px;">
-        <h2>Mi Biografía</h2>
-        <p style="color:var(--oro); font-weight:bold; font-size: 18px; margin-bottom: 10px;">Jacqueline Vanesa Pignatelli</p>
-        <a href="https://instagram.com/nave.arcturiana" target="_blank" class="insta-tag">@nave.arcturiana</a>
-        <div style="text-align:left; margin-top:20px; border-top: 1px solid #333; padding-top:15px; line-height: 1.8; color: #ccc;">
+   <div id="biografia" class="tab-content">
+    <div class="card-bio" style="text-align:center">
+        <h2 style="border:none; margin-bottom:10px;">Mi Biografía</h2>
+        <p style="color:var(--oro); font-weight:bold; font-size: 20px; margin: 0;">Jacqueline Vanesa Pignatelli</p>
+        
+        <a href="https://instagram.com/nave.arcturiana" target="_blank" class="insta-tag">
+            @nave.arcturiana
+        </a>
+
+        <div style="text-align:left; margin-top:20px; border-top: 1px solid #333; padding-top:20px; line-height: 1.8; color: #ccc;">
             <p>✦ Terapeuta Holística Matriculada.</p>
             <p>✦ Canalizadora de Cirugía Astral Cristal Arcturiano.</p>
             <p>✦ Canalizadora de Técnica Reiki Sandalfon (Sanación del Niño interior).</p>
