@@ -110,6 +110,12 @@
         
         .info-box { background: rgba(180, 151, 90, 0.05); padding: 25px; border-radius: 12px; border-left: 4px solid var(--oro); margin-bottom: 25px; line-height: 1.7; color: #ccc; font-size: 15px; text-align: left; }
         .info-box strong { color: var(--oro); }
+
+        /* ESTILO BIOGRAFÍA */
+        .bio-name-container { text-align: center; margin-bottom: 5px; }
+        .bio-list { list-style: none; padding: 0; }
+        .bio-list li { margin: 10px 0; color: #ddd; font-size: 14px; border-bottom: 1px solid #222; padding-bottom: 8px; text-align: left; }
+        .bio-list li::before { content: "✦"; color: var(--oro); margin-right: 10px; }
     </style>
 </head>
 <body oncontextmenu="return false;">
@@ -118,7 +124,7 @@
         <div class="login-box">
             <h1 style="color: var(--oro); font-size: 22px; margin-bottom: 5px; font-family: serif;">PÉNDULO EXPRESS</h1>
             <p style="color: var(--cyan); font-size: 10px; letter-spacing: 4px; margin-bottom: 25px;">AULA VIRTUAL</p>
-            <input type="text" id="user" placeholder="Usuario">
+            <input type="text" id="user" placeholder="Usuario" autocomplete="off">
             <input type="password" id="pass" placeholder="Contraseña">
             <button class="btn-ingresar" onclick="checkAccess()">INGRESAR</button>
         </div>
@@ -136,6 +142,7 @@
             <button onclick="showTab('proteccion', this)">Espacio Sagrado</button>
             <button onclick="showTab('funcionamiento', this)">Funcionamiento</button>
             <button onclick="showTab('chakras', this)">Chakras</button>
+            <button onclick="showTab('biografia', this)">Mi Biografía</button>
         </nav>
 
         <div class="aula-content">
@@ -235,19 +242,55 @@
                 </div>
             </div>
 
+            <div id="biografia" class="tab-content">
+                <h2>Mi Biografía</h2>
+                <div class="bio-name-container">
+                    <span style="color: var(--oro); font-size: 20px; font-family: serif;">Jacqueline Vanesa Pignatelli</span>
+                </div>
+                <p style="text-align:center; color: var(--cyan); font-size: 11px; margin-bottom: 20px;">@nave.arcturiana</p>
+                <ul class="bio-list">
+                    <li>Terapeuta Holística Matriculada.</li>
+                    <li>Canalizadora de Cirugía Astral Cristal Arcturiano.</li>
+                    <li>Canalizadora de Técnica Reiki Sandalfon (Sanación del Niño interior).</li>
+                    <li>Comunicación Mediumnica / Enlazadora de mundos.</li>
+                    <li>Instructora de Chikung.</li>
+                    <li>Lectora de Registros Akashicos / Operadora de Mesa Cuántica Energética.</li>
+                    <li>Profesora de Yoga de la Música.</li>
+                    <li>Maestra de Reiki (Usui, Karuna, Jin Kei Do, Chamánico).</li>
+                    <li>Terapeuta Floral, Auriculoterapeuta, del Sonido y Vibracional.</li>
+                    <li>Terapeuta de Técnicas Arcturianas, Pleyadianas y Transgeneracional.</li>
+                    <li>Diseño y desarrollo de ecosistemas de aprendizaje (LMS) con enfoque holístico.</li>
+                </ul>
+            </div>
+
         </div>
     </div>
 
     <script>
     function checkAccess() {
+        // Obtenemos los valores y quitamos cualquier espacio en blanco accidental
         var u = document.getElementById('user').value.toLowerCase().trim();
         var p = document.getElementById('pass').value.trim();
+        
+        // Verificación reforzada
         if(u === "pendulo" && p === "prueba") {
+            // Ocultamos la pantalla de login
             document.getElementById('login-screen').style.display = 'none';
+            // Mostramos el aula
             document.getElementById('aula-completa').style.display = 'block';
+            // Nos aseguramos de estar arriba de todo
             window.scrollTo(0,0);
-        } else { alert("Usuario o contraseña incorrectos."); }
+        } else { 
+            alert("Acceso denegado. Verifica que el usuario sea 'pendulo' y la clave 'prueba'"); 
+        }
     }
+
+    // Permitir ingresar presionando la tecla "Enter"
+    document.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            checkAccess();
+        }
+    });
 
     function showTab(tabId, btn) {
         var tabs = document.getElementsByClassName('tab-content');
@@ -264,13 +307,8 @@
         box.style.display = (box.style.display === 'block') ? 'none' : 'block';
     }
 
-    // ESTA ES LA FUNCIÓN CON SEGURIDAD AÑADIDA
     function playDirect(container, videoId) {
-        // 1. Quitamos el borde del contenedor para que se vea limpio
         container.style.border = "none";
-        
-        // 2. Insertamos el escudo invisible arriba y el iframe restringido
-        // ?modestbranding=1 (quita logo) &fs=0 (quita pantalla completa) &rel=0 (sin sugerencias)
         container.innerHTML = `
             <div style="position:relative; width:100%; height:100%;">
                 <div style="position:absolute; top:0; left:0; width:100%; height:60px; z-index:10; background:transparent;"></div>
