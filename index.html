@@ -3,82 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Péndulo Express - Nave Arcturiana</title>
+    <title>Taller de Péndulo Express - Aula Virtual</title>
     <style>
         :root { 
             --oro: #b4975a; 
             --oro-brillo: rgba(180, 151, 90, 0.4);
-            --fondo: #05060a; 
-            --caja: rgba(15, 17, 26, 0.95); 
+            --fondo: #0a0b10; 
+            --caja: #0f111a; 
             --cyan: #00bcd4; 
         }
         
         body { 
             background-color: var(--fondo); 
-            background-image: 
-                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
-                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
-                radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px);
-            background-size: 550px 550px, 350px 350px, 250px 250px;
             color: #ffffff; 
-            font-family: 'Segoe UI', sans-serif; 
-            margin: 0; padding: 0;
-            user-select: none;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+            margin: 0; 
+            padding: 0;
+            overflow-x: hidden; 
         }
 
-        /* LOGIN */
-        #login-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; justify-content: center; align-items: center; z-index: 99999; }
-        .login-box { border: 1px solid var(--oro); padding: 30px; border-radius: 15px; width: 85%; max-width: 320px; background: #0d0d0d; text-align: center; }
-        input { display: block; width: 100%; box-sizing: border-box; margin: 15px auto; padding: 12px; background: #000; border: 1px solid #333; color: #fff; text-align: center; border-radius: 5px; }
-        .btn-ingresar { background: var(--oro); color: #000; border: none; padding: 14px; width: 100%; cursor: pointer; font-weight: bold; border-radius: 5px; text-transform: uppercase; }
+        /* LOGIN RESPONSIVE */
+        #login-screen { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: #000000; display: flex; justify-content: center; align-items: center; z-index: 99999; 
+        }
+        .login-box { 
+            border: 1px solid var(--oro); padding: 30px; border-radius: 15px; 
+            width: 85%; max-width: 320px; background: #0d0d0d; text-align: center;
+            box-shadow: 0 0 30px rgba(180, 151, 90, 0.2);
+        }
+        input { display: block; width: 100%; box-sizing: border-box; margin: 15px auto; padding: 12px; background: #000; border: 1px solid #333; color: #fff; text-align: center; border-radius: 5px; font-size: 16px; }
+        .btn-ingresar { 
+            background: var(--oro); color: #000; border: none; padding: 14px; width: 100%; 
+            cursor: pointer; font-weight: bold; border-radius: 5px; text-transform: uppercase;
+            transition: 0.3s;
+        }
 
         #aula-completa { display: none; width: 100%; }
 
-        header { padding: 40px 15px 10px; text-align: center; }
-        header h1 { color: var(--oro); font-size: 24px; letter-spacing: 2px; margin: 0; font-family: serif; }
-        header p { color: var(--cyan); letter-spacing: 4px; font-size: 10px; margin-top: 10px; }
+        header { padding: 40px 15px 10px 15px; text-align: center; }
+        header h1 { color: var(--oro); font-size: clamp(20px, 6vw, 32px); letter-spacing: 2px; margin: 0; font-family: serif; }
+        header p { color: var(--cyan); text-transform: uppercase; letter-spacing: 4px; font-size: 10px; margin-top: 10px; }
 
-        /* NAVEGACIÓN */
-        nav { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; padding: 15px; max-width: 800px; margin: auto; }
-        nav button { background: rgba(255,255,255,0.03); border: 1px solid #333; color: #888; padding: 10px; cursor: pointer; text-transform: uppercase; font-size: 9px; border-radius: 4px; flex-grow: 1; transition: 0.3s; }
+        /* MENU RESPONSIVE */
+        nav { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; padding: 15px; }
+        nav button { 
+            background: rgba(255,255,255,0.03); border: 1px solid #333; color: #888; 
+            padding: 10px 15px; cursor: pointer; text-transform: uppercase; font-size: 10px; 
+            transition: 0.4s; border-radius: 4px; flex-grow: 1; max-width: 150px;
+        }
         nav button.active { border-color: var(--oro); color: var(--oro); background: rgba(180, 151, 90, 0.1); }
 
-        .aula-content { max-width: 800px; margin: 10px auto 80px; background: var(--caja); padding: 25px; border-radius: 12px; width: 95%; box-sizing: border-box; backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.05); }
+        /* CONTENIDO CENTRALIZADO */
+        .aula-content { 
+            max-width: 800px; 
+            margin: 10px auto 40px auto; 
+            background: var(--caja); 
+            padding: 25px 20px; 
+            border-radius: 12px; 
+            width: 90%; 
+            box-sizing: border-box;
+        }
+        
         .tab-content { display: none; animation: fadeIn 0.5s; }
         .tab-content.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
-        h2 { color: var(--oro); font-size: 20px; text-align: center; margin-bottom: 20px; font-family: serif; border-bottom: 1px solid #222; padding-bottom: 15px; }
+        h2 { color: var(--oro); font-size: 22px; text-align: center; margin-bottom: 25px; font-family: serif; border-bottom: 1px solid #222; padding-bottom: 15px; }
         
-        .item-list { list-style: none; padding: 0; }
-        .item-list li { margin: 12px 0; color: #e0e0e0; display: flex; font-size: 15px; line-height: 1.5; }
-        .item-list li::before { content: "✧"; color: var(--oro); margin-right: 10px; }
+        .item-list { list-style: none; padding: 0; text-align: left; }
+        .item-list li { margin: 15px 0; color: #e0e0e0; display: flex; align-items: flex-start; font-size: 16px; line-height: 1.6; }
+        .item-list li::before { content: "✧"; color: var(--oro); margin-right: 12px; font-weight: bold; }
 
-        .btn-ritual { background: rgba(180, 151, 90, 0.05); border: 1px solid var(--oro); color: var(--oro); width: 100%; padding: 15px; cursor: pointer; border-radius: 8px; margin-bottom: 20px; font-weight: bold; }
+        /* VIDEOS ADAPTATIVOS */
+        .video-container { margin: 35px auto; text-align: center; width: 100%; }
+        .video-label { color: var(--oro); font-size: 12px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; display: block; font-weight: bold; }
+        .video-wrapper {
+            position: relative; 
+            width: 100%; 
+            max-width: 280px; 
+            aspect-ratio: 9 / 16; 
+            margin: 0 auto;
+            border: 1px solid rgba(180, 151, 90, 0.3); 
+            border-radius: 20px; 
+            overflow: hidden; 
+            background: #000; 
+            cursor: pointer;
+            background-size: cover; 
+            background-position: center;
+            transition: 0.3s;
+        }
+        .video-wrapper:hover { border-color: var(--oro); transform: scale(1.02); }
+        .play-button {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 70px; height: 70px; background: rgba(180, 151, 90, 0.9);
+            border-radius: 50%; display: flex; justify-content: center; align-items: center; border: 2px solid #fff; z-index: 10;
+        }
+        .play-button::after { content: ""; border-style: solid; border-width: 12px 0 12px 22px; border-color: transparent transparent transparent white; margin-left: 6px; }
+        
+        iframe { width: 100%; height: 100%; border: none; }
 
-        /* VIDEOS */
-        .video-wrapper { position: relative; width: 100%; max-width: 280px; aspect-ratio: 9/16; margin: 20px auto; border: 1px solid var(--oro-brillo); border-radius: 20px; overflow: hidden; background: #000; }
-
-        /* BIO */
-        .bio-header { text-align: center; margin-bottom: 25px; }
-        .bio-name { color: var(--oro); font-size: 22px; margin-bottom: 5px; font-family: serif; display: flex; align-items: center; justify-content: center; gap: 10px; }
-        .bio-list { font-size: 14px; color: #ddd; }
-        .bio-list div { margin-bottom: 8px; padding-left: 20px; position: relative; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 5px; }
-        .bio-list div::before { content: "✦"; position: absolute; left: 0; color: var(--oro); }
-
-        /* BOTONES FLOTANTES */
-        .float-btn { position: fixed; width: 55px; height: 55px; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.5); z-index: 1000; transition: 0.3s; }
-        .whatsapp-btn { bottom: 20px; right: 20px; background: #25d366; }
-        .instagram-btn { bottom: 85px; right: 20px; background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
-        .float-btn svg { width: 30px; height: 30px; fill: white; }
+        .btn-ritual { background: rgba(180, 151, 90, 0.05); border: 1px solid var(--oro); color: var(--oro); width: 100%; padding: 18px; cursor: pointer; text-transform: uppercase; margin-bottom: 20px; border-radius: 8px; font-size: 13px; font-weight: bold; transition: 0.3s; }
+        .btn-ritual:hover { background: rgba(180, 151, 90, 0.15); }
+        
+        .box-ritual { display: none; border: 1px solid #333; padding: 25px; border-radius: 12px; background: #0c0e15; margin-bottom: 30px; line-height: 1.8; text-align: left; }
+        
+        .info-box { background: rgba(180, 151, 90, 0.05); padding: 25px; border-radius: 12px; border-left: 4px solid var(--oro); margin-bottom: 25px; line-height: 1.7; color: #ccc; font-size: 15px; text-align: left; }
+        .info-box strong { color: var(--oro); }
     </style>
 </head>
 <body oncontextmenu="return false;">
 
     <div id="login-screen">
         <div class="login-box">
-            <h1 style="color: var(--oro); font-size: 18px;">NAVE ARCTURIANA</h1>
-            <p style="color: var(--cyan); font-size: 9px; letter-spacing: 3px;">PÉNDULO EXPRESS</p>
+            <h1 style="color: var(--oro); font-size: 22px; margin-bottom: 5px; font-family: serif;">PÉNDULO EXPRESS</h1>
+            <p style="color: var(--cyan); font-size: 10px; letter-spacing: 4px; margin-bottom: 25px;">AULA VIRTUAL</p>
             <input type="text" id="user" placeholder="Usuario">
             <input type="password" id="pass" placeholder="Contraseña">
             <button class="btn-ingresar" onclick="checkAccess()">INGRESAR</button>
@@ -88,124 +127,160 @@
     <div id="aula-completa">
         <header>
             <h1>TALLER DE PÉNDULO EXPRESS</h1>
-            <p>Nave Arcturiana</p>
+            <p>AULA VIRTUAL</p>
         </header>
 
         <nav>
             <button onclick="showTab('materiales', this)" class="active">Materiales</button>
             <button onclick="showTab('limpieza', this)">Limpieza</button>
-            <button onclick="showTab('proteccion', this)">Protección</button>
-            <button onclick="showTab('sintonia', this)">Sintonía</button>
+            <button onclick="showTab('proteccion', this)">Espacio Sagrado</button>
+            <button onclick="showTab('funcionamiento', this)">Funcionamiento</button>
             <button onclick="showTab('chakras', this)">Chakras</button>
-            <button onclick="showTab('bio', this)">Mi Biografía</button>
         </nav>
 
         <div class="aula-content">
             
             <div id="materiales" class="tab-content active">
-                <h2>Materiales</h2>
+                <h2>Materiales de Trabajo</h2>
                 <ul class="item-list">
-                    <li><strong>Péndulo:</strong> Cristal, Madera u Orgonita.</li>
-                    <li>Lugar tranquilo y agua para hidratarte.</li>
+                    <li><strong>Péndulo:</strong> Cristal, Madera u Orgonita. Elige el que resuene contigo.</li>
+                    <li>Lugar tranquilo y armonioso para trabajar.</li>
+                    <li>Mesa o lugar de apoyo para estar cómodo.</li>
+                    <li>Lápiz negro y papel (para trabajos a distancia).</li>
+                    <li>Música de meditación para abrir el espacio sagrado.</li>
                 </ul>
-                <div class="video-wrapper" onclick="playVideo(this, 'IV0Aa1k0gX0')">
-                    <div style="background:#111; width:100%; height:100%; display:flex; justify-content:center; align-items:center; color:var(--oro);">▶ VER INTRODUCCIÓN</div>
+                <div class="video-container">
+                    <span class="video-label">Video: Introducción y Materiales</span>
+                    <div class="video-wrapper" style="background-image: url('materiales.jpg');" onclick="playDirect(this, 'IV0Aa1k0gX0')">
+                        <div class="play-button"></div>
+                    </div>
                 </div>
             </div>
 
             <div id="limpieza" class="tab-content">
                 <h2>Limpieza y Consagración</h2>
-                <button class="btn-ritual" onclick="document.getElementById('rit').style.display='block'">VER FRASE DE CONSAGRACIÓN</button>
-                <div id="rit" style="display:none; background:rgba(0,0,0,0.5); padding:20px; border-radius:10px; margin-bottom:20px; border:1px solid var(--oro); font-style: italic; color: var(--oro); text-align: center;">
-                    "A partir de este momento te consagro para que trabajes en la luz, muestres siempre la verdad, estés en ley, tus respuestas vengan siempre del ser superior y sean sabias, claras, precisas y seguras. Gracias".
+                <button class="btn-ritual" onclick="toggleRitual()">VER RITUAL Y FRASE DE CONSAGRACIÓN</button>
+                <div id="ritual-box" class="box-ritual">
+                    <p>La forma más rápida es con <strong>Sahumerio</strong>. El humo debe envolver al péndulo por completo desde abajo hacia arriba.</p>
+                    <ul style="color: #ccc; padding-left: 20px;">
+                        <li>Mirar hacia el Este.</li>
+                        <li>Poner el péndulo entre las manos en forma de rezo.</li>
+                        <li>Llevarlo a la nariz, inspirar y exhalar 3 veces.</li>
+                        <li>Llevarlo al entrecejo y luego al corazón.</li>
+                    </ul>
+                    <p style="font-style: italic; color: var(--oro); border-top: 1px solid #222; padding-top: 20px; margin-top: 15px;">"A partir de este momento te consagro para que trabajes en la luz, muestres siempre la verdad, estés en ley, tus respuestas vengan siempre del ser superior y sean sabias, claras, precisas y seguras. Gracias".</p>
                 </div>
-                <div class="video-wrapper" onclick="playVideo(this, 'eduRIA3ceis')">
-                   <div style="background:#111; width:100%; height:100%; display:flex; justify-content:center; align-items:center; color:var(--oro);">▶ VER VIDEO LIMPIEZA</div>
+                <div class="video-container">
+                    <span class="video-label">Video: Técnica de Limpieza</span>
+                    <div class="video-wrapper" style="background-image: url('limpieza.jpg');" onclick="playDirect(this, 'eduRIA3ceis')">
+                        <div class="play-button"></div>
+                    </div>
                 </div>
             </div>
 
             <div id="proteccion" class="tab-content">
-                <h2>Espacio Sagrado</h2>
-                <p style="text-align: center; color: #ccc;">Antes de comenzar, visualiza tu espacio protegido.</p>
-                <div style="text-align:center; margin: 20px 0;">
-                    <svg width="150" height="150" viewBox="0 0 100 100">
-                        <circle cx="50" cy="50" r="45" fill="none" stroke="var(--oro)" stroke-width="2"/>
-                        <path d="M50 5 L63 38 L98 38 L70 59 L81 92 L50 72 L19 92 L30 59 L2 38 L37 38 Z" fill="none" stroke="var(--oro)" stroke-width="2"/>
-                    </svg>
+                <h2>Espacio Sagrado y Protección</h2>
+                <div class="info-box">
+                    Es fundamental proteger el lugar antes de cualquier trabajo. Puedes utilizar el <strong>Símbolo de Pentagrama o Tetragrámaton</strong>. Trazamos primero el círculo y luego el pentagrama para sellar el ambiente. Visualiza una luz blanca protectora para sellar tu propia aura.
                 </div>
-                <p style="text-align: center; font-size: 14px; color: var(--cyan);">PROTECCIÓN ACTIVA</p>
+                
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <img src="pentagrama.jpg" alt="Pentagrama de Protección" style="width: 100%; max-width: 250px; border-radius: 10px; border: 1px solid var(--oro); box-shadow: 0 0 15px var(--oro-brillo);">
+                    <p style="color: var(--oro); font-size: 12px; margin-top: 10px; letter-spacing: 1px;">SÍMBOLO DE PROTECCIÓN</p>
+                </div>
+
+                <div class="video-container">
+                    <span class="video-label">Video: Protección Energética</span>
+                    <div class="video-wrapper" style="background-image: url('proteccion.jpg');" onclick="playDirect(this, 'R24gh8hWlu0')">
+                        <div class="play-button"></div>
+                    </div>
+                </div>
             </div>
 
-            <div id="sintonia" class="tab-content">
-                <h2>Sintonización</h2>
-                <div class="video-wrapper" onclick="playVideo(this, 'Xg2_Wo2K-zA')">
-                    <div style="background:#111; width:100%; height:100%; display:flex; justify-content:center; align-items:center; color:var(--oro);">▶ VER MOVIMIENTOS</div>
+            <div id="funcionamiento" class="tab-content">
+                <h2>Funcionamiento del Péndulo</h2>
+                <div class="info-box">
+                    <strong>El lenguaje del Péndulo:</strong><br>
+                    El péndulo es un puente entre la mente consciente e inconsciente. Traza dibujos que el hemisferio derecho (intuición) comprende y el izquierdo (lógica) procesa.<br><br>
+                    <strong>Sintonización (Descubrir tu SÍ y NO):</strong><br>
+                    Para que responda correctamente, es vital tener una <strong>actitud neutral</strong>.<br>
+                    1. Haz una pregunta de respuesta obvia ("¿La nieve es blanca?") para ver el movimiento del SÍ.<br>
+                    2. Haz una pregunta falsa para descubrir tu movimiento del NO.<br><br>
+                    <strong>Reglas de Oro:</strong> No utilizar si consumiste alcohol, medicamentos que alteren el sistema nervioso, si estás muy cansado o comiste en exceso.
+                </div>
+                <div class="video-container">
+                    <span class="video-label">Video: Movimientos y Sintonización</span>
+                    <div class="video-wrapper" style="background-image: url('movimiento.jpg');" onclick="playDirect(this, 'Xg2_Wo2K-zA')">
+                        <div class="play-button"></div>
+                    </div>
                 </div>
             </div>
 
             <div id="chakras" class="tab-content">
-                <h2>Testeo de Chakras</h2>
-                <div class="video-wrapper" onclick="playVideo(this, 'NJ-5aywOkAI')">
-                    <div style="background:#111; width:100%; height:100%; display:flex; justify-content:center; align-items:center; color:var(--oro);">▶ VER TESTEO</div>
+                <h2>Armonización de Chakras</h2>
+                <div class="info-box">
+                    <strong>Interpretación de los Giros:</strong><br><br>
+                    <ul class="item-list" style="margin:0;">
+                        <li><strong>SENTIDO HORARIO:</strong> El chakra está sano, la energía fluye correctamente.</li>
+                        <li><strong>SENTIDO ANTI-HORARIO:</strong> Bloqueo, fuga o la energía fluye negativamente para el cuerpo.</li>
+                        <li><strong>SIN MOVIMIENTO:</strong> El chakra está cerrado o la energía está estancada.</li>
+                        <li><strong>MOVIMIENTO ERRÁTICO:</strong> Existe una fuga o descompensación energética.</li>
+                    </ul>
                 </div>
-            </div>
-
-            <div id="bio" class="tab-content">
-                <div class="bio-header">
-                    <div class="bio-name">
-                        Jacqueline Vanesa Pignatelli
-                        <a href="https://www.instagram.com/nave.arcturiana" target="_blank">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--cyan)"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.17.054 1.805.249 2.227.412.558.217.957.477 1.377.896.419.42.679.819.896 1.377.163.422.358 1.057.412 2.227.059 1.265.071 1.646.071 4.85s-.012 3.584-.07 4.85c-.054 1.17-.249 1.805-.412 2.227-.217.558-.477.957-.896 1.377-.42.419-.819.679-1.377.896-.422.163-1.057.358-2.227.412-1.265.059-1.646.071-4.85.071s-3.584-.012-4.85-.07c-1.17-.054-1.805-.249-2.227-.412-.558-.217-.957-.477-1.377-.896-.419-.42-.679-.819-.896-1.377-.163-.422-.358-1.057-.412-2.227-.058-1.265-.071-1.646-.071-4.85s.013-3.584.071-4.85c.054-1.17.249-1.805.412-2.227.217-.558.477-.957.896-1.377.42-.419.819-.679 1.377-.896.422-.163 1.057-.358 2.227-.412 1.265-.059 1.646-.071 4.85-.071zm0-2.163c-3.259 0-3.667.014-4.947.072-1.277.057-2.15.26-2.914.557-.79.307-1.458.717-2.122 1.381s-1.074 1.332-1.381 2.122c-.297.763-.5 1.637-.557 2.914-.059 1.28-.073 1.688-.073 4.947s.014 3.667.072 4.947c.057 1.277.26 2.15.557 2.914.307.79.717 1.458 1.381 2.122s1.332 1.074 2.122 1.381c.763.297 1.637.5 2.914.557 1.28.059 1.688.073 4.947.073s3.667-.014 4.947-.072c1.277-.057 2.15-.26 2.914-.557.79-.307 1.458-.717 2.122-1.381s1.074-1.332 1.381-2.122c.297-.763.5-1.637.557-2.914.059-1.28.073-1.688.073-4.947s-.014-3.667-.072-4.947c-.057-1.277-.26-2.15-.557-2.914-.307-.79-.717-1.458-1.381-2.122s-1.332-1.074-2.122-1.381c-.763-.297-1.637-.5-2.914-.557-1.28-.059-1.688-.073-4.947-.073z"/></svg>
-                        </a>
+                <div class="video-container">
+                    <span class="video-label">Video: Práctica de Testeo</span>
+                    <div class="video-wrapper" style="background-image: url('testeo.jpg');" onclick="playDirect(this, 'NJ-5aywOkAI')">
+                        <div class="play-button"></div>
                     </div>
-                    <p style="color:var(--cyan); font-size: 13px;">Terapeuta Holística Matriculada</p>
-                </div>
-                <div class="bio-list">
-                    <div>Canalizadora de Cirugía Astral Cristal Arcturiano.</div>
-                    <div>Canalizadora de Técnica Reiki Sandalfon (Sanación del Niño interior).</div>
-                    <div>Comunicación Mediumnica / Enlazadora de mundos.</div>
-                    <div>Instructora de Chikung.</div>
-                    <div>Lectora de Registros Akashicos / Operadora de Mesa Cuántica Energética.</div>
-                    <div>Profesora de Yoga de la Música.</div>
-                    <div>Maestra de Reiki (Usui, Karuna, Jin Kei Do, Chamánico).</div>
-                    <div>Terapeuta Floral, Auriculoterapeuta, del Sonido y Vibracional.</div>
-                    <div>Terapeuta de Técnicas Arcturianas, Pleyadianas y Transgeneracional.</div>
-                    <div>Diseño y desarrollo de aplicación Numerología Transgeneracional 2026.</div>
                 </div>
             </div>
-        </div>
 
-        <a href="https://wa.me/5491136434026?text=Hola%20Jacqueline!%20Tengo%20una%20consulta%20del%20Taller%20de%20Pendulo%20Express" class="float-btn whatsapp-btn" target="_blank">
-            <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.588-5.946 0-6.556 5.332-11.888 11.888-11.888 3.176 0 6.161 1.237 8.404 3.48 2.242 2.242 3.48 5.227 3.48 8.404 0 6.556-5.332 11.888-11.888 11.888-2.01 0-3.988-.511-5.741-1.481l-6.142 1.606zm6.307-3.666c1.558.924 3.18 1.393 4.922 1.393 5.011 0 9.088-4.077 9.088-9.088 0-2.431-.946-4.717-2.664-6.436s-4.005-2.664-6.436-2.664c-5.011 0-9.088 4.077-9.088 9.088 0 1.83.546 3.614 1.577 5.16l-.999 3.647 3.733-.977zM16.814 13.8c-.287-.143-1.7-.84-1.963-.936-.264-.096-.456-.143-.648.143-.192.287-.744.936-.911 1.127-.167.192-.335.215-.623.072-.287-.143-1.214-.447-2.311-1.426-.855-.763-1.432-1.706-1.599-1.992-.167-.287-.018-.442.126-.584.129-.128.287-.335.431-.502.143-.167.192-.287.287-.478.096-.192.048-.359-.024-.502-.072-.143-.648-1.562-.887-2.136-.233-.56-.471-.484-.648-.493l-.551-.01c-.192 0-.502.072-.763.359-.264.287-1.006.984-1.006 2.399 0 1.415 1.03 2.784 1.173 2.976.143.192 2.028 3.097 4.912 4.342.686.296 1.222.473 1.638.604.689.219 1.317.189 1.812.115.551-.082 1.699-.694 1.939-1.364.24-.67.24-1.244.167-1.364-.072-.12-.264-.192-.551-.335z"/></svg>
-        </a>
-        <a href="https://www.instagram.com/nave.arcturiana" class="float-btn instagram-btn" target="_blank">
-            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.17.054 1.805.249 2.227.412.558.217.957.477 1.377.896.419.42.679.819.896 1.377.163.422.358 1.057.412 2.227.059 1.265.071 1.646.071 4.85s-.012 3.584-.07 4.85c-.054 1.17-.249 1.805-.412 2.227-.217.558-.477.957-.896 1.377-.42.419-.819.679-1.377.896-.422.163-1.057.358-2.227.412-1.265.059-1.646.071-4.85.071s-3.584-.012-4.85-.07c-1.17-.054-1.805-.249-2.227-.412-.558-.217-.957-.477-1.377-.896-.419-.42-.679-.819-.896-1.377-.163-.422-.358-1.057-.412-2.227-.058-1.265-.071-1.646-.071-4.85s.013-3.584.071-4.85c.054-1.17.249-1.805.412-2.227.217-.558.477-.957.896-1.377.42-.419.819-.679 1.377-.896.422-.163 1.057-.358 2.227-.412 1.265-.059 1.646-.071 4.85-.071zm0-2.163c-3.259 0-3.667.014-4.947.072-1.277.057-2.15.26-2.914.557-.79.307-1.458.717-2.122 1.381s-1.074 1.332-1.381 2.122c-.297.763-.5 1.637-.557 2.914-.059 1.28-.073 1.688-.073 4.947s.014 3.667.072 4.947c.057 1.277.26 2.15.557 2.914.307.79.717 1.458 1.381 2.122s1.332 1.074 2.122 1.381c.763.297 1.637.5 2.914.557 1.28.059 1.688.073 4.947.073s3.667-.014 4.947-.072c1.277-.057 2.15-.26 2.914-.557.79-.307 1.458-.717 2.122-1.381s1.074-1.332 1.381-2.122c.297-.763.5-1.637.557-2.914.059-1.28.073-1.688.073-4.947s-.014-3.667-.072-4.947c-.057-1.277-.26-2.15-.557-2.914-.307-.79-.717-1.458-1.381-2.122s-1.332-1.074-2.122-1.381c-.763-.297-1.637-.5-2.914-.557-1.28-.059-1.688-.073-4.947-.073z"/><path d="M12 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.791-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.209-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-        </a>
+        </div>
     </div>
 
     <script>
-        function checkAccess() {
-            var u = document.getElementById('user').value.toLowerCase().trim();
-            var p = document.getElementById('pass').value.trim();
-            if(u === "pendulo" && p === "prueba") {
-                document.getElementById('login-screen').style.display = 'none';
-                document.getElementById('aula-completa').style.display = 'block';
-            } else { alert("Acceso denegado."); }
-        }
+    function checkAccess() {
+        var u = document.getElementById('user').value.toLowerCase().trim();
+        var p = document.getElementById('pass').value.trim();
+        if(u === "pendulo" && p === "prueba") {
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('aula-completa').style.display = 'block';
+            window.scrollTo(0,0);
+        } else { alert("Usuario o contraseña incorrectos."); }
+    }
 
-        function showTab(tabId, btn) {
-            var tabs = document.getElementsByClassName('tab-content');
-            for (var i = 0; i < tabs.length; i++) { tabs[i].classList.remove('active'); }
-            var buttons = document.querySelectorAll('nav button');
-            for (var j = 0; j < buttons.length; j++) { buttons[j].classList.remove('active'); }
-            document.getElementById(tabId).classList.add('active');
-            btn.classList.add('active');
-            window.scrollTo({ top: 120, behavior: 'smooth' });
-        }
+    function showTab(tabId, btn) {
+        var tabs = document.getElementsByClassName('tab-content');
+        for (var i = 0; i < tabs.length; i++) { tabs[i].classList.remove('active'); }
+        var buttons = document.querySelectorAll('nav button');
+        for (var j = 0; j < buttons.length; j++) { buttons[j].classList.remove('active'); }
+        document.getElementById(tabId).classList.add('active');
+        btn.classList.add('active');
+        window.scrollTo({ top: 120, behavior: 'smooth' });
+    }
 
-        function playVideo(container, videoId) {
-            container.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1" allow="autoplay; encrypted-media" style="width:100%; height:100%; border:none;"></iframe>`;
-        }
-    </script>
+    function toggleRitual() {
+        var box = document.getElementById('ritual-box');
+        box.style.display = (box.style.display === 'block') ? 'none' : 'block';
+    }
+
+    // ESTA ES LA FUNCIÓN CON SEGURIDAD AÑADIDA
+    function playDirect(container, videoId) {
+        // 1. Quitamos el borde del contenedor para que se vea limpio
+        container.style.border = "none";
+        
+        // 2. Insertamos el escudo invisible arriba y el iframe restringido
+        // ?modestbranding=1 (quita logo) &fs=0 (quita pantalla completa) &rel=0 (sin sugerencias)
+        container.innerHTML = `
+            <div style="position:relative; width:100%; height:100%;">
+                <div style="position:absolute; top:0; left:0; width:100%; height:60px; z-index:10; background:transparent;"></div>
+                <iframe 
+                    src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&fs=0" 
+                    allow="autoplay; encrypted-media" 
+                    style="width:100%; height:100%; border:none;">
+                </iframe>
+            </div>`;
+    }
+</script>
 </body>
 </html>
