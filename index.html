@@ -66,19 +66,12 @@
             position: relative; width: 280px; height: 500px; margin: 0 auto;
             border: 1px solid rgba(180, 151, 90, 0.3); border-radius: 20px; overflow: hidden; 
             background: #000; cursor: pointer; transition: 0.5s;
-            display: flex; justify-content: center; align-items: center;
+            background-size: cover; background-position: center;
         }
-        /* Placeholder para cuando no hay imagen */
-        .video-placeholder {
-            position: absolute; width: 100%; height: 100%;
-            background: linear-gradient(45deg, #0f111a, #1a1d29);
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            color: var(--oro); font-size: 12px; text-transform: uppercase; letter-spacing: 2px;
-        }
-
         .video-wrapper:hover { border-color: var(--oro); box-shadow: 0 0 25px var(--oro-brillo); transform: translateY(-5px); }
         .play-button {
-            position: relative; width: 70px; height: 70px; background: rgba(180, 151, 90, 0.9);
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 70px; height: 70px; background: rgba(180, 151, 90, 0.9);
             border-radius: 50%; z-index: 20; display: flex; justify-content: center; align-items: center; border: 2px solid #fff;
         }
         .play-button::after { content: ""; border-style: solid; border-width: 12px 0 12px 22px; border-color: transparent transparent transparent white; margin-left: 6px; }
@@ -122,16 +115,15 @@
             <div id="materiales" class="tab-content active">
                 <h2>Materiales de Trabajo</h2>
                 <ul class="item-list">
-                    <li><strong>Péndulo:</strong> Cristal, Madera u Orgonita. Elige el que resuene contigo.</li>
-                    <li>Lugar tranquilo y armonioso para trabajar.</li>
-                    <li>Mesa o lugar de apoyo para estar cómodo.</li>
-                    <li>Lápiz negro y papel (para testeos a distancia).</li>
-                    <li>Música de meditación para abrir espacio sagrado.</li>
+                    <li><strong>Péndulo:</strong> Cristal, Madera u Orgonita. El que resuene contigo[cite: 9, 10].</li>
+                    <li>Lugar tranquilo y armonioso para trabajar[cite: 11].</li>
+                    <li>Mesa o lugar de apoyo para estar cómodo[cite: 12].</li>
+                    <li>Lápiz negro y papel para trabajos a distancia[cite: 14, 15].</li>
+                    <li>Música de meditación para abrir espacio sagrado[cite: 16].</li>
                 </ul>
                 <div class="video-container">
                     <span class="video-label">Video: Introducción y Materiales</span>
-                    <div class="video-wrapper" onclick="playDirect(this, 'IV0Aa1k0gX0')">
-                        <div class="video-placeholder"><span>CLASE MATERIALES</span></div>
+                    <div class="video-wrapper" style="background-image: url('materiales.jpg');" onclick="playDirect(this, 'IV0Aa1k0gX0')">
                         <div class="play-button"></div>
                     </div>
                 </div>
@@ -141,19 +133,18 @@
                 <h2>Limpieza y Consagración</h2>
                 <button class="btn-ritual" onclick="toggleRitual()">VER RITUAL Y FRASE DE CONSAGRACIÓN</button>
                 <div id="ritual-box" class="box-ritual">
-                    <p>La forma más rápida es con <strong>Sahumerio</strong>. El humo debe envolver al péndulo por completo desde abajo hacia arriba.</p>
+                    <p>La forma más rápida es con <strong>Sahumerio</strong>. El humo debe envolver al péndulo desde abajo hacia arriba[cite: 19, 20].</p>
                     <ul style="color: #ccc; padding-left: 20px;">
-                        <li>Mirar hacia el Este.</li>
-                        <li>Poner el péndulo entre las manos en forma de rezo.</li>
-                        <li>Llevarlo a la nariz, inspirar y exhalar 3 veces.</li>
-                        <li>Llevarlo al entrecejo y luego al corazón.</li>
+                        <li>Posición mirando al Este[cite: 26].</li>
+                        <li>Péndulo entre las manos en forma de rezo[cite: 27].</li>
+                        <li>Llevarlo a la nariz, inspirar y exhalar 3 veces[cite: 28].</li>
+                        <li>Llevarlo al entrecejo (Ajna) y luego al corazón[cite: 29, 31].</li>
                     </ul>
-                    <p style="font-style: italic; color: var(--oro); border-top: 1px solid #222; padding-top: 20px;">"A partir de este momento te consagro para que trabajes en la luz, muestres siempre la verdad, estés en ley, tus respuestas vengan siempre del ser superior y sean sabias, claras, precisas y seguras. Gracias".</p>
+                    <p style="font-style: italic; color: var(--oro); border-top: 1px solid #222; padding-top: 20px;">"A partir de este momento te consagro para que trabajes en la luz, muestres siempre la verdad, estés en ley, tus respuestas vengan siempre del ser superior y sean sabias, claras, precisas y seguras. Gracias"[cite: 30, 32].</p>
                 </div>
                 <div class="video-container">
                     <span class="video-label">Video: Técnica de Limpieza</span>
-                    <div class="video-wrapper" onclick="playDirect(this, 'eduRIA3ceis')">
-                        <div class="video-placeholder"><span>CLASE LIMPIEZA</span></div>
+                    <div class="video-wrapper" style="background-image: url('limpieza.jpg');" onclick="playDirect(this, 'eduRIA3ceis')">
                         <div class="play-button"></div>
                     </div>
                 </div>
@@ -161,15 +152,12 @@
 
             <div id="proteccion" class="tab-content">
                 <h2>Espacio Sagrado y Protección</h2>
-                <ul class="item-list">
-                    <li>Visualización de luz blanca protectora para sellar el aura.</li>
-                    <li>Invocación de guías espirituales y seres de luz.</li>
-                    <li>Uso de sahumos para limpiar la habitación antes y después.</li>
-                </ul>
+                <div class="info-box">
+                    Es fundamental proteger el lugar antes de cualquier limpieza energética[cite: 36]. Puedes utilizar el <strong>Símbolo de Pentagrama o Tetragrámaton</strong>[cite: 37, 41]. Trazamos primero el círculo y luego el pentagrama[cite: 40].
+                </div>
                 <div class="video-container">
                     <span class="video-label">Video: Protección Energética</span>
-                    <div class="video-wrapper" onclick="playDirect(this, 'R24gh8hWlu0')">
-                        <div class="video-placeholder"><span>CLASE PROTECCIÓN</span></div>
+                    <div class="video-wrapper" style="background-image: url('proteccion.jpg');" onclick="playDirect(this, 'R24gh8hWlu0')">
                         <div class="play-button"></div>
                     </div>
                 </div>
@@ -178,18 +166,15 @@
             <div id="funcionamiento" class="tab-content">
                 <h2>Funcionamiento del Péndulo</h2>
                 <div class="info-box">
-                    <strong>El lenguaje del Péndulo:</strong><br>
-                    El péndulo es un puente entre la mente consciente e inconsciente. Traza dibujos que el hemisferio derecho comprende y el izquierdo procesa.<br><br>
-                    <strong>Sintonización (Descubrir tu SÍ y NO):</strong><br>
-                    Para que responda, es vital tener una <strong>actitud neutral</strong>. 
-                    1. Haz una pregunta de respuesta obvia ("¿La nieve es blanca?") para ver el movimiento del SÍ.<br>
-                    2. Haz una pregunta falsa para descubrir tu movimiento del NO.<br><br>
-                    <strong>Reglas de Oro:</strong> No utilizar si consumiste alcohol, medicamentos que alteren el sistema nervioso, si estás muy cansado o comiste en exceso.
+                    <strong>Código de Lenguaje:</strong> El péndulo comunica la mente consciente e inconsciente[cite: 62]. El hemisferio izquierdo es lógico y analítico, mientras el derecho es intuitivo y maneja dibujos[cite: 62, 63]. El péndulo traza dibujos que el derecho entiende y el izquierdo traduce a palabras[cite: 64].<br><br>
+                    <strong>Descubre tu SI y NO:</strong><br>
+                    1. Formula una pregunta obvia para el <strong>SÍ</strong> (ej: ¿la nieve es blanca?)[cite: 73, 74].<br>
+                    2. Formula una pregunta falsa para el <strong>NO</strong> (ej: ¿la nieve es negra?)[cite: 78, 79].<br><br>
+                    <strong>Reglas:</strong> Mantener actitud neutral[cite: 85]. No usar bajo efectos de alcohol, medicamentos que alteren el sistema nervioso, si estás cansado o comiste mucho[cite: 90, 91, 92, 93].
                 </div>
                 <div class="video-container">
                     <span class="video-label">Video: Movimientos y Sintonización</span>
-                    <div class="video-wrapper" onclick="playDirect(this, 'Xg2_Wo2K-zA')">
-                        <div class="video-placeholder"><span>CLASE MOVIMIENTOS</span></div>
+                    <div class="video-wrapper" style="background-image: url('movimiento.jpg');" onclick="playDirect(this, 'Xg2_Wo2K-zA')">
                         <div class="play-button"></div>
                     </div>
                 </div>
@@ -197,19 +182,17 @@
 
             <div id="chakras" class="tab-content">
                 <h2>Armonización de Chakras</h2>
-                <div class="info-box" style="border-left-color: var(--cyan);">
-                    <strong>Interpretación de los Giros:</strong><br><br>
+                <div class="info-box">
+                    <strong>Detección de Bloqueos:</strong><br><br>
                     <ul class="item-list" style="margin:0;">
-                        <li><strong>SENTIDO HORARIO:</strong> El chakra está sano, la energía fluye correctamente.</li>
-                        <li><strong>SENTIDO ANTI-HORARIO:</strong> La energía fluye negativamente o hay un bloqueo emocional.</li>
-                        <li><strong>SIN MOVIMIENTO:</strong> El chakra está cerrado o la energía está estancada.</li>
-                        <li><strong>MOVIMIENTO ERRÁTICO:</strong> Existe una fuga o descompensación energética.</li>
+                        <li><strong>SENTIDO HORARIO:</strong> La energía fluye correctamente[cite: 56].</li>
+                        <li><strong>SENTIDO ANTI-HORARIO:</strong> La energía fluye negativamente para el cuerpo[cite: 55].</li>
+                        <li><strong>SIN MOVIMIENTO:</strong> El chakra está cerrado o la energía está estancada[cite: 54].</li>
                     </ul>
                 </div>
                 <div class="video-container">
-                    <span class="video-label">Video: Práctica de Testeo y Armonización</span>
-                    <div class="video-wrapper" onclick="playDirect(this, 'NJ-5aywOkAI')">
-                        <div class="video-placeholder"><span>CLASE CHAKRAS</span></div>
+                    <span class="video-label">Video: Práctica de Testeo</span>
+                    <div class="video-wrapper" style="background-image: url('testeo.jpg');" onclick="playDirect(this, 'NJ-5aywOkAI')">
                         <div class="play-button"></div>
                     </div>
                 </div>
@@ -244,7 +227,7 @@
         }
 
         function playDirect(container, videoId) {
-            container.innerHTML = '<div class="top-blocker"></div><iframe src="https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0&modestbranding=1" allow="autoplay; encrypted-media" style="width:100%; height:100%; border:none;"></iframe>';
+            container.innerHTML = '<div class="top-blocker"></div><iframe src="https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0" allow="autoplay; encrypted-media" style="width:100%; height:100%; border:none;"></iframe>';
         }
     </script>
 </body>
