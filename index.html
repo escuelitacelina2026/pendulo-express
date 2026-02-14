@@ -3,148 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taller de Péndulo Express - Aula Virtual</title>
+    <title>Péndulo Express - Celina</title>
     <style>
         :root { --oro: #b4975a; --fondo: #0a0b10; --caja: #0f111a; --cyan: #00bcd4; }
-        body { background-color: var(--fondo); color: #ffffff; font-family: 'Segoe UI', sans-serif; margin: 0; user-select: none; }
+        body { background: var(--fondo); color: white; font-family: sans-serif; margin: 0; user-select: none; -webkit-user-select: none; }
         
         /* LOGIN */
-        #login-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; justify-content: center; align-items: center; z-index: 9999; }
-        .login-box { border: 1px solid var(--oro); padding: 30px; border-radius: 15px; background: #0d0d0d; text-align: center; width: 280px; }
+        #login-screen { position: fixed; inset: 0; background: #000; display: flex; justify-content: center; align-items: center; z-index: 9999; }
+        .login-box { border: 1px solid var(--oro); padding: 30px; border-radius: 15px; text-align: center; width: 280px; background: #0d0d0d; }
+        input { display: block; width: 100%; margin: 10px 0; padding: 12px; background: #000; border: 1px solid #333; color: #fff; border-radius: 5px; box-sizing: border-box; }
         
-        /* BLOQUEO DE YOUTUBE (ESCUDO) */
-        .video-container { position: relative; width: 100%; max-width: 320px; margin: 20px auto; aspect-ratio: 9/16; border-radius: 15px; overflow: hidden; border: 2px solid #222; }
-        /* Esta capa impide que toquen el logo de YT o el título */
-        .video-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; pointer-events: none; }
-        .shield-top { position: absolute; top: 0; width: 100%; height: 60px; z-index: 20; background: transparent; pointer-events: auto; }
-        .shield-bottom { position: absolute; bottom: 0; width: 100%; height: 50px; z-index: 20; background: transparent; pointer-events: auto; }
+        /* NAVEGACION */
+        nav { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; padding: 10px; max-width: 800px; margin: auto; }
+        nav button { padding: 10px 2px; font-size: 10px; background: #1a1d29; border: 1px solid #333; color: #fff; cursor: pointer; border-radius: 5px; text-transform: uppercase; }
+        nav button.active { border-color: var(--oro); color: var(--oro); }
 
-        /* DISEÑO DE CONTENIDO */
-        .aula-content { max-width: 800px; margin: 0 auto; padding: 20px; }
-        nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
-        nav button { flex: 1; padding: 12px; background: #1a1d29; border: 1px solid #333; color: #fff; cursor: pointer; border-radius: 8px; font-size: 12px; }
-        nav button.active { border-color: var(--oro); color: var(--oro); box-shadow: 0 0 10px rgba(180, 151, 90, 0.3); }
-        .tab-content { display: none; background: var(--caja); padding: 25px; border-radius: 15px; line-height: 1.7; }
+        /* CONTENIDO */
+        .aula-content { max-width: 800px; margin: auto; padding: 15px; }
+        .tab-content { display: none; background: var(--caja); padding: 20px; border-radius: 15px; border: 1px solid #222; }
         .tab-content.active { display: block; }
-        .info-box { background: rgba(180, 151, 90, 0.08); padding: 15px; border-left: 4px solid var(--oro); margin: 20px 0; border-radius: 0 10px 10px 0; }
-        i { color: var(--cyan); }
+        .info-box { background: rgba(180,151,90,0.1); padding: 15px; border-left: 4px solid var(--oro); margin: 15px 0; line-height: 1.6; font-size: 14px; }
+        
+        /* PROTECCION VIDEO */
+        .video-wrapper { position: relative; width: 100%; max-width: 300px; margin: 20px auto; aspect-ratio: 9/16; border-radius: 15px; overflow: hidden; }
+        .shield { position: absolute; left: 0; width: 100%; z-index: 10; background: transparent; }
+        .shield-t { top: 0; height: 15%; } /* Título */
+        .shield-b { bottom: 0; height: 15%; } /* Logo YT */
+        iframe { width: 100%; height: 100%; border: none; }
+        
+        img { max-width: 100%; height: auto; border-radius: 10px; margin-top: 10px; opacity: 0.8; }
+        header { text-align: center; padding: 20px; }
+        footer { text-align: center; font-size: 11px; padding: 30px; color: #666; }
     </style>
 </head>
 <body oncontextmenu="return false;">
-    <div id="login-screen">
-        <div class="login-box">
-            <h2 style="color:var(--oro)">ACCESO ALUMNAS</h2>
-            <input type="text" id="user" placeholder="Usuario">
-            <input type="password" id="pass" placeholder="Contraseña">
-            <button style="background:var(--oro); border:none; padding:12px; width:100%; font-weight:bold; border-radius:5px; cursor:pointer;" onclick="checkAccess()">INGRESAR</button>
-        </div>
+
+<div id="login-screen">
+    <div class="login-box">
+        <h2 style="color:var(--oro)">BIENVENIDA</h2>
+        <input type="text" id="user" placeholder="Usuario">
+        <input type="password" id="pass" placeholder="Contraseña">
+        <button onclick="checkAccess()" style="width:100%; padding:12px; background:var(--oro); border:none; font-weight:bold; cursor:pointer;">ENTRAR</button>
     </div>
+</div>
 
-    <div id="aula-completa" style="display:none;">
-        <header style="text-align:center; padding:30px;">
-            <h1 style="color:var(--oro); font-size:28px; letter-spacing:2px; margin-bottom:5px;">PÉNDULO EXPRESS</h1>
-            <span style="color:var(--cyan); font-size:12px; letter-spacing:4px;">AULA VIRTUAL</span>
-        </header>
+<div id="aula" style="display:none;">
+    <header>
+        <h1 style="color:var(--oro); margin:0; font-size:24px;">PÉNDULO EXPRESS</h1>
+        <small style="color:var(--cyan); letter-spacing:3px;">AULA VIRTUAL</small>
+    </header>
 
-        <nav>
-            <button onclick="showTab('tab1', this)" class="active">MATERIALES</button>
-            <button onclick="showTab('tab2', this)">LIMPIEZA</button>
-            <button onclick="showTab('tab3', this)">PROTECCIÓN</button>
-            <button onclick="showTab('tab4', this)">SINTONÍA</button>
-            <button onclick="showTab('tab5', this)">CHAKRAS</button>
-        </nav>
+    <nav>
+        <button onclick="tab('t1', this)" class="active">Materiales</button>
+        <button onclick="tab('t2', this)">Limpieza</button>
+        <button onclick="tab('t3', this)">Protección</button>
+        <button onclick="tab('t4', this)">Sintonía</button>
+        <button onclick="tab('t5', this)">Chakras</button>
+    </nav>
 
-        <div class="aula-content">
-            <div id="tab1" class="tab-content active">
-                <h2 style="color:var(--oro)">Materiales de Trabajo</h2>
-                <div class="info-box">
-                    * <b>Tu Péndulo:</b> Ya sea de cristal, madera, metal u orgonita. Lo importante es tu conexión con él.<br>
-                    * <b>Espacio de anotación:</b> Tu cuaderno de bitácora o la guía impresa del taller.<br>
-                    * <b>Tu energía:</b> Estar presente, hidratada y en un lugar tranquilo.
-                </div>
-                <div class="video-container">
-                    <div class="shield-top"></div>
-                    <iframe src="https://www.youtube.com/embed/IV0Aa1k0gX0?controls=1&modestbranding=1&rel=0&fs=0&iv_load_policy=3" width="100%" height="100%" frameborder="0"></iframe>
-                    <div class="shield-bottom"></div>
-                </div>
+    <div class="aula-content">
+        <div id="t1" class="tab-content active">
+            <h3 style="color:var(--oro)">Materiales de Trabajo</h3>
+            <div class="info-box">
+                • <b>Tu Péndulo:</b> Cristal, madera u orgonita.<br>
+                • <b>Tu Guía:</b> Ten a mano el PDF impreso o tu cuaderno.<br>
+                • <b>Presencia:</b> Un espacio tranquilo y agua para hidratarte.
             </div>
-
-            <div id="tab2" class="tab-content">
-                <h2 style="color:var(--oro)">Limpieza y Consagración</h2>
-                <p>Es vital que tu péndulo esté libre de energías externas antes de preguntar.</p>
-                <div class="info-box">
-                    Pasa el péndulo por el humo de un sahumerio (sándalo o ruda) y repite con intención:<br><br>
-                    <i>"Yo te limpio y te consagro en nombre de la luz divina, para que tus respuestas sean claras, certeras y solo para mi mayor bien y el de todos los involucrados."</i>
-                </div>
-                <div class="video-container">
-                    <div class="shield-top"></div>
-                    <iframe src="https://www.youtube.com/embed/eduRIA3ceis?controls=1&modestbranding=1&rel=0&fs=0" width="100%" height="100%" frameborder="0"></iframe>
-                    <div class="shield-bottom"></div>
-                </div>
-            </div>
-
-            <div id="tab3" class="tab-content">
-                <h2 style="color:var(--oro)">Círculo de Protección</h2>
-                <div class="info-box">
-                    Nunca trabajes sin protegerte. Visualiza una luz blanca rodeándote. Puedes invocar a tus guías o utilizar el símbolo del pentagrama para sellar tu energía.
-                </div>
-                <div class="video-container">
-                    <div class="shield-top"></div>
-                    <iframe src="https://www.youtube.com/embed/R24gh8hWlu0?controls=1&modestbranding=1&rel=0&fs=0" width="100%" height="100%" frameborder="0"></iframe>
-                    <div class="shield-bottom"></div>
-                </div>
-            </div>
-
-            <div id="tab4" class="tab-content">
-                <h2 style="color:var(--oro)">Sintonización y Códigos</h2>
-                <div class="info-box">
-                    El péndulo no se mueve solo, responde a tus micro-movimientos musculares (efecto ideomotor). <br><br>
-                    Pide: <b>"Muéstrame mi SÍ"</b>, luego <b>"Muéstrame mi NO"</b>. Anota estos movimientos en tu guía.
-                </div>
-                <div class="video-container">
-                    <div class="shield-top"></div>
-                    <iframe src="https://www.youtube.com/embed/Xg2_Wo2K-zA?controls=1&modestbranding=1&rel=0&fs=0" width="100%" height="100%" frameborder="0"></iframe>
-                    <div class="shield-bottom"></div>
-                </div>
-            </div>
-
-            <div id="tab5" class="tab-content">
-                <h2 style="color:var(--oro)">Medición de Chakras</h2>
-                <div class="info-box">
-                    Coloca el péndulo sobre cada centro energético. <br>
-                    - Giro horario: <b>Abierto/Equilibrado</b>.<br>
-                    - Giro antihorario: <b>Bloqueado/Cerrado</b>.<br>
-                    - Estático: <b>Falta de energía</b>.
-                </div>
-                <div class="video-container">
-                    <div class="shield-top"></div>
-                    <iframe src="https://www.youtube.com/embed/NJ-5aywOkAI?controls=1&modestbranding=1&rel=0&fs=0" width="100%" height="100%" frameborder="0"></iframe>
-                    <div class="shield-bottom"></div>
-                </div>
+            <div class="video-wrapper">
+                <div class="shield shield-t"></div>
+                <iframe src="https://www.youtube.com/embed/IV0Aa1k0gX0?controls=1&modestbranding=1&rel=0&fs=0"></iframe>
+                <div class="shield shield-b"></div>
             </div>
         </div>
 
-        <footer style="text-align:center; padding:40px; color:var(--oro); font-size:12px; border-top:1px solid #222; margin-top:50px;">
-            <p>© 2026 Celina | Escuela de Sabiduría Holística</p>
-        </footer>
+        <div id="t2" class="tab-content">
+            <h3 style="color:var(--oro)">Limpieza y Consagración</h3>
+            <div class="info-box">
+                Pasa el péndulo por el humo de un sahumerio y repite:<br><br>
+                <i>"Yo te limpio y te consagro en nombre de la luz divina, para que tus respuestas sean claras, certeras y solo para mi mayor bien y el de todos los involucrados."</i>
+            </div>
+            <div class="video-wrapper">
+                <div class="shield shield-t"></div>
+                <iframe src="https://www.youtube.com/embed/eduRIA3ceis?controls=1&modestbranding=1&rel=0&fs=0"></iframe>
+                <div class="shield shield-b"></div>
+            </div>
+        </div>
+
+        <div id="t3" class="tab-content">
+            <h3 style="color:var(--oro)">Círculo de Protección</h3>
+            <div class="info-box">
+                Visualiza una burbuja de luz blanca. Puedes usar el símbolo del pentagrama para sellar tu energía antes de preguntar.
+            </div>
+            <center><img src="pentagrama.jpg" alt="Pentagrama"></center>
+            <div class="video-wrapper">
+                <div class="shield shield-t"></div>
+                <iframe src="https://www.youtube.com/embed/R24gh8hWlu0?controls=1&modestbranding=1&rel=0&fs=0"></iframe>
+                <div class="shield shield-b"></div>
+            </div>
+        </div>
+
+        <div id="t4" class="tab-content">
+            <h3 style="color:var(--oro)">Sintonía y Códigos</h3>
+            <div class="info-box">
+                Aprende a identificar tus respuestas. Pide al péndulo:<br>
+                1. <b>"Muéstrame mi SÍ"</b><br>
+                2. <b>"Muéstrame mi NO"</b><br><br>
+                Anota el movimiento: ¿Es circular? ¿Lineal? Esa es tu firma energética.
+            </div>
+            <div class="video-wrapper">
+                <div class="shield shield-t"></div>
+                <iframe src="https://www.youtube.com/embed/Xg2_Wo2K-zA?controls=1&modestbranding=1&rel=0&fs=0"></iframe>
+                <div class="shield shield-b"></div>
+            </div>
+        </div>
+
+        <div id="t5" class="tab-content">
+            <h3 style="color:var(--oro)">Medición de Chakras</h3>
+            <div class="info-box">
+                Coloca el péndulo sobre cada chakra:<br>
+                • <b>Derecha:</b> Energía fluida.<br>
+                • <b>Izquierda:</b> Bloqueo energético.<br>
+                • <b>Quieto:</b> Necesita activación.
+            </div>
+            <div class="video-wrapper">
+                <div class="shield shield-t"></div>
+                <iframe src="https://www.youtube.com/embed/NJ-5aywOkAI?controls=1&modestbranding=1&rel=0&fs=0"></iframe>
+                <div class="shield shield-b"></div>
+            </div>
+        </div>
     </div>
 
-    <script>
-        function checkAccess() {
-            const u = document.getElementById('user').value.toLowerCase().trim();
-            const p = document.getElementById('pass').value.trim();
-            if(u === "pendulo" && p === "celina2026") {
-                document.getElementById('login-screen').style.display = 'none';
-                document.getElementById('aula-completa').style.display = 'block';
-            } else { alert("Usuario o clave incorrectos"); }
-        }
+    <footer>
+        <p>© 2026 Celina | Escuela de Sabiduría Holística</p>
+    </footer>
+</div>
 
-        function showTab(id, btn) {
-            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-            btn.classList.add('active');
-        }
-    </script>
+<script>
+    function checkAccess() {
+        const u = document.getElementById('user').value.toLowerCase().trim();
+        const p = document.getElementById('pass').value;
+        if(u === "pendulo" && p === "prueba") {
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('aula').style.display = 'block';
+        } else { alert("Error"); }
+    }
+
+    function tab(id, btn) {
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        btn.classList.add('active');
+    }
+</script>
 </body>
 </html>
