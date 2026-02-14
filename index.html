@@ -20,9 +20,10 @@
             margin: 0; 
             padding: 0;
             overflow-x: hidden; 
+            user-select: none; /* Evita que copien el texto */
         }
 
-        /* EFECTO DE CARGA (PRELOADER) */
+        /* CARGADOR */
         #preloader {
             display: none;
             position: fixed;
@@ -51,7 +52,6 @@
             width: 30px; height: 30px;
             background: var(--oro);
             clip-path: polygon(50% 100%, 0% 20%, 100% 20%);
-            box-shadow: 0 10px 20px var(--oro-brillo);
         }
 
         @keyframes oscilar {
@@ -74,7 +74,6 @@
         .btn-ingresar { 
             background: var(--oro); color: #000; border: none; padding: 14px; width: 100%; 
             cursor: pointer; font-weight: bold; border-radius: 5px; text-transform: uppercase;
-            transition: 0.3s;
         }
 
         #aula-completa { display: none; width: 100%; }
@@ -83,19 +82,17 @@
         header h1 { color: var(--oro); font-size: clamp(20px, 6vw, 32px); letter-spacing: 2px; margin: 0; font-family: serif; }
         header p { color: var(--cyan); text-transform: uppercase; letter-spacing: 4px; font-size: 10px; margin-top: 10px; }
 
-        /* MENU RESPONSIVE */
         nav { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; padding: 15px; }
         nav button { 
             background: rgba(255,255,255,0.03); border: 1px solid #333; color: #888; 
             padding: 10px 15px; cursor: pointer; text-transform: uppercase; font-size: 10px; 
-            transition: 0.4s; border-radius: 4px; flex-grow: 1; max-width: 150px;
+            border-radius: 4px; flex-grow: 1; max-width: 150px;
         }
         nav button.active { border-color: var(--oro); color: var(--oro); background: rgba(180, 151, 90, 0.1); }
 
-        /* CONTENIDO CENTRALIZADO */
         .aula-content { 
             max-width: 800px; 
-            margin: 10px auto 10px auto; 
+            margin: 10px auto; 
             background: var(--caja); 
             padding: 25px 20px; 
             border-radius: 12px; 
@@ -109,43 +106,49 @@
 
         h2 { color: var(--oro); font-size: 22px; text-align: center; margin-bottom: 25px; font-family: serif; border-bottom: 1px solid #222; padding-bottom: 15px; }
         
-        .item-list { list-style: none; padding: 0; text-align: left; }
+        .item-list { list-style: none; padding: 0; }
         .item-list li { margin: 15px 0; color: #e0e0e0; display: flex; align-items: flex-start; font-size: 16px; line-height: 1.6; }
-        .item-list li::before { content: "✧"; color: var(--oro); margin-right: 12px; font-weight: bold; }
+        .item-list li::before { content: "✧"; color: var(--oro); margin-right: 12px; }
 
-        /* VIDEOS ADAPTATIVOS */
-        .video-container { margin: 35px auto; text-align: center; width: 100%; }
+        /* VIDEOS CON BLOQUEO */
+        .video-container { margin: 35px auto; text-align: center; width: 100%; position: relative; }
         .video-label { color: var(--oro); font-size: 12px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; display: block; font-weight: bold; }
+        
         .video-wrapper {
             position: relative; width: 100%; max-width: 280px; aspect-ratio: 9 / 16; margin: 0 auto;
             border: 1px solid rgba(180, 151, 90, 0.3); border-radius: 20px; overflow: hidden; 
-            background: #000; cursor: pointer; background-size: cover; background-position: center; transition: 0.3s;
+            background: #000; cursor: pointer; background-size: cover; background-position: center;
         }
+
+        /* ESCUDO INVISIBLE: Evita clics en el título y logo de YouTube */
+        .video-shield {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 10;
+            background: transparent;
+            pointer-events: all;
+            display: none; /* Se activa al reproducir */
+        }
+        
         .play-button {
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
             width: 70px; height: 70px; background: rgba(180, 151, 90, 0.9);
-            border-radius: 50%; display: flex; justify-content: center; align-items: center; border: 2px solid #fff; z-index: 10;
+            border-radius: 50%; display: flex; justify-content: center; align-items: center; border: 2px solid #fff; z-index: 11;
         }
         .play-button::after { content: ""; border-style: solid; border-width: 12px 0 12px 22px; border-color: transparent transparent transparent white; margin-left: 6px; }
-        
-        iframe { width: 100%; height: 100%; border: none; }
 
-        .btn-ritual { background: rgba(180, 151, 90, 0.05); border: 1px solid var(--oro); color: var(--oro); width: 100%; padding: 18px; cursor: pointer; text-transform: uppercase; margin-bottom: 20px; border-radius: 8px; font-size: 13px; font-weight: bold; transition: 0.3s; }
-        .box-ritual { display: none; border: 1px solid #333; padding: 25px; border-radius: 12px; background: #0c0e15; margin-bottom: 30px; line-height: 1.8; text-align: left; }
+        .btn-ritual { background: rgba(180, 151, 90, 0.05); border: 1px solid var(--oro); color: var(--oro); width: 100%; padding: 18px; cursor: pointer; text-transform: uppercase; margin-bottom: 20px; border-radius: 8px; font-weight: bold; }
+        .box-ritual { display: none; border: 1px solid #333; padding: 25px; border-radius: 12px; background: #0c0e15; margin-bottom: 30px; line-height: 1.8; }
         
-        .info-box { background: rgba(180, 151, 90, 0.05); padding: 25px; border-radius: 12px; border-left: 4px solid var(--oro); margin-bottom: 25px; line-height: 1.7; color: #ccc; font-size: 15px; text-align: left; }
-        .info-box strong { color: var(--oro); }
+        .info-box { background: rgba(180, 151, 90, 0.05); padding: 25px; border-radius: 12px; border-left: 4px solid var(--oro); margin-bottom: 25px; line-height: 1.7; color: #ccc; font-size: 15px; }
 
-        /* FOOTER */
-        footer { margin-top: 30px; padding: 40px 20px; text-align: center; border-top: 1px solid #222; background: #05060a; width: 100%; box-sizing: border-box; }
-        .footer-frase { font-style: italic; color: var(--oro); font-size: 15px; margin-bottom: 20px; font-family: serif; }
+        footer { margin-top: 30px; padding: 40px 20px; text-align: center; border-top: 1px solid #222; background: #05060a; }
+        .footer-frase { font-style: italic; color: var(--oro); font-size: 15px; margin-bottom: 20px; }
         .social-links a { color: var(--cyan); text-decoration: none; margin: 0 15px; font-size: 12px; letter-spacing: 2px; }
-        .copyright { margin-top: 30px; font-size: 9px; color: #444; text-transform: uppercase; letter-spacing: 1px; }
+        .copyright { margin-top: 30px; font-size: 9px; color: #444; text-transform: uppercase; }
     </style>
 </head>
-<body oncontextmenu="return false;">
-
-    <div id="preloader">
+<body oncontextmenu="return false;"> <div id="preloader">
         <div class="pendulo-loader"></div>
         <p style="color: var(--oro); margin-top: 40px; letter-spacing: 5px; font-size: 11px; text-transform: uppercase;">Conectando con la energía...</p>
     </div>
@@ -175,7 +178,6 @@
         </nav>
 
         <div class="aula-content">
-            
             <div id="materiales" class="tab-content active">
                 <h2>Materiales de Trabajo</h2>
                 <ul class="item-list">
@@ -186,8 +188,8 @@
                     <li>Música de meditación para abrir el espacio sagrado.</li>
                 </ul>
                 <div class="video-container">
-                    <span class="video-label">Video: Introducción y Materiales</span>
-                    <div class="video-wrapper" style="background-image: url('materiales.jpg');" onclick="playDirect(this, 'IV0Aa1k0gX0')">
+                    <span class="video-label">Video: Introducción</span>
+                    <div class="video-wrapper" style="background-image: url('materiales.jpg');" onclick="playLocked(this, 'IV0Aa1k0gX0')">
                         <div class="play-button"></div>
                     </div>
                 </div>
@@ -198,17 +200,11 @@
                 <button class="btn-ritual" onclick="toggleRitual()">VER RITUAL Y FRASE DE CONSAGRACIÓN</button>
                 <div id="ritual-box" class="box-ritual">
                     <p>La forma más rápida es con <strong>Sahumerio</strong>. El humo debe envolver al péndulo por completo desde abajo hacia arriba.</p>
-                    <ul style="color: #ccc; padding-left: 20px;">
-                        <li>Mirar hacia el Este.</li>
-                        <li>Poner el péndulo entre las manos en forma de rezo.</li>
-                        <li>Llevarlo a la nariz, inspirar y exhalar 3 veces.</li>
-                        <li>Llevarlo al entrecejo y luego al corazón.</li>
-                    </ul>
-                    <p style="font-style: italic; color: var(--oro); border-top: 1px solid #222; padding-top: 20px; margin-top: 15px;">"A partir de este momento te consagro para que trabajes en la luz, muestres siempre la verdad, estés en ley, tus respuestas vengan siempre del ser superior y sean sabias, claras, precisas y seguras. Gracias".</p>
+                    <p style="font-style: italic; color: var(--oro);">"A partir de este momento te consagro para que trabajes en la luz..."</p>
                 </div>
                 <div class="video-container">
-                    <span class="video-label">Video: Técnica de Limpieza</span>
-                    <div class="video-wrapper" style="background-image: url('limpieza.jpg');" onclick="playDirect(this, 'eduRIA3ceis')">
+                    <span class="video-label">Video: Técnica</span>
+                    <div class="video-wrapper" style="background-image: url('limpieza.jpg');" onclick="playLocked(this, 'eduRIA3ceis')">
                         <div class="play-button"></div>
                     </div>
                 </div>
@@ -217,16 +213,14 @@
             <div id="proteccion" class="tab-content">
                 <h2>Espacio Sagrado y Protección</h2>
                 <div class="info-box">
-                    Es fundamental proteger el lugar antes de cualquier trabajo. Puedes utilizar el <strong>Símbolo de Pentagrama o Tetragrámaton</strong>. Trazamos primero el círculo y luego el pentagrama para sellar el ambiente.
+                    Es fundamental proteger el lugar utilizando el <strong>Símbolo de Pentagrama</strong> para sellar el ambiente.
                 </div>
-                
                 <div style="text-align: center; margin-bottom: 30px;">
-                    <img src="pentagrama.jpg" alt="Pentagrama" style="width: 100%; max-width: 200px; border-radius: 10px; border: 1px solid var(--oro); box-shadow: 0 0 15px var(--oro-brillo);">
+                    <img src="pentagrama.jpg" alt="Pentagrama" style="width: 100%; max-width: 200px; border-radius: 10px; border: 1px solid var(--oro);">
                 </div>
-
                 <div class="video-container">
-                    <span class="video-label">Video: Protección Energética</span>
-                    <div class="video-wrapper" style="background-image: url('proteccion.jpg');" onclick="playDirect(this, 'R24gh8hWlu0')">
+                    <span class="video-label">Video: Protección</span>
+                    <div class="video-wrapper" style="background-image: url('proteccion.jpg');" onclick="playLocked(this, 'R24gh8hWlu0')">
                         <div class="play-button"></div>
                     </div>
                 </div>
@@ -235,17 +229,12 @@
             <div id="funcionamiento" class="tab-content">
                 <h2>Funcionamiento del Péndulo</h2>
                 <div class="info-box">
-                    <strong>El lenguaje del Péndulo:</strong><br>
-                    El péndulo comunica la mente consciente e inconsciente. Traza dibujos que el hemisferio derecho comprende y el izquierdo procesa.<br><br>
-                    <strong>Sintonización (Descubrir tu SÍ y NO):</strong><br>
-                    Para que responda correctamente, es vital tener una <strong>actitud neutral</strong>.<br>
-                    1. Haz una pregunta de respuesta obvia para ver el movimiento del SÍ.<br>
-                    2. Haz una pregunta falsa para descubrir tu movimiento del NO.<br><br>
-                    <strong>Reglas de Oro:</strong> No utilizar si consumiste alcohol, si estás muy cansado o comiste en exceso.
+                    <strong>El lenguaje del Péndulo:</strong> El péndulo comunica la mente consciente e inconsciente. Traza dibujos que el hemisferio derecho comprende y el izquierdo procesa.<br><br>
+                    <strong>Sintonización:</strong> Haz una pregunta obvia para el SÍ y una falsa para el NO. Mantén siempre actitud neutral.
                 </div>
                 <div class="video-container">
-                    <span class="video-label">Video: Movimientos y Sintonización</span>
-                    <div class="video-wrapper" style="background-image: url('movimiento.jpg');" onclick="playDirect(this, 'Xg2_Wo2K-zA')">
+                    <span class="video-label">Video: Sintonización</span>
+                    <div class="video-wrapper" style="background-image: url('movimiento.jpg');" onclick="playLocked(this, 'Xg2_Wo2K-zA')">
                         <div class="play-button"></div>
                     </div>
                 </div>
@@ -254,41 +243,35 @@
             <div id="chakras" class="tab-content">
                 <h2>Armonización de Chakras</h2>
                 <div class="info-box">
-                    <strong>Interpretación de los Giros:</strong><br><br>
-                    <ul class="item-list" style="margin:0;">
-                        <li><strong>SENTIDO HORARIO:</strong> El chakra está sano, la energía fluye correctamente.</li>
-                        <li><strong>SENTIDO ANTI-HORARIO:</strong> Bloqueo o energía fluyendo negativamente.</li>
-                        <li><strong>SIN MOVIMIENTO:</strong> El chakra está cerrado o estancado.</li>
-                    </ul>
+                    <strong>Interpretación:</strong> Horario (Sano), Anti-horario (Bloqueo), Sin movimiento (Cerrado).
                 </div>
                 <div class="video-container">
-                    <span class="video-label">Video: Práctica de Testeo</span>
-                    <div class="video-wrapper" style="background-image: url('testeo.jpg');" onclick="playDirect(this, 'NJ-5aywOkAI')">
+                    <span class="video-label">Video: Práctica</span>
+                    <div class="video-wrapper" style="background-image: url('testeo.jpg');" onclick="playLocked(this, 'NJ-5aywOkAI')">
                         <div class="play-button"></div>
                     </div>
                 </div>
             </div>
+        </div>
 
-        </div> <footer>
+        <footer>
             <p class="footer-frase">"Que la luz de la verdad guíe cada uno de tus movimientos."</p>
             <div class="social-links">
-                <a href="https://instagram.com/tu_usuario" target="_blank">INSTAGRAM</a>
-                <a href="https://wa.me/tunúmero" target="_blank">WHATSAPP</a>
+                <a href="#">INSTAGRAM</a>
+                <a href="#">WHATSAPP</a>
             </div>
-            <p class="copyright">© 2026 Celina · Péndulo Express · Todos los derechos reservados</p>
+            <p class="copyright">© 2026 Celina · Péndulo Express</p>
         </footer>
+    </div>
 
-    </div> <script>
+    <script>
         function checkAccess() {
             var u = document.getElementById('user').value.toLowerCase().trim();
             var p = document.getElementById('pass').value.trim();
-            
             if(u === "pendulo" && p === "prueba") {
                 document.getElementById('login-screen').style.display = 'none';
-                
                 var loader = document.getElementById('preloader');
                 loader.style.display = 'flex';
-                
                 setTimeout(function() {
                     loader.style.opacity = '0';
                     setTimeout(function() {
@@ -310,13 +293,22 @@
             window.scrollTo({ top: 120, behavior: 'smooth' });
         }
 
+        // FUNCIÓN PARA REPRODUCIR CON BLOQUEOS
+        function playLocked(container, videoId) {
+            // Reemplaza el contenido con el iframe y una capa protectora
+            // fs=0 (desactiva pantalla completa), rel=0 (no videos relacionados), modestbranding=1 (quita logo extra)
+            container.innerHTML = `
+                <div class="video-shield"></div>
+                <iframe 
+                    src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&fs=0&controls=1&disablekb=1" 
+                    allow="autoplay" 
+                    style="width:100%; height:100%; border:none;">
+                </iframe>`;
+        }
+
         function toggleRitual() {
             var box = document.getElementById('ritual-box');
             box.style.display = (box.style.display === 'block') ? 'none' : 'block';
-        }
-
-        function playDirect(container, videoId) {
-            container.innerHTML = '<iframe src="https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0" allow="autoplay; encrypted-media" style="width:100%; height:100%; border:none;" allowfullscreen></iframe>';
         }
     </script>
 </body>
