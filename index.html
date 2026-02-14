@@ -116,40 +116,24 @@
 <body oncontextmenu="return false;">
 <div id="login-screen">
     <div class="login-box">
-        
-        <div style="margin-bottom: 20px;">
-            <img src="http://googleusercontent.com/image_collection/image_retrieval/17289274728590023307_0" 
-                 alt="Péndulo" 
-                 style="width: 80px; height: auto; filter: drop-shadow(0 0 10px var(--oro-brillo));">
-        </div>
-        
-        <h1 style="color: #fff; font-size: 32px; margin: 0; font-family: serif; font-weight: bold;">Péndulo Express</h1>
+        <h1 style="color: #fff; font-size: 32px; margin: 0; font-family: sans-serif; font-weight: bold;">Péndulo Express</h1>
         <p style="color: var(--cyan); font-size: 11px; letter-spacing: 4px; margin-top: 10px; margin-bottom: 30px;">AULA VIRTUAL</p>
         
-        <input type="text" id="user" placeholder="Usuario" style="background: #eef4ff; color: #000;">
+        <input type="text" id="user" placeholder="Usuario" style="background: #eef4ff; color: #000; width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 8px; border: none; box-sizing: border-box;">
         
-        <div style="position: relative; width: 100%;">
-            <input type="password" id="pass" placeholder="Contraseña" style="background: #eef4ff; color: #000; width: 100%; padding-right: 40px; box-sizing: border-box;">
-            <span onclick="togglePass()" style="position: absolute; right: 10px; top: 12px; cursor: pointer; color: #666; font-size: 18px;">👁️</span>
+        <div style="position: relative; width: 100%; margin-bottom: 20px;">
+            <input type="password" id="pass" placeholder="Contraseña" style="background: #eef4ff; color: #000; width: 100%; padding: 12px; padding-right: 40px; border-radius: 8px; border: none; box-sizing: border-box;">
+            <span onclick="togglePass()" style="position: absolute; right: 10px; top: 10px; cursor: pointer; font-size: 20px;">👁️</span>
         </div>
         
-        <button class="btn-ingresar" onclick="checkAccess()" style="background: var(--oro); color: #000; font-size: 16px; border-radius: 8px; width: 100%; margin-top: 15px;">INGRESAR AL AULA</button>
-        function togglePass() 
-        {
-    var x = document.getElementById("pass");
-    if (x.type === "password") {
-        x.type = "text";
-    } else {
-        x.type = "password";
-    }
-}
+        <button class="btn-ingresar" onclick="checkAccess()" style="background: #b4975a; color: #000; font-size: 16px; font-weight: bold; border-radius: 8px; width: 100%; padding: 12px; cursor: pointer; border: none;">INGRESAR AL AULA</button>
+        
         <p style="color: #666; font-size: 11px; margin-top: 30px; font-style: italic;">
             "Solo el que está en ley puede ver la verdad"<br>
             <span style="color: var(--oro); font-style: normal; font-weight: bold; font-size: 13px;">— EL COMANDANTE —</span>
         </p>
     </div>
 </div>
-   
 
     <div id="aula-completa">
         <header>
@@ -329,7 +313,28 @@
                 alert("Usuario o contraseña incorrectos."); 
             }
         }
+<script>
+    function togglePass() {
+        var x = document.getElementById("pass");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
 
+    function checkAccess() {
+        var u = document.getElementById('user').value.toLowerCase().trim();
+        var p = document.getElementById('pass').value.trim();
+        if(u === "pendulo" && p === "prueba") {
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('aula-completa').style.display = 'block';
+            window.scrollTo(0,0);
+        } else { 
+            alert("Acceso denegado: Tu vibración no coincide con la llave del Comandante."); 
+        }
+    }
+</script>
         // CAMBIO DE SOLAPAS
         function showTab(tabId, btn) {
             var tabs = document.getElementsByClassName('tab-content');
