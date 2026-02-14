@@ -5,158 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Taller de Péndulo Express - Aula Virtual</title>
     <style>
-        :root { 
-            --oro: #b4975a; 
-            --oro-brillo: rgba(180, 151, 90, 0.4);
-            --fondo: #0a0b10; 
-            --caja: #0f111a; 
-            --cyan: #00bcd4; 
-        }
+        :root { --oro: #b4975a; --fondo: #0a0b10; --caja: #0f111a; --cyan: #00bcd4; }
+        body { background-color: var(--fondo); color: #ffffff; font-family: 'Segoe UI', sans-serif; margin: 0; user-select: none; }
         
-        body { 
-            background-color: var(--fondo); 
-            color: #ffffff; 
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
-            margin: 0; 
-            padding: 0;
-            overflow-x: hidden; 
-            user-select: none; /* Evita que copien el texto */
-        }
-
-        /* CARGADOR */
-        #preloader {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: #000;
-            z-index: 100000;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            transition: opacity 0.5s ease;
-        }
-
-        .pendulo-loader {
-            width: 2px;
-            height: 80px;
-            background: var(--oro);
-            position: relative;
-            animation: oscilar 1.5s ease-in-out infinite;
-            transform-origin: top center;
-        }
-
-        .pendulo-loader::after {
-            content: "";
-            position: absolute;
-            bottom: -15px; left: -14px;
-            width: 30px; height: 30px;
-            background: var(--oro);
-            clip-path: polygon(50% 100%, 0% 20%, 100% 20%);
-        }
-
-        @keyframes oscilar {
-            0% { transform: rotate(35deg); }
-            50% { transform: rotate(-35deg); }
-            100% { transform: rotate(35deg); }
-        }
+        /* PRELOADER PÉNDULO */
+        #preloader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 10000; display: none; justify-content: center; align-items: center; flex-direction: column; }
+        .pendulo-anim { width: 2px; height: 80px; background: var(--oro); transform-origin: top center; animation: oscilar 1.5s ease-in-out infinite; }
+        .pendulo-anim::after { content: ""; position: absolute; bottom: -15px; left: -14px; width: 30px; height: 30px; background: var(--oro); clip-path: polygon(50% 100%, 0% 20%, 100% 20%); }
+        @keyframes oscilar { 0%, 100% { transform: rotate(30deg); } 50% { transform: rotate(-30deg); } }
 
         /* LOGIN */
-        #login-screen { 
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: #000000; display: flex; justify-content: center; align-items: center; z-index: 99999; 
-        }
-        .login-box { 
-            border: 1px solid var(--oro); padding: 30px; border-radius: 15px; 
-            width: 85%; max-width: 320px; background: #0d0d0d; text-align: center;
-            box-shadow: 0 0 30px rgba(180, 151, 90, 0.2);
-        }
-        input { display: block; width: 100%; box-sizing: border-box; margin: 15px auto; padding: 12px; background: #000; border: 1px solid #333; color: #fff; text-align: center; border-radius: 5px; font-size: 16px; }
-        .btn-ingresar { 
-            background: var(--oro); color: #000; border: none; padding: 14px; width: 100%; 
-            cursor: pointer; font-weight: bold; border-radius: 5px; text-transform: uppercase;
-        }
+        #login-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; justify-content: center; align-items: center; z-index: 9999; }
+        .login-box { border: 1px solid var(--oro); padding: 30px; border-radius: 15px; background: #0d0d0d; text-align: center; width: 280px; }
+        input { display: block; width: 100%; margin: 10px 0; padding: 12px; background: #000; border: 1px solid #333; color: #fff; border-radius: 5px; box-sizing: border-box; }
+        .btn-ingresar { background: var(--oro); color: #000; border: none; padding: 12px; width: 100%; cursor: pointer; font-weight: bold; border-radius: 5px; }
 
-        #aula-completa { display: none; width: 100%; }
+        /* ESTRUCTURA AULA */
+        #aula-completa { display: none; padding: 20px; }
+        header { text-align: center; padding: 20px 0; }
+        header h1 { color: var(--oro); font-family: serif; margin: 0; font-size: 24px; }
+        nav { display: flex; flex-wrap: wrap; gap: 5px; margin: 20px 0; }
+        nav button { flex: 1; min-width: 100px; padding: 10px; font-size: 11px; background: #1a1d29; border: 1px solid #333; color: #fff; cursor: pointer; border-radius: 4px; }
+        nav button.active { border-color: var(--oro); color: var(--oro); }
 
-        header { padding: 40px 15px 10px 15px; text-align: center; }
-        header h1 { color: var(--oro); font-size: clamp(20px, 6vw, 32px); letter-spacing: 2px; margin: 0; font-family: serif; }
-        header p { color: var(--cyan); text-transform: uppercase; letter-spacing: 4px; font-size: 10px; margin-top: 10px; }
-
-        nav { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; padding: 15px; }
-        nav button { 
-            background: rgba(255,255,255,0.03); border: 1px solid #333; color: #888; 
-            padding: 10px 15px; cursor: pointer; text-transform: uppercase; font-size: 10px; 
-            border-radius: 4px; flex-grow: 1; max-width: 150px;
-        }
-        nav button.active { border-color: var(--oro); color: var(--oro); background: rgba(180, 151, 90, 0.1); }
-
-        .aula-content { 
-            max-width: 800px; 
-            margin: 10px auto; 
-            background: var(--caja); 
-            padding: 25px 20px; 
-            border-radius: 12px; 
-            width: 90%; 
-            box-sizing: border-box;
-        }
-        
-        .tab-content { display: none; animation: fadeIn 0.5s; }
+        .aula-content { max-width: 800px; margin: 0 auto; background: var(--caja); padding: 20px; border-radius: 10px; }
+        .tab-content { display: none; }
         .tab-content.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
-
-        h2 { color: var(--oro); font-size: 22px; text-align: center; margin-bottom: 25px; font-family: serif; border-bottom: 1px solid #222; padding-bottom: 15px; }
         
-        .item-list { list-style: none; padding: 0; }
-        .item-list li { margin: 15px 0; color: #e0e0e0; display: flex; align-items: flex-start; font-size: 16px; line-height: 1.6; }
-        .item-list li::before { content: "✧"; color: var(--oro); margin-right: 12px; }
+        /* PROTECCIÓN DE VIDEO */
+        .video-block { position: relative; width: 100%; max-width: 300px; margin: 20px auto; aspect-ratio: 9/16; border-radius: 15px; overflow: hidden; border: 1px solid #333; }
+        .video-shield { position: absolute; top: 0; left: 0; width: 100%; height: 80px; z-index: 5; background: transparent; } /* Bloquea el título */
+        .video-shield-bottom { position: absolute; bottom: 0; left: 0; width: 100%; height: 50px; z-index: 5; background: transparent; } /* Bloquea logo YT */
+        iframe { width: 100%; height: 100%; border: none; }
 
-        /* VIDEOS CON BLOQUEO */
-        .video-container { margin: 35px auto; text-align: center; width: 100%; position: relative; }
-        .video-label { color: var(--oro); font-size: 12px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; display: block; font-weight: bold; }
-        
-        .video-wrapper {
-            position: relative; width: 100%; max-width: 280px; aspect-ratio: 9 / 16; margin: 0 auto;
-            border: 1px solid rgba(180, 151, 90, 0.3); border-radius: 20px; overflow: hidden; 
-            background: #000; cursor: pointer; background-size: cover; background-position: center;
-        }
-
-        /* ESCUDO INVISIBLE: Evita clics en el título y logo de YouTube */
-        .video-shield {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 10;
-            background: transparent;
-            pointer-events: all;
-            display: none; /* Se activa al reproducir */
-        }
-        
-        .play-button {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 70px; height: 70px; background: rgba(180, 151, 90, 0.9);
-            border-radius: 50%; display: flex; justify-content: center; align-items: center; border: 2px solid #fff; z-index: 11;
-        }
-        .play-button::after { content: ""; border-style: solid; border-width: 12px 0 12px 22px; border-color: transparent transparent transparent white; margin-left: 6px; }
-
-        .btn-ritual { background: rgba(180, 151, 90, 0.05); border: 1px solid var(--oro); color: var(--oro); width: 100%; padding: 18px; cursor: pointer; text-transform: uppercase; margin-bottom: 20px; border-radius: 8px; font-weight: bold; }
-        .box-ritual { display: none; border: 1px solid #333; padding: 25px; border-radius: 12px; background: #0c0e15; margin-bottom: 30px; line-height: 1.8; }
-        
-        .info-box { background: rgba(180, 151, 90, 0.05); padding: 25px; border-radius: 12px; border-left: 4px solid var(--oro); margin-bottom: 25px; line-height: 1.7; color: #ccc; font-size: 15px; }
-
-        footer { margin-top: 30px; padding: 40px 20px; text-align: center; border-top: 1px solid #222; background: #05060a; }
-        .footer-frase { font-style: italic; color: var(--oro); font-size: 15px; margin-bottom: 20px; }
-        .social-links a { color: var(--cyan); text-decoration: none; margin: 0 15px; font-size: 12px; letter-spacing: 2px; }
-        .copyright { margin-top: 30px; font-size: 9px; color: #444; text-transform: uppercase; }
+        .info-box { background: rgba(180, 151, 90, 0.05); padding: 15px; border-left: 3px solid var(--oro); margin: 15px 0; line-height: 1.6; }
+        footer { text-align: center; margin-top: 40px; padding: 20px; border-top: 1px solid #222; font-size: 12px; color: var(--oro); }
     </style>
 </head>
-<body oncontextmenu="return false;"> <div id="preloader">
-        <div class="pendulo-loader"></div>
-        <p style="color: var(--oro); margin-top: 40px; letter-spacing: 5px; font-size: 11px; text-transform: uppercase;">Conectando con la energía...</p>
+<body oncontextmenu="return false;">
+
+    <div id="preloader">
+        <div class="pendulo-anim"></div>
+        <p style="color:var(--oro); margin-top:30px; letter-spacing:3px;">SINTONIZANDO...</p>
     </div>
 
     <div id="login-screen">
         <div class="login-box">
-            <h1 style="color: var(--oro); font-size: 22px; margin-bottom: 5px; font-family: serif;">PÉNDULO EXPRESS</h1>
-            <p style="color: var(--cyan); font-size: 10px; letter-spacing: 4px; margin-bottom: 25px;">AULA VIRTUAL</p>
+            <h2 style="color:var(--oro); margin-top:0;">BIENVENIDO</h2>
             <input type="text" id="user" placeholder="Usuario">
             <input type="password" id="pass" placeholder="Contraseña">
             <button class="btn-ingresar" onclick="checkAccess()">INGRESAR</button>
@@ -165,150 +60,109 @@
 
     <div id="aula-completa">
         <header>
-            <h1>TALLER DE PÉNDULO EXPRESS</h1>
-            <p>AULA VIRTUAL</p>
+            <h1>PÉNDULO EXPRESS</h1>
+            <p style="color:var(--cyan); font-size:10px; letter-spacing:3px;">AULA VIRTUAL CELINA</p>
         </header>
 
-        <nav>
-            <button onclick="showTab('materiales', this)" class="active">Materiales</button>
-            <button onclick="showTab('limpieza', this)">Limpieza</button>
-            <button onclick="showTab('proteccion', this)">Espacio Sagrado</button>
-            <button onclick="showTab('funcionamiento', this)">Funcionamiento</button>
-            <button onclick="showTab('chakras', this)">Chakras</button>
+        <nav id="mainNav">
+            <button onclick="showTab('tab1', this)" class="active">Materiales</button>
+            <button onclick="showTab('tab2', this)">Limpieza</button>
+            <button onclick="showTab('tab3', this)">Protección</button>
+            <button onclick="showTab('tab4', this)">Funcionamiento</button>
+            <button onclick="showTab('tab5', this)">Chakras</button>
         </nav>
 
         <div class="aula-content">
-            <div id="materiales" class="tab-content active">
-                <h2>Materiales de Trabajo</h2>
-                <ul class="item-list">
-                    <li><strong>Péndulo:</strong> Cristal, Madera u Orgonita. Elige el que resuene contigo.</li>
-                    <li>Lugar tranquilo y armonioso para trabajar.</li>
-                    <li>Mesa o lugar de apoyo para estar cómodo.</li>
-                    <li>Lápiz negro y papel (para trabajos a distancia).</li>
-                    <li>Música de meditación para abrir el espacio sagrado.</li>
-                </ul>
-                <div class="video-container">
-                    <span class="video-label">Video: Introducción</span>
-                    <div class="video-wrapper" style="background-image: url('materiales.jpg');" onclick="playLocked(this, 'IV0Aa1k0gX0')">
-                        <div class="play-button"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="limpieza" class="tab-content">
-                <h2>Limpieza y Consagración</h2>
-                <button class="btn-ritual" onclick="toggleRitual()">VER RITUAL Y FRASE DE CONSAGRACIÓN</button>
-                <div id="ritual-box" class="box-ritual">
-                    <p>La forma más rápida es con <strong>Sahumerio</strong>. El humo debe envolver al péndulo por completo desde abajo hacia arriba.</p>
-                    <p style="font-style: italic; color: var(--oro);">"A partir de este momento te consagro para que trabajes en la luz..."</p>
-                </div>
-                <div class="video-container">
-                    <span class="video-label">Video: Técnica</span>
-                    <div class="video-wrapper" style="background-image: url('limpieza.jpg');" onclick="playLocked(this, 'eduRIA3ceis')">
-                        <div class="play-button"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="proteccion" class="tab-content">
-                <h2>Espacio Sagrado y Protección</h2>
+            <div id="tab1" class="tab-content active">
+                <h2 style="color:var(--oro)">Materiales de Trabajo</h2>
                 <div class="info-box">
-                    Es fundamental proteger el lugar utilizando el <strong>Símbolo de Pentagrama</strong> para sellar el ambiente.
+                    • <b>Péndulo:</b> Puede ser de cristal, madera u orgonita.<br>
+                    • <b>Ambiente:</b> Un lugar tranquilo sin interrupciones.<br>
+                    • <b>Elementos:</b> Lápiz, papel y tu guía impresa.
                 </div>
-                <div style="text-align: center; margin-bottom: 30px;">
-                    <img src="pentagrama.jpg" alt="Pentagrama" style="width: 100%; max-width: 200px; border-radius: 10px; border: 1px solid var(--oro);">
-                </div>
-                <div class="video-container">
-                    <span class="video-label">Video: Protección</span>
-                    <div class="video-wrapper" style="background-image: url('proteccion.jpg');" onclick="playLocked(this, 'R24gh8hWlu0')">
-                        <div class="play-button"></div>
-                    </div>
+                <div class="video-block">
+                    <div class="video-shield"></div>
+                    <iframe src="https://www.youtube.com/embed/IV0Aa1k0gX0?rel=0&modestbranding=1&controls=1&showinfo=0&fs=0" allowfullscreen="false"></iframe>
+                    <div class="video-shield-bottom"></div>
                 </div>
             </div>
 
-            <div id="funcionamiento" class="tab-content">
-                <h2>Funcionamiento del Péndulo</h2>
+            <div id="tab2" class="tab-content">
+                <h2 style="color:var(--oro)">Limpieza y Consagración</h2>
                 <div class="info-box">
-                    <strong>El lenguaje del Péndulo:</strong> El péndulo comunica la mente consciente e inconsciente. Traza dibujos que el hemisferio derecho comprende y el izquierdo procesa.<br><br>
-                    <strong>Sintonización:</strong> Haz una pregunta obvia para el SÍ y una falsa para el NO. Mantén siempre actitud neutral.
+                    Utiliza el humo de un sahumerio para limpiar las energías previas. Sostén el péndulo y repite:<br>
+                    <i>"Te consagro en la luz para que tus respuestas sean claras y certeras."</i>
                 </div>
-                <div class="video-container">
-                    <span class="video-label">Video: Sintonización</span>
-                    <div class="video-wrapper" style="background-image: url('movimiento.jpg');" onclick="playLocked(this, 'Xg2_Wo2K-zA')">
-                        <div class="play-button"></div>
-                    </div>
+                <div class="video-block">
+                    <div class="video-shield"></div>
+                    <iframe src="https://www.youtube.com/embed/eduRIA3ceis?rel=0&modestbranding=1&controls=1&fs=0" allowfullscreen="false"></iframe>
+                    <div class="video-shield-bottom"></div>
                 </div>
             </div>
 
-            <div id="chakras" class="tab-content">
-                <h2>Armonización de Chakras</h2>
+            <div id="tab3" class="tab-content">
+                <h2 style="color:var(--oro)">Espacio Sagrado</h2>
                 <div class="info-box">
-                    <strong>Interpretación:</strong> Horario (Sano), Anti-horario (Bloqueo), Sin movimiento (Cerrado).
+                    Antes de comenzar, visualiza un círculo de luz. Puedes utilizar el símbolo del pentagrama para sellar el espacio de trabajo.
                 </div>
-                <div class="video-container">
-                    <span class="video-label">Video: Práctica</span>
-                    <div class="video-wrapper" style="background-image: url('testeo.jpg');" onclick="playLocked(this, 'NJ-5aywOkAI')">
-                        <div class="play-button"></div>
-                    </div>
+                <center><img src="pentagrama.jpg" style="width:150px; opacity:0.7;"></center>
+                <div class="video-block">
+                    <div class="video-shield"></div>
+                    <iframe src="https://www.youtube.com/embed/R24gh8hWlu0?rel=0&modestbranding=1&controls=1&fs=0" allowfullscreen="false"></iframe>
+                    <div class="video-shield-bottom"></div>
+                </div>
+            </div>
+
+            <div id="tab4" class="tab-content">
+                <h2 style="color:var(--oro)">Funcionamiento</h2>
+                <div class="info-box">
+                    El péndulo es una extensión de tu sistema nervioso. Aprende a identificar tu "SÍ" y tu "NO" mediante la sintonización consciente.
+                </div>
+                <div class="video-block">
+                    <div class="video-shield"></div>
+                    <iframe src="https://www.youtube.com/embed/Xg2_Wo2K-zA?rel=0&modestbranding=1&controls=1&fs=0" allowfullscreen="false"></iframe>
+                    <div class="video-shield-bottom"></div>
+                </div>
+            </div>
+
+            <div id="tab5" class="tab-content">
+                <h2 style="color:var(--oro)">Armonización de Chakras</h2>
+                <div class="info-box">
+                    Pasa el péndulo sobre cada centro energético. Si gira a la derecha, está fluido; a la izquierda, hay un bloqueo que liberar.
+                </div>
+                <div class="video-block">
+                    <div class="video-shield"></div>
+                    <iframe src="https://www.youtube.com/embed/NJ-5aywOkAI?rel=0&modestbranding=1&controls=1&fs=0" allowfullscreen="false"></iframe>
+                    <div class="video-shield-bottom"></div>
                 </div>
             </div>
         </div>
 
         <footer>
-            <p class="footer-frase">"Que la luz de la verdad guíe cada uno de tus movimientos."</p>
-            <div class="social-links">
-                <a href="#">INSTAGRAM</a>
-                <a href="#">WHATSAPP</a>
-            </div>
-            <p class="copyright">© 2026 Celina · Péndulo Express</p>
+            <p>"Que la luz de la verdad guíe cada uno de tus movimientos."</p>
+            <p>© 2026 Celina - Todos los derechos reservados</p>
         </footer>
     </div>
 
     <script>
         function checkAccess() {
-            var u = document.getElementById('user').value.toLowerCase().trim();
-            var p = document.getElementById('pass').value.trim();
+            const u = document.getElementById('user').value.toLowerCase().trim();
+            const p = document.getElementById('pass').value.trim();
             if(u === "pendulo" && p === "prueba") {
                 document.getElementById('login-screen').style.display = 'none';
-                var loader = document.getElementById('preloader');
-                loader.style.display = 'flex';
-                setTimeout(function() {
-                    loader.style.opacity = '0';
-                    setTimeout(function() {
-                        loader.style.display = 'none';
-                        document.getElementById('aula-completa').style.display = 'block';
-                        window.scrollTo(0,0);
-                    }, 500);
-                }, 2500);
-            } else { alert("Datos incorrectos."); }
+                document.getElementById('preloader').style.display = 'flex';
+                setTimeout(() => {
+                    document.getElementById('preloader').style.display = 'none';
+                    document.getElementById('aula-completa').style.display = 'block';
+                }, 2000);
+            } else { alert("Datos incorrectos"); }
         }
 
-        function showTab(tabId, btn) {
-            var tabs = document.getElementsByClassName('tab-content');
-            for (var i = 0; i < tabs.length; i++) { tabs[i].classList.remove('active'); }
-            var buttons = document.querySelectorAll('nav button');
-            for (var j = 0; j < buttons.length; j++) { buttons[j].classList.remove('active'); }
-            document.getElementById(tabId).classList.add('active');
+        function showTab(id, btn) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
             btn.classList.add('active');
-            window.scrollTo({ top: 120, behavior: 'smooth' });
-        }
-
-        // FUNCIÓN PARA REPRODUCIR CON BLOQUEOS
-        function playLocked(container, videoId) {
-            // Reemplaza el contenido con el iframe y una capa protectora
-            // fs=0 (desactiva pantalla completa), rel=0 (no videos relacionados), modestbranding=1 (quita logo extra)
-            container.innerHTML = `
-                <div class="video-shield"></div>
-                <iframe 
-                    src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&fs=0&controls=1&disablekb=1" 
-                    allow="autoplay" 
-                    style="width:100%; height:100%; border:none;">
-                </iframe>`;
-        }
-
-        function toggleRitual() {
-            var box = document.getElementById('ritual-box');
-            box.style.display = (box.style.display === 'block') ? 'none' : 'block';
         }
     </script>
 </body>
