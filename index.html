@@ -100,23 +100,28 @@
         }        }
 
         /* VIDEOS ADAPTATIVOS */
+/* --- ESTO ARREGLA EL ESPACIADO DE LOS VIDEOS --- */
 .video-container { 
-            margin-top: 100px !important; /* Forzamos 100px de separación con el de arriba */
-            margin-bottom: 20px; 
-            text-align: center; 
-            width: 100%; 
-            clear: both; /* Asegura que no haya elementos flotando cerca */
-        }
-     .video-label { 
-            color: var(--oro); 
-            font-size: 12px; 
-            text-transform: uppercase; 
-            letter-spacing: 2px; 
-            margin-bottom: 15px; 
-            display: block; 
-            font-weight: bold;
-            text-align: center; /* ESTA ES LA LÍNEA QUE TENÉS QUE AGREGAR */
-        }
+    margin-top: 100px !important; 
+    margin-bottom: 20px !important; 
+    display: block !important;
+    width: 100% !important;
+    clear: both !important;
+}
+
+.video-container:first-of-type { 
+    margin-top: 30px !important; 
+}
+
+.video-label { 
+    text-align: center !important; 
+    display: block !important;
+    margin-bottom: 25px !important;
+    color: var(--oro) !important;
+    font-weight: bold !important;
+    width: 100% !important;
+}
+/* --- FIN DEL ARREGLO --- */
         .video-wrapper {
             position: relative; 
             width: 100%; 
