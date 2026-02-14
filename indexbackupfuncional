@@ -6,7 +6,7 @@
     <title>Taller de Péndulo Express - Aula Virtual</title>
     <style>
         :root { 
-            --oro: #b4975a; 
+            --oro: #ff0000; 
             --oro-brillo: rgba(180, 151, 90, 0.4);
             --fondo: #0a0b10; 
             --caja: #0f111a; 
