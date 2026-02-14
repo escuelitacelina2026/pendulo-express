@@ -5,61 +5,105 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Taller de Péndulo Express - Aula Virtual</title>
     <style>
-        :root { --oro: #b4975a; --fondo: #0a0b10; --caja: #0f111a; --cyan: #00bcd4; }
+        :root { 
+            --oro: #b4975a; 
+            --oro-brillo: rgba(180, 151, 90, 0.4);
+            --fondo: #0a0b10; 
+            --caja: #0f111a; 
+            --cyan: #00bcd4; 
+        }
         
         /* LOGIN BLINDADO */
         #login-screen { 
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; 
             background: #000000; display: flex; justify-content: center; align-items: center; z-index: 99999; 
         }
-        .login-box { border: 1px solid var(--oro); padding: 40px; border-radius: 10px; width: 320px; background: #0d0d0d; text-align: center; }
+        .login-box { 
+            border: 1px solid var(--oro); padding: 40px; border-radius: 15px; 
+            width: 320px; background: #0d0d0d; text-align: center;
+            box-shadow: 0 0 30px rgba(180, 151, 90, 0.2);
+        }
         input { display: block; width: 90%; margin: 15px auto; padding: 12px; background: #000; border: 1px solid #333; color: #fff; text-align: center; border-radius: 5px; }
-        .btn-ingresar { background: var(--oro); color: #000; border: none; padding: 14px; width: 100%; cursor: pointer; font-weight: bold; border-radius: 5px; text-transform: uppercase; }
+        .btn-ingresar { 
+            background: var(--oro); color: #000; border: none; padding: 14px; width: 100%; 
+            cursor: pointer; font-weight: bold; border-radius: 5px; text-transform: uppercase;
+            transition: 0.3s;
+        }
+        .btn-ingresar:hover { box-shadow: 0 0 15px var(--oro); transform: scale(1.02); }
 
         #aula-completa { display: none; }
 
         body { background-color: var(--fondo); color: #ffffff; font-family: 'Segoe UI', sans-serif; margin: 0; overflow-x: hidden; }
-        header { padding: 40px 0 10px 0; text-align: center; }
-        header h1 { color: var(--oro); font-size: 28px; letter-spacing: 3px; margin: 0; font-family: serif; }
-        header p { color: var(--cyan); text-transform: uppercase; letter-spacing: 5px; font-size: 11px; }
+        header { padding: 50px 0 20px 0; text-align: center; }
+        header h1 { color: var(--oro); font-size: 32px; letter-spacing: 4px; margin: 0; font-family: serif; text-shadow: 0 0 10px var(--oro-brillo); }
+        header p { color: var(--cyan); text-transform: uppercase; letter-spacing: 6px; font-size: 12px; margin-top: 10px; }
 
-        nav { display: flex; justify-content: center; flex-wrap: wrap; gap: 5px; padding: 15px; }
-        nav button { background: none; border: 1px solid #333; color: #888; padding: 10px 15px; cursor: pointer; text-transform: uppercase; font-size: 10px; }
-        nav button.active { border-color: var(--oro); color: var(--oro); }
+        nav { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; padding: 20px; }
+        nav button { 
+            background: rgba(255,255,255,0.03); border: 1px solid #333; color: #888; 
+            padding: 12px 20px; cursor: pointer; text-transform: uppercase; font-size: 11px; 
+            transition: 0.4s; border-radius: 4px;
+        }
+        nav button:hover { border-color: var(--oro); color: #eee; box-shadow: 0 0 10px var(--oro-brillo); }
+        nav button.active { border-color: var(--oro); color: var(--oro); background: rgba(180, 151, 90, 0.05); box-shadow: 0 0 15px var(--oro-brillo); }
 
-        .aula-content { max-width: 800px; margin: 20px auto; background: var(--caja); padding: 30px; border-radius: 8px; }
-        .tab-content { display: none; }
+        .aula-content { max-width: 850px; margin: 20px auto; background: var(--caja); padding: 40px; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
+        .tab-content { display: none; animation: fadeIn 0.5s; }
         .tab-content.active { display: block; }
 
-        h2 { color: var(--oro); font-size: 22px; text-align: center; margin-bottom: 25px; font-family: serif; border-bottom: 1px solid #222; padding-bottom: 10px; }
-        .item-list { list-style: none; padding: 0; }
-        .item-list li { margin: 15px 0; color: #e0e0e0; display: flex; align-items: center; font-size: 16px; }
-        .item-list li::before { content: "✧"; color: var(--oro); margin-right: 12px; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* VIDEOS SEGUROS */
-        .video-wrapper {
-            position: relative; width: 280px; height: 500px; margin: 30px auto;
-            border: 2px solid var(--oro); border-radius: 20px; overflow: hidden; background: #000; cursor: pointer;
+        h2 { color: var(--oro); font-size: 24px; text-align: center; margin-bottom: 30px; font-family: serif; border-bottom: 1px solid #222; padding-bottom: 15px; }
+        
+        .item-list { list-style: none; padding: 0; }
+        .item-list li { margin: 18px 0; color: #e0e0e0; display: flex; align-items: center; font-size: 16px; }
+        .item-list li::before { content: "✧"; color: var(--oro); margin-right: 15px; font-weight: bold; }
+
+        /* VIDEO WRAPPER CON GLOW */
+        .video-container { margin: 40px auto; text-align: center; }
+        .video-label { 
+            color: var(--oro); font-size: 13px; text-transform: uppercase; 
+            letter-spacing: 2px; margin-bottom: 12px; display: block; font-weight: bold;
         }
-        .video-poster { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 10; }
+        .video-wrapper {
+            position: relative; width: 280px; height: 500px; margin: 0 auto;
+            border: 1px solid rgba(180, 151, 90, 0.3); border-radius: 20px; overflow: hidden; 
+            background: #000; cursor: pointer; transition: 0.5s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.8);
+        }
+        .video-wrapper:hover { 
+            border-color: var(--oro); 
+            box-shadow: 0 0 25px var(--oro-brillo); 
+            transform: translateY(-5px);
+        }
+        .video-poster { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 10; filter: brightness(0.8); transition: 0.5s; }
+        .video-wrapper:hover .video-poster { filter: brightness(1); }
+        
         .play-button {
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 65px; height: 65px; background: rgba(180, 151, 90, 0.9);
-            border-radius: 50%; z-index: 20; display: flex; justify-content: center; align-items: center; border: 2px solid #fff;
+            width: 70px; height: 70px; background: rgba(180, 151, 90, 0.9);
+            border-radius: 50%; z-index: 20; display: flex; justify-content: center; align-items: center; 
+            border: 2px solid #fff; box-shadow: 0 0 20px rgba(0,0,0,0.5);
         }
         .play-button::after { content: ""; border-style: solid; border-width: 12px 0 12px 22px; border-color: transparent transparent transparent white; margin-left: 6px; }
         .top-blocker { position: absolute; top: 0; left: 0; width: 100%; height: 60px; z-index: 50; background: transparent; }
 
-        .btn-ritual { background: none; border: 1px solid var(--oro); color: var(--oro); width: 100%; padding: 15px; cursor: pointer; text-transform: uppercase; margin-bottom: 15px; }
-        .box-ritual { display: none; border: 1px solid #333; padding: 25px; border-radius: 8px; background: #0c0e15; margin-bottom: 30px; }
+        .btn-ritual { 
+            background: rgba(180, 151, 90, 0.05); border: 1px solid var(--oro); color: var(--oro); 
+            width: 100%; padding: 18px; cursor: pointer; text-transform: uppercase; margin-bottom: 20px; 
+            transition: 0.3s; border-radius: 8px; font-weight: bold; letter-spacing: 1px;
+        }
+        .btn-ritual:hover { background: rgba(180, 151, 90, 0.15); box-shadow: 0 0 15px var(--oro-brillo); }
+        
+        .box-ritual { display: none; border: 1px solid #333; padding: 25px; border-radius: 12px; background: #0c0e15; margin-bottom: 30px; box-shadow: inset 0 0 20px rgba(0,0,0,0.5); }
     </style>
 </head>
 <body oncontextmenu="return false;">
 
     <div id="login-screen">
         <div class="login-box">
-            <h1 style="color: var(--oro); font-size: 20px; margin-bottom: 10px;">PÉNDULO EXPRESS</h1>
-            <p style="color: var(--cyan); font-size: 10px; letter-spacing: 3px; margin-bottom: 20px;">AULA VIRTUAL</p>
+            <h1 style="color: var(--oro); font-size: 22px; margin-bottom: 5px; font-family: serif;">PÉNDULO EXPRESS</h1>
+            <p style="color: var(--cyan); font-size: 10px; letter-spacing: 4px; margin-bottom: 25px;">AULA VIRTUAL</p>
             <input type="text" id="user" placeholder="Usuario">
             <input type="password" id="pass" placeholder="Contraseña">
             <button class="btn-ingresar" onclick="checkAccess()">INGRESAR</button>
@@ -89,9 +133,11 @@
                     <li>Lugar tranquilo y armonioso para trabajar.</li>
                     <li>Lápiz negro y papel para realizar el trabajo a distancia.</li>
                 </ul>
-                <div class="video-wrapper" onclick="playDirect(this, 'IV0Aa1k0gX0')">
-                    <img src="materiales.jpg" class="video-poster">
-                    <div class="play-button"></div>
+                <div class="video-container">
+                    <div class="video-wrapper" onclick="playDirect(this, 'IV0Aa1k0gX0')">
+                        <img src="materiales.jpg" class="video-poster">
+                        <div class="play-button"></div>
+                    </div>
                 </div>
             </div>
 
@@ -105,11 +151,13 @@
                         <li>Llevarlo a la nariz, inspirar y exhalar 3 veces.</li>
                         <li>Llevarlo al entrecejo y luego al corazón.</li>
                     </ul>
-                    <p style="font-style: italic; color: var(--oro); border-top: 1px solid #222; padding-top: 15px;">"A partir de este momento te consagro para que trabajes en la luz, muestres siempre la verdad, estés en ley, tus respuestas vengan siempre del ser superior y sean sabias, claras, precisas y seguras. Gracias".</p>
+                    <p style="font-style: italic; color: var(--oro); border-top: 1px solid #222; padding-top: 20px; line-height: 1.8;">"A partir de este momento te consagro para que trabajes en la luz, muestres siempre la verdad, estés en ley, tus respuestas vengan siempre del ser superior y sean sabias, claras, precisas y seguras. Gracias".</p>
                 </div>
-                <div class="video-wrapper" onclick="playDirect(this, 'eduRIA3ceis')">
-                    <img src="limpieza.jpg" class="video-poster">
-                    <div class="play-button"></div>
+                <div class="video-container">
+                    <div class="video-wrapper" onclick="playDirect(this, 'eduRIA3ceis')">
+                        <img src="limpieza.jpg" class="video-poster">
+                        <div class="play-button"></div>
+                    </div>
                 </div>
             </div>
 
@@ -119,63 +167,81 @@
                     <li>Visualización de luz blanca protectora.</li>
                     <li>Invocación de guías espirituales.</li>
                 </ul>
-                <div class="video-wrapper" onclick="playDirect(this, 'R24gh8hWlu0')">
-                    <img src="proteccion.jpg" class="video-poster">
-                    <div class="play-button"></div>
+                <div class="video-container">
+                    <div class="video-wrapper" onclick="playDirect(this, 'R24gh8hWlu0')">
+                        <img src="proteccion.jpg" class="video-poster">
+                        <div class="play-button"></div>
+                    </div>
                 </div>
             </div>
 
             <div id="chakras" class="tab-content">
                 <h2>Armonización de Chakras</h2>
-                <div style="background: rgba(180, 151, 90, 0.1); border: 1px dashed var(--oro); padding: 25px; border-radius: 8px; margin-bottom: 30px; line-height: 1.8; color: #e0e0e0;">
+                <div style="background: rgba(180, 151, 90, 0.08); border: 1px dashed var(--oro); padding: 25px; border-radius: 12px; margin-bottom: 40px; line-height: 1.8; color: #e0e0e0; box-shadow: inset 0 0 15px rgba(0,0,0,0.3);">
                     <p style="margin: 0 0 15px 0;">✧ <strong>Si el péndulo no se mueve:</strong> El chakra está cerrado. La energía se encuentra estancada en la zona.</p>
                     <p style="margin: 0 0 20px 0;">✧ <strong>Si el pendulo gira en círculo sentido anti horario:</strong> La energía está fluyendo negativamente para el cuerpo.</p>
-                    <p style="margin: 0; color: var(--oro); border-top: 1px solid #333; padding-top: 15px;">Para saber que la energía está fluyendo correctamente, el péndulo deberá <strong>girar en sentido horario</strong>.</p>
+                    <p style="margin: 0; color: var(--oro); border-top: 1px solid #333; padding-top: 15px; font-weight: bold;">Para saber que la energía está fluyendo correctamente, el péndulo deberá girar en sentido horario.</p>
                 </div>
                 
-                <div class="video-wrapper" onclick="playDirect(this, 'NJ-5aywOkAI')">
-                    <img src="testeo.jpg" class="video-poster">
-                    <div class="play-button"></div>
+                <div class="video-container">
+                    <span class="video-label">Parte 1: Introducción al Testeo</span>
+                    <div class="video-wrapper" onclick="playDirect(this, 'NJ-5aywOkAI')">
+                        <img src="testeo.jpg" class="video-poster">
+                        <div class="play-button"></div>
+                    </div>
                 </div>
-                <div class="video-wrapper" onclick="playDirect(this, 'LngEN9cmHRg')">
-                    <img src="testeo.jpg" class="video-poster">
-                    <div class="play-button"></div>
+
+                <div class="video-container">
+                    <span class="video-label">Parte 2: Técnica de Armonización</span>
+                    <div class="video-wrapper" onclick="playDirect(this, 'LngEN9cmHRg')">
+                        <img src="testeo.jpg" class="video-poster">
+                        <div class="play-button"></div>
+                    </div>
                 </div>
-                <div class="video-wrapper" onclick="playDirect(this, 'WymTOGzcohY')">
-                    <img src="testeo.jpg" class="video-poster">
-                    <div class="play-button"></div>
+
+                <div class="video-container">
+                    <span class="video-label">Parte 3: Práctica Completa</span>
+                    <div class="video-wrapper" onclick="playDirect(this, 'WymTOGzcohY')">
+                        <img src="testeo.jpg" class="video-poster">
+                        <div class="play-button"></div>
+                    </div>
                 </div>
             </div>
 
             <div id="glosario" class="tab-content">
                 <h2>Glosario - Movimientos del Péndulo</h2>
                 
-                <div style="background: rgba(180, 151, 90, 0.05); padding: 20px; border-radius: 8px; border-left: 3px solid var(--oro); margin-bottom: 25px;">
-                    <p style="margin: 0; line-height: 1.6; color: #ccc;">
-                        El péndulo se comunica mediante un <strong>código de lenguaje</strong>; un código entre la mente consciente e inconsciente.
+                <div style="background: rgba(180, 151, 90, 0.05); padding: 25px; border-radius: 12px; border-left: 4px solid var(--oro); margin-bottom: 25px;">
+                    <p style="margin: 0; line-height: 1.7; color: #ccc;">
+                        El péndulo se comunica mediante un <strong>código de lenguaje</strong>; un puente entre la mente consciente e inconsciente.
                         <br><br>
-                        <strong>Hemisferio Cerebral Izquierdo:</strong> Deductivo, lógico, analítico, consciente, yang, maneja la palabra.
+                        <strong>Hemisferio Cerebral Izquierdo:</strong> Lógica, análisis, yang, palabra.
                         <br>
-                        <strong>Hemisferio Cerebral Derecho:</strong> Intuitivo, espiritual, holístico, inconsciente, yin, maneja los dibujos.
+                        <strong>Hemisferio Cerebral Derecho:</strong> Intuición, espiritualidad, yin, dibujos.
                     </p>
                 </div>
 
-                <div style="background: rgba(0, 188, 212, 0.05); padding: 20px; border-radius: 8px; border-left: 3px solid var(--cyan); margin-bottom: 25px;">
-                    <p style="margin: 0 0 10px 0; font-weight: bold; color: var(--cyan);">DESCUBRE TU SI Y TU NO:</p>
-                    <p style="margin: 0; font-size: 14px; color: #ccc;">
-                        <strong>Para el SI:</strong> Formula una pregunta afirmativa obvia (ej. ¿la nieve es blanca?). El movimiento resultante es tu SI.
-                        <br><br>
-                        <strong>Para el NO:</strong> Formula una pregunta negativa obvia (ej. ¿la nieve es negra?). El movimiento resultante es tu NO.
+                <div style="background: rgba(0, 188, 212, 0.05); padding: 25px; border-radius: 12px; border-left: 4px solid var(--cyan); margin-bottom: 40px;">
+                    <p style="margin: 0 0 10px 0; font-weight: bold; color: var(--cyan); text-transform: uppercase; letter-spacing: 1px;">Sintonización (SÍ / NO):</p>
+                    <p style="margin: 0; font-size: 15px; color: #ccc;">
+                        Pregunta algo obvio como <em>"¿La nieve es blanca?"</em> para descubrir tu <strong>SÍ</strong>, y <em>"¿La nieve es negra?"</em> para identificar tu <strong>NO</strong>.
                     </p>
                 </div>
 
-                <div class="video-wrapper" onclick="playDirect(this, 'Xg2_Wo2K-zA')">
-                    <img src="movimiento.jpg" class="video-poster">
-                    <div class="play-button"></div>
+                <div class="video-container">
+                    <span class="video-label">Video Informativo: Parte 1</span>
+                    <div class="video-wrapper" onclick="playDirect(this, 'Xg2_Wo2K-zA')">
+                        <img src="movimiento.jpg" class="video-poster">
+                        <div class="play-button"></div>
+                    </div>
                 </div>
-                <div class="video-wrapper" onclick="playDirect(this, 'aJMlz0t79ZI')">
-                    <img src="movimiento.jpg" class="video-poster">
-                    <div class="play-button"></div>
+
+                <div class="video-container">
+                    <span class="video-label">Video Informativo: Parte 2</span>
+                    <div class="video-wrapper" onclick="playDirect(this, 'aJMlz0t79ZI')">
+                        <img src="movimiento.jpg" class="video-poster">
+                        <div class="play-button"></div>
+                    </div>
                 </div>
             </div>
         </div>
