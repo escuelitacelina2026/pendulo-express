@@ -75,25 +75,29 @@
 .item-list li { 
             margin: 20px 0; 
             color: #e0e0e0; 
-            display: flex; /* Cambiamos a flex para alinear la estrella */
-            align-items: flex-start; 
+            display: flex; 
+            flex-wrap: wrap; /* Esto permite que la explicación baje */
+            align-items: center; 
             font-size: 16px; 
             line-height: 1.6; 
         }
 .item-list li strong { 
-            display: inline; /* Importante: inline para que la estrella se pegue */
+            display: inline-block; 
+            width: calc(100% - 30px); /* Ocupa el resto de la línea arriba */
             color: var(--oro); 
             text-transform: uppercase;
             font-size: 14px;
-            margin-right: 5px;
+            letter-spacing: 1px;
         }
-        .item-list li::before { 
-            content: "✧"; 
-            color: var(--oro); 
-            margin-right: 8px; /* Espacio justo entre la estrella y la palabra */
-            font-weight: bold;
-            display: inline-block;
-        }
+        .item-list li { 
+            margin: 20px 0; 
+            color: #e0e0e0; 
+            display: flex; 
+            flex-wrap: wrap; /* Esto permite que la explicación baje */
+            align-items: center; 
+            font-size: 16px; 
+            line-height: 1.6; 
+        }        }
 
         /* VIDEOS ADAPTATIVOS */
         .video-container { margin: 35px auto; text-align: center; width: 100%; }
@@ -183,16 +187,17 @@
         </nav>
 
         <div class="aula-content">
-            
             <div id="materiales" class="tab-content active">
-                <h2>Materiales de Trabajo</h2>
-                <ul class="item-list">
-                    <li><strong>Péndulo:</strong> Cristal, Madera u Orgonita. Elige el que resuene contigo.</li>
-                    <li>Lugar tranquilo y armonioso para trabajar.</li>
-                    <li>Mesa o lugar de apoyo para estar cómodo.</li>
-                    <li>Lápiz negro y papel (para trabajos a distancia).</li>
-                    <li>Música de meditación para abrir el espacio sagrado.</li>
-                </ul>
+    <h2>Materiales de Trabajo</h2>
+    <ul class="item-list">
+        <li><strong>PÉNDULO:</strong> Cristal, Madera u Orgonita. Elige el que resuene contigo.</li>
+        <li><strong>AMBIENTE:</strong> Lugar tranquilo y armonioso para trabajar.</li>
+        <li><strong>APOYO:</strong> Mesa o lugar de apoyo para estar cómodo.</li>
+        <li><strong>REGISTRO:</strong> Lápiz negro y papel (para trabajos a distancia).</li>
+        <li><strong>ARMONIZACIÓN:</strong> Música de meditación para abrir el espacio sagrado.</li>
+    </ul>
+    ...
+            
                 <div class="video-container">
                     <span class="video-label">Video: Introducción y Materiales</span>
                     <div class="video-wrapper" style="background-image: url('materiales.jpg');" onclick="playDirect(this, 'IV0Aa1k0gX0')">
