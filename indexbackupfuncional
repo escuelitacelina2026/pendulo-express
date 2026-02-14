@@ -239,35 +239,48 @@
     </div>
 
     <script>
-        function checkAccess() {
-            var u = document.getElementById('user').value.toLowerCase().trim();
-            var p = document.getElementById('pass').value.trim();
-            if(u === "pendulo" && p === "prueba") {
-                document.getElementById('login-screen').style.display = 'none';
-                document.getElementById('aula-completa').style.display = 'block';
-                window.scrollTo(0,0);
-            } else { alert("Usuario o contraseña incorrectos."); }
-        }
+    function checkAccess() {
+        var u = document.getElementById('user').value.toLowerCase().trim();
+        var p = document.getElementById('pass').value.trim();
+        if(u === "pendulo" && p === "prueba") {
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('aula-completa').style.display = 'block';
+            window.scrollTo(0,0);
+        } else { alert("Usuario o contraseña incorrectos."); }
+    }
 
-        function showTab(tabId, btn) {
-            var tabs = document.getElementsByClassName('tab-content');
-            for (var i = 0; i < tabs.length; i++) { tabs[i].classList.remove('active'); }
-            var buttons = document.querySelectorAll('nav button');
-            for (var j = 0; j < buttons.length; j++) { buttons[j].classList.remove('active'); }
-            document.getElementById(tabId).classList.add('active');
-            btn.classList.add('active');
-            // Al cambiar de solapa en móvil, sube un poco para ver el título
-            window.scrollTo({ top: 120, behavior: 'smooth' });
-        }
+    function showTab(tabId, btn) {
+        var tabs = document.getElementsByClassName('tab-content');
+        for (var i = 0; i < tabs.length; i++) { tabs[i].classList.remove('active'); }
+        var buttons = document.querySelectorAll('nav button');
+        for (var j = 0; j < buttons.length; j++) { buttons[j].classList.remove('active'); }
+        document.getElementById(tabId).classList.add('active');
+        btn.classList.add('active');
+        window.scrollTo({ top: 120, behavior: 'smooth' });
+    }
 
-        function toggleRitual() {
-            var box = document.getElementById('ritual-box');
-            box.style.display = (box.style.display === 'block') ? 'none' : 'block';
-        }
+    function toggleRitual() {
+        var box = document.getElementById('ritual-box');
+        box.style.display = (box.style.display === 'block') ? 'none' : 'block';
+    }
 
-        function playDirect(container, videoId) {
-            container.innerHTML = '<iframe src="https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0" allow="autoplay; encrypted-media" style="width:100%; height:100%; border:none;" allowfullscreen></iframe>';
-        }
-    </script>
+    // ESTA ES LA FUNCIÓN CON SEGURIDAD AÑADIDA
+    function playDirect(container, videoId) {
+        // 1. Quitamos el borde del contenedor para que se vea limpio
+        container.style.border = "none";
+        
+        // 2. Insertamos el escudo invisible arriba y el iframe restringido
+        // ?modestbranding=1 (quita logo) &fs=0 (quita pantalla completa) &rel=0 (sin sugerencias)
+        container.innerHTML = `
+            <div style="position:relative; width:100%; height:100%;">
+                <div style="position:absolute; top:0; left:0; width:100%; height:60px; z-index:10; background:transparent;"></div>
+                <iframe 
+                    src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&fs=0" 
+                    allow="autoplay; encrypted-media" 
+                    style="width:100%; height:100%; border:none;">
+                </iframe>
+            </div>`;
+    }
+</script>
 </body>
 </html>
