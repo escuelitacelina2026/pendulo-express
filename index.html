@@ -52,14 +52,27 @@
         h2 { color: var(--oro); font-size: 22px; text-align: center; margin-bottom: 25px; font-family: serif; border-bottom: 1px solid #222; padding-bottom: 15px; }
         
         .item-list { list-style: none; padding: 0; }
-        .item-list li { margin: 20px 0; color: #e0e0e0; font-size: 16px; line-height: 1.6; }
-        .item-list li strong { color: var(--oro); text-transform: uppercase; font-size: 14px; letter-spacing: 1px; display: block; }
+        .item-list li { margin: 20px 0; color: #e0e0e0; font-size: 16px; line-height: 1.6; display: flex; flex-direction: column; }
+        .item-list li strong { color: var(--oro); text-transform: uppercase; font-size: 14px; letter-spacing: 1px; margin-bottom: 5px; }
 
-        /* VIDEOS */
-        .video-container { margin-top: 80px; margin-bottom: 20px; width: 100%; clear: both; }
-        .video-container:first-of-type { margin-top: 20px; }
-        .video-label { text-align: center; display: block; margin-bottom: 15px; color: var(--oro); font-weight: bold; font-size: 14px; text-transform: uppercase; }
-        .video-wrapper { position: relative; width: 100%; max-width: 280px; aspect-ratio: 9 / 16; margin: 0 auto; border: 1px solid rgba(180, 151, 90, 0.3); border-radius: 20px; overflow: hidden; background: #000; cursor: pointer; background-size: cover; background-position: center; transition: 0.3s; }
+        /* VIDEOS SYSTEM */
+        .video-container { 
+            margin-top: 100px !important; 
+            margin-bottom: 40px !important; 
+            display: block !important; 
+            width: 100% !important; 
+            clear: both !important; 
+        }
+        .video-container:first-of-type { margin-top: 20px !important; }
+        
+        .video-label { text-align: center; display: block; margin-bottom: 15px; color: var(--oro); font-weight: bold; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
+        
+        .video-wrapper { 
+            position: relative; width: 100%; max-width: 280px; aspect-ratio: 9 / 16; 
+            margin: 0 auto; border: 1px solid rgba(180, 151, 90, 0.3); 
+            border-radius: 20px; overflow: hidden; background: #000; 
+            cursor: pointer; background-size: cover; background-position: center; transition: 0.3s; 
+        }
         .video-wrapper:hover { border-color: var(--oro); transform: scale(1.02); }
         .play-button { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; background: rgba(180, 151, 90, 0.9); border-radius: 50%; display: flex; justify-content: center; align-items: center; border: 2px solid #fff; z-index: 10; }
         .play-button::after { content: ""; border-style: solid; border-width: 10px 0 10px 18px; border-color: transparent transparent transparent white; margin-left: 5px; }
@@ -67,23 +80,28 @@
         .info-box { background: rgba(180, 151, 90, 0.05); padding: 20px; border-radius: 12px; border-left: 4px solid var(--oro); margin-bottom: 25px; line-height: 1.7; color: #ccc; font-size: 15px; }
         .info-box strong { color: var(--oro); }
 
+        /* RITUAL BOX */
+        .btn-ritual { background: rgba(180, 151, 90, 0.05); border: 1px solid var(--oro); color: var(--oro); width: 100%; padding: 15px; cursor: pointer; text-transform: uppercase; margin-bottom: 20px; border-radius: 8px; font-weight: bold; }
+        .box-ritual { display: none; border: 1px solid #333; padding: 20px; border-radius: 12px; background: #0c0e15; margin-bottom: 30px; }
+
         /* BIOGRAFIA */
         .bio-header { text-align: center; margin-bottom: 25px; }
         .bio-name { color: var(--oro); font-size: 20px; font-family: serif; display: block; margin-bottom: 12px; }
         .bio-list { list-style: none; padding: 0; }
-        .bio-list li { margin: 10px 0; color: #ddd; font-size: 14px; border-bottom: 1px solid #222; padding-bottom: 8px; }
+        .bio-list li { margin: 10px 0; color: #ddd; font-size: 14px; border-bottom: 1px solid #222; padding-bottom: 8px; text-align: left; }
         .bio-list li::before { content: "✦"; color: var(--oro); margin-right: 10px; }
         
-        .instagram-link { display: inline-flex; align-items: center; text-decoration: none; color: #fff; gap: 10px; background: linear-gradient(45deg, #f09433, #bc1888); padding: 8px 15px; border-radius: 20px; font-weight: 500; font-size: 14px; }
+        .instagram-link { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; color: #fff; gap: 10px; background: linear-gradient(45deg, #f09433, #bc1888); padding: 8px 20px; border-radius: 20px; font-weight: 500; font-size: 14px; transition: 0.3s; }
+        .instagram-link:hover { transform: scale(1.05); }
     </style>
 </head>
 <body oncontextmenu="return false;">
 
     <div id="login-screen">
         <div class="login-box">
-            <h1 style="color: var(--oro); font-size: 22px; font-family: serif;">PÉNDULO EXPRESS</h1>
-            <p style="color: var(--cyan); font-size: 10px; letter-spacing: 4px; margin-bottom: 25px;">AULA VIRTUAL</p>
-            <input type="text" id="user" placeholder="Usuario">
+            <h1 style="color: var(--oro); font-size: 22px; font-family: serif; margin: 0;">PÉNDULO EXPRESS</h1>
+            <p style="color: var(--cyan); font-size: 10px; letter-spacing: 4px; margin-bottom: 25px; margin-top: 10px;">AULA VIRTUAL</p>
+            <input type="text" id="user" placeholder="Usuario" autocomplete="off">
             <input type="password" id="pass" placeholder="Contraseña">
             <button class="btn-ingresar" onclick="checkAccess()">INGRESAR</button>
         </div>
@@ -105,12 +123,14 @@
         </nav>
 
         <div class="aula-content">
+            
             <div id="materiales" class="tab-content active">
                 <h2>Materiales de Trabajo</h2>
                 <ul class="item-list">
                     <li><strong>PÉNDULO:</strong> Cristal, Madera u Orgonita. Elige el que resuene contigo.</li>
                     <li><strong>AMBIENTE:</strong> Lugar tranquilo y armonioso para trabajar.</li>
                     <li><strong>APOYO:</strong> Mesa o lugar de apoyo para estar cómodo.</li>
+                    <li><strong>REGISTRO:</strong> Lápiz negro y papel (para trabajos a distancia).</li>
                 </ul>
                 <div class="video-container">
                     <span class="video-label">Video: Introducción y Materiales</span>
@@ -122,8 +142,10 @@
 
             <div id="limpieza" class="tab-content">
                 <h2>Limpieza y Consagración</h2>
-                <div class="info-box">
-                    Utiliza <strong>Sahumerio</strong> para limpiar. Envuelve el péndulo en humo de abajo hacia arriba.
+                <button class="btn-ritual" onclick="toggleRitual()">VER RITUAL Y FRASE</button>
+                <div id="ritual-box" class="box-ritual">
+                    <p>La forma más rápida es con <strong>Sahumerio</strong>. El humo debe envolver al péndulo por completo.</p>
+                    <p style="font-style: italic; color: var(--oro);">"A partir de este momento te consagro para que trabajes en la luz... Gracias".</p>
                 </div>
                 <div class="video-container">
                     <span class="video-label">Video: Técnica de Limpieza</span>
@@ -135,7 +157,7 @@
 
             <div id="proteccion" class="tab-content">
                 <h2>Espacio Sagrado</h2>
-                <div class="info-box">Visualiza una luz blanca y utiliza el Tetragrámaton para sellar el ambiente.</div>
+                <div class="info-box">Utiliza el <strong>Tetragrámaton</strong> para proteger el lugar. Visualiza luz blanca sellando tu aura.</div>
                 <div class="video-container">
                     <span class="video-label">Video: Protección Energética</span>
                     <div class="video-wrapper" style="background-image: url('proteccion.jpg');" onclick="playDirect(this, 'R24gh8hWlu0')">
@@ -146,9 +168,9 @@
 
             <div id="funcionamiento" class="tab-content">
                 <h2>Funcionamiento</h2>
-                <div class="info-box">Busca tu SI y tu NO con preguntas básicas de verificación.</div>
+                <div class="info-box">El péndulo es un puente con tu inconsciente. Busca tu SI y tu NO con actitud neutral.</div>
                 <div class="video-container">
-                    <span class="video-label">Video: Movimientos</span>
+                    <span class="video-label">Video: Movimientos y Sintonización</span>
                     <div class="video-wrapper" style="background-image: url('movimiento.jpg');" onclick="playDirect(this, 'Xg2_Wo2K-zA')">
                         <div class="play-button"></div>
                     </div>
@@ -159,7 +181,9 @@
                 <h2>Armonización de Chakras</h2>
                 <div class="info-box">
                     <strong>Interpretación:</strong><br>
-                    ✧ Horario: Sano | ✧ Anti-horario: Bloqueo | ✧ Sin movimiento: Estancado.
+                    ✧ Sentido Horario: Chakra sano.<br>
+                    ✧ Sentido Anti-horario: Bloqueo.<br>
+                    ✧ Sin movimiento: Energía estancada.
                 </div>
                 
                 <div class="video-container">
@@ -177,7 +201,7 @@
                 </div>
 
                 <div class="video-container">
-                    <span class="video-label">Video 3: Fin de testeo - Final</span>
+                    <span class="video-label">Video 3: Fin de testeo - Final del taller</span>
                     <div class="video-wrapper" style="background-image: url('testeo.jpg');" onclick="playDirect(this, 'WymTOGzcohY')">
                         <div class="play-button"></div>
                     </div>
@@ -194,18 +218,19 @@
                     <li>Terapeuta Holística Matriculada.</li>
                     <li>Canalizadora de Cirugía Astral Cristal Arcturiano.</li>
                     <li>Maestra de Reiki y Técnica Reiki Sandalfon.</li>
+                    <li>Lectora de Registros Akashicos.</li>
+                    <li>Especialista en Técnicas Arcturianas y Pleyadianas.</li>
                 </ul>
             </div>
-        </div>
-    </div>
 
-    <script>
+        </div> </div> <script>
         function checkAccess() {
             var u = document.getElementById('user').value.toLowerCase().trim();
             var p = document.getElementById('pass').value.trim();
             if(u === "pendulo" && p === "prueba") {
                 document.getElementById('login-screen').style.display = 'none';
                 document.getElementById('aula-completa').style.display = 'block';
+                window.scrollTo(0,0);
             } else { alert("Acceso denegado."); }
         }
 
@@ -219,8 +244,19 @@
             window.scrollTo({ top: 120, behavior: 'smooth' });
         }
 
+        function toggleRitual() {
+            var box = document.getElementById('ritual-box');
+            box.style.display = (box.style.display === 'block') ? 'none' : 'block';
+        }
+
         function playDirect(container, videoId) {
-            container.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1" allow="autoplay; encrypted-media" style="width:100%; height:100%; border:none;"></iframe>`;
+            container.style.border = "none";
+            container.innerHTML = `
+                <iframe 
+                    src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1" 
+                    allow="autoplay; encrypted-media" 
+                    style="width:100%; height:100%; border:none;">
+                </iframe>`;
         }
     </script>
 </body>
