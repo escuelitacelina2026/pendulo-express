@@ -1,231 +1,38 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taller de Péndulo Express - Aula Virtual</title>
-    <style>
-        :root { --oro: #b4975a; --fondo: #0a0b10; --caja: #0f111a; --cyan: #00bcd4; }
-        body { background-color: var(--fondo); color: #ffffff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; text-align: center; }
-        
-        /* LOGIN */
-        #login-screen { position: fixed; width: 100%; height: 100%; background: #000; display: flex; justify-content: center; align-items: center; z-index: 2000; }
-        .login-box { border: 1px solid var(--oro); padding: 40px; border-radius: 10px; width: 380px; background: #0d0d0d; }
-        input { display: block; width: 90%; margin: 15px auto; padding: 12px; background: #000; border: 1px solid #333; color: #fff; text-align: center; }
-        .btn-ingresar { background: var(--oro); color: #000; border: none; padding: 14px; width: 96%; cursor: pointer; font-weight: bold; }
-
-        header { padding: 40px 0 10px 0; }
-        header h1 { color: var(--oro); font-size: 30px; letter-spacing: 3px; margin: 0; font-family: serif; }
-        header p { color: var(--cyan); text-transform: uppercase; letter-spacing: 5px; font-size: 12px; }
-
-        nav { display: flex; justify-content: center; flex-wrap: wrap; gap: 5px; padding: 15px; }
-        nav button { background: none; border: 1px solid #333; color: #888; padding: 8px 12px; cursor: pointer; text-transform: uppercase; font-size: 10px; }
-        nav button.active { border-color: var(--oro); color: var(--oro); }
-
-        .aula-content { max-width: 800px; margin: 0 auto; background: var(--caja); padding: 30px; border-radius: 4px; text-align: left; position: relative; }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
-
-        h2 { color: var(--oro); font-size: 24px; text-align: center; margin-bottom: 30px; font-family: serif; }
-        h3 { color: var(--oro); font-size: 18px; margin-top: 25px; border-bottom: 1px solid #333; padding-bottom: 5px; }
-
-        .item-list { list-style: none; padding: 0; margin-bottom: 30px; }
-        .item-list li { margin: 15px 0; color: #e0e0e0; display: flex; align-items: center; font-size: 16px; }
-        .item-list li::before { content: "✧"; color: var(--oro); margin-right: 12px; font-size: 18px; }
-
-        /* VIDEO VERTICAL CON PLAY BUTTON */
-        .video-wrapper {
-            position: relative;
-            width: 280px;
-            height: 500px;
-            margin: 30px auto;
-            border: 2px solid var(--oro);
-            border-radius: 20px;
-            overflow: hidden;
-            background: #000;
-            cursor: pointer;
-        }
-
-        .video-poster { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 40; }
-
-        .play-button {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 65px; height: 65px; background: rgba(180, 151, 90, 0.9);
-            border-radius: 50%; z-index: 50; display: flex; justify-content: center; align-items: center; border: 2px solid #fff;
-        }
-        .play-button::after {
-            content: ""; border-style: solid; border-width: 12px 0 12px 22px;
-            border-color: transparent transparent transparent white; margin-left: 6px;
-        }
-
-        .video-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 20; background: transparent; }
-        .video-wrapper iframe { width: 100%; height: 100%; border: none; }
-
-        /* RITUAL */
-        .btn-ritual { background: none; border: 1px solid var(--oro); color: var(--oro); width: 100%; padding: 15px; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; }
-        .box-ritual { display: none; border: 1px solid #333; padding: 25px; border-radius: 8px; margin-bottom: 30px; background: #0c0e15; }
-        .box-ritual p { font-style: italic; color: var(--oro); border-top: 1px solid #222; padding-top: 15px; line-height: 1.6; }
-    </style>
-</head>
-<body oncontextmenu="return false;">
-
-    <div id="login-screen">
-        <div class="login-box">
-            <h1>PÉNDULO EXPRESS</h1>
-            <input type="text" id="user" placeholder="Usuario">
-            <input type="password" id="pass" placeholder="Contraseña">
-            <button class="btn-ingresar" onclick="checkAccess()">INGRESAR</button>
-        </div>
+<div id="materiales" class="tab-content active">
+    <h2>Materiales de Trabajo</h2>
+    <ul class="item-list">
+        <li><strong>Péndulo:</strong> Cristal, Madera u Orgonita. Elige el que resuene contigo.</li>
+        <li>Lugar tranquilo y armonioso para trabajar (sin corrientes de aire).</li>
+        <li>Lápiz negro y papel para realizar el trabajo a distancia.</li>
+    </ul>
+    <div class="video-wrapper" id="container-materiales" onclick="playDirect(this, 'IV0Aa1k0gX0')">
+        <img src="materiales.jpg" class="video-poster">
+        <div class="play-button"></div>
+        <div id="player-materiales"></div> 
     </div>
+</div>
 
-    <header>
-        <h1>TALLER DE PÉNDULO EXPRESS</h1>
-        <p>AULA VIRTUAL</p>
-    </header>
+<script>
+// Esta función elimina la imagen y pone el video dándole PLAY al mismo tiempo
+function playDirect(container, videoId) {
+    container.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1" allow="autoplay; encrypted-media" allowfullscreen style="width:100%; height:100%; border:none;"></iframe>`;
+}
 
-    <nav>
-        <button onclick="showTab('materiales', this)" class="active">Materiales</button>
-        <button onclick="showTab('limpieza', this)">Limpieza</button>
-        <button onclick="showTab('espacio', this)">Espacio Sagrado</button>
-        <button onclick="showTab('chakras', this)">Chakras</button>
-        <button onclick="showTab('glosario', this)">Glosario</button>
-    </nav>
+// Para el glosario, he vuelto a poner el texto que mencionaste:
+</script>
 
-    <div class="aula-content">
-        
-        <div id="materiales" class="tab-content active">
-            <h2>Materiales de Trabajo</h2>
-            <ul class="item-list">
-                <li><strong>Péndulo:</strong> Cristal, Madera u Orgonita. Elige el que resuene contigo.</li>
-                <li>Lugar tranquilo y armonioso para trabajar (sin corrientes de aire).</li>
-                <li>Lápiz negro y papel para realizar el trabajo a distancia.</li>
-            </ul>
-            <div class="video-wrapper" onclick="activateVideo(this, 'IV0Aa1k0gX0')">
-                <img src="materiales.jpg" class="video-poster">
-                <div class="play-button"></div>
-                <iframe id="vid-IV0Aa1k0gX0" src="https://www.youtube.com/embed/IV0Aa1k0gX0?enablejsapi=1&rel=0&modestbranding=1" allow="autoplay"></iframe>
-            </div>
-        </div>
+<div id="glosario" class="tab-content">
+    <h2>Glosario - Movimientos del Péndulo</h2>
+    <p style="color: #aaa; text-align: center;">El péndulo es un puente entre tu mente consciente (lógica) e inconsciente (intuitiva).</p>
+    
+    <ul class="item-list">
+        <li><strong>Hemisferio Izquierdo (Yang):</strong> Deductivo, lógico y maneja la palabra.</li>
+        <li><strong>Hemisferio Derecho (Yin):</strong> Espiritual, intuitivo y maneja los dibujos/trazos.</li>
+    </ul>
 
-        <div id="limpieza" class="tab-content">
-            <h2>Limpieza y Consagración</h2>
-            <button class="btn-ritual" onclick="toggleRitual()">Ver Ritual y Frase de Consagración</button>
-            <div id="ritual-box" class="box-ritual">
-                <ul style="color: #ccc; padding-left: 20px; margin-bottom: 20px;">
-                    <li>Mirar hacia el Este.</li>
-                    <li>Poner el péndulo entre las manos en forma de rezo.</li>
-                    <li>Llevarlo a la nariz, inspirar y exhalar 3 veces hacia el péndulo.</li>
-                    <li>Llevarlo a la altura del chakra AJNA (entrecejo).</li>
-                    <li>Llevarlo a la altura del chakra Cardíaco (pecho).</li>
-                </ul>
-                <p>"A partir de este momento te consagro para que trabajes en la luz, muestres siempre la verdad, estés en ley, tus respuestas vengan siempre del ser superior y sean sabias, claras, precisas y seguras. Gracias".</p>
-            </div>
-            <div class="video-wrapper" onclick="activateVideo(this, 'eduRIA3ceis')">
-                <img src="limpieza.jpg" class="video-poster">
-                <div class="play-button"></div>
-                <iframe id="vid-eduRIA3ceis" src="https://www.youtube.com/embed/eduRIA3ceis?enablejsapi=1&rel=0&modestbranding=1" allow="autoplay"></iframe>
-            </div>
-        </div>
-
-        <div id="espacio" class="tab-content">
-            <h2>Espacio Sagrado y Protección</h2>
-            <ul class="item-list">
-                <li>Visualización de luz blanca o dorada protectora alrededor de tu campo áurico.</li>
-                <li>Invocación de asistencia de guías espirituales y seres de luz.</li>
-                <li>Decretar que solo la energía del amor y la verdad puede entrar en este espacio.</li>
-            </ul>
-            <div class="video-wrapper" onclick="activateVideo(this, 'R24gh8hWlu0')">
-                <img src="espacio.jpg" class="video-poster">
-                <div class="play-button"></div>
-                <iframe id="vid-R24gh8hWlu0" src="https://www.youtube.com/embed/R24gh8hWlu0?enablejsapi=1&rel=0&modestbranding=1" allow="autoplay"></iframe>
-            </div>
-        </div>
-
-        <div id="chakras" class="tab-content">
-            <h2>Armonización de Chakras</h2>
-            <p style="text-align: center; color: #aaa; margin-bottom: 20px;">Testeo y equilibrio de los 7 centros energéticos principales.</p>
-            
-            <div class="video-wrapper" onclick="activateVideo(this, 'NJ-5aywOkAI')">
-                <img src="chakra1.jpg" class="video-poster">
-                <div class="play-button"></div>
-                <iframe id="vid-NJ-5aywOkAI" src="https://www.youtube.com/embed/NJ-5aywOkAI?enablejsapi=1&rel=0"></iframe>
-            </div>
-            
-            <div class="video-wrapper" onclick="activateVideo(this, 'LngEN9cmHRg')">
-                <img src="chakra2.jpg" class="video-poster">
-                <div class="play-button"></div>
-                <iframe id="vid-LngEN9cmHRg" src="https://www.youtube.com/embed/LngEN9cmHRg?enablejsapi=1&rel=0"></iframe>
-            </div>
-
-            <div class="video-wrapper" onclick="activateVideo(this, 'WymTOGzcohY')">
-                <img src="chakra3.jpg" class="video-poster">
-                <div class="play-button"></div>
-                <iframe id="vid-WymTOGzcohY" src="https://www.youtube.com/embed/WymTOGzcohY?enablejsapi=1&rel=0"></iframe>
-            </div>
-        </div>
-
-        <div id="glosario" class="tab-content">
-            <h2>Glosario - Movimientos del Péndulo</h2>
-            <p style="color: #aaa; text-align: center;">El péndulo es un puente entre tu mente consciente (lógica) e inconsciente (intuitiva).</p>
-            
-            <ul class="item-list">
-                <li><strong>Hemisferio Izquierdo (Yang):</strong> Deductivo, lógico y maneja la palabra.</li>
-                <li><strong>Hemisferio Derecho (Yin):</strong> Espiritual, intuitivo y maneja los dibujos/trazos.</li>
-            </ul>
-
-            <h3>Trazos y Movimientos</h3>
-            <div style="display: flex; gap: 15px; justify-content: center; margin: 20px 0;">
-                <img src="giros.png" style="width: 48%; border: 1px solid #333; border-radius: 10px;">
-                <img src="lineas.png" style="width: 48%; border: 1px solid #333; border-radius: 10px;">
-            </div>
-
-            <div class="video-wrapper" onclick="activateVideo(this, 'Xg2_Wo2K-zA')">
-                <img src="glosario1.jpg" class="video-poster">
-                <div class="play-button"></div>
-                <iframe id="vid-Xg2_Wo2K-zA" src="https://www.youtube.com/embed/Xg2_Wo2K-zA?enablejsapi=1&rel=0"></iframe>
-            </div>
-
-            <div class="video-wrapper" onclick="activateVideo(this, 'aJMlz0t79ZI')">
-                <img src="glosario2.jpg" class="video-poster">
-                <div class="play-button"></div>
-                <iframe id="vid-aJMlz0t79ZI" src="https://www.youtube.com/embed/aJMlz0t79ZI?enablejsapi=1&rel=0"></iframe>
-            </div>
-        </div>
+    <h3>Trazos y Movimientos</h3>
+    <div style="display: flex; gap: 15px; justify-content: center; margin: 20px 0;">
+        <img src="giros.png" style="width: 48%; border: 1px solid #333; border-radius: 10px;">
+        <img src="lineas.png" style="width: 48%; border: 1px solid #333; border-radius: 10px;">
     </div>
-
-    <script>
-        function checkAccess() {
-            const u = document.getElementById('user').value.toLowerCase().trim();
-            const p = document.getElementById('pass').value.trim();
-            if(u === "pendulo" && p === "prueba") {
-                document.getElementById('login-screen').style.display = 'none';
-            } else { alert("Acceso denegado."); }
-        }
-
-        function showTab(tabId, btn) {
-            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
-            document.getElementById(tabId).classList.add('active');
-            btn.classList.add('active');
-        }
-
-        function activateVideo(container, videoId) {
-            const poster = container.querySelector('.video-poster');
-            const playBtn = container.querySelector('.play-button');
-            if(poster) poster.style.display = 'none';
-            if(playBtn) playBtn.style.display = 'none';
-            
-            const iframe = document.getElementById('vid-' + videoId);
-            const src = iframe.src;
-            if(!src.includes('autoplay=1')) {
-                iframe.src = src + "&autoplay=1";
-            }
-        }
-
-        function toggleRitual() {
-            const box = document.getElementById('ritual-box');
-            box.style.display = (box.style.display === 'block') ? 'none' : 'block';
-        }
-    </script>
-</body>
-</html>
+    </div>
