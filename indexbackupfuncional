@@ -22,7 +22,45 @@
             overflow-x: hidden; 
         }
 
-        /* LOGIN RESPONSIVE */
+        /* EFECTO DE CARGA (PRELOADER) */
+        #preloader {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #000;
+            z-index: 100000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            transition: opacity 0.5s ease;
+        }
+
+        .pendulo-loader {
+            width: 2px;
+            height: 80px;
+            background: var(--oro);
+            position: relative;
+            animation: oscilar 1.5s ease-in-out infinite;
+            transform-origin: top center;
+        }
+
+        .pendulo-loader::after {
+            content: "";
+            position: absolute;
+            bottom: -15px; left: -14px;
+            width: 30px; height: 30px;
+            background: var(--oro);
+            clip-path: polygon(50% 100%, 0% 20%, 100% 20%);
+            box-shadow: 0 10px 20px var(--oro-brillo);
+        }
+
+        @keyframes oscilar {
+            0% { transform: rotate(35deg); }
+            50% { transform: rotate(-35deg); }
+            100% { transform: rotate(35deg); }
+        }
+
+        /* LOGIN */
         #login-screen { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
             background: #000000; display: flex; justify-content: center; align-items: center; z-index: 99999; 
@@ -57,7 +95,7 @@
         /* CONTENIDO CENTRALIZADO */
         .aula-content { 
             max-width: 800px; 
-            margin: 10px auto 40px auto; 
+            margin: 10px auto 10px auto; 
             background: var(--caja); 
             padding: 25px 20px; 
             border-radius: 12px; 
@@ -79,21 +117,10 @@
         .video-container { margin: 35px auto; text-align: center; width: 100%; }
         .video-label { color: var(--oro); font-size: 12px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; display: block; font-weight: bold; }
         .video-wrapper {
-            position: relative; 
-            width: 100%; 
-            max-width: 280px; 
-            aspect-ratio: 9 / 16; 
-            margin: 0 auto;
-            border: 1px solid rgba(180, 151, 90, 0.3); 
-            border-radius: 20px; 
-            overflow: hidden; 
-            background: #000; 
-            cursor: pointer;
-            background-size: cover; 
-            background-position: center;
-            transition: 0.3s;
+            position: relative; width: 100%; max-width: 280px; aspect-ratio: 9 / 16; margin: 0 auto;
+            border: 1px solid rgba(180, 151, 90, 0.3); border-radius: 20px; overflow: hidden; 
+            background: #000; cursor: pointer; background-size: cover; background-position: center; transition: 0.3s;
         }
-        .video-wrapper:hover { border-color: var(--oro); transform: scale(1.02); }
         .play-button {
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
             width: 70px; height: 70px; background: rgba(180, 151, 90, 0.9);
@@ -104,15 +131,24 @@
         iframe { width: 100%; height: 100%; border: none; }
 
         .btn-ritual { background: rgba(180, 151, 90, 0.05); border: 1px solid var(--oro); color: var(--oro); width: 100%; padding: 18px; cursor: pointer; text-transform: uppercase; margin-bottom: 20px; border-radius: 8px; font-size: 13px; font-weight: bold; transition: 0.3s; }
-        .btn-ritual:hover { background: rgba(180, 151, 90, 0.15); }
-        
         .box-ritual { display: none; border: 1px solid #333; padding: 25px; border-radius: 12px; background: #0c0e15; margin-bottom: 30px; line-height: 1.8; text-align: left; }
         
         .info-box { background: rgba(180, 151, 90, 0.05); padding: 25px; border-radius: 12px; border-left: 4px solid var(--oro); margin-bottom: 25px; line-height: 1.7; color: #ccc; font-size: 15px; text-align: left; }
         .info-box strong { color: var(--oro); }
+
+        /* FOOTER */
+        footer { margin-top: 30px; padding: 40px 20px; text-align: center; border-top: 1px solid #222; background: #05060a; width: 100%; box-sizing: border-box; }
+        .footer-frase { font-style: italic; color: var(--oro); font-size: 15px; margin-bottom: 20px; font-family: serif; }
+        .social-links a { color: var(--cyan); text-decoration: none; margin: 0 15px; font-size: 12px; letter-spacing: 2px; }
+        .copyright { margin-top: 30px; font-size: 9px; color: #444; text-transform: uppercase; letter-spacing: 1px; }
     </style>
 </head>
 <body oncontextmenu="return false;">
+
+    <div id="preloader">
+        <div class="pendulo-loader"></div>
+        <p style="color: var(--oro); margin-top: 40px; letter-spacing: 5px; font-size: 11px; text-transform: uppercase;">Conectando con la energía...</p>
+    </div>
 
     <div id="login-screen">
         <div class="login-box">
@@ -181,93 +217,4 @@
             <div id="proteccion" class="tab-content">
                 <h2>Espacio Sagrado y Protección</h2>
                 <div class="info-box">
-                    Es fundamental proteger el lugar antes de cualquier trabajo. Puedes utilizar el <strong>Símbolo de Pentagrama o Tetragrámaton</strong>. Trazamos primero el círculo y luego el pentagrama para sellar el ambiente. Visualiza una luz blanca protectora para sellar tu propia aura.
-                </div>
-                
-                <div style="text-align: center; margin-bottom: 30px;">
-                    <img src="pentagrama.jpg" alt="Pentagrama de Protección" style="width: 100%; max-width: 250px; border-radius: 10px; border: 1px solid var(--oro); box-shadow: 0 0 15px var(--oro-brillo);">
-                    <p style="color: var(--oro); font-size: 12px; margin-top: 10px; letter-spacing: 1px;">SÍMBOLO DE PROTECCIÓN</p>
-                </div>
-
-                <div class="video-container">
-                    <span class="video-label">Video: Protección Energética</span>
-                    <div class="video-wrapper" style="background-image: url('proteccion.jpg');" onclick="playDirect(this, 'R24gh8hWlu0')">
-                        <div class="play-button"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="funcionamiento" class="tab-content">
-                <h2>Funcionamiento del Péndulo</h2>
-                <div class="info-box">
-                    <strong>El lenguaje del Péndulo:</strong><br>
-                    El péndulo es un puente entre la mente consciente e inconsciente. Traza dibujos que el hemisferio derecho (intuición) comprende y el izquierdo (lógica) procesa.<br><br>
-                    <strong>Sintonización (Descubrir tu SÍ y NO):</strong><br>
-                    Para que responda correctamente, es vital tener una <strong>actitud neutral</strong>.<br>
-                    1. Haz una pregunta de respuesta obvia ("¿La nieve es blanca?") para ver el movimiento del SÍ.<br>
-                    2. Haz una pregunta falsa para descubrir tu movimiento del NO.<br><br>
-                    <strong>Reglas de Oro:</strong> No utilizar si consumiste alcohol, medicamentos que alteren el sistema nervioso, si estás muy cansado o comiste en exceso.
-                </div>
-                <div class="video-container">
-                    <span class="video-label">Video: Movimientos y Sintonización</span>
-                    <div class="video-wrapper" style="background-image: url('movimiento.jpg');" onclick="playDirect(this, 'Xg2_Wo2K-zA')">
-                        <div class="play-button"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="chakras" class="tab-content">
-                <h2>Armonización de Chakras</h2>
-                <div class="info-box">
-                    <strong>Interpretación de los Giros:</strong><br><br>
-                    <ul class="item-list" style="margin:0;">
-                        <li><strong>SENTIDO HORARIO:</strong> El chakra está sano, la energía fluye correctamente.</li>
-                        <li><strong>SENTIDO ANTI-HORARIO:</strong> Bloqueo, fuga o la energía fluye negativamente para el cuerpo.</li>
-                        <li><strong>SIN MOVIMIENTO:</strong> El chakra está cerrado o la energía está estancada.</li>
-                        <li><strong>MOVIMIENTO ERRÁTICO:</strong> Existe una fuga o descompensación energética.</li>
-                    </ul>
-                </div>
-                <div class="video-container">
-                    <span class="video-label">Video: Práctica de Testeo</span>
-                    <div class="video-wrapper" style="background-image: url('testeo.jpg');" onclick="playDirect(this, 'NJ-5aywOkAI')">
-                        <div class="play-button"></div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <script>
-        function checkAccess() {
-            var u = document.getElementById('user').value.toLowerCase().trim();
-            var p = document.getElementById('pass').value.trim();
-            if(u === "pendulo" && p === "prueba") {
-                document.getElementById('login-screen').style.display = 'none';
-                document.getElementById('aula-completa').style.display = 'block';
-                window.scrollTo(0,0);
-            } else { alert("Usuario o contraseña incorrectos."); }
-        }
-
-        function showTab(tabId, btn) {
-            var tabs = document.getElementsByClassName('tab-content');
-            for (var i = 0; i < tabs.length; i++) { tabs[i].classList.remove('active'); }
-            var buttons = document.querySelectorAll('nav button');
-            for (var j = 0; j < buttons.length; j++) { buttons[j].classList.remove('active'); }
-            document.getElementById(tabId).classList.add('active');
-            btn.classList.add('active');
-            // Al cambiar de solapa en móvil, sube un poco para ver el título
-            window.scrollTo({ top: 120, behavior: 'smooth' });
-        }
-
-        function toggleRitual() {
-            var box = document.getElementById('ritual-box');
-            box.style.display = (box.style.display === 'block') ? 'none' : 'block';
-        }
-
-        function playDirect(container, videoId) {
-            container.innerHTML = '<iframe src="https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0" allow="autoplay; encrypted-media" style="width:100%; height:100%; border:none;" allowfullscreen></iframe>';
-        }
-    </script>
-</body>
-</html>
+                    Es fundamental proteger el lugar antes de cualquier trabajo. Puedes utilizar el <strong>Símbolo de Pentagrama o Tetragrámaton</strong>. Trazamos primero el círculo
