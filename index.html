@@ -79,4 +79,256 @@
             background: #000; cursor: pointer; transition: 0.5s;
         }
         .video-wrapper:hover { border-color: var(--oro); box-shadow: 0 0 25px var(--oro-brillo); transform: translateY(-5px); }
-        .video-poster { position: absolute; top: 0; left: 0; width: 100%; height: 100%; o
+        .video-poster { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 10; filter: brightness(0.8); }
+        .play-button {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 70px; height: 70px; background: rgba(180, 151, 90, 0.9);
+            border-radius: 50%; z-index: 20; display: flex; justify-content: center; align-items: center; border: 2px solid #fff;
+        }
+        .play-button::after { content: ""; border-style: solid; border-width: 12px 0 12px 22px; border-color: transparent transparent transparent white; margin-left: 6px; }
+        .top-blocker { position: absolute; top: 0; left: 0; width: 100%; height: 60px; z-index: 50; background: transparent; }
+
+        .btn-ritual { background: rgba(180, 151, 90, 0.05); border: 1px solid var(--oro); color: var(--oro); width: 100%; padding: 18px; cursor: pointer; text-transform: uppercase; margin-bottom: 20px; border-radius: 8px; font-weight: bold; }
+        .box-ritual { display: none; border: 1px solid #333; padding: 25px; border-radius: 12px; background: #0c0e15; margin-bottom: 30px; }
+    </style>
+</head>
+<body oncontextmenu="return false;">
+
+    <div id="login-screen">
+        <div class="login-box">
+            <h1 style="color: var(--oro); font-size: 22px; margin-bottom: 5px; font-family: serif;">PÉNDULO EXPRESS</h1>
+            <p style="color: var(--cyan); font-size: 10px; letter-spacing: 4px; margin-bottom: 25px;">AULA VIRTUAL</p>
+            <input type="text" id="user" placeholder="Usuario">
+            <input type="password" id="pass" placeholder="Contraseña">
+            <button class="btn-ingresar" onclick="checkAccess()">INGRESAR</button>
+        </div>
+    </div>
+
+    <div id="aula-completa">
+        <header>
+            <h1>TALLER DE PÉNDULO EXPRESS</h1>
+            <p>AULA VIRTUAL</p>
+        </header>
+
+        <nav>
+            <button onclick="showTab('materiales', this)" class="active">Materiales</button>
+            <button onclick="showTab('limpieza', this)">Limpieza</button>
+            <button onclick="showTab('proteccion', this)">Espacio Sagrado</button>
+            <button onclick="showTab('funcionamiento', this)">Funcionamiento del Péndulo</button>
+            <button onclick="showTab('chakras', this)">Chakras</button>
+            <button onclick="showTab('manual', this)">Manual de Estudio</button>
+        </nav>
+
+        <div class="aula-content">
+            
+            <div id="materiales" class="tab-content active">
+                <h2>Materiales de Trabajo</h2>
+                <ul class="item-list">
+                    <li><strong>Péndulo:</strong> Cristal, Madera u Orgonita. Elige el que resuene contigo.</li>
+                    <li>Lugar tranquilo y armonioso para trabajar.</li>
+                    <li>Mesa o lugar de apoyo para estar cómodo.</li>
+                    <li>Lápiz negro y papel (para testeos a distancia).</li>
+                    <li>Música de meditación para abrir espacio sagrado.</li>
+                </ul>
+                <div class="video-container">
+                    <div class="video-wrapper" onclick="playDirect(this, 'IV0Aa1k0gX0')">
+                        <img src="materiales.jpg" class="video-poster">
+                        <div class="play-button"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="limpieza" class="tab-content">
+                <h2>Limpieza y Consagración</h2>
+                <button class="btn-ritual" onclick="toggleRitual()">VER RITUAL Y FRASE DE CONSAGRACIÓN</button>
+                <div id="ritual-box" class="box-ritual">
+                    <p style="color: #ccc;">La forma más rápida es con <strong>Sahumerio</strong>. El humo debe envolver al péndulo por completo desde abajo hacia arriba.</p>
+                    <ul style="color: #ccc; padding-left: 20px;">
+                        <li>Mirar hacia el Este.</li>
+                        <li>Poner el péndulo entre las manos en forma de rezo.</li>
+                        <li>Llevarlo a la nariz, inspirar y exhalar 3 veces.</li>
+                        <li>Llevarlo al entrecejo y luego al corazón.</li>
+                    </ul>
+                    <p style="font-style: italic; color: var(--oro); border-top: 1px solid #222; padding-top: 20px; line-height: 1.8;">"A partir de este momento te consagro para que trabajes en la luz, muestres siempre la verdad, estés en ley, tus respuestas vengan siempre del ser superior y sean sabias, claras, precisas y seguras. Gracias".</p>
+                </div>
+                <div class="video-container">
+                    <div class="video-wrapper" onclick="playDirect(this, 'eduRIA3ceis')">
+                        <img src="limpieza.jpg" class="video-poster">
+                        <div class="play-button"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="proteccion" class="tab-content">
+                <h2>Espacio Sagrado y Protección</h2>
+                <ul class="item-list">
+                    <li>Visualización de luz blanca protectora para sellar el aura.</li>
+                    <li>Invocación de guías espirituales y seres de luz.</li>
+                    <li>Uso de sahumos para limpiar la habitación antes y después.</li>
+                </ul>
+                <div class="video-container">
+                    <div class="video-wrapper" onclick="playDirect(this, 'R24gh8hWlu0')">
+                        <img src="proteccion.jpg" class="video-poster">
+                        <div class="play-button"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="funcionamiento" class="tab-content">
+                <h2>Movimientos del Péndulo</h2>
+                <div style="background: rgba(180, 151, 90, 0.05); padding: 25px; border-radius: 12px; border-left: 4px solid var(--oro); margin-bottom: 25px;">
+                    <p style="margin: 0; line-height: 1.7; color: #ccc;">
+                        El péndulo es un puente entre la mente consciente e inconsciente.
+                        <br><br>
+                        <strong>Hemisferio Izquierdo:</strong> Lógica, análisis, yang, palabra.
+                        <br>
+                        <strong>Hemisferio Derecho:</strong> Intuición, espiritualidad, yin, dibujos o trazos.
+                        <br><br>
+                        El péndulo traza dibujos que el hemisferio derecho comprende y el izquierdo procesa como respuestas.
+                    </p>
+                </div>
+                
+                <div style="background: rgba(0, 188, 212, 0.05); padding: 25px; border-radius: 12px; border-left: 4px solid var(--cyan); margin-bottom: 40px;">
+                    <p style="margin: 0 0 10px 0; font-weight: bold; color: var(--cyan); text-transform: uppercase;">Sintonización (Descubrir tu SÍ / NO):</p>
+                    <p style="margin: 0; font-size: 15px; color: #ccc;">
+                        Para que el péndulo responda, es vital tener una <strong>actitud neutral</strong>. Haz una pregunta obvia como "¿La nieve es blanca?" para descubrir tu movimiento de "SÍ". Luego haz una negativa para descubrir tu "NO".
+                    </p>
+                </div>
+
+                <div class="video-container">
+                    <span class="video-label">Video Informativo: Movimientos Básicos</span>
+                    <div class="video-wrapper" onclick="playDirect(this, 'Xg2_Wo2K-zA')">
+                        <img src="movimiento.jpg" class="video-poster">
+                        <div class="play-button"></div>
+                    </div>
+                </div>
+                <div class="video-container">
+                    <span class="video-label">Video Informativo: Interpretación de Giros</span>
+                    <div class="video-wrapper" onclick="playDirect(this, 'aJMlz0t79ZI')">
+                        <img src="movimiento.jpg" class="video-poster">
+                        <div class="play-button"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="chakras" class="tab-content">
+                <h2>Armonización de Chakras</h2>
+                <div style="background: rgba(180, 151, 90, 0.08); border: 1px dashed var(--oro); padding: 25px; border-radius: 12px; margin-bottom: 40px; line-height: 1.8; color: #e0e0e0;">
+                    <p style="margin: 0 0 15px 0;">✧ <strong>Si el péndulo no se mueve:</strong> El chakra está cerrado. La energía se encuentra estancada.</p>
+                    <p style="margin: 0 0 15px 0;">✧ <strong>Giro ANTI-HORARIO:</strong> La energía está fluyendo negativamente.</p>
+                    <p style="margin: 0; color: var(--oro); font-weight: bold; border-top: 1px solid #333; padding-top: 15px;">Para saber que la energía fluye correctamente (Chakra sano), el péndulo girará en SENTIDO HORARIO.</p>
+                </div>
+                
+                <div class="video-container">
+                    <span class="video-label">Video Parte 1- Testeo de Chakras</span>
+                    <div class="video-wrapper" onclick="playDirect(this, 'NJ-5aywOkAI')">
+                        <img src="testeo.jpg" class="video-poster">
+                        <div class="play-button"></div>
+                    </div>
+                </div>
+
+                <div class="video-container">
+                    <span class="video-label">Video Parte 2- Practica de Armonización</span>
+                    <div class="video-wrapper" onclick="playDirect(this, 'LngEN9cmHRg')">
+                        <img src="testeo.jpg" class="video-poster">
+                        <div class="play-button"></div>
+                    </div>
+                </div>
+
+                <div class="video-container">
+                    <span class="video-label">Video Parte 3- Practica de Armonización (Final)</span>
+                    <div class="video-wrapper" onclick="playDirect(this, 'WymTOGzcohY')">
+                        <img src="testeo.jpg" class="video-poster">
+                        <div class="play-button"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="manual" class="tab-content">
+                <div style="text-align: center; margin-bottom: 40px;">
+                    <div style="font-size: 50px; color: var(--oro); margin-bottom: 10px;">✧</div>
+                    <h2 style="border: none; margin-bottom: 5px;">Taller Péndulo Express</h2>
+                    <p style="color: var(--cyan); letter-spacing: 3px; font-size: 11px; text-transform: uppercase;">Guía Teórica de Formación</p>
+                </div>
+
+                <div class="manual-texto">
+                    <h3>Código de Lenguaje</h3>
+                    <p>El péndulo traza dibujos que el hemisferio derecho comprende. Una vez descubierto tu SÍ y NO, procedes a sintonizarte con el objeto de búsqueda excluyendo cualquier otra cosa.</p>
+                    
+                    <h3>Reglas de Oro</h3>
+                    <p>NO utilizar el péndulo si:</p>
+                    <ul class="item-list">
+                        <li>Tomaste alcohol o estimulantes.</li>
+                        <li>Tomas medicamentos que alteren el sistema nervioso.</li>
+                        <li>Estás cansado o comiste mucho.</li>
+                    </ul>
+
+                    <div style="text-align: center; margin-top: 30px;">
+                        <a href="PENDULO EXPRESS- TALLER.pdf" download="Manual_Pendulo_Express.pdf" class="btn-download">📥 DESCARGAR MANUAL COMPLETO (PDF)</a>
+                    </div>
+
+                    <div class="bio-box">
+                        <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 20px;">
+                            <div style="width: 70px; height: 70px; border-radius: 50%; border: 2px solid var(--oro); background: #1a1a1a; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; color: var(--oro);">JP</div>
+                            <div>
+                                <h3 style="margin: 0; border: none; padding: 0; font-size: 19px;">Jacqueline Vanesa Pignatelli</h3>
+                                <p style="margin: 0; color: var(--cyan); font-size: 11px; text-transform: uppercase;">Terapeuta Holística Matriculada</p>
+                            </div>
+                        </div>
+                        <ul style="list-style: none; padding: 0; font-size: 14px; color: #bbb; line-height: 1.7;">
+                            <li>• Canalizadora de Cirugía Astral Cristal Arcturiano</li>
+                            <li>• Sanación del Niño interior (Técnica Reiki Sandalfon)</li>
+                            <li>• Comunicación Mediumnica / Enlazadora de mundos</li>
+                            <li>• Instructora de Chikung y Profesora de Yoga de la Música</li>
+                            <li>• Lectora de Registros Akashicos / Operadora de Mesa Cuántica</li>
+                            <li>• Maestra de Reiki y Terapeuta Floral</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // FUNCIÓN DE INGRESO CORREGIDA
+        function checkAccess() {
+            var u = document.getElementById('user').value.toLowerCase().trim();
+            var p = document.getElementById('pass').value.trim();
+            
+            if(u === "pendulo" && p === "prueba") {
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('aula-completa').style.display = 'block';
+                window.scrollTo(0,0);
+            } else { 
+                alert("Usuario o contraseña incorrectos."); 
+            }
+        }
+
+        // CAMBIO DE SOLAPAS
+        function showTab(tabId, btn) {
+            var tabs = document.getElementsByClassName('tab-content');
+            for (var i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove('active');
+            }
+            var buttons = document.querySelectorAll('nav button');
+            for (var j = 0; j < buttons.length; j++) {
+                buttons[j].classList.remove('active');
+            }
+            document.getElementById(tabId).classList.add('active');
+            btn.classList.add('active');
+        }
+
+        // MOSTRAR RITUAL
+        function toggleRitual() {
+            var box = document.getElementById('ritual-box');
+            box.style.display = (box.style.display === 'block') ? 'none' : 'block';
+        }
+
+        // REPRODUCTOR DE VIDEO
+        function playDirect(container, videoId) {
+            container.innerHTML = '<div class="top-blocker"></div><iframe src="https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0&modestbranding=1&controls=1&fs=0" allow="autoplay; encrypted-media" style="width:100%; height:100%; border:none;"></iframe>';
+        }
+    </script>
+</body>
+</html>
