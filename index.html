@@ -7,16 +7,16 @@
     <style>
         :root { --oro: #b4975a; --fondo: #0a0b10; --caja: #0f111a; --cyan: #00bcd4; }
         
-        /* PANTALLA DE LOGIN: Bloquea todo */
+        /* LOGIN BLOQUEANTE */
         #login-screen { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
             background: #000; display: flex; justify-content: center; align-items: center; z-index: 9999; 
         }
         .login-box { border: 1px solid var(--oro); padding: 40px; border-radius: 10px; width: 320px; background: #0d0d0d; text-align: center; }
         input { display: block; width: 90%; margin: 15px auto; padding: 12px; background: #000; border: 1px solid #333; color: #fff; text-align: center; border-radius: 5px; }
-        .btn-ingresar { background: var(--oro); color: #000; border: none; padding: 14px; width: 100%; cursor: pointer; font-weight: bold; border-radius: 5px; }
+        .btn-ingresar { background: var(--oro); color: #000; border: none; padding: 14px; width: 100%; cursor: pointer; font-weight: bold; border-radius: 5px; text-transform: uppercase; }
 
-        /* EL AULA ESTÁ OCULTA POR DEFECTO */
+        /* AULA OCULTA HASTA LOGIN */
         #aula-completa { display: none; }
 
         body { background-color: var(--fondo); color: #ffffff; font-family: 'Segoe UI', sans-serif; margin: 0; }
@@ -32,12 +32,14 @@
         .tab-content { display: none; }
         .tab-content.active { display: block; }
 
-        h2 { color: var(--oro); font-size: 22px; text-align: center; margin-bottom: 25px; font-family: serif; }
-        .item-list { list-style: none; padding: 0; }
-        .item-list li { margin: 15px 0; color: #e0e0e0; display: flex; align-items: center; }
-        .item-list li::before { content: "✧"; color: var(--oro); margin-right: 12px; }
+        h2 { color: var(--oro); font-size: 22px; text-align: center; margin-bottom: 25px; font-family: serif; border-bottom: 1px solid #222; padding-bottom: 10px; }
+        h3 { color: var(--oro); font-size: 18px; margin-top: 25px; border-bottom: 1px solid #333; padding-bottom: 5px; }
 
-        /* VIDEO VERTICAL */
+        .item-list { list-style: none; padding: 0; margin-bottom: 30px; }
+        .item-list li { margin: 15px 0; color: #e0e0e0; display: flex; align-items: center; font-size: 16px; }
+        .item-list li::before { content: "✧"; color: var(--oro); margin-right: 12px; font-size: 18px; }
+
+        /* VIDEO VERTICAL CON SEGURIDAD */
         .video-wrapper {
             position: relative; width: 280px; height: 500px; margin: 30px auto;
             border: 2px solid var(--oro); border-radius: 20px; overflow: hidden; background: #000; cursor: pointer;
@@ -50,12 +52,15 @@
         }
         .play-button::after { content: ""; border-style: solid; border-width: 12px 0 12px 22px; border-color: transparent transparent transparent white; margin-left: 6px; }
 
-        /* RITUAL */
+        /* Bloqueador de clics en cabecera de video */
+        .top-blocker { position: absolute; top: 0; left: 0; width: 100%; height: 60px; z-index: 50; background: transparent; }
+
         .btn-ritual { background: none; border: 1px solid var(--oro); color: var(--oro); width: 100%; padding: 15px; cursor: pointer; text-transform: uppercase; margin-bottom: 15px; }
-        .box-ritual { display: none; border: 1px solid #333; padding: 25px; border-radius: 8px; background: #0c0e15; margin-bottom: 20px; }
+        .box-ritual { display: none; border: 1px solid #333; padding: 25px; border-radius: 8px; background: #0c0e15; margin-bottom: 30px; }
+        .box-ritual p { font-style: italic; color: var(--oro); border-top: 1px solid #222; padding-top: 15px; line-height: 1.6; }
     </style>
 </head>
-<body>
+<body oncontextmenu="return false;">
 
     <div id="login-screen">
         <div class="login-box">
@@ -76,7 +81,7 @@
             <button onclick="showTab('materiales', this)" class="active">Materiales</button>
             <button onclick="showTab('limpieza', this)">Limpieza</button>
             <button onclick="showTab('proteccion', this)">Protección</button>
-            <button onclick="showTab('testeo', this)">Testeo</button>
+            <button onclick="showTab('chakras', this)">Chakras</button>
             <button onclick="showTab('glosario', this)">Glosario</button>
         </nav>
 
@@ -85,7 +90,7 @@
                 <h2>Materiales de Trabajo</h2>
                 <ul class="item-list">
                     <li><strong>Péndulo:</strong> Cristal, Madera u Orgonita. Elige el que resuene contigo.</li>
-                    <li>Lugar tranquilo y armonioso para trabajar.</li>
+                    <li>Lugar tranquilo y armonioso para trabajar (sin corrientes de aire).</li>
                     <li>Lápiz negro y papel para realizar el trabajo a distancia.</li>
                 </ul>
                 <div class="video-wrapper" onclick="playDirect(this, 'IV0Aa1k0gX0')">
@@ -98,16 +103,14 @@
                 <h2>Limpieza y Consagración</h2>
                 <button class="btn-ritual" onclick="toggleRitual()">VER RITUAL Y FRASE DE CONSAGRACIÓN</button>
                 <div id="ritual-box" class="box-ritual">
-                    <ul style="color: #ccc; padding-left: 20px;">
+                    <ul style="color: #ccc; padding-left: 20px; margin-bottom: 20px;">
                         <li>Mirar hacia el Este.</li>
                         <li>Poner el péndulo entre las manos en forma de rezo.</li>
                         <li>Llevarlo a la nariz, inspirar y exhalar 3 veces hacia el péndulo.</li>
                         <li>Llevarlo a la altura del chakra AJNA (entrecejo).</li>
                         <li>Llevarlo a la altura del chakra Cardíaco (pecho).</li>
                     </ul>
-                    <p style="font-style: italic; color: var(--oro); border-top: 1px solid #222; padding-top: 15px;">
-                        "A partir de este momento te consagro para que trabajes en la luz, muestres siempre la verdad, estés en ley, tus respuestas vengan siempre del ser superior y sean sabias, claras, precisas y seguras. Gracias".
-                    </p>
+                    <p>"A partir de este momento te consagro para que trabajes en la luz, muestres siempre la verdad, estés en ley, tus respuestas vengan siempre del ser superior y sean sabias, claras, precisas y seguras. Gracias".</p>
                 </div>
                 <div class="video-wrapper" onclick="playDirect(this, 'eduRIA3ceis')">
                     <img src="limpieza.jpg" class="video-poster">
@@ -116,10 +119,11 @@
             </div>
 
             <div id="proteccion" class="tab-content">
-                <h2>Protección del Espacio</h2>
+                <h2>Espacio Sagrado y Protección</h2>
                 <ul class="item-list">
-                    <li>Visualización de luz blanca o dorada protectora.</li>
-                    <li>Invocación de asistencia de guías espirituales.</li>
+                    <li>Visualización de luz blanca o dorada protectora alrededor de tu campo áurico.</li>
+                    <li>Invocación de asistencia de guías espirituales y seres de luz.</li>
+                    <li>Decretar que solo la energía del amor y la verdad puede entrar en este espacio.</li>
                 </ul>
                 <div class="video-wrapper" onclick="playDirect(this, 'R24gh8hWlu0')">
                     <img src="proteccion.jpg" class="video-poster">
@@ -127,31 +131,41 @@
                 </div>
             </div>
 
-            <div id="testeo" class="tab-content">
-                <h2>Metodología de Testeo</h2>
-                <ul class="item-list">
-                    <li>Giro horario (Derecha): Abierto y fluyendo.</li>
-                    <li>Giro anti-horario (Izquierda): Bloqueo o energía estancada.</li>
-                </ul>
+            <div id="chakras" class="tab-content">
+                <h2>Armonización de Chakras</h2>
+                <p style="text-align: center; color: #aaa; margin-bottom: 20px;">Testeo y equilibrio de los 7 centros energéticos principales.</p>
                 <div class="video-wrapper" onclick="playDirect(this, 'NJ-5aywOkAI')">
-                    <img src="testeo.jpg" class="video-poster">
+                    <img src="chakra1.jpg" class="video-poster">
+                    <div class="play-button"></div>
+                </div>
+                <div class="video-wrapper" onclick="playDirect(this, 'LngEN9cmHRg')">
+                    <img src="chakra2.jpg" class="video-poster">
+                    <div class="play-button"></div>
+                </div>
+                <div class="video-wrapper" onclick="playDirect(this, 'WymTOGzcohY')">
+                    <img src="chakra3.jpg" class="video-poster">
                     <div class="play-button"></div>
                 </div>
             </div>
 
             <div id="glosario" class="tab-content">
                 <h2>Glosario - Movimientos del Péndulo</h2>
-                <p style="text-align: center; color: #aaa; font-size: 14px;">El péndulo es un puente entre tu mente consciente e inconsciente.</p>
+                <p style="color: #aaa; text-align: center;">El péndulo es un puente entre tu mente consciente (lógica) e inconsciente (intuitiva).</p>
                 <ul class="item-list">
                     <li><strong>Hemisferio Izquierdo (Yang):</strong> Deductivo, lógico y maneja la palabra.</li>
-                    <li><strong>Hemisferio Derecho (Yin):</strong> Espiritual, intuitivo y maneja los dibujos.</li>
+                    <li><strong>Hemisferio Derecho (Yin):</strong> Espiritual, intuitivo y maneja los dibujos/trazos.</li>
                 </ul>
-                <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-                    <div style="flex:1; border: 1px solid #333; padding: 10px; text-align: center; border-radius: 5px;">Giro Horario y Antihorario</div>
-                    <div style="flex:1; border: 1px solid #333; padding: 10px; text-align: center; border-radius: 5px;">Líneas Verticales y Diagonales</div>
+                <h3>Trazos y Movimientos</h3>
+                <div style="display: flex; gap: 15px; justify-content: center; margin-bottom: 20px;">
+                    <img src="giros.png" style="width: 48%; border: 1px solid #333; border-radius: 10px;">
+                    <img src="lineas.png" style="width: 48%; border: 1px solid #333; border-radius: 10px;">
                 </div>
                 <div class="video-wrapper" onclick="playDirect(this, 'Xg2_Wo2K-zA')">
                     <img src="glosario1.jpg" class="video-poster">
+                    <div class="play-button"></div>
+                </div>
+                <div class="video-wrapper" onclick="playDirect(this, 'aJMlz0t79ZI')">
+                    <img src="glosario2.jpg" class="video-poster">
                     <div class="play-button"></div>
                 </div>
             </div>
@@ -165,7 +179,7 @@
             if(u === "pendulo" && p === "prueba") {
                 document.getElementById('login-screen').style.display = 'none';
                 document.getElementById('aula-completa').style.display = 'block';
-            } else { alert("Datos incorrectos"); }
+            } else { alert("Usuario o contraseña incorrectos."); }
         }
 
         function showTab(tabId, btn) {
@@ -181,7 +195,14 @@
         }
 
         function playDirect(container, videoId) {
-            container.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1" allow="autoplay; encrypted-media" allowfullscreen style="width:100%; height:100%; border:none;"></iframe>`;
+            // Eliminamos la imagen y el botón para insertar el iframe sin opción de agrandar (fs=0)
+            container.innerHTML = `
+                <div class="top-blocker"></div>
+                <iframe 
+                    src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&controls=1&fs=0&iv_load_policy=3" 
+                    allow="autoplay; encrypted-media" 
+                    style="width:100%; height:100%; border:none;">
+                </iframe>`;
         }
     </script>
 </body>
