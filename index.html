@@ -55,28 +55,30 @@
         .item-list li strong { color: var(--oro); text-transform: uppercase; font-size: 14px; letter-spacing: 1px; margin-bottom: 5px; }
 
         /* VIDEOS SYSTEM */
-        .video-container { 
-            margin-top: 100px !important; 
-            margin-bottom: 40px !important; 
-            display: block !important; 
-            width: 100% !important; 
-            clear: both !important; 
-      .video-container {
-    margin-bottom: 20px; /* Bajamos de 40px o 50px a solo 20px */
+/* Esto ajusta el espacio arriba y abajo de cada video */
+.video-container {
+    margin-top: 10px !important;    /* Reduce el espacio superior */
+    margin-bottom: 20px !important; /* Espacio entre videos */
+    padding: 0 !important;          /* Quita rellenos extra */
     text-align: center;
 }
 
-.video-container iframe {
-    width: 100%;
-    max-width: 320px; /* Esto mantiene el tamaño celular */
-    aspect-ratio: 9/16; 
-    margin-top: 5px; /* Pega el video al título */
-}
-
+/* Esto ajusta el título del video */
 .video-label {
     display: block;
-    margin-bottom: 5px; /* Reduce el espacio entre el texto y el video */
+    margin-bottom: 8px;   /* Acerca el título al video */
+    font-size: 14px;
+    color: var(--oro);
     font-weight: bold;
+}
+
+/* Esto asegura que el video no se estire a lo ancho */
+iframe {
+    width: 100%;
+    max-width: 320px;     /* Tamaño ideal para que parezca un celular */
+    aspect-ratio: 9/16;   /* Formato vertical */
+    border-radius: 15px;
+    border: 2px solid #222;
 }
         
         .video-wrapper { 
