@@ -133,6 +133,34 @@ nav button:hover {
     margin-top: 20px;
 }
         /* MANUAL Y BIO */
+        .btn-download {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(180, 151, 90, 0.2), rgba(0, 0, 0, 0.6));
+    color: var(--oro);
+    border: 2px solid var(--oro); /* Un poco más grueso para resaltar */
+    padding: 18px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    transition: 0.4s;
+    box-shadow: 0 0 15px var(--oro-brillo);
+}
+
+.btn-download:hover {
+    background: var(--oro);
+    color: #000;
+    box-shadow: 0 0 25px var(--oro);
+    transform: translateY(-3px) scale(1.02);
+}
+
+.btn-download span {
+    margin-right: 12px;
+    font-size: 20px;
+}
         .manual-texto { line-height: 1.8; color: #ccc; font-size: 16px; }
         .manual-texto h3 { color: var(--oro); margin-top: 30px; border-left: 3px solid var(--oro); padding-left: 15px; }
         .btn-download {
@@ -210,7 +238,13 @@ nav button:hover {
             <button onclick="showTab('chakras', this)">Chakras</button>
 <button onclick="showTab('biografia', this)">Mi Biografía</button>
         </nav>
+<div style="text-align: center; margin-top: 10px; margin-bottom: 30px;">
+    <a href="https://drive.google.com/file/d/1u-RA_KG_NB87mde0Iq5JzTjUjYYJ3BZO/view?usp=sharing" target="_blank" class="btn-download">
+        <span>📥</span> DESCARGAR MATERIAL(PDF)
+    </a>
+</div>
 
+        
         <div class="aula-content">
             
             <div id="materiales" class="tab-content active">
