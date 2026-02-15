@@ -38,15 +38,57 @@
         header h1 { color: var(--oro); font-size: 32px; letter-spacing: 4px; margin: 0; font-family: serif; text-shadow: 0 0 10px var(--oro-brillo); }
         header p { color: var(--cyan); text-transform: uppercase; letter-spacing: 6px; font-size: 12px; margin-top: 10px; }
 
-        nav { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; padding: 20px; }
-        nav button { 
-            background: rgba(255,255,255,0.03); border: 1px solid #333; color: #888; 
-            padding: 12px 20px; cursor: pointer; text-transform: uppercase; font-size: 11px; 
-            transition: 0.4s; border-radius: 4px;
-        }
-        nav button:hover { border-color: var(--oro); color: #eee; box-shadow: 0 0 10px var(--oro-brillo); }
-        nav button.active { border-color: var(--oro); color: var(--oro); background: rgba(180, 151, 90, 0.05); box-shadow: 0 0 15px var(--oro-brillo); }
+       /* DISEÑO DE NAVEGACIÓN ARMÓNICO */
+nav { 
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr); /* Dos columnas iguales */
+    gap: 10px; 
+    padding: 20px; 
+    max-width: 850px;
+    margin: 0 auto;
+}
 
+nav button { 
+    background: rgba(255,255,255,0.03); 
+    border: 1px solid #333; 
+    color: #888; 
+    padding: 15px 5px; 
+    cursor: pointer; 
+    text-transform: uppercase; 
+    font-size: 10px; 
+    letter-spacing: 1px;
+    transition: 0.4s; 
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 50px; /* Para que todos tengan el mismo alto */
+}
+
+/* El botón de Biografía queda solo al final ocupando las dos columnas */
+nav button:nth-child(6) {
+    grid-column: span 2;
+}
+
+nav button:hover { 
+    border-color: var(--oro); 
+    color: #eee; 
+    box-shadow: 0 0 10px var(--oro-brillo); 
+}
+
+nav button.active { 
+    border-color: var(--oro); 
+    color: var(--oro); 
+    background: rgba(180, 151, 90, 0.1); 
+    box-shadow: 0 0 15px var(--oro-brillo); 
+}
+
+/* Ajuste para pantallas muy chicas */
+@media (max-width: 400px) {
+    nav { gap: 6px; padding: 10px; }
+    nav button { font-size: 9px; padding: 10px 2px; }
+} 
         .aula-content { max-width: 850px; margin: 20px auto; background: var(--caja); padding: 40px; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
         .tab-content { display: none; animation: fadeIn 0.5s; }
         .tab-content.active { display: block; }
