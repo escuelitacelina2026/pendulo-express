@@ -39,11 +39,13 @@
         header p { color: var(--cyan); text-transform: uppercase; letter-spacing: 6px; font-size: 12px; margin-top: 10px; }
 
        /* DISEÑO DE NAVEGACIÓN ARMÓNICO */
+
+/* NAVEGACIÓN SIMÉTRICA (3 FILAS DE 2) */
 nav { 
     display: grid; 
-    grid-template-columns: repeat(2, 1fr); /* Dos columnas iguales */
+    grid-template-columns: 1fr 1fr; /* Fuerza 2 columnas iguales siempre */
     gap: 10px; 
-    padding: 20px; 
+    padding: 15px; 
     max-width: 850px;
     margin: 0 auto;
 }
@@ -52,10 +54,10 @@ nav button {
     background: rgba(255,255,255,0.03); 
     border: 1px solid #333; 
     color: #888; 
-    padding: 15px 5px; 
+    padding: 12px 5px; 
     cursor: pointer; 
     text-transform: uppercase; 
-    font-size: 10px; 
+    font-size: 10px; /* Tamaño ideal para que "Funcionamiento..." entre en 2 líneas */
     letter-spacing: 1px;
     transition: 0.4s; 
     border-radius: 8px;
@@ -63,18 +65,12 @@ nav button {
     align-items: center;
     justify-content: center;
     text-align: center;
-    min-height: 50px; /* Para que todos tengan el mismo alto */
+    min-height: 55px; /* Altura uniforme para todos */
 }
 
-/* El botón de Biografía queda solo al final ocupando las dos columnas */
-nav button:nth-child(6) {
-    grid-column: span 2;
-}
-
-nav button:hover { 
-    border-color: var(--oro); 
-    color: #eee; 
-    box-shadow: 0 0 10px var(--oro-brillo); 
+/* ELIMINAMOS cualquier instrucción de 'span 2' para que Biografía no se estire */
+nav button:last-child {
+    grid-column: span 1 !important;
 }
 
 nav button.active { 
