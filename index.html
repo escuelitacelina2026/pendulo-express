@@ -40,10 +40,18 @@
 
        /* DISEÑO DE NAVEGACIÓN ARMÓNICO */
 
-/* NAVEGACIÓN SIMÉTRICA (3 FILAS DE 2) */
-/* NAVEGACIÓN CON MARCO DORADO SIEMPRE ACTIVO */
+/* NAVEGACIÓN ARMÓNICA Y DORADA */
+nav { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; /* Mantiene las 2 columnas que perdimos */
+    gap: 12px; 
+    padding: 20px; 
+    max-width: 500px; /* Acotamos el ancho para que quede centrado en el celu */
+    margin: 0 auto; /* CENTRA toda la botonera */
+}
+
 nav button { 
-    background: rgba(180, 151, 90, 0.05); /* Un fondo sutil dorado */
+    background: rgba(180, 151, 90, 0.08); 
     border: 1px solid var(--oro); /* MARCO DORADO SIEMPRE */
     color: var(--oro); /* TEXTO DORADO SIEMPRE */
     padding: 12px 5px; 
@@ -57,36 +65,24 @@ nav button {
     align-items: center;
     justify-content: center;
     text-align: center;
-    min-height: 55px;
-    box-shadow: 0 0 10px var(--oro-brillo); /* BRILLO SIEMPRE */
+    min-height: 60px;
+    box-shadow: 0 0 12px var(--oro-brillo); /* BRILLO SIEMPRE */
+    width: 100%; /* Ocupa su celda de la grilla */
 }
 
-/* EFECTO CUANDO SE SELECCIONA O SE TOCA (SE "APAGA" O CAMBIA) */
-nav button.active { 
-    border-color: #444; /* El marco se vuelve gris/oscuro */
-    color: #eee; /* El texto se aclara */
-    background: rgba(255, 255, 255, 0.03); /* Fondo neutro */
-    box-shadow: none; /* Se va el brillo */
-}
-
-/* Para que al pasar el mouse (en PC) también se note el cambio */
-nav button:hover {
-    background: rgba(180, 151, 90, 0.15);
-    transform: scale(0.98); /* Efecto de hundido al tocar */
-}
-
-/* ELIMINAMOS cualquier instrucción de 'span 2' para que Biografía no se estire */
+/* El botón de Bio ahora sí queda al lado de Chakras prolijamente */
 nav button:last-child {
     grid-column: span 1 !important;
 }
 
+/* LA SOLAPA ACTIVA SE "APAGA" PARA DIFERENCIARSE */
 nav button.active { 
-    border-color: var(--oro); 
-    color: var(--oro); 
-    background: rgba(180, 151, 90, 0.1); 
-    box-shadow: 0 0 15px var(--oro-brillo); 
+    border-color: #444; 
+    color: #888; 
+    background: rgba(255, 255, 255, 0.03); 
+    box-shadow: none; 
+    transform: scale(0.95); /* Efecto de presionada */
 }
-
 /* Ajuste para pantallas muy chicas */
 @media (max-width: 400px) {
     nav { gap: 6px; padding: 10px; }
