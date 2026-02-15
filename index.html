@@ -41,47 +41,58 @@
        /* DISEÑO DE NAVEGACIÓN ARMÓNICO */
 
 /* NAVEGACIÓN ARMÓNICA Y DORADA */
-nav { 
-    display: grid; 
-    grid-template-columns: 1fr 1fr; /* Mantiene las 2 columnas que perdimos */
-    gap: 12px; 
-    padding: 20px; 
-    max-width: 500px; /* Acotamos el ancho para que quede centrado en el celu */
-    margin: 0 auto; /* CENTRA toda la botonera */
-}
-
-nav button { 
-    background: rgba(180, 151, 90, 0.08); 
-    border: 1px solid var(--oro); /* MARCO DORADO SIEMPRE */
-    color: var(--oro); /* TEXTO DORADO SIEMPRE */
-    padding: 12px 5px; 
-    cursor: pointer; 
-    text-transform: uppercase; 
-    font-size: 10px; 
-    letter-spacing: 1px;
-    transition: 0.4s; 
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    min-height: 60px;
-    box-shadow: 0 0 12px var(--oro-brillo); /* BRILLO SIEMPRE */
-    width: 100%; /* Ocupa su celda de la grilla */
-}
 
 /* El botón de Bio ahora sí queda al lado de Chakras prolijamente */
 nav button:last-child {
     grid-column: span 1 !important;
 }
+/* NAVEGACIÓN EN GRILLA CENTRADA */
+nav { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; /* 2 columnas siempre */
+    gap: 10px; 
+    padding: 20px; 
+    max-width: 600px; /* Para que no se estiren de más en pantallas grandes */
+    margin: 0 auto; /* Centra todo el bloque */
+}
 
-/* LA SOLAPA ACTIVA SE "APAGA" PARA DIFERENCIARSE */
+/* TODAS LAS SOLAPAS DORADAS POR DEFECTO */
+nav button { 
+    background: rgba(180, 151, 90, 0.1); 
+    border: 1px solid var(--oro); 
+    color: var(--oro); 
+    padding: 12px 5px; 
+    cursor: pointer; 
+    text-transform: uppercase; 
+    font-size: 10px; 
+    letter-spacing: 1px;
+    font-weight: bold;
+    transition: 0.3s; 
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 55px;
+    box-shadow: 0 0 10px var(--oro-brillo); /* Brillo activo en todas */
+    width: 100%;
+}
+
+/* CUANDO HACES CLICK (SE ACTIVA EL MÓDULO) */
 nav button.active { 
-    border-color: #444; 
-    color: #888; 
+    border-color: #444; /* Pierde el marco dorado */
+    color: #888; /* El texto se apaga un poco */
     background: rgba(255, 255, 255, 0.03); 
-    box-shadow: none; 
-    transform: scale(0.95); /* Efecto de presionada */
+    box-shadow: none; /* Se va el brillo */
+    transform: scale(0.96); /* Efecto de que está "hundida" o presionada */
+}
+
+/* EFECTO AL PASAR EL DEDO O MOUSE */
+nav button:hover {
+    background: rgba(180, 151, 90, 0.2);
+    box-shadow: 0 0 15px var(--oro);
+}
+
 }
 /* Ajuste para pantallas muy chicas */
 @media (max-width: 400px) {
